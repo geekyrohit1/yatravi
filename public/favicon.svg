@@ -1,0 +1,10 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="64" height="64" rx="14" fill="#FB5012"/>
+  <!-- Decorative Bubble Art -->
+  <circle cx="58" cy="6" r="10" stroke="white" stroke-opacity="0.3" stroke-width="2"/>
+  <circle cx="-2" cy="60" r="16" stroke="white" stroke-opacity="0.15" stroke-width="2"/>
+  <circle cx="12" cy="12" r="3" fill="white" fill-opacity="0.15"/>
+  
+  <!-- "y" Path Refined to match Montserrat Alternates Lowercase/Unicase Style from Screenshot -->
+  <path d="M16.5 22V32C16.5 40 22.5 46 31 46C39.5 46 45.5 40 45.5 32V22H53V32C53 44 44 53 31 53C18 53 9 44 9 32V22H16.5Z M53 22V52C53 58 46 64 31 64V56C41 56 45.5 54 45.5 50V22H53Z" fill="white" />
+</svg>

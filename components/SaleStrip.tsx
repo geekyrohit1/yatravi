@@ -1,0 +1,84 @@
+"use client";
+
+import React, { useState, useEffect } from 'react';
+import { useSettings } from '@/context/SettingsContext';
+import Link from 'next/link';
+
+function getTimeLeft(endDate: string | undefined) {
+    if (!endDate) return { days: 0, hours: 0, minutes: 0, seconds: 0, expired: true };
+    const diff = new Date(endDate).getTime() - Date.now();
+    if (diff <= 0) return { days: 0, hours: 0, minutes: 0, seconds: 0, expired: true };
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+    return { days, hours, minutes, seconds, expired: false };
+}
+
+export const SaleStrip: React.FC = () => {
+    const { settings, loading } = useSettings();
+    const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0, expired: true });
+
+    useEffect(() => {
+        setTimeLeft(getTimeLeft(settings.saleBannerTimerEndDate));
+        const timer = setInterval(() => {
+            setTimeLeft(getTimeLeft(settings.saleBannerTimerEndDate));
+        }, 1000);
+        return () => clearInterval(timer);
+    }, [settings.saleBannerTimerEndDate]);
+
+    if (!settings.enableSaleBanner || loading) return null;
+
+    const showTimer = settings.enableSaleBannerTimer && !timeLeft.expired;
+    const bgStart = settings.saleBannerBgColor || '#7c3aed';
+    const bgEnd = settings.saleBannerTextColor || '#db2777';
+
+    const pad = (n: number) => String(n).padStart(2, '0');
+
+    return (
+        <div
+            style={{
+                background: `linear-gradient(135deg, ${bgStart} 0%, ${bgEnd} 50%, ${bgStart} 100%)`,
+                backgroundSize: '200% auto',
+                fontFamily: 'var(--font-montserrat), sans-serif',
+            }}
+            className="w-full h-8 md:h-10 flex items-center justify-center text-white z-[100] relative overflow-hidden shadow-sm border-b border-white/5 animate-gradient-xy"
+        >
+            <div className="absolute inset-0 opacity-10 pointer-events-none">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_0%,_black_100%)] opacity-20"></div>
+            </div>
+
+            <div className="max-w-7xl mx-auto w-full px-4 flex items-center justify-center relative z-10 gap-4 md:gap-8">
+                <div className="flex items-center gap-3">
+                    {settings.saleBannerLink ? (
+                        <Link href={settings.saleBannerLink} className="flex items-center hover:opacity-80 transition-all active:scale-95">
+                            <div className="flex items-center gap-3 font-sans">
+                                <span className="font-bold tracking-[0.2em] text-[10px] md:text-[11px] uppercase">Holi Special</span>
+                                <span className="w-1.5 h-1.5 rounded-full bg-white/40"></span>
+                                <span className="font-light tracking-[0.1em] text-[10px] md:text-[11px] uppercase opacity-90">Up to 40% Off</span>
+                            </div>
+                        </Link>
+                    ) : (
+                        <div className="flex items-center gap-3 font-sans">
+                            <span className="font-bold tracking-[0.2em] text-[10px] md:text-[11px] uppercase">Holi Special</span>
+                            <span className="w-1.5 h-1.5 rounded-full bg-white/40"></span>
+                            <span className="font-light tracking-[0.1em] text-[10px] md:text-[11px] uppercase opacity-90">Up to 40% Off</span>
+                        </div>
+                    )}
+                </div>
+
+                {showTimer && (
+                    <div className="flex items-center gap-3 text-[10px] md:text-[11px] font-light tracking-[0.1em] border-l border-white/20 pl-4 md:pl-8">
+                        <span className="opacity-60 uppercase text-[8px] md:text-[9px] hidden sm:block">Ends in</span>
+                        <div className="flex items-center gap-2 tabular-nums font-medium">
+                            {timeLeft.days > 0 && <span>{pad(timeLeft.days)}d <span className="opacity-40 font-light">:</span></span>}
+                            <span>{pad(timeLeft.hours)}h <span className="opacity-40 font-light">:</span></span>
+                            <span>{pad(timeLeft.minutes)}m <span className="opacity-40 font-light">:</span></span>
+                            <span className="text-yellow-300">{pad(timeLeft.seconds)}s</span>
+                        </div>
+                    </div>
+                )}
+            </div>
+        </div>
+    );
+};
