@@ -58,6 +58,7 @@ const inquiryCalendarTheme = createTheme({
                 },
             },
         },
+        // @ts-ignore - Modern MUI versions use different slot names in theme, but this is used for popper styling
         MuiPickersPopper: {
             styleOverrides: {
                 paper: {
