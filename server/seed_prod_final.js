@@ -57,27 +57,28 @@ async function absoluteSync() {
         const seededDests = await Destination.insertMany(dests.map(d => ({ ...d, slug: d.name.toLowerCase() })));
         console.log('11 Destinations Seeded.');
 
-        // 5. SEED 18 PACKAGES
+        // 5. SEED 18 PACKAGES (With Unique IDs)
         const pkgs = [
-            { title: 'Bali Retreat Special', location: 'Bali', price: 29999, originalPrice: 45000, category: 'International', tags: ['Trending'], duration: 5 },
-            { title: 'Luxury Dubai Staycation', location: 'Dubai', price: 45000, originalPrice: 65000, category: 'International', tags: ['Trending'], duration: 5 },
-            { title: 'Maldives Water Villa Paradise', location: 'Maldives', price: 85000, originalPrice: 110000, category: 'International', tags: ['Trending'], duration: 6 },
-            { title: 'Heavenly Kashmir Special', location: 'Kashmir', price: 32500, originalPrice: 42000, category: 'Domestic', tags: ['Super Saver'], duration: 6 },
-            { title: 'Manali Volvo Special', location: 'Manali, India', price: 7999, originalPrice: 12999, category: 'Domestic', tags: ['Super Saver'], duration: 4 },
-            { title: 'Kerala Backwaters Bliss', location: 'Kerala', price: 18000, originalPrice: 22000, category: 'Domestic', duration: 5 },
-            { title: 'Kasol Kheerganga Trek', location: 'Kasol', price: 6500, originalPrice: 9500, category: 'Domestic', tags: ['Super Saver'], duration: 5 },
-            { title: 'Rishikesh Rafting Adventure', location: 'Rishikesh', price: 5999, originalPrice: 8999, category: 'Domestic', tags: ['Super Saver'], duration: 3 },
-            { title: 'Misty Munnar & Thekkady', location: 'Kerala', price: 12000, originalPrice: 15000, category: 'Domestic', tags: ['Super Saver'], duration: 4 },
-            { title: 'Thailand Super Saver', location: 'Thailand', price: 29999, originalPrice: 40000, category: 'International', tags: ['Super Saver'], duration: 5 },
-            { title: 'Vietnam Heritage Tour', location: 'Vietnam', price: 35000, originalPrice: 50000, category: 'International', duration: 6 },
-            { title: 'Singapore City Lights', location: 'Singapore', price: 48000, originalPrice: 60000, category: 'International', duration: 4 },
-            { title: 'Malaysia Adventure', location: 'Malaysia', price: 38000, originalPrice: 48000, category: 'International', duration: 5 },
-            { title: 'Hong Kong Dreams', location: 'Hong Kong', price: 75000, originalPrice: 90000, category: 'International', duration: 5 },
-            { title: 'Swiss Alpine Explorer', location: 'Switzerland', price: 230000, originalPrice: 280000, category: 'International', duration: 7 },
-            { title: 'Goa Beach Party', location: 'Goa', price: 9999, originalPrice: 15000, category: 'Domestic', tags: ['Super Saver'], duration: 3 },
-            { title: 'Jaipur Heritage', location: 'Jaipur', price: 12000, originalPrice: 16000, category: 'Domestic', duration: 3 },
-            { title: 'Darjeeling Tea Garden', location: 'Darjeeling', price: 24000, originalPrice: 30000, category: 'Domestic', duration: 5 }
+            { id: 'pkg_bali_1', title: 'Bali Retreat Special', location: 'Bali', price: 29999, originalPrice: 45000, category: 'International', tags: ['Trending'], duration: 5 },
+            { id: 'pkg_dubai_1', title: 'Luxury Dubai Staycation', location: 'Dubai', price: 45000, originalPrice: 65000, category: 'International', tags: ['Trending'], duration: 5 },
+            { id: 'pkg_maldives_1', title: 'Maldives Water Villa Paradise', location: 'Maldives', price: 85000, originalPrice: 110000, category: 'International', tags: ['Trending'], duration: 6 },
+            { id: 'pkg_kashmir_1', title: 'Heavenly Kashmir Special', location: 'Kashmir', price: 32500, originalPrice: 42000, category: 'Domestic', tags: ['Super Saver'], duration: 6 },
+            { id: 'pkg_manali_1', title: 'Manali Volvo Special', location: 'Manali, India', price: 7999, originalPrice: 12999, category: 'Domestic', tags: ['Super Saver'], duration: 4 },
+            { id: 'pkg_kerala_1', title: 'Kerala Backwaters Bliss', location: 'Kerala', price: 18000, originalPrice: 22000, category: 'Domestic', duration: 5 },
+            { id: 'pkg_kasol_1', title: 'Kasol Kheerganga Trek', location: 'Kasol', price: 6500, originalPrice: 9500, category: 'Domestic', tags: ['Super Saver'], duration: 5 },
+            { id: 'pkg_rishi_1', title: 'Rishikesh Rafting Adventure', location: 'Rishikesh', price: 5999, originalPrice: 8999, category: 'Domestic', tags: ['Super Saver'], duration: 3 },
+            { id: 'pkg_munnar_1', title: 'Misty Munnar & Thekkady', location: 'Kerala', price: 12000, originalPrice: 15000, category: 'Domestic', tags: ['Super Saver'], duration: 4 },
+            { id: 'pkg_thai_1', title: 'Thailand Super Saver', location: 'Thailand', price: 29999, originalPrice: 40000, category: 'International', tags: ['Super Saver'], duration: 5 },
+            { id: 'pkg_viet_1', title: 'Vietnam Heritage Tour', location: 'Vietnam', price: 35000, originalPrice: 50000, category: 'International', duration: 6 },
+            { id: 'pkg_sing_1', title: 'Singapore City Lights', location: 'Singapore', price: 48000, originalPrice: 60000, category: 'International', duration: 4 },
+            { id: 'pkg_malaysia_1', title: 'Malaysia Adventure', location: 'Malaysia', price: 38000, originalPrice: 48000, category: 'International', duration: 5 },
+            { id: 'pkg_hk_1', title: 'Hong Kong Dreams', location: 'Hong Kong', price: 75000, originalPrice: 90000, category: 'International', duration: 5 },
+            { id: 'pkg_swiss_1', title: 'Swiss Alpine Explorer', location: 'Switzerland', price: 230000, originalPrice: 280000, category: 'International', duration: 7 },
+            { id: 'pkg_goa_1', title: 'Goa Beach Party', location: 'Goa', price: 9999, originalPrice: 15000, category: 'Domestic', tags: ['Super Saver'], duration: 3 },
+            { id: 'pkg_jaipur_1', title: 'Jaipur Heritage', location: 'Jaipur', price: 12000, originalPrice: 16000, category: 'Domestic', duration: 3 },
+            { id: 'pkg_darj_1', title: 'Darjeeling Tea Garden', location: 'Darjeeling', price: 24000, originalPrice: 30000, category: 'Domestic', duration: 5 }
         ];
+
         await Package.insertMany(pkgs.map(p => ({
             ...p, status: 'published', showOnHomepage: true, slug: p.title.toLowerCase().replace(/ /g, '-'),
             image: `https://ik.imagekit.io/2nikzq08c/${p.location.split(',')[0].trim()}.jpg`,
