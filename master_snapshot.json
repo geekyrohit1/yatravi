@@ -1,0 +1,3353 @@
+{
+  "packages": [
+    {
+      "_id": "69c291efd382d77cd1874683",
+      "seo": {
+        "title": "Bali Retreat | 6 Days Luxury Tour | Yatravi",
+        "description": "Experience the magic of the Island of Gods with this perfectly curated 6-day itinerary blending adventure, culture, and relaxation.",
+        "keywords": "Bali, Indonesia travel, Bali Retreat, luxury tours, Yatravi holidays"
+      },
+      "id": "bali_classic_1",
+      "slug": "bali-retreat",
+      "title": "Bali Retreat",
+      "location": "Bali, Indonesia",
+      "duration": 6,
+      "price": 29999,
+      "originalPrice": 45000,
+      "rating": 4.8,
+      "reviewsCount": 124,
+      "image": "https://images.unsplash.com/photo-1577717903315-1691ae25ab3f?q=80&w=1000&auto=format&fit=crop",
+      "gallery": [
+        "https://images.unsplash.com/photo-1577717903315-1691ae25ab3f",
+        "https://images.unsplash.com/photo-1537953773345-d172ccfa13c8",
+        "https://images.unsplash.com/photo-1551632811-561732d1e306"
+      ],
+      "category": "Beach",
+      "groupSize": "Max 12",
+      "overview": "Experience the magic of the Island of Gods with this perfectly curated 6-day itinerary blending adventure, culture, and relaxation.",
+      "highlights": [
+        "Sunset dinner at Jimbaran",
+        "Ubud Monkey Forest",
+        "Kintamani Volcano View",
+        "Tanah Lot Temple"
+      ],
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Arrival & Welcome",
+          "description": "Check-in to your hotel in Bali, Indonesia and enjoy the evening at leisure.",
+          "highlights": [],
+          "meals": {
+            "breakfastIncluded": false,
+            "lunchIncluded": false,
+            "dinnerIncluded": false
+          },
+          "activities": [],
+          "itineraryImages": [],
+          "flights": [],
+          "_id": "69c291efd382d77cd1874684",
+          "detailedActivities": []
+        },
+        {
+          "day": 2,
+          "title": "Local Sightseeing",
+          "description": "Explore the iconic landmarks and hidden gems of the city.",
+          "highlights": [],
+          "meals": {
+            "breakfastIncluded": false,
+            "lunchIncluded": false,
+            "dinnerIncluded": false
+          },
+          "activities": [],
+          "itineraryImages": [],
+          "flights": [],
+          "_id": "69c291efd382d77cd1874685",
+          "detailedActivities": []
+        },
+        {
+          "day": 3,
+          "title": "Adventure & Culture",
+          "description": "Experience the local traditions and outdoor activities.",
+          "highlights": [],
+          "meals": {
+            "breakfastIncluded": false,
+            "lunchIncluded": false,
+            "dinnerIncluded": false
+          },
+          "activities": [],
+          "itineraryImages": [],
+          "flights": [],
+          "_id": "69c291efd382d77cd1874686",
+          "detailedActivities": []
+        }
+      ],
+      "inclusions": [
+        "Airport transfers",
+        "Daily Breakfast",
+        "Sightseeing in private car",
+        "English speaking driver"
+      ],
+      "exclusions": [
+        "Airfare",
+        "Personal expenses",
+        "Visa on Arrival fee"
+      ],
+      "thingsToPack": [],
+      "policies": {
+        "cancellation": "Free cancellation up to 7 days before departure. 50% refund within 7 days. No refund for no-shows.",
+        "refund": "Refunds are automatically processed to your original payment method within 5-7 business days.",
+        "payment": "Book initially with just 20%. The remaining 80% is securely payable up to 7 days before your departure."
+      },
+      "status": "published",
+      "showOnHomepage": true,
+      "showInCollections": true,
+      "isBestSeller": false,
+      "isTrending": false,
+      "isAlmostFull": false,
+      "homepageSections": [],
+      "inclusionHighlights": [],
+      "tags": [
+        "Super Saver"
+      ],
+      "faqs": [],
+      "createdAt": "2026-03-24T13:30:23.492Z",
+      "__v": 0,
+      "itinerarySummary": "A curated 6-day exploration covering the top highlights and hidden gems of Bali, Indonesia."
+    },
+    {
+      "_id": "69c291efd382d77cd1874687",
+      "seo": {
+        "title": "Romantic Bali Honeymoon Escape | 5 Days Luxury Tour | Yatravi",
+        "description": "A romantic getaway featuring private pool villas, flower baths, and candle-lit dinners in Seminyak and Ubud.",
+        "keywords": "Bali, Indonesia travel, Romantic Bali Honeymoon Escape, luxury tours, Yatravi holidays"
+      },
+      "id": "bali_honeymoon_1",
+      "slug": "romantic-bali-honeymoon-escape",
+      "title": "Romantic Bali Honeymoon Escape",
+      "location": "Bali, Indonesia",
+      "duration": 5,
+      "price": 65000,
+      "originalPrice": 85000,
+      "rating": 4.9,
+      "reviewsCount": 89,
+      "image": "https://images.unsplash.com/photo-1544644181-1484b3fdfc62?q=80&w=1000&auto=format&fit=crop",
+      "gallery": [
+        "https://images.unsplash.com/photo-1544644181-1484b3fdfc62",
+        "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2"
+      ],
+      "category": "Honeymoon",
+      "groupSize": "Private",
+      "overview": "A romantic getaway featuring private pool villas, flower baths, and candle-lit dinners in Seminyak and Ubud.",
+      "highlights": [
+        "Private Pool Villa",
+        "Candle Light Dinner",
+        "Balancer Massage for Couple",
+        "Bed Decoration"
+      ],
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Arrival & Welcome",
+          "description": "Check-in to your hotel in Bali, Indonesia and enjoy the evening at leisure.",
+          "highlights": [],
+          "meals": {
+            "breakfastIncluded": false,
+            "lunchIncluded": false,
+            "dinnerIncluded": false
+          },
+          "activities": [],
+          "itineraryImages": [],
+          "flights": [],
+          "_id": "69c291efd382d77cd1874688",
+          "detailedActivities": []
+        },
+        {
+          "day": 2,
+          "title": "Local Sightseeing",
+          "description": "Explore the iconic landmarks and hidden gems of the city.",
+          "highlights": [],
+          "meals": {
+            "breakfastIncluded": false,
+            "lunchIncluded": false,
+            "dinnerIncluded": false
+          },
+          "activities": [],
+          "itineraryImages": [],
+          "flights": [],
+          "_id": "69c291efd382d77cd1874689",
+          "detailedActivities": []
+        },
+        {
+          "day": 3,
+          "title": "Adventure & Culture",
+          "description": "Experience the local traditions and outdoor activities.",
+          "highlights": [],
+          "meals": {
+            "breakfastIncluded": false,
+            "lunchIncluded": false,
+            "dinnerIncluded": false
+          },
+          "activities": [],
+          "itineraryImages": [],
+          "flights": [],
+          "_id": "69c291efd382d77cd187468a",
+          "detailedActivities": []
+        }
+      ],
+      "inclusions": [
+        "Private Transfers",
+        "Daily Breakfast",
+        "Honeymoon Cake",
+        "Spa Session"
+      ],
+      "exclusions": [
+        "Airfare",
+        "Lunch & Dinner"
+      ],
+      "thingsToPack": [],
+      "policies": {
+        "cancellation": "Free cancellation up to 7 days before departure. 50% refund within 7 days. No refund for no-shows.",
+        "refund": "Refunds are automatically processed to your original payment method within 5-7 business days.",
+        "payment": "Book initially with just 20%. The remaining 80% is securely payable up to 7 days before your departure."
+      },
+      "status": "published",
+      "showOnHomepage": true,
+      "showInCollections": true,
+      "isBestSeller": false,
+      "isTrending": false,
+      "isAlmostFull": false,
+      "homepageSections": [],
+      "inclusionHighlights": [],
+      "tags": [],
+      "faqs": [],
+      "createdAt": "2026-03-24T13:30:23.493Z",
+      "__v": 0,
+      "itinerarySummary": "A curated 5-day exploration covering the top highlights and hidden gems of Bali, Indonesia."
+    },
+    {
+      "_id": "69c291efd382d77cd187468b",
+      "seo": {
+        "title": "Cultural Heart of Bali | 4 Days Luxury Tour | Yatravi",
+        "description": "Immerse yourself in Balinese culture, rice terraces, and ancient temples in the cultural capital of Ubud.",
+        "keywords": "Ubud, Bali, Indonesia travel, Cultural Heart of Bali, luxury tours, Yatravi holidays"
+      },
+      "id": "bali_culture_1",
+      "slug": "cultural-heart-of-bali",
+      "title": "Cultural Heart of Bali",
+      "location": "Ubud, Bali, Indonesia",
+      "duration": 4,
+      "price": 35000,
+      "originalPrice": 45000,
+      "rating": 4.7,
+      "reviewsCount": 56,
+      "image": "https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=1000&auto=format&fit=crop",
+      "gallery": [
+        "https://images.unsplash.com/photo-1537996194471-e657df975ab4"
+      ],
+      "category": "Culture",
+      "groupSize": "Max 10",
+      "overview": "Immerse yourself in Balinese culture, rice terraces, and ancient temples in the cultural capital of Ubud.",
+      "highlights": [
+        "Tegalalang Rice Terrace",
+        "Tegenungan Waterfall",
+        "Barong Dance Performance"
+      ],
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Arrival & Welcome",
+          "description": "Check-in to your hotel in Ubud, Bali, Indonesia and enjoy the evening at leisure.",
+          "highlights": [],
+          "meals": {
+            "breakfastIncluded": false,
+            "lunchIncluded": false,
+            "dinnerIncluded": false
+          },
+          "activities": [],
+          "itineraryImages": [],
+          "flights": [],
+          "_id": "69c291efd382d77cd187468c",
+          "detailedActivities": []
+        },
+        {
+          "day": 2,
+          "title": "Local Sightseeing",
+          "description": "Explore the iconic landmarks and hidden gems of the city.",
+          "highlights": [],
+          "meals": {
+            "breakfastIncluded": false,
+            "lunchIncluded": false,
+            "dinnerIncluded": false
+          },
+          "activities": [],
+          "itineraryImages": [],
+          "flights": [],
+          "_id": "69c291efd382d77cd187468d",
+          "detailedActivities": []
+        },
+        {
+          "day": 3,
+          "title": "Adventure & Culture",
+          "description": "Experience the local traditions and outdoor activities.",
+          "highlights": [],
+          "meals": {
+            "breakfastIncluded": false,
+            "lunchIncluded": false,
+            "dinnerIncluded": false
+          },
+          "activities": [],
+          "itineraryImages": [],
+          "flights": [],
+          "_id": "69c291efd382d77cd187468e",
+          "detailedActivities": []
+        }
+      ],
+      "inclusions": [
+        "Hotel Stay",
+        "Breakfast",
+        "Tours"
+      ],
+      "exclusions": [
+        "Airfare"
+      ],
+      "thingsToPack": [],
+      "policies": {
+        "cancellation": "Free cancellation up to 7 days before departure. 50% refund within 7 days. No refund for no-shows.",
+        "refund": "Refunds are automatically processed to your original payment method within 5-7 business days.",
+        "payment": "Book initially with just 20%. The remaining 80% is securely payable up to 7 days before your departure."
+      },
+      "status": "published",
+      "showOnHomepage": true,
+      "showInCollections": true,
+      "isBestSeller": false,
+      "isTrending": false,
+      "isAlmostFull": false,
+      "homepageSections": [],
+      "inclusionHighlights": [],
+      "tags": [],
+      "faqs": [],
+      "createdAt": "2026-03-24T13:30:23.493Z",
+      "__v": 0,
+      "itinerarySummary": "A curated 4-day exploration covering the top highlights and hidden gems of Ubud, Bali, Indonesia."
+    },
+    {
+      "_id": "69c291efd382d77cd187468f",
+      "seo": {
+        "title": "Swiss Alpine Wonder | 5 Days Luxury Tour | Yatravi",
+        "description": "Breathtaking views of the Alps, pristine lakes, and charming villages await you. Experience the Top of Europe at Jungfraujoch.",
+        "keywords": "Interlaken, Switzerland travel, Swiss Alpine Wonder, luxury tours, Yatravi holidays"
+      },
+      "id": "swiss_alpine_1",
+      "slug": "swiss-alpine-wonder",
+      "title": "Swiss Alpine Wonder",
+      "location": "Interlaken, Switzerland",
+      "duration": 5,
+      "price": 145000,
+      "originalPrice": 165000,
+      "rating": 4.9,
+      "reviewsCount": 200,
+      "image": "https://images.unsplash.com/photo-1531366936337-7c912a4589a7?q=80&w=1000&auto=format&fit=crop",
+      "gallery": [
+        "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/SCL_Swiss_Alps_Switzerland_001_3000x1500_8THRsmOXF.jpg?updatedAt=1770104152297",
+        "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/SCL_Swiss_Alps_Switzerland_001_3000x1500_3zUeNH9Ly.jpg?updatedAt=1770218904597",
+        "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/SCL_Swiss_Alps_Switzerland_001_3000x1500_FgD8YulNC.jpg?updatedAt=1770219026216",
+        "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/SCL_Swiss_Alps_Switzerland_001_3000x1500_URAiuuEIP.jpg?updatedAt=1770219138432",
+        "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/SCL_Swiss_Alps_Switzerland_001_3000x1500_zTruoz1bT.jpg?updatedAt=1772545487604"
+      ],
+      "category": "Mountain",
+      "groupSize": "Max 20",
+      "overview": "Breathtaking views of the Alps, pristine lakes, and charming villages await you. Experience the Top of Europe at Jungfraujoch.",
+      "highlights": [
+        "Jungfraujoch Top of Europe",
+        "Lake Brienz Cruise",
+        "Lucerne City Tour"
+      ],
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Arrival & Welcome",
+          "description": "Check-in to your hotel in Interlaken, Switzerland and enjoy the evening at leisure.",
+          "highlights": [],
+          "meals": {
+            "breakfastIncluded": false,
+            "lunchIncluded": false,
+            "dinnerIncluded": false
+          },
+          "activities": [],
+          "itineraryImages": [],
+          "flights": [],
+          "_id": "69c291efd382d77cd1874690",
+          "detailedActivities": []
+        },
+        {
+          "day": 2,
+          "title": "Local Sightseeing",
+          "description": "Explore the iconic landmarks and hidden gems of the city.",
+          "highlights": [],
+          "meals": {
+            "breakfastIncluded": false,
+            "lunchIncluded": false,
+            "dinnerIncluded": false
+          },
+          "activities": [],
+          "itineraryImages": [],
+          "flights": [],
+          "_id": "69c291efd382d77cd1874691",
+          "detailedActivities": []
+        },
+        {
+          "day": 3,
+          "title": "Adventure & Culture",
+          "description": "Experience the local traditions and outdoor activities.",
+          "highlights": [],
+          "meals": {
+            "breakfastIncluded": false,
+            "lunchIncluded": false,
+            "dinnerIncluded": false
+          },
+          "activities": [],
+          "itineraryImages": [],
+          "flights": [],
+          "_id": "69c291efd382d77cd1874692",
+          "detailedActivities": []
+        }
+      ],
+      "inclusions": [
+        "Swiss Travel Pass (4 Days)",
+        "Accommodation",
+        "Breakfast"
+      ],
+      "exclusions": [
+        "City Tax",
+        "Flights",
+        "Lunch/Dinner"
+      ],
+      "thingsToPack": [],
+      "policies": {
+        "cancellation": "Free cancellation up to 7 days before departure. 50% refund within 7 days. No refund for no-shows.",
+        "refund": "Refunds are automatically processed to your original payment method within 5-7 business days.",
+        "payment": "Book initially with just 20%. The remaining 80% is securely payable up to 7 days before your departure."
+      },
+      "status": "published",
+      "showOnHomepage": true,
+      "showInCollections": true,
+      "isBestSeller": false,
+      "isTrending": false,
+      "isAlmostFull": false,
+      "homepageSections": [],
+      "inclusionHighlights": [],
+      "tags": [
+        "Trending"
+      ],
+      "faqs": [],
+      "createdAt": "2026-03-24T13:30:23.494Z",
+      "__v": 1,
+      "itinerarySummary": "A curated 5-day exploration covering the top highlights and hidden gems of Interlaken, Switzerland."
+    },
+    {
+      "_id": "69c291efd382d77cd1874693",
+      "seo": {
+        "title": "Best of Paris & Swiss | 7 Days Luxury Tour | Yatravi",
+        "description": "A classic European blend. Visit the Eiffel Tower in Paris and the snowy peaks of Mt. Titlis in Switzerland.",
+        "keywords": "Zurich, Switzerland travel, Best of Paris & Swiss, luxury tours, Yatravi holidays"
+      },
+      "id": "swiss_paris_1",
+      "slug": "best-of-paris-swiss",
+      "title": "Best of Paris & Swiss",
+      "location": "Zurich, Switzerland",
+      "duration": 7,
+      "price": 185000,
+      "originalPrice": 210000,
+      "rating": 4.8,
+      "reviewsCount": 340,
+      "image": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=1000&auto=format&fit=crop",
+      "gallery": [
+        "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/SCL_Swiss_Alps_Switzerland_001_3000x1500_8THRsmOXF.jpg?updatedAt=1770104152297",
+        "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/SCL_Swiss_Alps_Switzerland_001_3000x1500_3zUeNH9Ly.jpg?updatedAt=1770218904597",
+        "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/SCL_Swiss_Alps_Switzerland_001_3000x1500_FgD8YulNC.jpg?updatedAt=1770219026216",
+        "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/SCL_Swiss_Alps_Switzerland_001_3000x1500_URAiuuEIP.jpg?updatedAt=1770219138432",
+        "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/SCL_Swiss_Alps_Switzerland_001_3000x1500_zTruoz1bT.jpg?updatedAt=1772545487604"
+      ],
+      "category": "International",
+      "groupSize": "Max 25",
+      "overview": "A classic European blend. Visit the Eiffel Tower in Paris and the snowy peaks of Mt. Titlis in Switzerland.",
+      "highlights": [
+        "Eiffel Tower Summit",
+        "Seine River Cruise",
+        "Mt. Titlis with Ice Flyer",
+        "Rhine Falls"
+      ],
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Arrival & Welcome",
+          "description": "Check-in to your hotel in Zurich, Switzerland and enjoy the evening at leisure.",
+          "highlights": [],
+          "meals": {
+            "breakfastIncluded": false,
+            "lunchIncluded": false,
+            "dinnerIncluded": false
+          },
+          "activities": [],
+          "itineraryImages": [],
+          "flights": [],
+          "_id": "69c291efd382d77cd1874694",
+          "detailedActivities": []
+        },
+        {
+          "day": 2,
+          "title": "Local Sightseeing",
+          "description": "Explore the iconic landmarks and hidden gems of the city.",
+          "highlights": [],
+          "meals": {
+            "breakfastIncluded": false,
+            "lunchIncluded": false,
+            "dinnerIncluded": false
+          },
+          "activities": [],
+          "itineraryImages": [],
+          "flights": [],
+          "_id": "69c291efd382d77cd1874695",
+          "detailedActivities": []
+        },
+        {
+          "day": 3,
+          "title": "Adventure & Culture",
+          "description": "Experience the local traditions and outdoor activities.",
+          "highlights": [],
+          "meals": {
+            "breakfastIncluded": false,
+            "lunchIncluded": false,
+            "dinnerIncluded": false
+          },
+          "activities": [],
+          "itineraryImages": [],
+          "flights": [],
+          "_id": "69c291efd382d77cd1874696",
+          "detailedActivities": []
+        }
+      ],
+      "inclusions": [
+        "Train tickets",
+        "Hotels",
+        "Breakfast"
+      ],
+      "exclusions": [
+        "Schengen Visa",
+        "City Taxes"
+      ],
+      "thingsToPack": [],
+      "policies": {
+        "cancellation": "Free cancellation up to 7 days before departure. 50% refund within 7 days. No refund for no-shows.",
+        "refund": "Refunds are automatically processed to your original payment method within 5-7 business days.",
+        "payment": "Book initially with just 20%. The remaining 80% is securely payable up to 7 days before your departure."
+      },
+      "status": "published",
+      "showOnHomepage": true,
+      "showInCollections": true,
+      "isBestSeller": false,
+      "isTrending": false,
+      "isAlmostFull": false,
+      "homepageSections": [],
+      "inclusionHighlights": [],
+      "tags": [],
+      "faqs": [],
+      "createdAt": "2026-03-24T13:30:23.495Z",
+      "__v": 1,
+      "itinerarySummary": "A curated 7-day exploration covering the top highlights and hidden gems of Zurich, Switzerland."
+    },
+    {
+      "_id": "69c291efd382d77cd1874697",
+      "seo": {
+        "title": "Kerala Backwaters Bliss | 4 Days Luxury Tour | Yatravi",
+        "description": "Relax on a houseboat as you glide through the serene backwaters of Kerala. Enjoy authentic Ayurvedic massages.",
+        "keywords": "Alleppey, Kerala, India travel, Kerala Backwaters Bliss, luxury tours, Yatravi holidays"
+      },
+      "id": "kerala_backwaters_1",
+      "slug": "kerala-backwaters-bliss",
+      "title": "Kerala Backwaters Bliss",
+      "location": "Alleppey, Kerala, India",
+      "duration": 4,
+      "price": 18000,
+      "originalPrice": 22000,
+      "rating": 4.7,
+      "reviewsCount": 210,
+      "image": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?q=80&w=1000&auto=format&fit=crop",
+      "gallery": [
+        "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944",
+        "https://images.unsplash.com/photo-1506461883276-594a12b11cf3"
+      ],
+      "category": "Family",
+      "groupSize": "Private",
+      "overview": "Relax on a houseboat as you glide through the serene backwaters of Kerala. Enjoy authentic Ayurvedic massages.",
+      "highlights": [
+        "Houseboat Stay",
+        "Shikara Ride",
+        "Munnar Tea Gardens"
+      ],
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Arrival & Welcome",
+          "description": "Check-in to your hotel in Alleppey, Kerala, India and enjoy the evening at leisure.",
+          "highlights": [],
+          "meals": {
+            "breakfastIncluded": false,
+            "lunchIncluded": false,
+            "dinnerIncluded": false
+          },
+          "activities": [],
+          "itineraryImages": [],
+          "flights": [],
+          "_id": "69c291efd382d77cd1874698",
+          "detailedActivities": []
+        },
+        {
+          "day": 2,
+          "title": "Local Sightseeing",
+          "description": "Explore the iconic landmarks and hidden gems of the city.",
+          "highlights": [],
+          "meals": {
+            "breakfastIncluded": false,
+            "lunchIncluded": false,
+            "dinnerIncluded": false
+          },
+          "activities": [],
+          "itineraryImages": [],
+          "flights": [],
+          "_id": "69c291efd382d77cd1874699",
+          "detailedActivities": []
+        },
+        {
+          "day": 3,
+          "title": "Adventure & Culture",
+          "description": "Experience the local traditions and outdoor activities.",
+          "highlights": [],
+          "meals": {
+            "breakfastIncluded": false,
+            "lunchIncluded": false,
+            "dinnerIncluded": false
+          },
+          "activities": [],
+          "itineraryImages": [],
+          "flights": [],
+          "_id": "69c291efd382d77cd187469a",
+          "detailedActivities": []
+        }
+      ],
+      "inclusions": [
+        "Houseboat meals",
+        "Transfers",
+        "Hotel Stay"
+      ],
+      "exclusions": [
+        "Airfare"
+      ],
+      "thingsToPack": [],
+      "policies": {
+        "cancellation": "Free cancellation up to 7 days before departure. 50% refund within 7 days. No refund for no-shows.",
+        "refund": "Refunds are automatically processed to your original payment method within 5-7 business days.",
+        "payment": "Book initially with just 20%. The remaining 80% is securely payable up to 7 days before your departure."
+      },
+      "status": "published",
+      "showOnHomepage": true,
+      "showInCollections": true,
+      "isBestSeller": false,
+      "isTrending": false,
+      "isAlmostFull": false,
+      "homepageSections": [],
+      "inclusionHighlights": [],
+      "tags": [
+        "Super Saver"
+      ],
+      "faqs": [],
+      "createdAt": "2026-03-24T13:30:23.495Z",
+      "__v": 0,
+      "itinerarySummary": "A curated 4-day exploration covering the top highlights and hidden gems of Alleppey, Kerala, India."
+    },
+    {
+      "_id": "69c291efd382d77cd187469b",
+      "seo": {
+        "title": "Misty Munnar & Thekkady | 3 Days Luxury Tour | Yatravi",
+        "description": "Explore the rolling hills of Munnar and the wildlife of Periyar National Park in Thekkady.",
+        "keywords": "Munnar, Kerala, India travel, Misty Munnar & Thekkady, luxury tours, Yatravi holidays"
+      },
+      "id": "kerala_munnar_1",
+      "slug": "misty-munnar-thekkady",
+      "title": "Misty Munnar & Thekkady",
+      "location": "Munnar, Kerala, India",
+      "duration": 3,
+      "price": 12000,
+      "originalPrice": 15000,
+      "rating": 4.6,
+      "reviewsCount": 120,
+      "image": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/pexels-akos-szabo-145938-440731_IMjm8q1_b.jpg",
+      "gallery": [],
+      "category": "Nature",
+      "groupSize": "Max 12",
+      "overview": "Explore the rolling hills of Munnar and the wildlife of Periyar National Park in Thekkady.",
+      "highlights": [
+        "Eravikulam National Park",
+        "Periyar Wildlife Sanctuary",
+        "Spice Plantation Tour"
+      ],
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Arrival & Welcome",
+          "description": "Check-in to your hotel in Munnar, Kerala, India and enjoy the evening at leisure.",
+          "highlights": [],
+          "meals": {
+            "breakfastIncluded": false,
+            "lunchIncluded": false,
+            "dinnerIncluded": false
+          },
+          "activities": [],
+          "detailedActivities": [],
+          "stay": null,
+          "itineraryImages": [],
+          "flights": [],
+          "_id": "69ca107a90926847aecbe2c8"
+        },
+        {
+          "day": 2,
+          "title": "Local Sightseeing",
+          "description": "Explore the iconic landmarks and hidden gems of the city.",
+          "highlights": [],
+          "meals": {
+            "breakfastIncluded": false,
+            "lunchIncluded": false,
+            "dinnerIncluded": false
+          },
+          "activities": [],
+          "detailedActivities": [],
+          "stay": null,
+          "itineraryImages": [],
+          "flights": [],
+          "_id": "69ca107a90926847aecbe2c9"
+        },
+        {
+          "day": 3,
+          "title": "Adventure & Culture",
+          "description": "Experience the local traditions and outdoor activities.",
+          "highlights": [],
+          "meals": {
+            "breakfastIncluded": false,
+            "lunchIncluded": false,
+            "dinnerIncluded": false
+          },
+          "activities": [],
+          "detailedActivities": [],
+          "stay": null,
+          "itineraryImages": [],
+          "flights": [],
+          "_id": "69ca107a90926847aecbe2ca"
+        }
+      ],
+      "inclusions": [
+        "Breakfast",
+        "Transfers",
+        "Accommodation"
+      ],
+      "exclusions": [
+        "Entry tickets"
+      ],
+      "thingsToPack": [],
+      "policies": {
+        "cancellation": "Free cancellation up to 7 days before departure. 50% refund within 7 days. No refund for no-shows.",
+        "refund": "Refunds are automatically processed to your original payment method within 5-7 business days.",
+        "payment": "Book initially with just 20%. The remaining 80% is securely payable up to 7 days before your departure."
+      },
+      "status": "published",
+      "showOnHomepage": true,
+      "showInCollections": true,
+      "isBestSeller": false,
+      "isTrending": false,
+      "isAlmostFull": false,
+      "homepageSections": [],
+      "inclusionHighlights": [],
+      "tags": [
+        "Super Saver"
+      ],
+      "faqs": [],
+      "createdAt": "2026-03-24T13:30:23.496Z",
+      "__v": 1,
+      "itinerarySummary": "A curated 3-day exploration covering the top highlights and hidden gems of Munnar, Kerala, India.",
+      "regionBreakdown": "",
+      "validityDate": "",
+      "verticalImage": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/aman-shrestha-vi5tkym8r64-unsplash_XZRRThjx6.jpg"
+    },
+    {
+      "_id": "69c291efd382d77cd187469f",
+      "seo": {
+        "title": "Dubai Delight with Burj Khalifa | 5 Days Luxury Tour | Yatravi",
+        "description": "Witness the futuristic skyline of Dubai, go on a desert safari, and shop at the world's largest mall.",
+        "keywords": "Dubai, UAE travel, Dubai Delight with Burj Khalifa, luxury tours, Yatravi holidays"
+      },
+      "id": "dubai_classic_1",
+      "slug": "dubai-delight-burj-khalifa",
+      "title": "Dubai Delight with Burj Khalifa",
+      "location": "Dubai, UAE",
+      "duration": 5,
+      "price": 45000,
+      "originalPrice": 55000,
+      "rating": 4.8,
+      "reviewsCount": 450,
+      "image": "https://images.unsplash.com/photo-1518684079-3c830dcef6c3?q=80&w=1000&auto=format&fit=crop",
+      "gallery": [
+        "https://images.unsplash.com/photo-1518684079-3c830dcef6c3",
+        "https://images.unsplash.com/photo-1546412414-8035e1776c9a"
+      ],
+      "category": "International",
+      "groupSize": "Fixed Departure",
+      "overview": "Witness the futuristic skyline of Dubai, go on a desert safari, and shop at the world's largest mall.",
+      "highlights": [
+        "Burj Khalifa 124th Floor",
+        "Desert Safari with BBQ Dinner",
+        "Dhow Cruise Marina",
+        "Dubai Mall"
+      ],
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Arrival & Welcome",
+          "description": "Check-in to your hotel in Dubai, UAE and enjoy the evening at leisure.",
+          "highlights": [],
+          "meals": {
+            "breakfastIncluded": false,
+            "lunchIncluded": false,
+            "dinnerIncluded": false
+          },
+          "activities": [],
+          "itineraryImages": [],
+          "flights": [],
+          "_id": "69c291efd382d77cd18746a0",
+          "detailedActivities": []
+        },
+        {
+          "day": 2,
+          "title": "Local Sightseeing",
+          "description": "Explore the iconic landmarks and hidden gems of the city.",
+          "highlights": [],
+          "meals": {
+            "breakfastIncluded": false,
+            "lunchIncluded": false,
+            "dinnerIncluded": false
+          },
+          "activities": [],
+          "itineraryImages": [],
+          "flights": [],
+          "_id": "69c291efd382d77cd18746a1",
+          "detailedActivities": []
+        },
+        {
+          "day": 3,
+          "title": "Adventure & Culture",
+          "description": "Experience the local traditions and outdoor activities.",
+          "highlights": [],
+          "meals": {
+            "breakfastIncluded": false,
+            "lunchIncluded": false,
+            "dinnerIncluded": false
+          },
+          "activities": [],
+          "itineraryImages": [],
+          "flights": [],
+          "_id": "69c291efd382d77cd18746a2",
+          "detailedActivities": []
+        }
+      ],
+      "inclusions": [
+        "Visa",
+        "Breakfast",
+        "Transfers",
+        "Tours"
+      ],
+      "exclusions": [
+        "Tourism Dirham Fee",
+        "Airfare"
+      ],
+      "thingsToPack": [],
+      "policies": {
+        "cancellation": "Free cancellation up to 7 days before departure. 50% refund within 7 days. No refund for no-shows.",
+        "refund": "Refunds are automatically processed to your original payment method within 5-7 business days.",
+        "payment": "Book initially with just 20%. The remaining 80% is securely payable up to 7 days before your departure."
+      },
+      "status": "published",
+      "showOnHomepage": true,
+      "showInCollections": true,
+      "isBestSeller": false,
+      "isTrending": false,
+      "isAlmostFull": false,
+      "homepageSections": [],
+      "inclusionHighlights": [],
+      "tags": [],
+      "faqs": [],
+      "createdAt": "2026-03-24T13:30:23.496Z",
+      "__v": 0,
+      "itinerarySummary": "A curated 5-day exploration covering the top highlights and hidden gems of Dubai, UAE."
+    },
+    {
+      "_id": "69c291efd382d77cd18746a3",
+      "seo": {
+        "title": "Luxury Dubai Staycation | 4 Days Luxury Tour | Yatravi",
+        "description": "Stay at the Atlantis The Palm and enjoy unlimited access to Aquaventure Waterpark.",
+        "keywords": "Dubai, UAE travel, Luxury Dubai Staycation, luxury tours, Yatravi holidays"
+      },
+      "id": "dubai_luxury_1",
+      "slug": "luxury-dubai-staycation",
+      "title": "Luxury Dubai Staycation",
+      "location": "Dubai, UAE",
+      "duration": 4,
+      "price": 75000,
+      "originalPrice": 90000,
+      "rating": 4.9,
+      "reviewsCount": 112,
+      "image": "https://images.unsplash.com/photo-1582672060674-bc2bd808a8b5?q=80&w=1000&auto=format&fit=crop",
+      "gallery": [
+        "https://images.unsplash.com/photo-1582672060674-bc2bd808a8b5"
+      ],
+      "category": "Luxury",
+      "groupSize": "Private",
+      "overview": "Stay at the Atlantis The Palm and enjoy unlimited access to Aquaventure Waterpark.",
+      "highlights": [
+        "Atlantis The Palm Stay",
+        "Aquaventure Waterpark",
+        "Lost Chambers Aquarium"
+      ],
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Arrival & Welcome",
+          "description": "Check-in to your hotel in Dubai, UAE and enjoy the evening at leisure.",
+          "highlights": [],
+          "meals": {
+            "breakfastIncluded": false,
+            "lunchIncluded": false,
+            "dinnerIncluded": false
+          },
+          "activities": [],
+          "detailedActivities": [],
+          "stay": null,
+          "itineraryImages": [],
+          "flights": [],
+          "_id": "69ca102c90926847aecbe1b6"
+        },
+        {
+          "day": 2,
+          "title": "Local Sightseeing",
+          "description": "Explore the iconic landmarks and hidden gems of the city.",
+          "highlights": [],
+          "meals": {
+            "breakfastIncluded": false,
+            "lunchIncluded": false,
+            "dinnerIncluded": false
+          },
+          "activities": [],
+          "detailedActivities": [],
+          "stay": null,
+          "itineraryImages": [],
+          "flights": [],
+          "_id": "69ca102c90926847aecbe1b7"
+        },
+        {
+          "day": 3,
+          "title": "Adventure & Culture",
+          "description": "Experience the local traditions and outdoor activities.",
+          "highlights": [],
+          "meals": {
+            "breakfastIncluded": false,
+            "lunchIncluded": false,
+            "dinnerIncluded": false
+          },
+          "activities": [],
+          "detailedActivities": [],
+          "stay": null,
+          "itineraryImages": [],
+          "flights": [],
+          "_id": "69ca102c90926847aecbe1b8"
+        }
+      ],
+      "inclusions": [
+        "5-Star Stay",
+        "Breakfast & Dinner",
+        "Private Transfers"
+      ],
+      "exclusions": [
+        "Airfare"
+      ],
+      "thingsToPack": [],
+      "policies": {
+        "cancellation": "Free cancellation up to 7 days before departure. 50% refund within 7 days. No refund for no-shows.",
+        "refund": "Refunds are automatically processed to your original payment method within 5-7 business days.",
+        "payment": "Book initially with just 20%. The remaining 80% is securely payable up to 7 days before your departure."
+      },
+      "status": "published",
+      "showOnHomepage": true,
+      "showInCollections": true,
+      "isBestSeller": false,
+      "isTrending": false,
+      "isAlmostFull": false,
+      "homepageSections": [],
+      "inclusionHighlights": [],
+      "tags": [
+        "Trending"
+      ],
+      "faqs": [],
+      "createdAt": "2026-03-24T13:30:23.497Z",
+      "__v": 1,
+      "itinerarySummary": "A curated 4-day exploration covering the top highlights and hidden gems of Dubai, UAE.",
+      "regionBreakdown": "",
+      "validityDate": "",
+      "verticalImage": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/pexels-kadiravsarr-14749729__BFA0utH4.jpg"
+    },
+    {
+      "_id": "69c291efd382d77cd18746a7",
+      "seo": {
+        "title": "Maldives Water Villa Paradise | 4 Days Luxury Tour | Yatravi",
+        "description": "The ultimate honeymoon destination. Stay in an overwater villa with direct access to the turquoise lagoon.",
+        "keywords": "Maldives travel, Maldives Water Villa Paradise, luxury tours, Yatravi holidays"
+      },
+      "id": "maldives_beach_1",
+      "slug": "maldives-water-villa-paradise",
+      "title": "Maldives Water Villa Paradise",
+      "location": "Maldives",
+      "duration": 4,
+      "price": 85000,
+      "originalPrice": 110000,
+      "rating": 4.9,
+      "reviewsCount": 300,
+      "image": "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?q=80&w=1000&auto=format&fit=crop",
+      "gallery": [
+        "https://images.unsplash.com/photo-1514282401047-d79a71a590e8"
+      ],
+      "category": "Honeymoon",
+      "groupSize": "Private",
+      "overview": "The ultimate honeymoon destination. Stay in an overwater villa with direct access to the turquoise lagoon.",
+      "highlights": [
+        "Overwater Villa",
+        "All Inclusive Meal Plan",
+        "Snorkeling Gear",
+        "Speedboat Transfer"
+      ],
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Arrival & Welcome",
+          "description": "Check-in to your hotel in Maldives and enjoy the evening at leisure.",
+          "highlights": [],
+          "meals": {
+            "breakfastIncluded": false,
+            "lunchIncluded": false,
+            "dinnerIncluded": false
+          },
+          "activities": [],
+          "detailedActivities": [],
+          "stay": null,
+          "itineraryImages": [],
+          "flights": [],
+          "_id": "69ca0faf90926847aecbe0a7"
+        },
+        {
+          "day": 2,
+          "title": "Local Sightseeing",
+          "description": "Explore the iconic landmarks and hidden gems of the city.",
+          "highlights": [],
+          "meals": {
+            "breakfastIncluded": false,
+            "lunchIncluded": false,
+            "dinnerIncluded": false
+          },
+          "activities": [],
+          "detailedActivities": [],
+          "stay": null,
+          "itineraryImages": [],
+          "flights": [],
+          "_id": "69ca0faf90926847aecbe0a8"
+        },
+        {
+          "day": 3,
+          "title": "Adventure & Culture",
+          "description": "Experience the local traditions and outdoor activities.",
+          "highlights": [],
+          "meals": {
+            "breakfastIncluded": false,
+            "lunchIncluded": false,
+            "dinnerIncluded": false
+          },
+          "activities": [],
+          "detailedActivities": [],
+          "stay": null,
+          "itineraryImages": [],
+          "flights": [],
+          "_id": "69ca0faf90926847aecbe0a9"
+        }
+      ],
+      "inclusions": [
+        "All Meals",
+        "Drinks",
+        "Transfers"
+      ],
+      "exclusions": [
+        "Airfare",
+        "Green Tax"
+      ],
+      "thingsToPack": [],
+      "policies": {
+        "cancellation": "Free cancellation up to 7 days before departure. 50% refund within 7 days. No refund for no-shows.",
+        "refund": "Refunds are automatically processed to your original payment method within 5-7 business days.",
+        "payment": "Book initially with just 20%. The remaining 80% is securely payable up to 7 days before your departure."
+      },
+      "status": "published",
+      "showOnHomepage": true,
+      "showInCollections": true,
+      "isBestSeller": false,
+      "isTrending": false,
+      "isAlmostFull": false,
+      "homepageSections": [],
+      "inclusionHighlights": [],
+      "tags": [],
+      "faqs": [],
+      "createdAt": "2026-03-24T13:30:23.497Z",
+      "__v": 1,
+      "itinerarySummary": "A curated 4-day exploration covering the top highlights and hidden gems of Maldives.",
+      "regionBreakdown": "",
+      "validityDate": "",
+      "verticalImage": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/StockCake-maldives_Images_and_Photos_1762605728_dnPKOlJ0d.jpg"
+    },
+    {
+      "_id": "69c291efd382d77cd18746ab",
+      "seo": {
+        "title": "Heavenly Kashmir | 6 Days Luxury Tour | Yatravi",
+        "description": "Experience the paradise on earth. Stay in a houseboat, ride a Shikara, and visit the meadows of Gulmarg.",
+        "keywords": "Srinagar, Kashmir, India travel, Heavenly Kashmir, luxury tours, Yatravi holidays"
+      },
+      "id": "kashmir_paradise_1",
+      "slug": "heavenly-kashmir",
+      "title": "Heavenly Kashmir",
+      "location": "Kashmir",
+      "duration": 6,
+      "price": 32500,
+      "originalPrice": 42000,
+      "rating": 4.8,
+      "reviewsCount": 200,
+      "image": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/SCL_Swiss_Alps_Switzerland_001_3000x1500_J2JxUkAil.jpg",
+      "gallery": [
+        "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/StockCake-KASHMIR_SNOW_Images_and_Photos_1762518238_wD2mAwRSC.jpg?updatedAt=1772372162769",
+        "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/StockCake-KASHMIR_SNOW_Images_and_Photos_1762518254_dlFUiJCPw.jpg?updatedAt=1772372198474",
+        "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/StockCake-KASHMIR_SNOW_Images_and_Photos_1762518254_CjLT7zoxY.jpg?updatedAt=1772612157283",
+        "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/StockCake-KASHMIR_SNOW_Images_and_Photos_1762518254_1xqjYzX2S.jpg?updatedAt=1772612303058",
+        "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/StockCake-KASHMIR_SNOW_BOAT_Images_and_Photos_1762518506_QQjHLcUzNE.jpg?updatedAt=1772692055011"
+      ],
+      "category": "Honeymoon",
+      "groupSize": "Max 12",
+      "overview": "Experience the paradise on earth. Stay in a houseboat, ride a Shikara, and visit the meadows of Gulmarg.",
+      "highlights": [
+        "Dal Lake Houseboat",
+        "Gulmarg Gondola Ride",
+        "Pahalgam Valley",
+        "Mughal Gardens"
+      ],
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Arrival & Welcome",
+          "description": "Check-in to your hotel in Srinagar, Kashmir, India and enjoy the evening at leisure.",
+          "highlights": [],
+          "meals": {
+            "breakfastIncluded": false,
+            "lunchIncluded": false,
+            "dinnerIncluded": false
+          },
+          "activities": [],
+          "detailedActivities": [],
+          "stay": null,
+          "itineraryImages": [],
+          "flights": [],
+          "_id": "69ca6deaa6da7f9e1066e4ed"
+        },
+        {
+          "day": 2,
+          "title": "Local Sightseeing",
+          "description": "Explore the iconic landmarks and hidden gems of the city.",
+          "highlights": [],
+          "meals": {
+            "breakfastIncluded": false,
+            "lunchIncluded": false,
+            "dinnerIncluded": false
+          },
+          "activities": [],
+          "detailedActivities": [],
+          "stay": null,
+          "itineraryImages": [],
+          "flights": [],
+          "_id": "69ca6deaa6da7f9e1066e4ee"
+        },
+        {
+          "day": 3,
+          "title": "Adventure & Culture",
+          "description": "Experience the local traditions and outdoor activities.",
+          "highlights": [],
+          "meals": {
+            "breakfastIncluded": false,
+            "lunchIncluded": false,
+            "dinnerIncluded": false
+          },
+          "activities": [],
+          "detailedActivities": [],
+          "stay": null,
+          "itineraryImages": [],
+          "flights": [],
+          "_id": "69ca6deaa6da7f9e1066e4ef"
+        }
+      ],
+      "inclusions": [
+        "Breakfast & Dinner",
+        "Private Cab",
+        "Houseboat Stay"
+      ],
+      "exclusions": [
+        "Gondola Tickets",
+        "Pony Ride",
+        "Airfare"
+      ],
+      "thingsToPack": [],
+      "policies": {
+        "cancellation": "Free cancellation up to 7 days before departure. 50% refund within 7 days. No refund for no-shows.",
+        "refund": "Refunds are automatically processed to your original payment method within 5-7 business days.",
+        "payment": "Book initially with just 20%. The remaining 80% is securely payable up to 7 days before your departure."
+      },
+      "status": "published",
+      "showOnHomepage": true,
+      "showInCollections": true,
+      "isBestSeller": false,
+      "isTrending": false,
+      "isAlmostFull": false,
+      "homepageSections": [
+        "domestic"
+      ],
+      "inclusionHighlights": [],
+      "tags": [],
+      "faqs": [],
+      "createdAt": "2026-03-24T13:30:23.498Z",
+      "__v": 6,
+      "itinerarySummary": "A curated 6-day exploration covering the top highlights and hidden gems of Srinagar, Kashmir, India.",
+      "regionBreakdown": "",
+      "validityDate": "",
+      "verticalImage": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/pexels-tobiasbjorkli-1853354_nfNrLQCsm.jpg"
+    },
+    {
+      "_id": "69c291efd382d77cd18746af",
+      "seo": {
+        "title": "Vietnam Explorer: Hanoi to Ho Chi Minh | 8 Days Luxury Tour | Yatravi",
+        "description": "Discover the diverse landscapes of Vietnam from the limestone karsts of Halong Bay to the bustling streets of Saigon.",
+        "keywords": "Hanoi, Vietnam travel, Vietnam Explorer: Hanoi to Ho Chi Minh, luxury tours, Yatravi holidays"
+      },
+      "id": "vietnam_explorer_1",
+      "slug": "vietnam-explorer",
+      "title": "Vietnam Explorer: Hanoi to Ho Chi Minh",
+      "location": "Hanoi, Vietnam",
+      "duration": 8,
+      "price": 65000,
+      "originalPrice": 80000,
+      "rating": 4.8,
+      "reviewsCount": 150,
+      "image": "https://images.unsplash.com/photo-1528127269322-539801943592?q=80&w=1000&auto=format&fit=crop",
+      "gallery": [
+        "https://images.unsplash.com/photo-1528127269322-539801943592"
+      ],
+      "category": "International",
+      "groupSize": "Max 16",
+      "overview": "Discover the diverse landscapes of Vietnam from the limestone karsts of Halong Bay to the bustling streets of Saigon.",
+      "highlights": [
+        "Halong Bay Cruise",
+        "Hoi An Ancient Town",
+        "Cu Chi Tunnels",
+        "Mekong Delta"
+      ],
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Arrival & Welcome",
+          "description": "Check-in to your hotel in Hanoi, Vietnam and enjoy the evening at leisure.",
+          "highlights": [],
+          "meals": {
+            "breakfastIncluded": false,
+            "lunchIncluded": false,
+            "dinnerIncluded": false
+          },
+          "activities": [],
+          "itineraryImages": [],
+          "flights": [],
+          "_id": "69c291efd382d77cd18746b0",
+          "detailedActivities": []
+        },
+        {
+          "day": 2,
+          "title": "Local Sightseeing",
+          "description": "Explore the iconic landmarks and hidden gems of the city.",
+          "highlights": [],
+          "meals": {
+            "breakfastIncluded": false,
+            "lunchIncluded": false,
+            "dinnerIncluded": false
+          },
+          "activities": [],
+          "itineraryImages": [],
+          "flights": [],
+          "_id": "69c291efd382d77cd18746b1",
+          "detailedActivities": []
+        },
+        {
+          "day": 3,
+          "title": "Adventure & Culture",
+          "description": "Experience the local traditions and outdoor activities.",
+          "highlights": [],
+          "meals": {
+            "breakfastIncluded": false,
+            "lunchIncluded": false,
+            "dinnerIncluded": false
+          },
+          "activities": [],
+          "itineraryImages": [],
+          "flights": [],
+          "_id": "69c291efd382d77cd18746b2",
+          "detailedActivities": []
+        }
+      ],
+      "inclusions": [
+        "Internal Flights",
+        "Hotels",
+        "Breakfast",
+        "Visa Letter"
+      ],
+      "exclusions": [
+        "International Flights",
+        "Visa Stamp Fee"
+      ],
+      "thingsToPack": [],
+      "policies": {
+        "cancellation": "Free cancellation up to 7 days before departure. 50% refund within 7 days. No refund for no-shows.",
+        "refund": "Refunds are automatically processed to your original payment method within 5-7 business days.",
+        "payment": "Book initially with just 20%. The remaining 80% is securely payable up to 7 days before your departure."
+      },
+      "status": "published",
+      "showOnHomepage": true,
+      "showInCollections": true,
+      "isBestSeller": false,
+      "isTrending": false,
+      "isAlmostFull": false,
+      "homepageSections": [],
+      "inclusionHighlights": [],
+      "tags": [],
+      "faqs": [],
+      "createdAt": "2026-03-24T13:30:23.499Z",
+      "__v": 0,
+      "itinerarySummary": "A curated 8-day exploration covering the top highlights and hidden gems of Hanoi, Vietnam."
+    },
+    {
+      "_id": "69c291efd382d77cd18746b3",
+      "seo": {
+        "title": "Thailand Super Saver Special | 5 Days Luxury Tour | Yatravi",
+        "description": "Embark on an unforgettable 5-day journey to Thailand. This meticulously crafted premium package by Yatravi Holidays ensures a seamless and luxurious experience ",
+        "keywords": "Thailand travel, Thailand Super Saver Special, luxury tours, Yatravi holidays",
+        "robots": "index, follow",
+        "sitemapFrequency": "weekly",
+        "sitemapPriority": 0.8
+      },
+      "id": "thai_adventure_1",
+      "slug": "thailand-super-saver-special",
+      "title": "Thailand Super Saver Special",
+      "location": "Thailand",
+      "duration": 5,
+      "price": 29999,
+      "originalPrice": 45000,
+      "rating": 0,
+      "reviewsCount": 0,
+      "image": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/max-bottinger-UxzDksvcWcY-unsplash_y0m-yzAp1.jpg",
+      "gallery": [
+        "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/beautiful-girl-red-bikini-boat-koh-kai-island-thailand_DZTOV1Yss.jpg?updatedAt=1772373062322"
+      ],
+      "category": "International",
+      "highlights": [],
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Arrival & Welcome",
+          "description": "Check-in to your hotel in Thailand and enjoy the evening at leisure.",
+          "highlights": [],
+          "meals": {
+            "breakfastIncluded": false,
+            "lunchIncluded": false,
+            "dinnerIncluded": false
+          },
+          "activities": [],
+          "detailedActivities": [],
+          "stay": null,
+          "itineraryImages": [],
+          "flights": [],
+          "_id": "69c8c2c70262a6a5833b85ed"
+        },
+        {
+          "day": 2,
+          "title": "Local Sightseeing",
+          "description": "Explore the iconic landmarks and hidden gems of the city.",
+          "highlights": [],
+          "meals": {
+            "breakfastIncluded": false,
+            "lunchIncluded": false,
+            "dinnerIncluded": false
+          },
+          "activities": [],
+          "detailedActivities": [],
+          "stay": null,
+          "itineraryImages": [],
+          "flights": [],
+          "_id": "69c8c2c70262a6a5833b85ee"
+        },
+        {
+          "day": 3,
+          "title": "Adventure & Culture",
+          "description": "Experience the local traditions and outdoor activities.",
+          "highlights": [],
+          "meals": {
+            "breakfastIncluded": false,
+            "lunchIncluded": false,
+            "dinnerIncluded": false
+          },
+          "activities": [],
+          "detailedActivities": [],
+          "stay": null,
+          "itineraryImages": [],
+          "flights": [],
+          "_id": "69c8c2c70262a6a5833b85ef"
+        }
+      ],
+      "inclusions": [
+        "Premium Accommodation in 4/5 Star Hotels",
+        "Daily Buffet Breakfast",
+        "Private Airport Transfers",
+        "Expert Local Guide for Sightseeing",
+        "All Taxes and Service Charges"
+      ],
+      "exclusions": [
+        "International & Domestic Flights",
+        "Lunch and Dinner (unless specified)",
+        "Personal Expenses & Shopping",
+        "Visa Fees",
+        "Travel Insurance"
+      ],
+      "thingsToPack": [],
+      "policies": {
+        "cancellation": "Free cancellation up to 7 days before departure. 50% refund within 7 days. No refund for no-shows.",
+        "refund": "Refunds are automatically processed to your original payment method within 5-7 business days.",
+        "payment": "Book initially with just 20%. The remaining 80% is securely payable up to 7 days before your departure."
+      },
+      "status": "published",
+      "showOnHomepage": true,
+      "showInCollections": true,
+      "isBestSeller": false,
+      "isTrending": false,
+      "isAlmostFull": false,
+      "homepageSections": [],
+      "inclusionHighlights": [
+        "stay",
+        "transfer",
+        "flight",
+        "breakfast",
+        "sightseeing",
+        "visa"
+      ],
+      "tags": [
+        "Super Saver",
+        "Trending"
+      ],
+      "faqs": [],
+      "createdAt": "2026-03-24T13:30:23.499Z",
+      "__v": 3,
+      "itinerarySummary": "A curated 5-day exploration covering the top highlights and hidden gems of Thailand.",
+      "overview": "Embark on an unforgettable 5-day journey to Thailand. This meticulously crafted premium package by Yatravi Holidays ensures a seamless and luxurious experience from the moment you arrive. Discover the best of Thailand Super Saver Special and create memories that will last a lifetime.",
+      "groupSize": "Fixed Departure",
+      "regionBreakdown": "",
+      "validityDate": ""
+    },
+    {
+      "_id": "69c291efd382d77cd18746b7",
+      "seo": {
+        "title": "Rishikesh Rafting Adventure | 3 Days Luxury Tour | Yatravi",
+        "description": "Embark on an unforgettable 3-day journey to Rishikesh, India. This meticulously crafted premium package by Yatravi Holidays ensures a seamless and luxurious exp",
+        "keywords": "Rishikesh, India travel, Rishikesh Rafting Adventure, luxury tours, Yatravi holidays"
+      },
+      "id": "rishi_rafting_1",
+      "slug": "rishikesh-rafting-adventure",
+      "title": "Rishikesh Rafting Adventure",
+      "location": "Rishikesh, India",
+      "duration": 3,
+      "price": 5999,
+      "originalPrice": 8999,
+      "rating": 0,
+      "reviewsCount": 0,
+      "image": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/saurabh-kumar-2ZZYACycXZk-unsplash_9hdzGJL-a.jpg",
+      "gallery": [
+        "https://ik.imagekit.io/2nikzq08c/yatravi_test/test_upload_script_f2_C8hDgs.png?updatedAt=1768747249881",
+        "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/pexels-yulia-2077612-3815533_2UYEfax6d.jpg?updatedAt=1768748288543",
+        "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/pexels-peng-liu-45946-169647_zKhOBGPvL.jpg?updatedAt=1768748300304",
+        "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/pexels-pixabay-460376_uu-EdZ2kW.jpg?updatedAt=1768748307972"
+      ],
+      "category": "Domestic",
+      "highlights": [],
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Arrival & Welcome",
+          "description": "Check-in to your hotel in Rishikesh, India and enjoy the evening at leisure.",
+          "highlights": [],
+          "meals": {
+            "breakfastIncluded": false,
+            "lunchIncluded": false,
+            "dinnerIncluded": false
+          },
+          "activities": [],
+          "detailedActivities": [],
+          "stay": null,
+          "itineraryImages": [],
+          "flights": [],
+          "_id": "69ca86f2b0ebeaf65a614970"
+        },
+        {
+          "day": 2,
+          "title": "Local Sightseeing",
+          "description": "Explore the iconic landmarks and hidden gems of the city.",
+          "highlights": [],
+          "meals": {
+            "breakfastIncluded": false,
+            "lunchIncluded": false,
+            "dinnerIncluded": false
+          },
+          "activities": [],
+          "detailedActivities": [],
+          "stay": null,
+          "itineraryImages": [],
+          "flights": [],
+          "_id": "69ca86f2b0ebeaf65a614971"
+        },
+        {
+          "day": 3,
+          "title": "Adventure & Culture",
+          "description": "Experience the local traditions and outdoor activities.",
+          "highlights": [],
+          "meals": {
+            "breakfastIncluded": false,
+            "lunchIncluded": false,
+            "dinnerIncluded": false
+          },
+          "activities": [],
+          "detailedActivities": [],
+          "stay": null,
+          "itineraryImages": [],
+          "flights": [],
+          "_id": "69ca86f2b0ebeaf65a614972"
+        }
+      ],
+      "inclusions": [
+        "Premium Accommodation in 4/5 Star Hotels",
+        "Daily Buffet Breakfast",
+        "Private Airport Transfers",
+        "Expert Local Guide for Sightseeing",
+        "All Taxes and Service Charges"
+      ],
+      "exclusions": [
+        "International & Domestic Flights",
+        "Lunch and Dinner (unless specified)",
+        "Personal Expenses & Shopping",
+        "Visa Fees",
+        "Travel Insurance"
+      ],
+      "thingsToPack": [],
+      "policies": {
+        "cancellation": "Free cancellation up to 7 days before departure. 50% refund within 7 days. No refund for no-shows.",
+        "refund": "Refunds are automatically processed to your original payment method within 5-7 business days.",
+        "payment": "Book initially with just 20%. The remaining 80% is securely payable up to 7 days before your departure."
+      },
+      "status": "published",
+      "showOnHomepage": true,
+      "showInCollections": true,
+      "isBestSeller": false,
+      "isTrending": false,
+      "isAlmostFull": false,
+      "homepageSections": [],
+      "inclusionHighlights": [],
+      "tags": [
+        "Super Saver"
+      ],
+      "faqs": [],
+      "createdAt": "2026-03-24T13:30:23.500Z",
+      "__v": 2,
+      "itinerarySummary": "A curated 3-day exploration covering the top highlights and hidden gems of Rishikesh, India.",
+      "overview": "Embark on an unforgettable 3-day journey to Rishikesh, India. This meticulously crafted premium package by Yatravi Holidays ensures a seamless and luxurious experience from the moment you arrive. Discover the best of Rishikesh Rafting Adventure and create memories that will last a lifetime.",
+      "groupSize": "Fixed Departure",
+      "regionBreakdown": "",
+      "validityDate": "",
+      "verticalImage": ""
+    },
+    {
+      "_id": "69c291efd382d77cd18746bb",
+      "seo": {
+        "title": "Manali Volvo Special | 4 Days Luxury Tour | Yatravi",
+        "description": "Embark on an unforgettable 4-day journey to Manali, India. This meticulously crafted premium package by Yatravi Holidays ensures a seamless and luxurious experi",
+        "keywords": "Manali, India travel, Manali Volvo Special, luxury tours, Yatravi holidays"
+      },
+      "id": "manali_volvo_1",
+      "slug": "manali-volvo-special",
+      "title": "Manali Volvo Special",
+      "location": "Manali, India",
+      "duration": 4,
+      "price": 7999,
+      "originalPrice": 12999,
+      "rating": 0,
+      "reviewsCount": 0,
+      "image": "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23",
+      "gallery": [
+        "https://ik.imagekit.io/2nikzq08c/yatravi_test/test_upload_script_f2_C8hDgs.png?updatedAt=1768747249881",
+        "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/pexels-yulia-2077612-3815533_2UYEfax6d.jpg?updatedAt=1768748288543",
+        "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/pexels-peng-liu-45946-169647_zKhOBGPvL.jpg?updatedAt=1768748300304",
+        "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/pexels-pixabay-460376_uu-EdZ2kW.jpg?updatedAt=1768748307972"
+      ],
+      "category": "Domestic",
+      "highlights": [],
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Arrival & Welcome",
+          "description": "Check-in to your hotel in Manali, India and enjoy the evening at leisure.",
+          "highlights": [],
+          "meals": {
+            "breakfastIncluded": false,
+            "lunchIncluded": false,
+            "dinnerIncluded": false
+          },
+          "activities": [],
+          "itineraryImages": [],
+          "flights": [],
+          "_id": "69c291efd382d77cd18746bc",
+          "detailedActivities": []
+        },
+        {
+          "day": 2,
+          "title": "Local Sightseeing",
+          "description": "Explore the iconic landmarks and hidden gems of the city.",
+          "highlights": [],
+          "meals": {
+            "breakfastIncluded": false,
+            "lunchIncluded": false,
+            "dinnerIncluded": false
+          },
+          "activities": [],
+          "itineraryImages": [],
+          "flights": [],
+          "_id": "69c291efd382d77cd18746bd",
+          "detailedActivities": []
+        },
+        {
+          "day": 3,
+          "title": "Adventure & Culture",
+          "description": "Experience the local traditions and outdoor activities.",
+          "highlights": [],
+          "meals": {
+            "breakfastIncluded": false,
+            "lunchIncluded": false,
+            "dinnerIncluded": false
+          },
+          "activities": [],
+          "itineraryImages": [],
+          "flights": [],
+          "_id": "69c291efd382d77cd18746be",
+          "detailedActivities": []
+        }
+      ],
+      "inclusions": [
+        "Premium Accommodation in 4/5 Star Hotels",
+        "Daily Buffet Breakfast",
+        "Private Airport Transfers",
+        "Expert Local Guide for Sightseeing",
+        "All Taxes and Service Charges"
+      ],
+      "exclusions": [
+        "International & Domestic Flights",
+        "Lunch and Dinner (unless specified)",
+        "Personal Expenses & Shopping",
+        "Visa Fees",
+        "Travel Insurance"
+      ],
+      "thingsToPack": [],
+      "policies": {
+        "cancellation": "Free cancellation up to 7 days before departure. 50% refund within 7 days. No refund for no-shows.",
+        "refund": "Refunds are automatically processed to your original payment method within 5-7 business days.",
+        "payment": "Book initially with just 20%. The remaining 80% is securely payable up to 7 days before your departure."
+      },
+      "status": "published",
+      "showOnHomepage": true,
+      "showInCollections": true,
+      "isBestSeller": false,
+      "isTrending": false,
+      "isAlmostFull": false,
+      "homepageSections": [],
+      "inclusionHighlights": [],
+      "tags": [
+        "Super Saver"
+      ],
+      "faqs": [],
+      "createdAt": "2026-03-24T13:30:23.501Z",
+      "__v": 1,
+      "itinerarySummary": "A curated 4-day exploration covering the top highlights and hidden gems of Manali, India.",
+      "overview": "Embark on an unforgettable 4-day journey to Manali, India. This meticulously crafted premium package by Yatravi Holidays ensures a seamless and luxurious experience from the moment you arrive. Discover the best of Manali Volvo Special and create memories that will last a lifetime."
+    },
+    {
+      "_id": "69c291efd382d77cd18746bf",
+      "seo": {
+        "title": "Kasol Kheerganga Trek | 5 Days Luxury Tour | Yatravi",
+        "description": "Embark on an unforgettable 5-day journey to Kasol, India. This meticulously crafted premium package by Yatravi Holidays ensures a seamless and luxurious experie",
+        "keywords": "Kasol, India travel, Kasol Kheerganga Trek, luxury tours, Yatravi holidays"
+      },
+      "id": "kasol_trek_1",
+      "slug": "kasol-kheerganga-trek",
+      "title": "Kasol Kheerganga Trek",
+      "location": "Kasol, India",
+      "duration": 5,
+      "price": 6500,
+      "originalPrice": 9500,
+      "rating": 0,
+      "reviewsCount": 0,
+      "image": "https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd",
+      "gallery": [
+        "https://ik.imagekit.io/2nikzq08c/yatravi_test/test_upload_script_f2_C8hDgs.png?updatedAt=1768747249881",
+        "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/pexels-yulia-2077612-3815533_2UYEfax6d.jpg?updatedAt=1768748288543",
+        "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/pexels-peng-liu-45946-169647_zKhOBGPvL.jpg?updatedAt=1768748300304",
+        "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/pexels-pixabay-460376_uu-EdZ2kW.jpg?updatedAt=1768748307972"
+      ],
+      "category": "Domestic",
+      "highlights": [],
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Arrival & Welcome",
+          "description": "Check-in to your hotel in Kasol, India and enjoy the evening at leisure.",
+          "highlights": [],
+          "meals": {
+            "breakfastIncluded": false,
+            "lunchIncluded": false,
+            "dinnerIncluded": false
+          },
+          "activities": [],
+          "itineraryImages": [],
+          "flights": [],
+          "_id": "69c291efd382d77cd18746c0",
+          "detailedActivities": []
+        },
+        {
+          "day": 2,
+          "title": "Local Sightseeing",
+          "description": "Explore the iconic landmarks and hidden gems of the city.",
+          "highlights": [],
+          "meals": {
+            "breakfastIncluded": false,
+            "lunchIncluded": false,
+            "dinnerIncluded": false
+          },
+          "activities": [],
+          "itineraryImages": [],
+          "flights": [],
+          "_id": "69c291efd382d77cd18746c1",
+          "detailedActivities": []
+        },
+        {
+          "day": 3,
+          "title": "Adventure & Culture",
+          "description": "Experience the local traditions and outdoor activities.",
+          "highlights": [],
+          "meals": {
+            "breakfastIncluded": false,
+            "lunchIncluded": false,
+            "dinnerIncluded": false
+          },
+          "activities": [],
+          "itineraryImages": [],
+          "flights": [],
+          "_id": "69c291efd382d77cd18746c2",
+          "detailedActivities": []
+        }
+      ],
+      "inclusions": [
+        "Premium Accommodation in 4/5 Star Hotels",
+        "Daily Buffet Breakfast",
+        "Private Airport Transfers",
+        "Expert Local Guide for Sightseeing",
+        "All Taxes and Service Charges"
+      ],
+      "exclusions": [
+        "International & Domestic Flights",
+        "Lunch and Dinner (unless specified)",
+        "Personal Expenses & Shopping",
+        "Visa Fees",
+        "Travel Insurance"
+      ],
+      "thingsToPack": [],
+      "policies": {
+        "cancellation": "Free cancellation up to 7 days before departure. 50% refund within 7 days. No refund for no-shows.",
+        "refund": "Refunds are automatically processed to your original payment method within 5-7 business days.",
+        "payment": "Book initially with just 20%. The remaining 80% is securely payable up to 7 days before your departure."
+      },
+      "status": "published",
+      "showOnHomepage": true,
+      "showInCollections": true,
+      "isBestSeller": false,
+      "isTrending": false,
+      "isAlmostFull": false,
+      "homepageSections": [],
+      "inclusionHighlights": [],
+      "tags": [
+        "Super Saver"
+      ],
+      "faqs": [],
+      "createdAt": "2026-03-24T13:30:23.501Z",
+      "__v": 1,
+      "itinerarySummary": "A curated 5-day exploration covering the top highlights and hidden gems of Kasol, India.",
+      "overview": "Embark on an unforgettable 5-day journey to Kasol, India. This meticulously crafted premium package by Yatravi Holidays ensures a seamless and luxurious experience from the moment you arrive. Discover the best of Kasol Kheerganga Trek and create memories that will last a lifetime."
+    },
+    {
+      "_id": "69c291efd382d77cd18746c3",
+      "seo": {
+        "title": "Hong Kong Dreams: Disney & Lantau | 5 Days Luxury Tour | Yatravi",
+        "description": "Embark on an unforgettable 5-day journey to Hong Kong. This meticulously crafted premium package by Yatravi Holidays ensures a seamless and luxurious experience",
+        "keywords": "Hong Kong travel, Hong Kong Dreams: Disney & Lantau, luxury tours, Yatravi holidays"
+      },
+      "id": "pkg_hong_kong_disney",
+      "slug": "hong-kong-dreams-disney-lantau",
+      "title": "Hong Kong Dreams: Disney & Lantau",
+      "location": "Hong Kong",
+      "duration": 5,
+      "price": 75000,
+      "originalPrice": 95000,
+      "rating": 0,
+      "reviewsCount": 0,
+      "image": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/pexels-ahsan-15693277_Trr-QJFXL.jpg",
+      "gallery": [
+        "https://ik.imagekit.io/2nikzq08c/yatravi_test/test_upload_script_f2_C8hDgs.png?updatedAt=1768747249881",
+        "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/pexels-yulia-2077612-3815533_2UYEfax6d.jpg?updatedAt=1768748288543",
+        "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/pexels-peng-liu-45946-169647_zKhOBGPvL.jpg?updatedAt=1768748300304",
+        "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/pexels-pixabay-460376_uu-EdZ2kW.jpg?updatedAt=1768748307972"
+      ],
+      "category": "International",
+      "highlights": [],
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Arrival & Welcome",
+          "description": "Check-in to your hotel in Hong Kong and enjoy the evening at leisure.",
+          "highlights": [],
+          "meals": {
+            "breakfastIncluded": false,
+            "lunchIncluded": false,
+            "dinnerIncluded": false
+          },
+          "activities": [],
+          "detailedActivities": [],
+          "stay": null,
+          "itineraryImages": [],
+          "flights": [],
+          "_id": "69c8b8c90262a6a5833b7b9e"
+        },
+        {
+          "day": 2,
+          "title": "Local Sightseeing",
+          "description": "Explore the iconic landmarks and hidden gems of the city.",
+          "highlights": [],
+          "meals": {
+            "breakfastIncluded": false,
+            "lunchIncluded": false,
+            "dinnerIncluded": false
+          },
+          "activities": [],
+          "detailedActivities": [],
+          "stay": null,
+          "itineraryImages": [],
+          "flights": [],
+          "_id": "69c8b8c90262a6a5833b7b9f"
+        },
+        {
+          "day": 3,
+          "title": "Adventure & Culture",
+          "description": "Experience the local traditions and outdoor activities.",
+          "highlights": [],
+          "meals": {
+            "breakfastIncluded": false,
+            "lunchIncluded": false,
+            "dinnerIncluded": false
+          },
+          "activities": [],
+          "detailedActivities": [],
+          "stay": null,
+          "itineraryImages": [],
+          "flights": [],
+          "_id": "69c8b8c90262a6a5833b7ba0"
+        }
+      ],
+      "inclusions": [
+        "Premium Accommodation in 4/5 Star Hotels",
+        "Daily Buffet Breakfast",
+        "Private Airport Transfers",
+        "Expert Local Guide for Sightseeing",
+        "All Taxes and Service Charges"
+      ],
+      "exclusions": [
+        "International & Domestic Flights",
+        "Lunch and Dinner (unless specified)",
+        "Personal Expenses & Shopping",
+        "Visa Fees",
+        "Travel Insurance"
+      ],
+      "thingsToPack": [],
+      "policies": {
+        "cancellation": "Free cancellation up to 7 days before departure. 50% refund within 7 days. No refund for no-shows.",
+        "refund": "Refunds are automatically processed to your original payment method within 5-7 business days.",
+        "payment": "Book initially with just 20%. The remaining 80% is securely payable up to 7 days before your departure."
+      },
+      "status": "published",
+      "showOnHomepage": true,
+      "showInCollections": true,
+      "isBestSeller": false,
+      "isTrending": false,
+      "isAlmostFull": false,
+      "homepageSections": [],
+      "inclusionHighlights": [],
+      "tags": [
+        "Trending"
+      ],
+      "faqs": [],
+      "createdAt": "2026-03-24T13:30:23.502Z",
+      "__v": 2,
+      "groupSize": "Fixed Departure",
+      "itinerarySummary": "A curated 5-day exploration covering the top highlights and hidden gems of Hong Kong.",
+      "overview": "Embark on an unforgettable 5-day journey to Hong Kong. This meticulously crafted premium package by Yatravi Holidays ensures a seamless and luxurious experience from the moment you arrive. Discover the best of Hong Kong Dreams: Disney & Lantau and create memories that will last a lifetime.",
+      "regionBreakdown": "",
+      "validityDate": ""
+    },
+    {
+      "_id": "69c291efd382d77cd18746c7",
+      "seo": {
+        "title": "Malaysia Truly Asia: Genting & KL | 6 Days Luxury Tour | Yatravi",
+        "description": "Embark on an unforgettable 6-day journey to Malaysia. This meticulously crafted premium package by Yatravi Holidays ensures a seamless and luxurious experience ",
+        "keywords": "Malaysia travel, Malaysia Truly Asia: Genting & KL, luxury tours, Yatravi holidays"
+      },
+      "id": "malaysia_truly_1",
+      "slug": "malaysia-truly-asia-genting-kl",
+      "title": "Malaysia Truly Asia: Genting & KL",
+      "location": "Malaysia",
+      "duration": 6,
+      "price": 42000,
+      "originalPrice": 80000,
+      "rating": 0,
+      "reviewsCount": 0,
+      "image": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/grande-centre-point-pattaya_DuPZeO1T8.jpg",
+      "gallery": [
+        "https://ik.imagekit.io/2nikzq08c/yatravi_test/test_upload_script_f2_C8hDgs.png?updatedAt=1768747249881",
+        "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/pexels-yulia-2077612-3815533_2UYEfax6d.jpg?updatedAt=1768748288543",
+        "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/pexels-peng-liu-45946-169647_zKhOBGPvL.jpg?updatedAt=1768748300304",
+        "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/pexels-pixabay-460376_uu-EdZ2kW.jpg?updatedAt=1768748307972"
+      ],
+      "category": "International",
+      "highlights": [],
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Arrival & Welcome",
+          "description": "Check-in to your hotel in Malaysia and enjoy the evening at leisure.",
+          "highlights": [],
+          "meals": {
+            "breakfastIncluded": false,
+            "lunchIncluded": false,
+            "dinnerIncluded": false
+          },
+          "activities": [],
+          "detailedActivities": [],
+          "stay": null,
+          "itineraryImages": [],
+          "flights": [],
+          "_id": "69ca6fa4a6da7f9e1066ea3d"
+        },
+        {
+          "day": 2,
+          "title": "Local Sightseeing",
+          "description": "Explore the iconic landmarks and hidden gems of the city.",
+          "highlights": [],
+          "meals": {
+            "breakfastIncluded": false,
+            "lunchIncluded": false,
+            "dinnerIncluded": false
+          },
+          "activities": [],
+          "detailedActivities": [],
+          "stay": null,
+          "itineraryImages": [],
+          "flights": [],
+          "_id": "69ca6fa4a6da7f9e1066ea3e"
+        },
+        {
+          "day": 3,
+          "title": "Adventure & Culture",
+          "description": "Experience the local traditions and outdoor activities.",
+          "highlights": [],
+          "meals": {
+            "breakfastIncluded": false,
+            "lunchIncluded": false,
+            "dinnerIncluded": false
+          },
+          "activities": [],
+          "detailedActivities": [],
+          "stay": null,
+          "itineraryImages": [],
+          "flights": [],
+          "_id": "69ca6fa4a6da7f9e1066ea3f"
+        }
+      ],
+      "inclusions": [
+        "Premium Accommodation in 4/5 Star Hotels",
+        "Daily Buffet Breakfast",
+        "Private Airport Transfers",
+        "Expert Local Guide for Sightseeing",
+        "All Taxes and Service Charges"
+      ],
+      "exclusions": [
+        "International & Domestic Flights",
+        "Lunch and Dinner (unless specified)",
+        "Personal Expenses & Shopping",
+        "Visa Fees",
+        "Travel Insurance"
+      ],
+      "thingsToPack": [],
+      "policies": {
+        "cancellation": "Free cancellation up to 7 days before departure. 50% refund within 7 days. No refund for no-shows.",
+        "refund": "Refunds are automatically processed to your original payment method within 5-7 business days.",
+        "payment": "Book initially with just 20%. The remaining 80% is securely payable up to 7 days before your departure."
+      },
+      "status": "published",
+      "showOnHomepage": true,
+      "showInCollections": true,
+      "isBestSeller": false,
+      "isTrending": false,
+      "isAlmostFull": false,
+      "homepageSections": [],
+      "inclusionHighlights": [],
+      "tags": [],
+      "faqs": [],
+      "createdAt": "2026-03-24T13:30:23.502Z",
+      "__v": 4,
+      "groupSize": "Fixed Departure",
+      "itinerarySummary": "A curated 6-day exploration covering the top highlights and hidden gems of Malaysia.",
+      "overview": "Embark on an unforgettable 6-day journey to Malaysia. This meticulously crafted premium package by Yatravi Holidays ensures a seamless and luxurious experience from the moment you arrive. Discover the best of Malaysia Truly Asia: Genting & KL and create memories that will last a lifetime.",
+      "regionBreakdown": "3N Pattaya 1N Bangkok",
+      "validityDate": "Vaild Until Jun 25th, 2026",
+      "verticalImage": ""
+    }
+  ],
+  "destinations": [
+    {
+      "_id": "69c291efd382d77cd1874672",
+      "name": "Bali",
+      "seo": {
+        "title": "Premium Bali Tour Packages | Yatravi Holidays",
+        "description": "Discover the best luxury and premium tour packages for Bali. Unforgettable experiences await with Yatravi Holidays.",
+        "keywords": "Bali tours, Bali holiday packages, luxury travel Bali, Yatravi",
+        "robots": "index, follow",
+        "sitemapFrequency": "weekly",
+        "sitemapPriority": 0.8
+      },
+      "slug": "bali",
+      "heroImage": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/pexels-darren-lawrence-848896-3417701_FMtlF1BxM.jpg",
+      "tagline": "Unforgettable journey to Bali",
+      "isFeatured": true,
+      "isVisaFree": false,
+      "order": 0,
+      "startingPrice": 29999,
+      "priceLabel": "per person",
+      "packageCount": 0,
+      "region": "International",
+      "facts": {
+        "currency": "IDR (Indonesian Rupiah)",
+        "language": "English & Regional Dialects",
+        "timezone": "Depends on location",
+        "bestTime": "Peak Season: September to May",
+        "budget": "Premium & Luxury Options Available",
+        "visaInfo": "Check Visa-on-Arrival eligibility or e-Visa requirements prior to booking.",
+        "gettingAround": "Private chauffeurs, premium cabs, and scenic domestic flights.",
+        "localDish": "Authentic regional delicacies with curated dining experiences."
+      },
+      "attractions": [
+        {
+          "name": "Uluwatu Temple",
+          "image": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/sebastian-pena-lambarri-U_i6h9Y50wQ-unsplash_bVzhesTb8.jpg",
+          "description": "Uluwatu Temple (Pura Luhur Uluwatu) is one of six key temples believed to be Bali's spiritual pillars, is renowned for its magnificent location, perched on top of a steep cliff approximately 70 metres above sea level. This temple also shares the splendid sunset backdrops as that of Tanah Lot Temple, another important sea temple located in the island's western shores.",
+          "_id": "69ca295d0fb66230b1baa1b2"
+        }
+      ],
+      "faqs": [],
+      "__v": 6,
+      "createdAt": "2026-03-24T13:30:23.395Z",
+      "updatedAt": "2026-03-30T07:42:21.724Z",
+      "description": "Experience the ultimate journey to Bali. Explore breathtaking landscapes, rich culture, and world-class hospitality curated specifically for you by Yatravi Holidays.",
+      "bannerImage": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/pexels-alleksana-4239627_FK4HshaiA.jpg",
+      "verticalImage": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/beautiful-starry-sky-town__1___My-6Q7bx.jpg"
+    },
+    {
+      "_id": "69c291efd382d77cd1874678",
+      "name": "Dubai",
+      "seo": {
+        "title": "Premium Dubai Tour Packages | Yatravi Holidays",
+        "description": "Discover the best luxury and premium tour packages for Dubai. Unforgettable experiences await with Yatravi Holidays.",
+        "keywords": "Dubai tours, Dubai holiday packages, luxury travel Dubai, Yatravi",
+        "robots": "index, follow",
+        "sitemapFrequency": "weekly",
+        "sitemapPriority": 0.8
+      },
+      "slug": "dubai",
+      "heroImage": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/pexels-ahsan-15693277_7E-Q-4sey.jpg",
+      "tagline": "Unforgettable journey to Dubai",
+      "isFeatured": true,
+      "isVisaFree": false,
+      "order": 0,
+      "startingPrice": 45000,
+      "priceLabel": "per person",
+      "packageCount": 0,
+      "region": "International",
+      "facts": {
+        "currency": "AED (Emirati Dirham)",
+        "language": "English & Regional Dialects",
+        "timezone": "Depends on location",
+        "bestTime": "Peak Season: September to May",
+        "budget": "Premium & Luxury Options Available",
+        "visaInfo": "Check Visa-on-Arrival eligibility or e-Visa requirements prior to booking.",
+        "gettingAround": "Private chauffeurs, premium cabs, and scenic domestic flights.",
+        "localDish": "Authentic regional delicacies with curated dining experiences."
+      },
+      "attractions": [],
+      "faqs": [],
+      "__v": 0,
+      "createdAt": "2026-03-24T13:30:23.397Z",
+      "updatedAt": "2026-03-30T14:23:46.520Z",
+      "description": "Experience the ultimate journey to Dubai. Explore breathtaking landscapes, rich culture, and world-class hospitality curated specifically for you by Yatravi Holidays.",
+      "bannerImage": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/pexels-jeshoots-com-147458-442579_a_qcJO9Yp.jpg",
+      "verticalImage": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/christoph-schulz-7tb-b37yHx4-unsplash__1__jPPOnyI15E.jpg"
+    },
+    {
+      "_id": "69c291efd382d77cd1874679",
+      "name": "Maldives",
+      "seo": {
+        "title": "Premium Maldives Tour Packages | Yatravi Holidays",
+        "description": "Discover the best luxury and premium tour packages for Maldives. Unforgettable experiences await with Yatravi Holidays.",
+        "keywords": "Maldives tours, Maldives holiday packages, luxury travel Maldives, Yatravi",
+        "robots": "index, follow",
+        "sitemapFrequency": "weekly",
+        "sitemapPriority": 0.8
+      },
+      "slug": "maldives",
+      "heroImage": "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?q=80&w=1000&auto=format&fit=crop",
+      "tagline": "Unforgettable journey to Maldives",
+      "isFeatured": true,
+      "isVisaFree": false,
+      "order": 0,
+      "startingPrice": 85000,
+      "priceLabel": "per person",
+      "packageCount": 0,
+      "region": "Domestic",
+      "facts": {
+        "currency": "Local Currency (USD accepted widely)",
+        "language": "English & Regional Dialects",
+        "timezone": "Depends on location",
+        "bestTime": "Peak Season: September to May",
+        "budget": "Premium & Luxury Options Available",
+        "visaInfo": "Check Visa-on-Arrival eligibility or e-Visa requirements prior to booking.",
+        "gettingAround": "Private chauffeurs, premium cabs, and scenic domestic flights.",
+        "localDish": "Authentic regional delicacies with curated dining experiences."
+      },
+      "attractions": [],
+      "faqs": [],
+      "__v": 0,
+      "createdAt": "2026-03-24T13:30:23.397Z",
+      "updatedAt": "2026-03-30T12:50:02.480Z",
+      "description": "Experience the ultimate journey to Maldives. Explore breathtaking landscapes, rich culture, and world-class hospitality curated specifically for you by Yatravi Holidays.",
+      "bannerImage": "",
+      "verticalImage": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/Serene_Infinity_Pool_Overlooking_Ocean_4ctJUuK2Q.png"
+    },
+    {
+      "_id": "69c291efd382d77cd187467c",
+      "name": "Thailand",
+      "seo": {
+        "title": "Premium Thailand Tour Packages | Yatravi Holidays",
+        "description": "Discover the best luxury and premium tour packages for Thailand. Unforgettable experiences await with Yatravi Holidays.",
+        "keywords": "Thailand tours, Thailand holiday packages, luxury travel Thailand, Yatravi",
+        "robots": "index, follow",
+        "sitemapFrequency": "weekly",
+        "sitemapPriority": 0.8
+      },
+      "slug": "thailand",
+      "heroImage": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/sasint-phra-nakhon-si-ayutthaya-1822502_1920_ULg7WTEw7.jpg",
+      "tagline": "Unforgettable journey to Thailand",
+      "isFeatured": true,
+      "isVisaFree": false,
+      "order": 1,
+      "startingPrice": 29999,
+      "priceLabel": "per person",
+      "packageCount": 0,
+      "region": "International",
+      "facts": {
+        "currency": "Local Currency (USD accepted widely)",
+        "language": "English & Regional Dialects",
+        "timezone": "Depends on location",
+        "bestTime": "Peak Season: September to May",
+        "budget": "Premium & Luxury Options Available",
+        "visaInfo": "Check Visa-on-Arrival eligibility or e-Visa requirements prior to booking.",
+        "gettingAround": "Private chauffeurs, premium cabs, and scenic domestic flights.",
+        "localDish": "Authentic regional delicacies with curated dining experiences."
+      },
+      "attractions": [],
+      "faqs": [],
+      "__v": 0,
+      "createdAt": "2026-03-24T13:30:23.398Z",
+      "updatedAt": "2026-03-30T14:18:46.214Z",
+      "description": "Experience the ultimate journey to Thailand. Explore breathtaking landscapes, rich culture, and world-class hospitality curated specifically for you by Yatravi Holidays.",
+      "bannerImage": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/pexels-darren-lawrence-848896-3417701_6opjRTwGE.jpg",
+      "verticalImage": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/marcin-kalinski-PCgM2CYm6HA-unsplash__1__BOXVpR5fj.jpg"
+    },
+    {
+      "_id": "69c291efd382d77cd1874680",
+      "name": "Hong Kong",
+      "seo": {
+        "title": "Premium Hong Kong Tour Packages | Yatravi Holidays",
+        "description": "Discover the best luxury and premium tour packages for Hong Kong. Unforgettable experiences await with Yatravi Holidays.",
+        "keywords": "Hong Kong tours, Hong Kong holiday packages, luxury travel Hong Kong, Yatravi",
+        "robots": "index, follow",
+        "sitemapFrequency": "weekly",
+        "sitemapPriority": 0.8
+      },
+      "slug": "hong-kong",
+      "heroImage": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/e7_NCGhyCWjJ.jpg",
+      "tagline": "Unforgettable journey to Hong Kong",
+      "isFeatured": true,
+      "isVisaFree": false,
+      "order": 0,
+      "startingPrice": 75000,
+      "priceLabel": "per person",
+      "packageCount": 0,
+      "region": "International",
+      "facts": {
+        "currency": "Local Currency (USD accepted widely)",
+        "language": "English & Regional Dialects",
+        "timezone": "Depends on location",
+        "bestTime": "Peak Season: September to May",
+        "budget": "Premium & Luxury Options Available",
+        "visaInfo": "Check Visa-on-Arrival eligibility or e-Visa requirements prior to booking.",
+        "gettingAround": "Private chauffeurs, premium cabs, and scenic domestic flights.",
+        "localDish": "Authentic regional delicacies with curated dining experiences."
+      },
+      "attractions": [],
+      "faqs": [],
+      "__v": 0,
+      "createdAt": "2026-03-24T13:30:23.398Z",
+      "updatedAt": "2026-03-30T14:15:42.489Z",
+      "description": "Experience the ultimate journey to Hong Kong. Explore breathtaking landscapes, rich culture, and world-class hospitality curated specifically for you by Yatravi Holidays.",
+      "bannerImage": "",
+      "verticalImage": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/pexels-mr-mihi-2151602653-31855994_LnwdOJ0M0.jpg"
+    },
+    {
+      "_id": "69c291efd382d77cd1874681",
+      "name": "Malaysia",
+      "seo": {
+        "title": "Premium Malaysia Tour Packages | Yatravi Holidays",
+        "description": "Discover the best luxury and premium tour packages for Malaysia. Unforgettable experiences await with Yatravi Holidays.",
+        "keywords": "Malaysia tours, Malaysia holiday packages, luxury travel Malaysia, Yatravi"
+      },
+      "slug": "malaysia",
+      "heroImage": "https://ik.imagekit.io/2nikzq08c/Malaysia.jpg",
+      "tagline": "Unforgettable journey to Malaysia",
+      "isFeatured": true,
+      "isVisaFree": false,
+      "order": 0,
+      "startingPrice": 42000,
+      "priceLabel": "per person",
+      "packageCount": 0,
+      "region": "International",
+      "facts": {
+        "currency": "Local Currency (USD accepted widely)",
+        "language": "English & Regional Dialects",
+        "timezone": "Depends on location",
+        "bestTime": "Peak Season: September to May",
+        "budget": "Premium & Luxury Options Available",
+        "visaInfo": "Check Visa-on-Arrival eligibility or e-Visa requirements prior to booking.",
+        "gettingAround": "Private chauffeurs, premium cabs, and scenic domestic flights.",
+        "localDish": "Authentic regional delicacies with curated dining experiences."
+      },
+      "attractions": [],
+      "faqs": [],
+      "__v": 0,
+      "createdAt": "2026-03-24T13:30:23.398Z",
+      "updatedAt": "2026-03-29T05:40:43.203Z",
+      "description": "Experience the ultimate journey to Malaysia. Explore breathtaking landscapes, rich culture, and world-class hospitality curated specifically for you by Yatravi Holidays."
+    },
+    {
+      "_id": "69c8b5a44a59458084d29aec",
+      "name": "Vietnam",
+      "seo": {
+        "title": "Premium Vietnam Tour Packages | Yatravi Holidays",
+        "description": "Discover the best luxury and premium tour packages for Vietnam. Unforgettable experiences await with Yatravi Holidays.",
+        "keywords": "Vietnam tours, Vietnam holiday packages, luxury travel Vietnam, Yatravi"
+      },
+      "slug": "vietnam",
+      "heroImage": "https://ik.imagekit.io/2nikzq08c/yatravi_test/test_upload_script_f2_C8hDgs.png?updatedAt=1768747249881",
+      "tagline": "THE HIDDEN GEM",
+      "isFeatured": true,
+      "isVisaFree": false,
+      "order": 0,
+      "startingPrice": 0,
+      "priceLabel": "per person",
+      "packageCount": 0,
+      "region": "International",
+      "facts": {
+        "currency": "Local Currency (USD accepted widely)",
+        "language": "English & Regional Dialects",
+        "timezone": "Depends on location",
+        "bestTime": "Peak Season: September to May",
+        "budget": "Premium & Luxury Options Available",
+        "visaInfo": "Check Visa-on-Arrival eligibility or e-Visa requirements prior to booking.",
+        "gettingAround": "Private chauffeurs, premium cabs, and scenic domestic flights.",
+        "localDish": "Authentic regional delicacies with curated dining experiences."
+      },
+      "attractions": [],
+      "faqs": [],
+      "createdAt": "2026-03-29T05:16:20.455Z",
+      "updatedAt": "2026-03-29T05:40:43.269Z",
+      "__v": 0,
+      "description": "Experience the ultimate journey to Vietnam. Explore breathtaking landscapes, rich culture, and world-class hospitality curated specifically for you by Yatravi Holidays."
+    },
+    {
+      "_id": "69c8b5a44a59458084d29af3",
+      "name": "Switzerland",
+      "seo": {
+        "title": "Premium Switzerland Tour Packages | Yatravi Holidays",
+        "description": "Discover the best luxury and premium tour packages for Switzerland. Unforgettable experiences await with Yatravi Holidays.",
+        "keywords": "Switzerland tours, Switzerland holiday packages, luxury travel Switzerland, Yatravi",
+        "robots": "index, follow",
+        "sitemapFrequency": "weekly",
+        "sitemapPriority": 0.8
+      },
+      "slug": "switzerland",
+      "heroImage": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/SCL_Swiss_Alps_Switzerland_001_3000x1500_io8lkw6Nt.jpg?updatedAt=1772715855341",
+      "tagline": "THE HEART OF EUROPE",
+      "isFeatured": true,
+      "isVisaFree": false,
+      "order": 0,
+      "startingPrice": 230000,
+      "priceLabel": "per person",
+      "packageCount": 0,
+      "region": "International",
+      "facts": {
+        "currency": "CHF (Swiss Franc)",
+        "language": "English & Regional Dialects",
+        "timezone": "Depends on location",
+        "bestTime": "Peak Season: September to May",
+        "budget": "Premium & Luxury Options Available",
+        "visaInfo": "Check Visa-on-Arrival eligibility or e-Visa requirements prior to booking.",
+        "gettingAround": "Private chauffeurs, premium cabs, and scenic domestic flights.",
+        "localDish": "Authentic regional delicacies with curated dining experiences."
+      },
+      "attractions": [],
+      "faqs": [],
+      "createdAt": "2026-03-29T05:16:20.909Z",
+      "updatedAt": "2026-03-30T12:49:10.519Z",
+      "__v": 0,
+      "description": "Experience the ultimate journey to Switzerland. Explore breathtaking landscapes, rich culture, and world-class hospitality curated specifically for you by Yatravi Holidays.",
+      "bannerImage": "",
+      "verticalImage": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/wp11165775-alps-phone-4k-wallpapers_Lg6F2nZkjf.jpg"
+    },
+    {
+      "_id": "69c8b5a54a59458084d29afa",
+      "name": "Kerala",
+      "seo": {
+        "title": "Premium Kerala Tour Packages | Yatravi Holidays",
+        "description": "Discover the best luxury and premium tour packages for Kerala. Unforgettable experiences await with Yatravi Holidays.",
+        "keywords": "Kerala tours, Kerala holiday packages, luxury travel Kerala, Yatravi"
+      },
+      "slug": "kerala",
+      "heroImage": "https://ik.imagekit.io/2nikzq08c/yatravi_test/test_upload_script_f2_C8hDgs.png?updatedAt=1768747249881",
+      "tagline": "GODS OWN COUNTRY",
+      "isFeatured": true,
+      "isVisaFree": false,
+      "order": 0,
+      "startingPrice": 0,
+      "priceLabel": "per person",
+      "packageCount": 0,
+      "region": "Domestic",
+      "facts": {
+        "currency": "INR (Indian Rupee)",
+        "language": "English & Regional Dialects",
+        "timezone": "Depends on location",
+        "bestTime": "Peak Season: September to May",
+        "budget": "Premium & Luxury Options Available",
+        "visaInfo": "Check Visa-on-Arrival eligibility or e-Visa requirements prior to booking.",
+        "gettingAround": "Private chauffeurs, premium cabs, and scenic domestic flights.",
+        "localDish": "Authentic regional delicacies with curated dining experiences."
+      },
+      "attractions": [],
+      "faqs": [],
+      "createdAt": "2026-03-29T05:16:21.331Z",
+      "updatedAt": "2026-03-29T05:40:43.397Z",
+      "__v": 0,
+      "description": "Experience the ultimate journey to Kerala. Explore breathtaking landscapes, rich culture, and world-class hospitality curated specifically for you by Yatravi Holidays."
+    },
+    {
+      "_id": "69c8b5a54a59458084d29b01",
+      "name": "Kashmir",
+      "seo": {
+        "title": "Premium Kashmir Tour Packages | Yatravi Holidays",
+        "description": "Discover the best luxury and premium tour packages for Kashmir. Unforgettable experiences await with Yatravi Holidays.",
+        "keywords": "Kashmir tours, Kashmir holiday packages, luxury travel Kashmir, Yatravi"
+      },
+      "slug": "kashmir",
+      "heroImage": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/StockCake-KASHMIR_SNOW_BOAT_Images_and_Photos_1762518506_QQjHLcUzNE.jpg?updatedAt=1772692055011",
+      "tagline": "HEAVEN ON EARTH",
+      "isFeatured": true,
+      "isVisaFree": false,
+      "order": 0,
+      "startingPrice": 0,
+      "priceLabel": "per person",
+      "packageCount": 0,
+      "region": "Domestic",
+      "facts": {
+        "currency": "INR (Indian Rupee)",
+        "language": "English & Regional Dialects",
+        "timezone": "Depends on location",
+        "bestTime": "Peak Season: September to May",
+        "budget": "Premium & Luxury Options Available",
+        "visaInfo": "Check Visa-on-Arrival eligibility or e-Visa requirements prior to booking.",
+        "gettingAround": "Private chauffeurs, premium cabs, and scenic domestic flights.",
+        "localDish": "Authentic regional delicacies with curated dining experiences."
+      },
+      "attractions": [],
+      "faqs": [],
+      "createdAt": "2026-03-29T05:16:21.747Z",
+      "updatedAt": "2026-03-29T05:40:43.465Z",
+      "__v": 0,
+      "description": "Experience the ultimate journey to Kashmir. Explore breathtaking landscapes, rich culture, and world-class hospitality curated specifically for you by Yatravi Holidays."
+    },
+    {
+      "_id": "69c8b5a64a59458084d29b08",
+      "name": "Himachal",
+      "seo": {
+        "title": "Premium Himachal Tour Packages | Yatravi Holidays",
+        "description": "Discover the best luxury and premium tour packages for Himachal. Unforgettable experiences await with Yatravi Holidays.",
+        "keywords": "Himachal tours, Himachal holiday packages, luxury travel Himachal, Yatravi"
+      },
+      "slug": "himachal",
+      "heroImage": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/pexels-peng-liu-45946-169647_zKhOBGPvL.jpg?updatedAt=1768748300304",
+      "tagline": "LAND OF THE GODS",
+      "isFeatured": true,
+      "isVisaFree": false,
+      "order": 0,
+      "startingPrice": 0,
+      "priceLabel": "per person",
+      "packageCount": 0,
+      "region": "Domestic",
+      "facts": {
+        "currency": "INR (Indian Rupee)",
+        "language": "English & Regional Dialects",
+        "timezone": "Depends on location",
+        "bestTime": "Peak Season: September to May",
+        "budget": "Premium & Luxury Options Available",
+        "visaInfo": "Check Visa-on-Arrival eligibility or e-Visa requirements prior to booking.",
+        "gettingAround": "Private chauffeurs, premium cabs, and scenic domestic flights.",
+        "localDish": "Authentic regional delicacies with curated dining experiences."
+      },
+      "attractions": [],
+      "faqs": [],
+      "createdAt": "2026-03-29T05:16:22.166Z",
+      "updatedAt": "2026-03-29T05:40:43.541Z",
+      "__v": 0,
+      "description": "Experience the ultimate journey to Himachal. Explore breathtaking landscapes, rich culture, and world-class hospitality curated specifically for you by Yatravi Holidays."
+    }
+  ],
+  "images": [
+    {
+      "_id": "69c7dd82303e3c0b3491d824",
+      "title": "Untitled",
+      "filename": "grande-centre-point-pattaya_DuPZeO1T8.jpg",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/grande-centre-point-pattaya_DuPZeO1T8.jpg",
+      "uploadedAt": "2026-03-28T13:54:10.553Z",
+      "__v": 0
+    },
+    {
+      "_id": "69c8b8c60262a6a5833b7b97",
+      "title": "Untitled",
+      "filename": "pexels-ahsan-15693277_Trr-QJFXL.jpg",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/pexels-ahsan-15693277_Trr-QJFXL.jpg",
+      "uploadedAt": "2026-03-29T05:29:42.675Z",
+      "__v": 0
+    },
+    {
+      "_id": "69c8bbaf0262a6a5833b7e3c",
+      "title": "Untitled",
+      "filename": "pexels-alleksana-4239627_FK4HshaiA.jpg",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/pexels-alleksana-4239627_FK4HshaiA.jpg",
+      "uploadedAt": "2026-03-29T05:42:07.899Z",
+      "__v": 0
+    },
+    {
+      "_id": "69c8bbfb0262a6a5833b7eea",
+      "title": "Untitled",
+      "filename": "pexels-jeshoots-com-147458-442579_a_qcJO9Yp.jpg",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/pexels-jeshoots-com-147458-442579_a_qcJO9Yp.jpg",
+      "uploadedAt": "2026-03-29T05:43:23.432Z",
+      "__v": 0
+    },
+    {
+      "_id": "69c8bc0e0262a6a5833b7eed",
+      "title": "Untitled",
+      "filename": "pexels-yulia-2077612-3815533_ICn4i7ioH.jpg",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/pexels-yulia-2077612-3815533_ICn4i7ioH.jpg",
+      "uploadedAt": "2026-03-29T05:43:42.720Z",
+      "__v": 0
+    },
+    {
+      "_id": "69c8c25c0262a6a5833b83f7",
+      "title": "Untitled",
+      "filename": "sasint-phra-nakhon-si-ayutthaya-1822502_1920_ULg7WTEw7.jpg",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/sasint-phra-nakhon-si-ayutthaya-1822502_1920_ULg7WTEw7.jpg",
+      "uploadedAt": "2026-03-29T06:10:36.953Z",
+      "__v": 0
+    },
+    {
+      "_id": "69c8c26d0262a6a5833b83fa",
+      "title": "Untitled",
+      "filename": "pexels-darren-lawrence-848896-3417701_6opjRTwGE.jpg",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/pexels-darren-lawrence-848896-3417701_6opjRTwGE.jpg",
+      "uploadedAt": "2026-03-29T06:10:53.495Z",
+      "__v": 0
+    },
+    {
+      "_id": "69c8c2c50262a6a5833b85e6",
+      "title": "Untitled",
+      "filename": "max-bottinger-UxzDksvcWcY-unsplash_y0m-yzAp1.jpg",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/max-bottinger-UxzDksvcWcY-unsplash_y0m-yzAp1.jpg",
+      "uploadedAt": "2026-03-29T06:12:21.224Z",
+      "__v": 0
+    },
+    {
+      "_id": "69ca059824d67dfbbce984a7",
+      "title": "Untitled",
+      "filename": "sebastian-pena-lambarri-U_i6h9Y50wQ-unsplash_bVzhesTb8.jpg",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/sebastian-pena-lambarri-U_i6h9Y50wQ-unsplash_bVzhesTb8.jpg",
+      "uploadedAt": "2026-03-30T05:09:44.733Z",
+      "__v": 0
+    },
+    {
+      "_id": "69ca069f24d67dfbbce98894",
+      "title": "Untitled",
+      "filename": "space-and-time-cube-bangkok-the-ultimate-immersive-experience-8129_v2-gDLIsK.jpg",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/space-and-time-cube-bangkok-the-ultimate-immersive-experience-8129_v2-gDLIsK.jpg",
+      "uploadedAt": "2026-03-30T05:14:07.167Z",
+      "__v": 0
+    },
+    {
+      "_id": "69ca06aa24d67dfbbce98897",
+      "title": "Untitled",
+      "filename": "f_Y8N9tDf1F.png",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/f_Y8N9tDf1F.png",
+      "uploadedAt": "2026-03-30T05:14:18.087Z",
+      "__v": 0
+    },
+    {
+      "_id": "69ca086a24d67dfbbce98a6a",
+      "title": "Untitled",
+      "filename": "pexels-putraawiratama-2093119_AlMmRDVJq.jpg",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/pexels-putraawiratama-2093119_AlMmRDVJq.jpg",
+      "uploadedAt": "2026-03-30T05:21:46.581Z",
+      "__v": 0
+    },
+    {
+      "_id": "69ca0b1224d67dfbbce9900c",
+      "title": "Untitled",
+      "filename": "pexels-wanderinglenses-15045798_KFINZ0SLm.jpg",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/pexels-wanderinglenses-15045798_KFINZ0SLm.jpg",
+      "uploadedAt": "2026-03-30T05:33:06.878Z",
+      "__v": 0
+    },
+    {
+      "_id": "69ca0ce324d67dfbbce9a823",
+      "title": "Untitled",
+      "filename": "pexels-darren-lawrence-848896-3417701_FMtlF1BxM.jpg",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/pexels-darren-lawrence-848896-3417701_FMtlF1BxM.jpg",
+      "uploadedAt": "2026-03-30T05:40:51.671Z",
+      "__v": 0
+    },
+    {
+      "_id": "69ca0d0024d67dfbbce9a8c0",
+      "title": "Untitled",
+      "filename": "pexels-ahsan-15693277_7E-Q-4sey.jpg",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/pexels-ahsan-15693277_7E-Q-4sey.jpg",
+      "uploadedAt": "2026-03-30T05:41:20.740Z",
+      "__v": 0
+    },
+    {
+      "_id": "69ca0d9324d67dfbbce9aa1e",
+      "title": "Untitled",
+      "filename": "pexels-wanderinglenses-15045798_6lTDSIz5O.jpg",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/pexels-wanderinglenses-15045798_6lTDSIz5O.jpg",
+      "uploadedAt": "2026-03-30T05:43:47.714Z",
+      "__v": 0
+    },
+    {
+      "_id": "69ca0f8290926847aecbdf91",
+      "title": "Untitled",
+      "filename": "pexels-tobiasbjorkli-1853354_nfNrLQCsm.jpg",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/pexels-tobiasbjorkli-1853354_nfNrLQCsm.jpg",
+      "uploadedAt": "2026-03-30T05:52:02.673Z",
+      "__v": 0
+    },
+    {
+      "_id": "69ca0fac90926847aecbe0a0",
+      "title": "Untitled",
+      "filename": "StockCake-maldives_Images_and_Photos_1762605728_dnPKOlJ0d.jpg",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/StockCake-maldives_Images_and_Photos_1762605728_dnPKOlJ0d.jpg",
+      "uploadedAt": "2026-03-30T05:52:44.143Z",
+      "__v": 0
+    },
+    {
+      "_id": "69ca102a90926847aecbe1af",
+      "title": "Untitled",
+      "filename": "pexels-kadiravsarr-14749729__BFA0utH4.jpg",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/pexels-kadiravsarr-14749729__BFA0utH4.jpg",
+      "uploadedAt": "2026-03-30T05:54:50.111Z",
+      "__v": 0
+    },
+    {
+      "_id": "69ca104b90926847aecbe2be",
+      "title": "Untitled",
+      "filename": "pexels-akos-szabo-145938-440731_IMjm8q1_b.jpg",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/pexels-akos-szabo-145938-440731_IMjm8q1_b.jpg",
+      "uploadedAt": "2026-03-30T05:55:23.222Z",
+      "__v": 0
+    },
+    {
+      "_id": "69ca107690926847aecbe2c1",
+      "title": "Untitled",
+      "filename": "aman-shrestha-vi5tkym8r64-unsplash_XZRRThjx6.jpg",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/aman-shrestha-vi5tkym8r64-unsplash_XZRRThjx6.jpg",
+      "uploadedAt": "2026-03-30T05:56:06.778Z",
+      "__v": 0
+    },
+    {
+      "_id": "69ca12ac90926847aecbe400",
+      "title": "Untitled",
+      "filename": "EVERYTHING_aH_t3QCWN.png",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/EVERYTHING_aH_t3QCWN.png",
+      "uploadedAt": "2026-03-30T06:05:32.957Z",
+      "__v": 0
+    },
+    {
+      "_id": "69ca12d990926847aecbe4d9",
+      "title": "Untitled",
+      "filename": "EVERYTHING_0d537o-8y.png",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/EVERYTHING_0d537o-8y.png",
+      "uploadedAt": "2026-03-30T06:06:17.010Z",
+      "__v": 0
+    },
+    {
+      "_id": "69ca21ec90926847aecbe801",
+      "title": "Untitled",
+      "filename": "Coastal_Cliffside_View_NHqYYwcVY.png",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/Coastal_Cliffside_View_NHqYYwcVY.png",
+      "uploadedAt": "2026-03-30T07:10:36.969Z",
+      "__v": 0
+    },
+    {
+      "_id": "69ca22360fb66230b1ba9e96",
+      "title": "Untitled",
+      "filename": "Coastal_Cliffside_View_Oas2OxPA1.png",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/Coastal_Cliffside_View_Oas2OxPA1.png",
+      "uploadedAt": "2026-03-30T07:11:50.691Z",
+      "__v": 0
+    },
+    {
+      "_id": "69ca22b60fb66230b1ba9f35",
+      "title": "Untitled",
+      "filename": "b728a8965499389b0052821ee628a626_R1FnktFm1.jpg",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/b728a8965499389b0052821ee628a626_R1FnktFm1.jpg",
+      "uploadedAt": "2026-03-30T07:13:58.735Z",
+      "__v": 0
+    },
+    {
+      "_id": "69ca23600fb66230b1ba9fd2",
+      "title": "Untitled",
+      "filename": "907c7a043414b992324b0f6b1ca95624_IiynA8Rmy.jpg",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/907c7a043414b992324b0f6b1ca95624_IiynA8Rmy.jpg",
+      "uploadedAt": "2026-03-30T07:16:48.401Z",
+      "__v": 0
+    },
+    {
+      "_id": "69ca256e0fb66230b1baa075",
+      "title": "Untitled",
+      "filename": "futuristic-landscape-dubai_mPFsMuDQ5.jpg",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/futuristic-landscape-dubai_mPFsMuDQ5.jpg",
+      "uploadedAt": "2026-03-30T07:25:34.999Z",
+      "__v": 0
+    },
+    {
+      "_id": "69ca292a0fb66230b1baa110",
+      "title": "Untitled",
+      "filename": "907c7a043414b992324b0f6b1ca95624_JmnY21RY9.jpg",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/907c7a043414b992324b0f6b1ca95624_JmnY21RY9.jpg",
+      "uploadedAt": "2026-03-30T07:41:30.231Z",
+      "__v": 0
+    },
+    {
+      "_id": "69ca29590fb66230b1baa1ad",
+      "title": "Untitled",
+      "filename": "beautiful-starry-sky-town__1___My-6Q7bx.jpg",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/beautiful-starry-sky-town__1___My-6Q7bx.jpg",
+      "uploadedAt": "2026-03-30T07:42:17.331Z",
+      "__v": 0
+    },
+    {
+      "_id": "69ca29d70fb66230b1baa24a",
+      "title": "Untitled",
+      "filename": "light-trails-modern-building-background-shanghai-china_fSQ1Ib4Cl.jpg",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/light-trails-modern-building-background-shanghai-china_fSQ1Ib4Cl.jpg",
+      "uploadedAt": "2026-03-30T07:44:23.992Z",
+      "__v": 0
+    },
+    {
+      "_id": "69ca6c4aa6da7f9e1066e1e5",
+      "title": "Untitled",
+      "filename": "EVERYTHING-jorunery_-PBG7U5Oj.png",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/EVERYTHING-jorunery_-PBG7U5Oj.png",
+      "uploadedAt": "2026-03-30T12:27:54.760Z",
+      "__v": 0
+    },
+    {
+      "_id": "69ca6d00a6da7f9e1066e394",
+      "title": "Untitled",
+      "filename": "EVERYTHING_48LP8irRc.png",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/EVERYTHING_48LP8irRc.png",
+      "uploadedAt": "2026-03-30T12:30:56.991Z",
+      "__v": 0
+    },
+    {
+      "_id": "69ca6dcea6da7f9e1066e4e6",
+      "title": "Untitled",
+      "filename": "SCL_Swiss_Alps_Switzerland_001_3000x1500_J2JxUkAil.jpg",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/SCL_Swiss_Alps_Switzerland_001_3000x1500_J2JxUkAil.jpg",
+      "uploadedAt": "2026-03-30T12:34:22.194Z",
+      "__v": 0
+    },
+    {
+      "_id": "69ca6ef6a6da7f9e1066e7ff",
+      "title": "Untitled",
+      "filename": "EVERYTHING_qPH2fUUOF.png",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/EVERYTHING_qPH2fUUOF.png",
+      "uploadedAt": "2026-03-30T12:39:18.584Z",
+      "__v": 0
+    },
+    {
+      "_id": "69ca7140a6da7f9e1066ed79",
+      "title": "Untitled",
+      "filename": "wp11165775-alps-phone-4k-wallpapers_Lg6F2nZkjf.jpg",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/wp11165775-alps-phone-4k-wallpapers_Lg6F2nZkjf.jpg",
+      "uploadedAt": "2026-03-30T12:49:04.347Z",
+      "__v": 0
+    },
+    {
+      "_id": "69ca7178a6da7f9e1066ee15",
+      "title": "Untitled",
+      "filename": "Serene_Infinity_Pool_Overlooking_Ocean_4ctJUuK2Q.png",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/Serene_Infinity_Pool_Overlooking_Ocean_4ctJUuK2Q.png",
+      "uploadedAt": "2026-03-30T12:50:00.110Z",
+      "__v": 0
+    },
+    {
+      "_id": "69ca7652a6da7f9e1066efce",
+      "title": "Untitled",
+      "filename": "EVERYTHING_Agp9e5um1.png",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/EVERYTHING_Agp9e5um1.png",
+      "uploadedAt": "2026-03-30T13:10:42.507Z",
+      "__v": 0
+    },
+    {
+      "_id": "69ca765ba6da7f9e1066efd1",
+      "title": "Untitled",
+      "filename": "EVERYTHING-jorunery_q4hFAHND8.png",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/EVERYTHING-jorunery_q4hFAHND8.png",
+      "uploadedAt": "2026-03-30T13:10:51.247Z",
+      "__v": 0
+    },
+    {
+      "_id": "69ca7663a6da7f9e1066efd4",
+      "title": "Untitled",
+      "filename": "EVERYTHING_qjB6O1PMy.png",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/EVERYTHING_qjB6O1PMy.png",
+      "uploadedAt": "2026-03-30T13:10:59.485Z",
+      "__v": 0
+    },
+    {
+      "_id": "69ca7671a6da7f9e1066f023",
+      "title": "Untitled",
+      "filename": "EVERYTHING-jorunery_I7CFZRg3Q.png",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/EVERYTHING-jorunery_I7CFZRg3Q.png",
+      "uploadedAt": "2026-03-30T13:11:13.246Z",
+      "__v": 0
+    },
+    {
+      "_id": "69ca7675a6da7f9e1066f026",
+      "title": "Untitled",
+      "filename": "EVERYTHING_cgCKqB0B2.png",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/EVERYTHING_cgCKqB0B2.png",
+      "uploadedAt": "2026-03-30T13:11:17.509Z",
+      "__v": 0
+    },
+    {
+      "_id": "69ca76dd42e4bd9de6c5e4f9",
+      "title": "Untitled",
+      "filename": "EVERYTHING-jorunery_HoVRXtwpz.png",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/EVERYTHING-jorunery_HoVRXtwpz.png",
+      "uploadedAt": "2026-03-30T13:13:01.289Z",
+      "__v": 0
+    },
+    {
+      "_id": "69ca76e142e4bd9de6c5e4fc",
+      "title": "Untitled",
+      "filename": "EVERYTHING_TkrRPznXt.png",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/EVERYTHING_TkrRPznXt.png",
+      "uploadedAt": "2026-03-30T13:13:05.858Z",
+      "__v": 0
+    },
+    {
+      "_id": "69ca8578b0ebeaf65a61457c",
+      "title": "Untitled",
+      "filename": "e7_NCGhyCWjJ.jpg",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/e7_NCGhyCWjJ.jpg",
+      "uploadedAt": "2026-03-30T14:15:20.792Z",
+      "__v": 0
+    },
+    {
+      "_id": "69ca858bb0ebeaf65a61457f",
+      "title": "Untitled",
+      "filename": "pexels-mr-mihi-2151602653-31855994_LnwdOJ0M0.jpg",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/pexels-mr-mihi-2151602653-31855994_LnwdOJ0M0.jpg",
+      "uploadedAt": "2026-03-30T14:15:39.681Z",
+      "__v": 0
+    },
+    {
+      "_id": "69ca8616b0ebeaf65a614799",
+      "title": "Untitled",
+      "filename": "yannick-apollon-j0a0i-LN3ws-unsplash__1__FQ-Lw13TF.jpg",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/yannick-apollon-j0a0i-LN3ws-unsplash__1__FQ-Lw13TF.jpg",
+      "uploadedAt": "2026-03-30T14:17:58.231Z",
+      "__v": 0
+    },
+    {
+      "_id": "69ca8641b0ebeaf65a614838",
+      "title": "Untitled",
+      "filename": "marcin-kalinski-PCgM2CYm6HA-unsplash__1__BOXVpR5fj.jpg",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/marcin-kalinski-PCgM2CYm6HA-unsplash__1__BOXVpR5fj.jpg",
+      "uploadedAt": "2026-03-30T14:18:41.915Z",
+      "__v": 0
+    },
+    {
+      "_id": "69ca86edb0ebeaf65a614969",
+      "title": "Untitled",
+      "filename": "saurabh-kumar-2ZZYACycXZk-unsplash_9hdzGJL-a.jpg",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/saurabh-kumar-2ZZYACycXZk-unsplash_9hdzGJL-a.jpg",
+      "uploadedAt": "2026-03-30T14:21:33.034Z",
+      "__v": 0
+    },
+    {
+      "_id": "69ca876eb0ebeaf65a614a9c",
+      "title": "Untitled",
+      "filename": "christoph-schulz-7tb-b37yHx4-unsplash__1__jPPOnyI15E.jpg",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/christoph-schulz-7tb-b37yHx4-unsplash__1__jPPOnyI15E.jpg",
+      "uploadedAt": "2026-03-30T14:23:42.293Z",
+      "__v": 0
+    },
+    {
+      "_id": "69ca9deb9517288b8c984d9f",
+      "title": "Untitled",
+      "filename": "23838-337674789_medium_Upb6eq0n7.mp4",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/23838-337674789_medium_Upb6eq0n7.mp4",
+      "uploadedAt": "2026-03-30T15:59:39.155Z",
+      "__v": 0
+    },
+    {
+      "_id": "69ca9e5d9517288b8c984fc3",
+      "title": "Untitled",
+      "filename": "2249630-uhd_3840_2160_30fps_3PTjvXXOD.mp4",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/2249630-uhd_3840_2160_30fps_3PTjvXXOD.mp4",
+      "uploadedAt": "2026-03-30T16:01:33.500Z",
+      "__v": 0
+    },
+    {
+      "_id": "69ca9e8c9517288b8c985093",
+      "title": "Untitled",
+      "filename": "23838-337674789_medium_KrCcU7jWE.mp4",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/23838-337674789_medium_KrCcU7jWE.mp4",
+      "uploadedAt": "2026-03-30T16:02:20.362Z",
+      "__v": 0
+    },
+    {
+      "_id": "69caa3c99517288b8c98569c",
+      "title": "Untitled",
+      "filename": "202368-918049003_small_CaqYCg4ol.mp4",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/202368-918049003_small_CaqYCg4ol.mp4",
+      "uploadedAt": "2026-03-30T16:24:41.002Z",
+      "__v": 0
+    },
+    {
+      "_id": "69caa691a0930b35b35623eb",
+      "title": "Untitled",
+      "filename": "6026300-uhd_4096_2160_24fps_VEBIzrZoa.mp4",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/6026300-uhd_4096_2160_24fps_VEBIzrZoa.mp4",
+      "uploadedAt": "2026-03-30T16:36:33.256Z",
+      "__v": 0
+    },
+    {
+      "_id": "69caa7cba0930b35b35625c1",
+      "title": "Untitled",
+      "filename": "23838-337674789_medium_oOYPIwqOY.mp4",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/23838-337674789_medium_oOYPIwqOY.mp4",
+      "uploadedAt": "2026-03-30T16:41:47.967Z",
+      "__v": 0
+    },
+    {
+      "_id": "69cb5515e92b290aa5009580",
+      "title": "Untitled",
+      "filename": "2034261-uhd_3840_2160_30fps_quhFTaQ9N.mp4",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/2034261-uhd_3840_2160_30fps_quhFTaQ9N.mp4",
+      "uploadedAt": "2026-03-31T05:01:09.221Z",
+      "__v": 0
+    },
+    {
+      "_id": "69cb5643e92b290aa500993b",
+      "title": "Untitled",
+      "filename": "114594-701775953_medium_lOxyZXNYr.mp4",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/114594-701775953_medium_lOxyZXNYr.mp4",
+      "uploadedAt": "2026-03-31T05:06:11.255Z",
+      "__v": 0
+    },
+    {
+      "_id": "69cb5757e92b290aa5009daa",
+      "title": "Untitled",
+      "filename": "202368-918049003_small_XFh9Nhkxh.mp4",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/202368-918049003_small_XFh9Nhkxh.mp4",
+      "uploadedAt": "2026-03-31T05:10:47.488Z",
+      "__v": 0
+    },
+    {
+      "_id": "69cb5901e92b290aa500a1b7",
+      "title": "Untitled",
+      "filename": "286089_small_LHDpWWs3i.mp4",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/286089_small_LHDpWWs3i.mp4",
+      "uploadedAt": "2026-03-31T05:17:53.069Z",
+      "__v": 0
+    },
+    {
+      "_id": "69ccb3c5d878a438c40371a1",
+      "title": "Untitled",
+      "filename": "pexels-alleksana-4239627_7fE7Frjyk.jpg",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/pexels-alleksana-4239627_7fE7Frjyk.jpg",
+      "uploadedAt": "2026-04-01T05:57:25.497Z",
+      "__v": 0
+    }
+  ],
+  "homepageconfigs": [
+    {
+      "_id": "69c291efd382d77cd18746cc",
+      "heroSlider": [
+        {
+          "destinationId": "69c291efd382d77cd1874672",
+          "enabled": true,
+          "order": 0,
+          "customTagline": "",
+          "customImage": "",
+          "_id": "69ccb3cad878a438c40371bd"
+        },
+        {
+          "destinationId": "69c291efd382d77cd187467c",
+          "enabled": true,
+          "order": 1,
+          "customTagline": "",
+          "customImage": "",
+          "_id": "69ccb3cad878a438c40371be"
+        },
+        {
+          "destinationId": "69c291efd382d77cd1874678",
+          "enabled": true,
+          "order": 2,
+          "customTagline": "",
+          "customImage": "",
+          "_id": "69ccb3cad878a438c40371bf"
+        },
+        {
+          "destinationId": "69c291efd382d77cd1874679",
+          "enabled": true,
+          "order": 3,
+          "customTagline": "",
+          "customImage": "",
+          "_id": "69ccb3cad878a438c40371c0"
+        },
+        {
+          "destinationId": "69c8b5a44a59458084d29aec",
+          "enabled": true,
+          "order": 4,
+          "customTagline": "",
+          "customImage": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/pexels-putraawiratama-2093119_AlMmRDVJq.jpg",
+          "_id": "69ccb3cad878a438c40371c1"
+        },
+        {
+          "destinationId": "69c291efd382d77cd1874680",
+          "enabled": true,
+          "order": 5,
+          "customTagline": "",
+          "customImage": "",
+          "_id": "69ccb3cad878a438c40371c2"
+        }
+      ],
+      "sections": [
+        {
+          "key": "offersAndUpdates",
+          "title": "",
+          "subtitle": "",
+          "enabled": true,
+          "order": 1,
+          "type": "offers",
+          "destinationItems": [],
+          "cards": [
+            {
+              "title": "Swiss Rail Special",
+              "image": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/f_Y8N9tDf1F.png",
+              "linkType": "url",
+              "linkValue": "/search?q=swiss",
+              "_id": "69c291efd382d77cd18746d5"
+            },
+            {
+              "title": "Offer",
+              "image": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/EVERYTHING_48LP8irRc.png",
+              "linkType": "destination",
+              "linkValue": "",
+              "_id": "69ca6d04a6da7f9e1066e3bb"
+            },
+            {
+              "title": "Offer",
+              "image": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/pexels-alleksana-4239627_7fE7Frjyk.jpg",
+              "linkType": "destination",
+              "linkValue": "",
+              "_id": "69ccb3cad878a438c40371c6"
+            }
+          ],
+          "mediaUrl": "",
+          "mobileMediaUrl": "",
+          "mediaSlides": [],
+          "isVideo": false,
+          "queryConfig": {
+            "limit": 6
+          },
+          "_id": "69c291efd382d77cd18746d3"
+        },
+        {
+          "key": "topDestinations",
+          "title": "Top Destinations",
+          "subtitle": "Global Hotspots",
+          "enabled": true,
+          "order": 2,
+          "type": "destinations",
+          "destinationItems": [
+            "69c291efd382d77cd1874672",
+            "69c291efd382d77cd1874678",
+            "69c291efd382d77cd1874679",
+            "69c8b5a44a59458084d29af3",
+            "69c291efd382d77cd187467c",
+            "69c291efd382d77cd1874680"
+          ],
+          "cards": [],
+          "mediaUrl": "",
+          "mobileMediaUrl": "",
+          "mediaSlides": [],
+          "isVideo": false,
+          "queryConfig": {
+            "limit": 6
+          },
+          "_id": "69c291efd382d77cd18746d2"
+        },
+        {
+          "key": "trendingPackages",
+          "title": "Trending Right Now",
+          "subtitle": "Most loved by travelers",
+          "enabled": true,
+          "order": 3,
+          "type": "packages",
+          "destinationItems": [],
+          "cards": [],
+          "mediaUrl": "",
+          "mobileMediaUrl": "",
+          "mediaSlides": [],
+          "isVideo": false,
+          "queryConfig": {
+            "tag": "Trending",
+            "limit": 6
+          },
+          "_id": "69c291efd382d77cd18746d6"
+        },
+        {
+          "key": "international",
+          "title": "World at your reach",
+          "subtitle": "Explore the world",
+          "enabled": true,
+          "order": 4,
+          "type": "packages",
+          "destinationItems": [],
+          "cards": [],
+          "mediaUrl": "",
+          "mobileMediaUrl": "",
+          "mediaSlides": [],
+          "isVideo": false,
+          "filterType": "International",
+          "queryConfig": {
+            "limit": 6
+          },
+          "_id": "69c291efd382d77cd18746d9"
+        },
+        {
+          "key": "domestic",
+          "title": "Explore India",
+          "subtitle": "Discover India",
+          "enabled": true,
+          "order": 5,
+          "type": "packages",
+          "destinationItems": [],
+          "cards": [],
+          "mediaUrl": "",
+          "mobileMediaUrl": "",
+          "mediaSlides": [],
+          "isVideo": false,
+          "filterType": "Domestic",
+          "queryConfig": {
+            "limit": 6
+          },
+          "_id": "69c291efd382d77cd18746da"
+        },
+        {
+          "key": "promoBanner",
+          "title": "Summer Sale Live!",
+          "subtitle": "Get up to 30% off on all bookings",
+          "enabled": true,
+          "order": 6,
+          "type": "media",
+          "destinationItems": [],
+          "cards": [],
+          "mediaUrl": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/EVERYTHING_aH_t3QCWN.png",
+          "mobileMediaUrl": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/EVERYTHING_0d537o-8y.png",
+          "mediaSlides": [],
+          "isVideo": false,
+          "queryConfig": {
+            "limit": 6
+          },
+          "_id": "69c291efd382d77cd18746d7"
+        },
+        {
+          "key": "superSaver",
+          "title": "Budget Friendly",
+          "subtitle": "Best value for your money",
+          "enabled": true,
+          "order": 7,
+          "type": "packages",
+          "destinationItems": [],
+          "cards": [],
+          "mediaUrl": "",
+          "mobileMediaUrl": "",
+          "mediaSlides": [],
+          "isVideo": false,
+          "queryConfig": {
+            "tag": "Super Saver",
+            "limit": 6
+          },
+          "_id": "69c291efd382d77cd18746db"
+        },
+        {
+          "key": "communityBanner",
+          "title": "Join Our Community",
+          "subtitle": "Connect with fellow travelers and get exclusive tips",
+          "enabled": true,
+          "order": 8,
+          "type": "media",
+          "destinationItems": [],
+          "cards": [],
+          "mediaUrl": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/EVERYTHING-jorunery_-PBG7U5Oj.png",
+          "mobileMediaUrl": "",
+          "mediaSlides": [
+            {
+              "desktop": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/EVERYTHING-jorunery_HoVRXtwpz.png",
+              "mobile": "",
+              "_id": "69ca76e442e4bd9de6c5e51d"
+            },
+            {
+              "desktop": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/EVERYTHING_TkrRPznXt.png",
+              "mobile": "",
+              "_id": "69ca76e442e4bd9de6c5e51e"
+            }
+          ],
+          "isVideo": false,
+          "queryConfig": {
+            "limit": 6
+          },
+          "_id": "69c291efd382d77cd18746d8"
+        },
+        {
+          "key": "citydepartures",
+          "title": "From Your City",
+          "subtitle": "Regional departures",
+          "enabled": true,
+          "order": 9,
+          "type": "packages",
+          "destinationItems": [],
+          "cards": [],
+          "mediaUrl": "",
+          "mobileMediaUrl": "",
+          "mediaSlides": [],
+          "isVideo": false,
+          "queryConfig": {
+            "limit": 6
+          },
+          "_id": "69c291efd382d77cd18746dc"
+        },
+        {
+          "key": "quicklinks",
+          "title": "Quick Links",
+          "subtitle": "",
+          "enabled": true,
+          "order": 10,
+          "type": "links",
+          "destinationItems": [],
+          "cards": [],
+          "mediaUrl": "",
+          "mobileMediaUrl": "",
+          "mediaSlides": [],
+          "isVideo": false,
+          "queryConfig": {
+            "limit": 6
+          },
+          "_id": "69c291efd382d77cd18746dd"
+        }
+      ],
+      "quickLinks": [
+        {
+          "label": "Thailand Tour",
+          "url": "/thailand",
+          "_id": "69c291efd382d77cd18746de"
+        },
+        {
+          "label": "Bali Holidays",
+          "url": "/bali-indonesia",
+          "_id": "69c291efd382d77cd18746df"
+        }
+      ],
+      "importantLinks": [
+        {
+          "label": "About",
+          "url": "/about",
+          "_id": "69c291efd382d77cd18746e0"
+        },
+        {
+          "label": "Contact",
+          "url": "/contact",
+          "_id": "69c291efd382d77cd18746e1"
+        }
+      ],
+      "showMobileHeroVideo": true,
+      "faq": [],
+      "updatedAt": "2026-03-24T13:30:23.677Z",
+      "__v": 45,
+      "mobileHeroVideo": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/286089_small_LHDpWWs3i.mp4"
+    }
+  ],
+  "globalsettings": [
+    {
+      "_id": "69c2950b5165045a3aa395d8",
+      "contactPhone": "+91 98765 43210",
+      "whatsappNumber": "+91 9587505726",
+      "socialLinks": {
+        "instagram": "",
+        "facebook": "",
+        "twitter": "",
+        "youtube": "",
+        "linkedin": ""
+      },
+      "enableWhatsappChat": true,
+      "enableInquiryPopup": true,
+      "enableNewsletter": true,
+      "enableSaleBanner": true,
+      "enableSaleBannerAnimation": true,
+      "enableSaleBannerTimer": false,
+      "saleBannerText": "🎨 <span style='letter-spacing: 0.1em;'>HOLI SPECIAL</span> • <span style='font-weight: 300; opacity: 0.9;'>UP TO 40% OFF</span>",
+      "saleBannerLink": "",
+      "saleBannerBgColor": "#7c3aed",
+      "saleBannerTextColor": "#db2777",
+      "saleBannerBorderColor": "#eab308",
+      "consultationBannerHeadline": "Confused about where to go?",
+      "consultationBannerSubtext": "Talk to our travel experts and get a personalized itinerary crafted just for you.",
+      "newsletterHeadline": "Unlock Exclusive Travel Deals!",
+      "newsletterSubtext": "Subscribe to our newsletter and get up to",
+      "newsletterDiscount": "40% OFF",
+      "joinPageHeroTitle": "Grow with Yatravi",
+      "joinPageHeroSubtitle": "Join India's fastest-growing travel network. Whether you're a travel agent, hotelier, or corporate partner, let's build success together.",
+      "joinPageHeroBadge": "Partner with Excellence",
+      "joinPageHeroImage": "/images/placeholder.svg",
+      "heroMobileTagline": "We care your trip • Yatravi",
+      "heroSearchPlaceholder": "Search your destination",
+      "heroPriceLabel": "Starting from",
+      "saleBannerTimerEndDate": "2026-04-03T13:03:36.569Z",
+      "whyChooseUs": [
+        {
+          "title": "100% Verified Packages",
+          "desc": "Trusted by thousands",
+          "_id": "69c2950b5165045a3aa395d9"
+        },
+        {
+          "title": "24/7 Expert Support",
+          "desc": "Always here for you",
+          "_id": "69c2950b5165045a3aa395da"
+        },
+        {
+          "title": "Best Price Guarantee",
+          "desc": "Unbeatable value",
+          "_id": "69c2950b5165045a3aa395db"
+        },
+        {
+          "title": "Hassle-free Planning",
+          "desc": "Transparent process",
+          "_id": "69c2950b5165045a3aa395dc"
+        }
+      ],
+      "createdAt": "2026-03-24T13:43:39.073Z",
+      "updatedAt": "2026-04-01T08:53:13.921Z",
+      "__v": 0
+    }
+  ],
+  "admins": [
+    {
+      "_id": "69c7dd0583352707cebb42fb",
+      "name": "Main Admin",
+      "email": "yatraviholidays@gmail.com",
+      "username": null,
+      "password": null,
+      "role": "superadmin",
+      "sessionVersion": 0,
+      "createdAt": "2026-03-28T13:52:05.662Z",
+      "__v": 0
+    }
+  ]
+}
