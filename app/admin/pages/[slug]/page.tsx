@@ -206,7 +206,7 @@ export default function AdminPageEditor() {
     const handleSave = async () => {
         setSaving(true);
         try {
-            const res = await fetch(`${API_BASE_URL}/api/admin/pages/${slug}`, {
+            const res = await fetch(`${API_BASE_URL}/api/pages/${slug}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 credentials: 'include',

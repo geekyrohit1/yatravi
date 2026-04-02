@@ -33,6 +33,10 @@ const globalSettingSchema = new mongoose.Schema({
         type: Boolean,
         default: true
     },
+    enableAIChat: {
+        type: Boolean,
+        default: true
+    },
 
     // Sale Banner
     enableSaleBanner: {

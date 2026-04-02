@@ -10,8 +10,8 @@ import { FadeIn } from '../components/FadeIn';
 // Reusable Skeleton Components
 const SectionHeaderSkeleton = () => (
     <div className="flex items-center gap-3 mb-6 md:mb-8">
-        <div className="w-1 h-6 md:h-8 bg-gray-200 rounded-full animate-pulse"></div>
-        <div className="h-7 w-48 bg-gray-200 rounded-lg animate-pulse"></div>
+        <div className="w-1 h-6 md:h-8 bg-slate-300/50 rounded-full animate-pulse"></div>
+        <div className="h-7 w-48 bg-slate-200/60 rounded-lg animate-pulse"></div>
     </div>
 );
 
@@ -21,10 +21,10 @@ const SliderSkeleton = ({ cardCount = 4 }) => (
         <div className="flex gap-4 md:gap-6 overflow-hidden">
             {[...Array(cardCount)].map((_, j) => (
                 <div key={j} className="w-[72vw] md:w-[calc((100%-48px)/2.2)] lg:w-[calc((100%-72px)/4)] flex-shrink-0 flex flex-col gap-4">
-                    <div className="aspect-[4/3] bg-gray-100 rounded-xl animate-pulse"></div>
+                    <div className="aspect-[4/3] bg-slate-200/40 rounded-xl animate-pulse"></div>
                     <div className="space-y-3 px-1">
-                        <div className="h-4 w-3/4 bg-gray-50 rounded-lg animate-pulse"></div>
-                        <div className="h-3 w-1/2 bg-gray-50 rounded-lg animate-pulse"></div>
+                        <div className="h-4 w-3/4 bg-slate-100/60 rounded-lg animate-pulse"></div>
+                        <div className="h-3 w-1/2 bg-slate-100/40 rounded-lg animate-pulse"></div>
                     </div>
                 </div>
             ))}
@@ -34,7 +34,7 @@ const SliderSkeleton = ({ cardCount = 4 }) => (
 
 const BannerSkeleton = ({ aspectRatio = "aspect-[16/9] md:aspect-[21/9]" }) => (
     <div className="py-4 md:py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
-        <div className={`${aspectRatio} w-full bg-gray-100 rounded-xl animate-pulse`}></div>
+        <div className={`${aspectRatio} w-full bg-slate-200/40 rounded-xl animate-pulse`}></div>
     </div>
 );
 
@@ -43,10 +43,10 @@ const GridSkeleton = () => (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {[1, 2, 3, 4].map((i) => (
                 <div key={i} className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-lg bg-gray-100 animate-pulse"></div>
+                    <div className="w-10 h-10 rounded-lg bg-slate-200/40 animate-pulse"></div>
                     <div className="space-y-2">
-                        <div className="h-3 w-24 bg-gray-50 rounded animate-pulse"></div>
-                        <div className="h-2 w-16 bg-gray-50/50 rounded animate-pulse"></div>
+                        <div className="h-3 w-24 bg-slate-100/60 rounded animate-pulse"></div>
+                        <div className="h-2 w-16 bg-slate-100/30 rounded animate-pulse"></div>
                     </div>
                 </div>
             ))}
@@ -89,6 +89,12 @@ interface HomeClientProps {
 }
 
 export const HomeClient: React.FC<HomeClientProps> = ({ initialPackages, initialConfig }) => {
+    const [isMounted, setIsMounted] = React.useState(false);
+
+    React.useEffect(() => {
+        setIsMounted(true);
+    }, []);
+
     // Memoized section data calculation
     const calculatedSectionsData = React.useMemo(() => {
         if (!initialPackages.length || !initialConfig) return { dynamicSections: {}, cityDepartures: [], featuredCollections: [] };
@@ -242,23 +248,30 @@ export const HomeClient: React.FC<HomeClientProps> = ({ initialPackages, initial
     ]);
 
     return (
-        <div className="flex flex-col gap-0 text-gray-800 bg-white">
+        <div className={`flex flex-col gap-0 text-gray-800 bg-white ${isMounted ? 'animate-in fade-in duration-500' : 'opacity-0'}`}>
             <HeroSection 
                 heroData={initialConfig?.heroSlider} 
-                isLoading={false} 
+                isLoading={!isMounted} 
                 mobileVideo={initialConfig?.mobileHeroVideo}
                 showMobileVideo={initialConfig?.showMobileHeroVideo}
             />
 
             <div className="flex flex-col gap-0">
-                {initialConfig && Array.isArray(initialConfig.sections) && (
+                {!isMounted ? (
                     <div className="flex flex-col gap-0">
-                        {[...initialConfig.sections]
-                            .filter((s: any) => s && s.enabled && s.key !== 'quicklinks')
-                            .sort((a: any, b: any) => (parseFloat(a.order) || 999) - (parseFloat(b.order) || 999))
-                            .map((section: any, index: number) => renderSection(section, index))
-                        }
+                         <SliderSkeleton />
+                         <BannerSkeleton />
                     </div>
+                ) : (
+                    initialConfig && Array.isArray(initialConfig.sections) && (
+                        <div className="flex flex-col gap-0">
+                            {[...initialConfig.sections]
+                                .filter((s: any) => s && s.enabled && s.key !== 'quicklinks')
+                                .sort((a: any, b: any) => (parseFloat(a.order) || 999) - (parseFloat(b.order) || 999))
+                                .map((section: any, index: number) => renderSection(section, index))
+                            }
+                        </div>
+                    )
                 )}
 
                 <div className="flex flex-col gap-0 bg-white">

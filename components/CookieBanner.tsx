@@ -20,7 +20,7 @@ export const CookieBanner: React.FC = () => {
                 }
                 setIsVisible(true);
             };
-            const timer = setTimeout(checkAndShow, 20000);
+            const timer = setTimeout(checkAndShow, 180000); // Wait 3 minutes (180000ms) for high-intent users
             return () => clearTimeout(timer);
         }
     }, [hasResponded]);

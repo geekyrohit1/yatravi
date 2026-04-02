@@ -28,6 +28,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
   const [isExternalFormOpen, setIsExternalFormOpen] = useState(false);
   const pathname = usePathname();
   const isAdmin = pathname?.startsWith('/admin');
+  const isHideIconsPage = pathname?.startsWith('/packages/') || pathname?.startsWith('/destination/');
   const [mounted, setMounted] = useState(false);
   const [placeholder, setPlaceholder] = useState('');
   const router = useRouter();
@@ -305,10 +306,12 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
       <Footer onOpenQuote={() => setIsQuotePopupOpen(true)} />
 
       {/* AI Assistant Chat Widget */}
-      <ViChatAssistant isHidden={isQuotePopupOpen || isExternalPopupOpen || isExternalFormOpen} />
+      {settings?.enableAIChat !== false && !isHideIconsPage && (
+        <ViChatAssistant isHidden={isQuotePopupOpen || isExternalPopupOpen || isExternalFormOpen} />
+      )}
 
       {/* Floating WhatsApp Button */}
-      {settings?.enableWhatsappChat !== false && !isQuotePopupOpen && !isExternalPopupOpen && !isExternalFormOpen && (
+      {settings?.enableWhatsappChat !== false && !isHideIconsPage && !isQuotePopupOpen && !isExternalPopupOpen && !isExternalFormOpen && (
         <a
           href={`https://wa.me/${(settings?.whatsappNumber || '9587505726').replace(/[^0-9]/g, '')}`}
           target="_blank"

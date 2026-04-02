@@ -170,14 +170,15 @@ const PackageCardComponent: React.FC<PackageCardProps> = ({ pkg, variant = 'vert
         {/* Image Section - Fixed Aspect Ratio */}
         <div className="relative w-full max-w-[calc(100vw-32px)] md:w-[260px] lg:w-[300px] aspect-[1.2/1] md:aspect-auto shrink-0 overflow-hidden bg-gray-50">
 
-          <Image
-            src={safeImages[0]}
-            alt={pkg.title}
-            fill
-            className="object-cover"
-            sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1200px) 300px, 400px"
-            quality={75}
-          />
+            <Image
+              src={safeImages[0]}
+              alt={pkg.title}
+              fill
+              className="object-cover"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
+              quality={75}
+              priority={false}
+            />
 
           {/* Overlay Badges removed from image overlay as requested */}
         </div>
@@ -299,8 +300,9 @@ const PackageCardComponent: React.FC<PackageCardProps> = ({ pkg, variant = 'vert
             alt={pkg.title}
             fill
             className="object-cover transform-gpu"
-            sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 300px"
+            sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 400px"
             quality={75}
+            priority={false}
           />
 
 
@@ -427,5 +429,13 @@ const PackageCardComponent: React.FC<PackageCardProps> = ({ pkg, variant = 'vert
   );
 };
 
-export const PackageCard = React.memo(PackageCardComponent);
+export const PackageCard = React.memo(PackageCardComponent, (prevProps, nextProps) => {
+  return (
+    prevProps.pkg.id === nextProps.pkg.id &&
+    prevProps.pkg._id === nextProps.pkg._id &&
+    prevProps.pkg.price === nextProps.pkg.price &&
+    prevProps.variant === nextProps.variant
+  );
+});
+
 PackageCard.displayName = 'PackageCard';

@@ -47,8 +47,8 @@ export const FAQSection: React.FC<FAQSectionProps> = ({
             <div className={noContainer ? '' : 'max-w-4xl mx-auto px-4 sm:px-6 lg:px-8'}>
                 {!hideHeader && (
                     <div className="border-l-4 border-brand pl-4 mb-6 font-sans">
-                        <p className="text-[10px] font-bold text-brand tracking-wider mb-1">Common queries</p>
-                        <h2 className="text-lg md:text-xl font-bold text-gray-900 tracking-tight">Frequently Asked Questions</h2>
+                        <p className="text-[10px] font-bold text-brand tracking-wider mb-1.5">Common queries</p>
+                        <h2 className="text-xl md:text-2xl font-bold text-gray-900 tracking-tight">Frequently Asked Questions</h2>
                     </div>
                 )}
 
@@ -73,7 +73,7 @@ export const FAQSection: React.FC<FAQSectionProps> = ({
                             <div
                                 className={`overflow-hidden transition-all duration-300 ease-in-out ${openIndex === index ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}
                             >
-                                <div className="px-5 pb-5 pt-0 text-[13px] md:text-sm text-gray-600 leading-[1.85] border-t border-gray-50/50 mt-1 pt-4">
+                                <div className="px-5 pb-5 pt-0 text-[13px] md:text-sm font-medium text-gray-600 leading-[1.85] border-t border-gray-50/50 mt-1 pt-4">
                                     {faq.answer}
                                 </div>
                             </div>

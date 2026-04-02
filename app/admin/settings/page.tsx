@@ -246,6 +246,16 @@ export default function SettingsPage() {
                         </div>
                         <div className="flex items-center justify-between p-4 rounded-xl bg-gray-50">
                             <div className="space-y-0.5">
+                                <Label className="text-gray-900 font-medium">AI Chat Assistant</Label>
+                                <p className="text-sm text-gray-500">Floating AI assistant bot for customer support</p>
+                            </div>
+                            <Switch
+                                checked={watch('enableAIChat')}
+                                onCheckedChange={(val) => setValue('enableAIChat', val)}
+                            />
+                        </div>
+                        <div className="flex items-center justify-between p-4 rounded-xl bg-gray-50">
+                            <div className="space-y-0.5">
                                 <Label className="text-gray-900 font-medium">Inquiry Popup</Label>
                                 <p className="text-sm text-gray-500">Auto-show inquiry form after 7 seconds</p>
                             </div>

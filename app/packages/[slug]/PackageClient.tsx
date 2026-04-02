@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { Package } from '../../../types';
 import { API_BASE_URL } from '../../../constants';
-import { Star, MapPin, Clock, CheckCircle, XCircle, X, Shield, ArrowRight, User, Mail, Phone, Calendar, Users, Plane, Car, BedDouble, Coffee, Camera, Info, Map, ShieldCheck, Utensils, Share2, MessageCircle, AlertCircle, RotateCcw, CreditCard, Plus, Minus, TrendingUp } from 'lucide-react';
+import { Star, MapPin, Clock, CheckCircle, XCircle, X, Shield, ArrowRight, User, Mail, Phone, Calendar, Users, Plane, Car, BedDouble, Coffee, Camera, Info, Map, ShieldCheck, Utensils, Share2, MessageCircle, AlertCircle, RotateCcw, CreditCard, Plus, Minus, TrendingUp, ChevronDown } from 'lucide-react';
 import ShareButton from '../../../components/ShareButton';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -25,9 +25,10 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
     const [pkg, setPkg] = useState<Package | null>(initialPkg);
     const loading = false; // No longer loading initial data
 
-    const [expandedDay, setExpandedDay] = useState<number | null>(0); // Day 1 expanded by default
+    const [expandedDays, setExpandedDays] = useState<number[]>([0]); // Day 1 expanded by default
     const [activeSection, setActiveSection] = useState('overview');
     const [isSticky, setIsSticky] = useState(false);
+    const [isOverviewExpanded, setIsOverviewExpanded] = useState(false);
     const stickyRef = useRef<HTMLDivElement>(null);
     const [showGallery, setShowGallery] = useState(false);
     const [currentHeroIndex, setCurrentHeroIndex] = useState(1);
@@ -77,6 +78,18 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
 
     // Countdown timer logic (unchanged)
     const [timeLeft, setTimeLeft] = useState({ hours: 23, minutes: 59, seconds: 59 });
+    const [showOverviewButton, setShowOverviewButton] = useState(false);
+    const overviewRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (overviewRef.current && !isOverviewExpanded) {
+            // Check if scrollHeight > clientHeight (means text is clamped)
+            // Height for 3 lines at 1.8 leading is approx 72-76px
+            const isClamped = overviewRef.current.scrollHeight > overviewRef.current.clientHeight;
+            setShowOverviewButton(isClamped);
+        }
+    }, [pkg?.overview, isOverviewExpanded]);
+
     useEffect(() => {
         const timer = setInterval(() => {
             setTimeLeft(prev => {
@@ -174,7 +187,7 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
             <section className="relative w-full h-[40vh] md:h-[45vh] lg:h-[60vh] min-h-[300px] md:min-h-[400px] lg:min-h-[500px] overflow-hidden bg-gray-50">
                 <div className="flex lg:grid lg:grid-cols-12 gap-0.5 h-full w-full">
                     {/* Swipable Mobile Hero / Main Desktop View */}
-                    <div 
+                    <div
                         ref={heroScrollRef}
                         onScroll={handleHeroScroll}
                         className="w-full lg:col-span-9 flex overflow-x-auto snap-x snap-mandatory no-scrollbar lg:overflow-hidden lg:block h-full relative"
@@ -195,7 +208,7 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
                             </div>
                         ))}
                     </div>
-                    
+
                     {/* Desktop Side Stack */}
                     <div className="hidden lg:flex lg:col-span-3 flex-col gap-0.5 h-full">
                         <div className="relative flex-1 overflow-hidden">
@@ -273,7 +286,7 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
                                     ))}
                                 </div>
                                 <h1 className="text-3xl md:text-4xl lg:text-6xl font-sans font-semibold text-white tracking-tight leading-[1.15] drop-shadow-xl max-w-3xl animate-fade-up [animation-delay:200ms]">
-                                {packageData.title}
+                                    {packageData.title}
                                 </h1>
 
                                 {/* Brand-Refined Stats Bar (Desktop) */}
@@ -297,7 +310,7 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
                                             <Clock className="w-4 h-4" />
                                         </div>
                                         <div>
-                                            <p className="text-[9px] font-medium text-[#64748b] uppercase tracking-widest leading-none mb-1.5">Duration</p>
+                                            <p className="text-[9px] font-medium text-slate-500 uppercase tracking-widest leading-none mb-1.5">Duration</p>
                                             <p className="text-sm font-semibold text-[#0f172a] leading-none">
                                                 {packageData.duration - 1}N - {packageData.duration}D
                                             </p>
@@ -311,7 +324,7 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
                                         <p className="text-[11px] lg:text-[12px] text-white/90 font-medium tracking-wide">
                                             {packageData.regionBreakdown.split(/[•|·]| - /).map((part, i) => (
                                                 <React.Fragment key={i}>
-                                                    {part.trim().split(/(\d+[Nn])/).map((subPart, j) => 
+                                                    {part.trim().split(/(\d+[Nn])/).map((subPart, j) =>
                                                         /^\d+[Nn]$/.test(subPart) ? <span key={j} className="font-bold text-white text-[13px]">{subPart}</span> : <span key={j} className="opacity-80">{subPart}</span>
                                                     )}
                                                     {i < (packageData.regionBreakdown?.split(/[•|·]| - /).length || 0) - 1 && <span className="mx-3 opacity-30">•</span>}
@@ -337,7 +350,7 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
 
                 {/* Floating Gallery Toggle (All Views) */}
                 <div className="absolute bottom-6 right-6 z-10">
-                    <button 
+                    <button
                         onClick={() => setShowGallery(true)}
                         className="bg-black/80 backdrop-blur-md text-white px-5 py-2.5 rounded-xl text-[10px] md:text-[11px] font-bold tracking-wider flex items-center gap-2.5 shadow-2xl hover:bg-black transition-all duration-300 border border-white/10 group"
                     >
@@ -349,7 +362,7 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
 
             <div className="md:hidden bg-white border-b border-gray-100 py-5 font-sans">
                 <div className="px-5">
-                    <nav className="text-[10px] text-gray-400 flex items-center gap-2 font-medium tracking-wide mb-3">
+                    <nav className="text-[10px] text-slate-500 flex items-center gap-2 font-medium tracking-wide mb-3">
                         <span onClick={() => router.push('/')}>Home</span>
                         <span className="opacity-30">/</span>
                         <span>Packages</span>
@@ -389,22 +402,22 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
                         </div>
                         <div className="flex justify-between items-start gap-4">
                             <h1 className="text-[22px] md:text-2xl font-semibold text-gray-900 leading-tight tracking-tight pr-4">{packageData.title}</h1>
-                        
-                        {/* Rating (Compact - Top Right for Mobile) */}
-                        <div className="flex items-center gap-1.5 bg-yellow-50/50 text-yellow-700 px-3 py-1.5 rounded-full border border-yellow-100 text-[10px] font-bold shrink-0 mt-1 shadow-sm">
-                            <Star className="w-3 h-3 fill-current" />
-                            <span>{packageData.rating}</span>
+
+                            {/* Rating (Compact - Top Right for Mobile) */}
+                            <div className="flex items-center gap-1.5 bg-yellow-50/50 text-yellow-700 px-3 py-1.5 rounded-full border border-yellow-100 text-[10px] font-bold shrink-0 mt-1 shadow-sm">
+                                <Star className="w-3 h-3 fill-current" />
+                                <span>{packageData.rating}</span>
+                            </div>
                         </div>
                     </div>
-                    </div>
-                    
+
                     {/* Region Breakdown Highlight Bar (Mobile) */}
                     {packageData.regionBreakdown && packageData.regionBreakdown.trim() !== '' && (
                         <div className="flex items-center gap-1.5 py-1.5 px-3 bg-orange-50/80 border border-orange-100/50 rounded-xl mb-4 w-fit">
                             <p className="text-[10px] md:text-[11px] text-gray-600 font-medium flex-wrap">
                                 {packageData.regionBreakdown.split(/[•|·]| - /).map((part, i) => (
                                     <React.Fragment key={i}>
-                                        {part.trim().split(/(\d+[Nn])/).map((subPart, j) => 
+                                        {part.trim().split(/(\d+[Nn])/).map((subPart, j) =>
                                             /^\d+[Nn]$/.test(subPart) ? <span key={j} className="font-bold text-gray-900">{subPart}</span> : subPart
                                         )}
                                         {i < (packageData.regionBreakdown?.split(/[•|·]| - /).length || 0) - 1 && <span className="mx-2 text-gray-300">•</span>}
@@ -413,49 +426,49 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
                             </p>
                         </div>
                     )}
-                        {/* High-End Stats Bar (Yatravi Signature Style) */}
-                        <div className="grid grid-cols-2 gap-2.5 md:flex md:flex-wrap md:items-center">
-                            {/* Pickup & Drop Info Card */}
-                            <div className="flex items-center gap-2.5 bg-white border border-gray-100 rounded-2xl p-2.5 pr-4 shadow-sm group transition-all duration-300">
-                                <div className="bg-gray-50 p-2 rounded-xl text-gray-900 shrink-0">
-                                    <MapPin className="w-3.5 h-3.5" />
-                                </div>
-                                <div className="min-w-0">
-                                    <p className="text-[8px] font-medium text-[#64748b] uppercase tracking-widest leading-none mb-1">Pickup & Drop</p>
-                                    <p className="text-[11px] font-semibold text-[#0f172a] leading-none truncate pr-1">
-                                        {packageData.pickupPoint || packageData.location.split(',')[0]} - {packageData.dropPoint || packageData.location.split(',')[0]}
-                                    </p>
-                                </div>
+                    {/* High-End Stats Bar (Yatravi Signature Style) */}
+                    <div className="grid grid-cols-2 gap-2.5 md:flex md:flex-wrap md:items-center">
+                        {/* Pickup & Drop Info Card */}
+                        <div className="flex items-center gap-2.5 bg-white border border-gray-100 rounded-2xl p-2.5 pr-4 shadow-sm group transition-all duration-300">
+                            <div className="bg-gray-50 p-2 rounded-xl text-gray-900 shrink-0">
+                                <MapPin className="w-3.5 h-3.5" />
                             </div>
-
-                            {/* Duration Info Card */}
-                            <div className="flex items-center gap-2.5 bg-white border border-gray-100 rounded-2xl p-2.5 pr-4 shadow-sm group transition-all duration-300">
-                                <div className="bg-gray-50 p-2 rounded-xl text-gray-900 shrink-0">
-                                    <Clock className="w-3.5 h-3.5" />
-                                </div>
-                                <div>
-                                    <p className="text-[8px] font-medium text-[#64748b] uppercase tracking-widest leading-none mb-1">Duration</p>
-                                    <p className="text-[11px] font-semibold text-[#0f172a] leading-none whitespace-nowrap">
-                                        {packageData.duration - 1}N - {packageData.duration}D
-                                    </p>
-                                </div>
+                            <div className="min-w-0">
+                                <p className="text-[8px] font-medium text-slate-500 uppercase tracking-widest leading-none mb-1">Pickup & Drop</p>
+                                <p className="text-[11px] font-semibold text-[#0f172a] leading-none truncate pr-1">
+                                    {packageData.pickupPoint || packageData.location.split(',')[0]} - {packageData.dropPoint || packageData.location.split(',')[0]}
+                                </p>
                             </div>
                         </div>
 
+                        {/* Duration Info Card */}
+                        <div className="flex items-center gap-2.5 bg-white border border-gray-100 rounded-2xl p-2.5 pr-4 shadow-sm group transition-all duration-300">
+                            <div className="bg-gray-50 p-2 rounded-xl text-gray-900 shrink-0">
+                                <Clock className="w-3.5 h-3.5" />
+                            </div>
+                            <div>
+                                <p className="text-[8px] font-medium text-slate-500 uppercase tracking-widest leading-none mb-1">Duration</p>
+                                <p className="text-[11px] font-semibold text-[#0f172a] leading-none whitespace-nowrap">
+                                    {packageData.duration - 1}N - {packageData.duration}D
+                                </p>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
+            </div>
 
 
 
             {/* Tab Bar Placeholder (Prevents Layout Jumps) */}
             <div ref={stickyRef} className="h-14">
-                <div className={`${isSticky 
-                    ? 'fixed top-0 left-0 right-0 z-[60] shadow-md border-b border-gray-100 lg:border-white/10' 
+                <div className={`${isSticky
+                    ? 'fixed top-0 left-0 right-0 z-[60] shadow-md border-b border-gray-100 lg:border-white/10'
                     : 'relative border-b border-gray-100 lg:border-white/10'} 
                     bg-white/95 lg:bg-brand-dark backdrop-blur-md transition-all duration-300`}>
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div className="flex items-center gap-8 md:gap-10 overflow-x-auto no-scrollbar">
-                        {[
+                            {[
                                 { id: 'overview', label: 'Overview' },
                                 { id: 'itinerary', label: 'Itinerary' },
                                 { id: 'inclusions', label: 'Inclusions' },
@@ -520,7 +533,7 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
                                                 };
                                                 const mapped = iconMap[highlight];
                                                 if (!mapped) return null;
-                                                
+
                                                 const Icon = mapped.icon;
                                                 return (
                                                     <div key={idx} className="flex flex-col items-center justify-center gap-1 bg-white border border-gray-100 rounded-xl p-1.5 px-0.5 shadow-sm transition-all group">
@@ -547,7 +560,7 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
                                                 };
                                                 const mapped = iconMap[highlight];
                                                 if (!mapped) return null;
-                                                
+
                                                 const Icon = mapped.icon;
                                                 return (
                                                     <div key={idx} className="flex items-center gap-3 group/item shrink-0">
@@ -556,7 +569,7 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
                                                         </div>
                                                         <div className="flex flex-col">
                                                             <span className="text-[11px] font-bold text-[#0f172a] tracking-tight leading-none group-hover/item:text-brand transition-colors">{mapped.label}</span>
-                                                            <span className="text-[8px] text-gray-400 font-bold mt-0.5 uppercase tracking-wider">Included</span>
+                                                            <span className="text-[8px] text-slate-500 font-bold mt-0.5 uppercase tracking-wider">Included</span>
                                                         </div>
                                                     </div>
                                                 );
@@ -572,16 +585,35 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
                                     <p className="text-[10px] font-bold text-brand tracking-wider mb-1.5">The experience</p>
                                     <h2 className="text-xl md:text-2xl font-bold text-gray-900 tracking-tight leading-tight">About this Journey</h2>
                                 </div>
-                                <p className="text-[13px] md:text-sm text-gray-600 leading-[1.85] whitespace-pre-line">{packageData.overview}</p>
+                                <div className="relative">
+                                    <div 
+                                        ref={overviewRef}
+                                        className={`text-[13px] md:text-[14.5px] font-medium text-gray-600 leading-[1.8] mt-6 transition-all duration-500 overflow-hidden ${isOverviewExpanded ? 'max-h-[2000px]' : 'line-clamp-3 md:line-clamp-3'}`}
+                                    >
+                                        {packageData.overview}
+                                        {!isOverviewExpanded && showOverviewButton && <div className="absolute bottom-0 left-0 w-full h-8 bg-gradient-to-t from-white to-transparent pointer-events-none transition-opacity duration-300" />}
+                                    </div>
+                                    {showOverviewButton && (
+                                        <div className="flex justify-end mt-2">
+                                            <button
+                                                onClick={() => setIsOverviewExpanded(!isOverviewExpanded)}
+                                                className="text-[10px] font-bold text-slate-400 hover:text-brand uppercase tracking-[0.15em] flex items-center gap-1.5 transition-all group"
+                                            >
+                                                {isOverviewExpanded ? 'Show Less' : 'Read Full Overview'}
+                                                <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${isOverviewExpanded ? 'rotate-180' : 'group-hover:translate-y-0.5'}`} />
+                                            </button>
+                                        </div>
+                                    )}
+                                </div>
                             </div>
                         </div>
 
                         {/* Itinerary */}
-                             <div id="itinerary" className="scroll-mt-32 pt-2">
-                                <div className="border-l-4 border-brand pl-4 mb-6">
-                                     <p className="text-[10px] font-bold text-brand tracking-wider mb-1.5">Your schedule</p>
-                                    <h2 className="text-xl md:text-2xl font-bold text-gray-900 tracking-tight">Daily Itinerary</h2>
-                                </div>
+                        <div id="itinerary" className="scroll-mt-32 pt-2">
+                            <div className="border-l-4 border-brand pl-4 mb-6">
+                                <p className="text-[10px] font-bold text-brand tracking-wider mb-1.5">Your schedule</p>
+                                <h2 className="text-xl md:text-2xl font-bold text-gray-900 tracking-tight">Daily Itinerary</h2>
+                            </div>
 
                             {packageData.itinerary && packageData.itinerary.length > 0 ? (
                                 <div className="relative">
@@ -597,34 +629,42 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
                                                 </div>
 
                                                 {/* Day Card */}
-                                                <div className="flex-1 bg-white border border-gray-100 rounded-xl shadow-sm overflow-hidden">
+                                                <div className={`flex-1 bg-white border rounded-xl shadow-sm overflow-hidden transition-all duration-300 ${expandedDays.includes(i) ? 'ring-1 ring-brand/20 border-brand/10 shadow-md translate-x-1' : 'border-gray-100 hover:border-gray-200'}`}>
                                                     <div
-                                                        className="flex justify-between items-center px-5 py-4 cursor-pointer group"
-                                                        onClick={() => setExpandedDay(expandedDay === i ? null : i)}
+                                                        className="flex justify-between items-center px-5 py-4 cursor-pointer group select-none"
+                                                        onClick={() => {
+                                                            if (expandedDays.includes(i)) {
+                                                                setExpandedDays(expandedDays.filter(d => d !== i));
+                                                            } else {
+                                                                setExpandedDays([...expandedDays, i]);
+                                                            }
+                                                        }}
                                                     >
-                                                        <div>
-                                                             <span className="text-[10px] font-bold tracking-wider text-brand block mb-1">Day {day.day}</span>
-                                                            <h3 className="text-[14px] font-bold text-gray-900 group-hover:text-brand transition-colors leading-snug">{day.title}</h3>
+                                                        <div className="flex-1 flex flex-col items-start gap-1 min-w-0">
+                                                            <span className="text-[10px] font-extrabold tracking-widest text-[#9b1313] shrink-0 uppercase py-0.5 px-2 bg-orange-50/80 rounded-md border border-orange-100/50">Day {day.day}</span>
+                                                            <h3 className="text-[14px] md:text-[15px] font-bold text-gray-900 group-hover:text-brand transition-colors leading-snug">{day.title}</h3>
                                                         </div>
-                                                        <div className={`shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-all duration-300 ml-3 ${expandedDay === i ? 'bg-brand text-white rotate-90' : 'bg-gray-100 text-gray-400'}`}>
-                                                            <ArrowRight className="w-3.5 h-3.5" />
+                                                        <div className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-500 ml-3 ${expandedDays.includes(i) ? 'bg-brand text-white rotate-180 shadow-lg shadow-brand/20' : 'bg-gray-50 text-gray-400 group-hover:bg-gray-100'}`}>
+                                                            <svg className={`w-4 h-4 transition-transform duration-500`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M19 9l-7 7-7-7" />
+                                                            </svg>
                                                         </div>
                                                     </div>
-
-                                                    {/* Expandable Content */}
-                                                    <div className={`grid transition-all duration-400 ease-in-out ${expandedDay === i ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}>
+                                                    
+                                                    {/* Expandable Content - Smooth Grid Grow Transition */}
+                                                    <div className={`grid transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] ${expandedDays.includes(i) ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}>
                                                         <div className="overflow-hidden">
                                                             <div className="px-5 pb-5 border-t border-gray-50">
                                                                 {day.description && (
-                                                                    <p className="text-[13px] md:text-sm text-gray-600 leading-[1.85] mt-4">{day.description}</p>
+                                                                    <p className="text-[13px] md:text-sm font-medium text-gray-600 leading-[1.85] mt-4">{day.description}</p>
                                                                 )}
 
                                                                 {/* Highlights */}
                                                                 {day.highlights && day.highlights.length > 0 && (
                                                                     <div className="flex flex-wrap gap-2 mt-3">
                                                                         {day.highlights.map((h: string, idx: number) => (
-                                                                            <span key={idx} className="flex items-center gap-1.5 text-[11px] font-semibold text-brand bg-brand/5 px-3 py-1.5 rounded-full">
-                                                                                <Star className="w-3 h-3 fill-current" /> {h}
+                                                                            <span key={idx} className="flex items-center gap-1.5 text-[11px] font-extrabold text-slate-700 bg-slate-50/50 px-3 py-1.5 rounded-lg border border-slate-100">
+                                                                                <CheckCircle className="w-3 h-3 text-emerald-600" /> {h}
                                                                             </span>
                                                                         ))}
                                                                     </div>
@@ -633,7 +673,7 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
                                                                 {/* Meals */}
                                                                 {((Array.isArray(day.meals) && day.meals.length > 0) || (!Array.isArray(day.meals) && day.meals && (day.meals.breakfastIncluded || day.meals.lunchIncluded || day.meals.dinnerIncluded))) && (
                                                                     <div className="flex gap-2 mt-3 pt-3 border-t border-gray-50 items-center flex-wrap">
-                                                                         <span className="text-[10px] font-bold text-gray-400 tracking-wider">Meals:</span>
+                                                                        <span className="text-[10px] font-bold text-slate-500 tracking-wider">Meals:</span>
                                                                         {Array.isArray(day.meals) ? (
                                                                             day.meals.map((meal: string, idx: number) => (
                                                                                 <span key={idx} className="flex items-center gap-1 text-[11px] font-semibold text-gray-600 bg-gray-50 border border-gray-100 px-2.5 py-1 rounded-lg">
@@ -653,11 +693,11 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
                                                                 {/* Tours/Activities with Images */}
                                                                 {day.detailedActivities && day.detailedActivities.length > 0 && (
                                                                     <div className="mt-5 space-y-4 pt-4 border-t border-gray-50">
-                                                                         <span className="text-[10px] font-bold text-gray-400 tracking-wider block mb-3">Tours & experiences:</span>
+                                                                        <span className="text-[10px] font-bold text-slate-500 tracking-wider block mb-3">Tours & experiences:</span>
                                                                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                                                             {day.detailedActivities.map((activity: any, actIdx: number) => (
-                                                                                <div 
-                                                                                    key={actIdx} 
+                                                                                <div
+                                                                                    key={actIdx}
                                                                                     className="group relative overflow-hidden rounded-xl bg-white border border-gray-100 shadow-sm transition-all duration-300 cursor-pointer"
                                                                                     onClick={() => setSelectedTour(activity)}
                                                                                 >
@@ -703,14 +743,14 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
                         {/* 5. Inclusions Section */}
                         <div id="inclusions" className="scroll-mt-32 pt-10">
                             <div className="border-l-4 border-brand pl-4 mb-6">
-                                 <p className="text-[10px] font-bold text-brand tracking-wider mb-1">Package benefits</p>
-                                 <h2 className="text-xl md:text-2xl font-bold text-gray-900 tracking-tight">What's Included</h2>
-                             </div>
+                                <p className="text-[10px] font-bold text-brand tracking-wider mb-1">Package benefits</p>
+                                <h2 className="text-xl md:text-2xl font-bold text-gray-900 tracking-tight">What's Included</h2>
+                            </div>
                             <div className="bg-white border border-gray-100 rounded-3xl overflow-hidden shadow-sm">
-                                 <div className="flex items-center gap-2.5 px-6 py-4 bg-emerald-50/50 border-b border-emerald-100">
-                                     <CheckCircle className="w-5 h-5 text-emerald-600" />
-                                     <span className="text-sm font-bold text-emerald-700 tracking-wide">Inclusions</span>
-                                 </div>
+                                <div className="flex items-center gap-2.5 px-6 py-4 bg-emerald-50/50 border-b border-emerald-100">
+                                    <CheckCircle className="w-5 h-5 text-emerald-600" />
+                                    <span className="text-sm font-bold text-emerald-700 tracking-wide">Inclusions</span>
+                                </div>
                                 <div className="p-2 md:p-4">
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8">
                                         {packageData.inclusions.map((item, i) => (
@@ -727,20 +767,20 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
                         {/* 6. Exclusions Section */}
                         <div id="exclusions" className="scroll-mt-32 pt-10">
                             <div className="border-l-4 border-brand pl-4 mb-6">
-                                 <p className="text-[10px] font-bold text-brand tracking-wider mb-1">Important note</p>
-                                 <h2 className="text-xl md:text-2xl font-bold text-gray-900 tracking-tight">Not Included</h2>
-                             </div>
+                                <p className="text-[10px] font-bold text-brand tracking-wider mb-1">Important note</p>
+                                <h2 className="text-xl md:text-2xl font-bold text-gray-900 tracking-tight">Not Included</h2>
+                            </div>
                             <div className="bg-white border border-gray-100 rounded-3xl overflow-hidden shadow-sm">
-                                 <div className="flex items-center gap-2.5 px-6 py-4 bg-rose-50/50 border-b border-rose-100">
-                                     <XCircle className="w-5 h-5 text-rose-500" />
-                                     <span className="text-sm font-bold text-rose-600 tracking-wide">Exclusions</span>
-                                 </div>
+                                <div className="flex items-center gap-2.5 px-6 py-4 bg-rose-50/50 border-b border-rose-100">
+                                    <XCircle className="w-5 h-5 text-rose-500" />
+                                    <span className="text-sm font-bold text-rose-600 tracking-wide">Exclusions</span>
+                                </div>
                                 <div className="p-2 md:p-4">
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8">
                                         {packageData.exclusions.map((item, i) => (
                                             <div key={i} className="flex items-start gap-3 px-4 py-3 border-b border-gray-50 last:border-b-0 md:last:border-b md:even:border-l md:even:border-gray-50 group">
                                                 <XCircle className="w-4 h-4 text-rose-400 shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
-                                                <span className="text-[13px] font-medium text-gray-600 leading-relaxed group-hover:text-gray-800 transition-colors">{item}</span>
+                                                <span className="text-[13px] font-medium text-gray-700 leading-relaxed group-hover:text-gray-900 transition-colors">{item}</span>
                                             </div>
                                         ))}
                                     </div>
@@ -756,9 +796,9 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
                         {/* 8. Policies Section - Redesigned (Vertical Stack) */}
                         <div id="policies" className="scroll-mt-32 pt-10">
                             <div className="border-l-4 border-brand pl-4 mb-8">
-                                 <p className="text-[10px] font-bold text-brand tracking-wider mb-1">Yatravi standards</p>
-                                 <h2 className="text-xl md:text-2xl font-bold text-gray-900 tracking-tight">Booking Policies</h2>
-                             </div>
+                                <p className="text-[10px] font-bold text-brand tracking-wider mb-1">Yatravi standards</p>
+                                <h2 className="text-xl md:text-2xl font-bold text-gray-900 tracking-tight">Booking Policies</h2>
+                            </div>
                             <div className="flex flex-col gap-5">
                                 {[
                                     { id: 'cancellation', icon: AlertCircle, color: 'text-orange-600', bg: 'bg-orange-50/50', border: 'border-orange-100', title: 'Cancellation' },
@@ -768,7 +808,7 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
                                     <div key={policy.id} className={`${policy.bg} ${policy.border} border rounded-[2rem] p-6 md:p-8 transition-all duration-300 hover:shadow-xl hover:shadow-gray-200/40 group relative overflow-hidden`}>
                                         <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none" />
                                         <div className="flex flex-col md:flex-row md:items-center gap-6 relative z-10">
-                                             <div className="flex items-center gap-4 shrink-0">
+                                            <div className="flex items-center gap-4 shrink-0">
                                                 <div className="p-3 rounded-2xl bg-white shadow-sm border border-gray-50 group-hover:scale-110 transition-transform duration-300">
                                                     <policy.icon className={`w-6 h-6 ${policy.color}`} />
                                                 </div>
@@ -776,7 +816,7 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
                                             </div>
                                             <div className="flex-1">
                                                 <span className="hidden md:block text-[10px] font-bold text-brand tracking-wider mb-2">{policy.title} policy</span>
-                                                <p className="text-[13px] md:text-sm text-gray-600 leading-[1.85] whitespace-pre-line">
+                                                <p className="text-[13px] md:text-sm font-medium text-gray-600 leading-[1.85] whitespace-pre-line">
                                                     {packageData.policies[policy.id as keyof typeof packageData.policies]}
                                                 </p>
                                             </div>
@@ -789,10 +829,10 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
                         {/* 9. Things to Pack - Redesigned */}
                         {packageData.thingsToPack && packageData.thingsToPack.length > 0 && (
                             <div id="things-to-pack" className="scroll-mt-32 pt-10 pb-10">
-                                 <div className="border-l-4 border-brand pl-4 mb-8">
-                                     <p className="text-[10px] font-bold text-brand tracking-wider mb-1">Travel checklist</p>
-                                     <h2 className="text-xl md:text-2xl font-bold text-gray-900 tracking-tight">Things to Pack</h2>
-                                 </div>
+                                <div className="border-l-4 border-brand pl-4 mb-8">
+                                    <p className="text-[10px] font-bold text-brand tracking-wider mb-1">Travel checklist</p>
+                                    <h2 className="text-xl md:text-2xl font-bold text-gray-900 tracking-tight">Things to Pack</h2>
+                                </div>
                                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                                     {packageData.thingsToPack.map((item: string, i: number) => (
                                         <div key={i} className="flex items-center gap-4 px-5 py-4 bg-white border border-gray-100 rounded-2xl group hover:border-brand/20 hover:shadow-xl hover:shadow-gray-100/50 transition-all duration-300 relative overflow-hidden">
@@ -800,7 +840,7 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
                                             <div className="w-8 h-8 rounded-xl bg-gray-50 flex items-center justify-center shrink-0 group-hover:bg-brand/10 transition-colors">
                                                 <CheckCircle className="w-4 h-4 text-brand" />
                                             </div>
-                                            <span className="text-[13px] text-gray-700 font-bold group-hover:text-gray-900 tracking-tight transition-colors">{item}</span>
+                                            <span className="text-[13px] text-gray-600 font-bold group-hover:text-gray-900 tracking-tight transition-colors">{item}</span>
                                         </div>
                                     ))}
                                 </div>
@@ -811,46 +851,46 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
                     {/* Right Column (Sidebar) - Hidden on Mobile */}
                     <div className="hidden lg:block lg:col-span-1">
                         <div className="sticky top-[150px] space-y-8">
-                             {/* Booking Card - Compact Brand Design */}
-                              <div className="rounded-2xl overflow-hidden shadow-lg border border-brand/10">
-                                 {/* Tangelo Header Section */}
-                                 <div className="bg-brand px-6 py-10 relative overflow-hidden">
-                                     {/* Decorative Art */}
-                                     <div className="absolute -top-6 -right-6 w-28 h-28 rounded-full bg-white/5 border border-white/10"></div>
-                                     <div className="absolute -bottom-8 -left-8 w-36 h-36 rounded-full bg-white/5 border border-white/10"></div>
-                                     <div className="absolute top-4 right-10 w-10 h-10 rounded-full bg-white/10"></div>
-                                     <div className="absolute bottom-4 right-4 w-5 h-5 rounded-full bg-white/10"></div>
-                                     {/* Content */}
-                                     <p className="relative text-white/60 text-[10px] font-bold tracking-wider mb-3">Starting from</p>
-                                     <div className="relative flex items-baseline gap-2.5 mb-1">
-                                         <span className="text-white text-3xl font-extrabold tracking-tight leading-none">₹{packageData.price.toLocaleString()}</span>
-                                         <span className="text-white/60 text-sm font-semibold">/ Adult</span>
-                                     </div>
-                                     {packageData.originalPrice && (
-                                         <p className="relative text-white/40 text-sm line-through font-normal mt-1">₹{packageData.originalPrice.toLocaleString()}</p>
-                                     )}
-                                     <p className="relative text-white/40 text-[9px] font-bold tracking-wider mt-3">+ Taxes & surcharges</p>
-                                 </div>
-                                 {/* White CTA Section */}
-                                 <div className="bg-white px-6 py-4">
-                                     <button
-                                         onClick={() => document.getElementById('inquiry-form')?.scrollIntoView({ behavior: 'smooth' })}
-                                         className="w-full bg-brand text-white py-3.5 rounded-xl font-bold text-sm tracking-wider transition-all duration-300 flex items-center justify-center gap-2 hover:shadow-md hover:shadow-brand/30 active:scale-[0.98]"
-                                     >
-                                         Send Enquiry
-                                         <ArrowRight className="w-4 h-4" />
-                                     </button>
-                                     <div className="flex items-center justify-center gap-2 mt-3 text-[9px] text-gray-400 font-bold tracking-wide">
-                                         <div className="w-1.5 h-1.5 bg-brand rounded-full animate-pulse shadow-[0_0_6px_rgba(251,80,18,0.4)]"></div>
-                                         Best price guaranteed
-                                     </div>
-                                 </div>
-                             </div>
+                            {/* Booking Card - Compact Brand Design */}
+                            <div className="rounded-2xl overflow-hidden shadow-lg border border-brand/10">
+                                {/* Tangelo Header Section */}
+                                <div className="bg-brand px-6 py-10 relative overflow-hidden">
+                                    {/* Decorative Art */}
+                                    <div className="absolute -top-6 -right-6 w-28 h-28 rounded-full bg-white/5 border border-white/10"></div>
+                                    <div className="absolute -bottom-8 -left-8 w-36 h-36 rounded-full bg-white/5 border border-white/10"></div>
+                                    <div className="absolute top-4 right-10 w-10 h-10 rounded-full bg-white/10"></div>
+                                    <div className="absolute bottom-4 right-4 w-5 h-5 rounded-full bg-white/10"></div>
+                                    {/* Content */}
+                                    <p className="relative text-white/60 text-[10px] font-bold tracking-wider mb-3">Starting from</p>
+                                    <div className="relative flex items-baseline gap-2.5 mb-1">
+                                        <span className="text-white text-3xl font-extrabold tracking-tight leading-none">₹{packageData.price.toLocaleString()}</span>
+                                        <span className="text-white/60 text-sm font-semibold">/ Adult</span>
+                                    </div>
+                                    {packageData.originalPrice && (
+                                        <p className="relative text-white/40 text-sm line-through font-normal mt-1">₹{packageData.originalPrice.toLocaleString()}</p>
+                                    )}
+                                    <p className="relative text-white/40 text-[9px] font-bold tracking-wider mt-3">+ Taxes & surcharges</p>
+                                </div>
+                                {/* White CTA Section */}
+                                <div className="bg-white px-6 py-4">
+                                    <button
+                                        onClick={() => document.getElementById('inquiry-form')?.scrollIntoView({ behavior: 'smooth' })}
+                                        className="w-full bg-brand text-white py-3.5 rounded-xl font-bold text-sm tracking-wider transition-all duration-300 flex items-center justify-center gap-2 hover:shadow-md hover:shadow-brand/30 active:scale-[0.98]"
+                                    >
+                                        Send Enquiry
+                                        <ArrowRight className="w-4 h-4" />
+                                    </button>
+                                    <div className="flex items-center justify-center gap-2 mt-3 text-[9px] text-gray-400 font-bold tracking-wide">
+                                        <div className="w-1.5 h-1.5 bg-brand rounded-full animate-pulse shadow-[0_0_6px_rgba(251,80,18,0.4)]"></div>
+                                        Best price guaranteed
+                                    </div>
+                                </div>
+                            </div>
                             {/* Inquiry Widget Sidebar */}
                             <div id="inquiry-form" className="animate-in fade-in duration-700">
-                                <InquiryWidget 
-                                    title={`Inquiry for ${packageData.title}`} 
-                                    showPaxCount={true} 
+                                <InquiryWidget
+                                    title={`Inquiry for ${packageData.title}`}
+                                    showPaxCount={true}
                                 />
                             </div>
                         </div>
@@ -877,11 +917,11 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
                 <div className="lg:hidden fixed inset-0 z-[100] flex items-end justify-center bg-black/60 backdrop-blur-sm animate-in fade-in duration-300 pointer-events-auto">
                     <div className="relative w-full max-h-[92vh] animate-in slide-in-from-bottom-full duration-500">
                         <div className="rounded-t-xl overflow-hidden shadow-2xl-up">
-                             <InquiryWidget 
-                                title={`Inquiry for ${packageData.title}`} 
+                            <InquiryWidget
+                                title={`Inquiry for ${packageData.title}`}
                                 onClose={() => setShowMobileForm(false)}
                                 showPaxCount={true}
-                             />
+                            />
                         </div>
                     </div>
                 </div>
@@ -896,7 +936,7 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
                             <h3 className="text-lg font-bold tracking-tight">{packageData.title}</h3>
                             <p className="text-[10px] text-gray-400 font-bold tracking-wider mt-1">Gallery view • {packageData.gallery.length} Images</p>
                         </div>
-                        <button 
+                        <button
                             onClick={() => setShowGallery(false)}
                             className="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-all transform hover:rotate-90"
                         >
@@ -907,7 +947,7 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
                     {/* Main Image View */}
                     <div className="relative w-full h-[60vh] md:h-[70vh] flex items-center justify-center px-4 md:px-20 group">
                         {/* Navigation Buttons */}
-                        <button 
+                        <button
                             onClick={() => setCurrentHeroIndex(prev => prev > 1 ? prev - 1 : packageData.gallery.length)}
                             className="absolute left-4 md:left-8 w-12 h-12 md:w-16 md:h-16 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-white transition-all opacity-0 group-hover:opacity-100 -translate-x-4 group-hover:translate-x-0"
                         >
@@ -925,7 +965,7 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
                             />
                         </div>
 
-                        <button 
+                        <button
                             onClick={() => setCurrentHeroIndex(prev => prev < packageData.gallery.length ? prev + 1 : 1)}
                             className="absolute right-4 md:right-8 w-12 h-12 md:w-16 md:h-16 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-white transition-all opacity-0 group-hover:opacity-100 translate-x-4 group-hover:translate-x-0"
                         >
@@ -940,11 +980,10 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
                                 <button
                                     key={idx}
                                     onClick={() => setCurrentHeroIndex(idx + 1)}
-                                    className={`relative w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden shrink-0 transition-all duration-300 ${
-                                        currentHeroIndex === idx + 1 
-                                        ? 'ring-2 ring-brand ring-offset-4 ring-offset-black scale-110 translate-y-[-4px]' 
-                                        : 'opacity-40 hover:opacity-100'
-                                    }`}
+                                    className={`relative w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden shrink-0 transition-all duration-300 ${currentHeroIndex === idx + 1
+                                            ? 'ring-2 ring-brand ring-offset-4 ring-offset-black scale-110 translate-y-[-4px]'
+                                            : 'opacity-40 hover:opacity-100'
+                                        }`}
                                 >
                                     <Image src={img} alt="Thumb" fill className="object-cover" />
                                 </button>
@@ -957,7 +996,7 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
             {/* Tour Details Sidebar/Modal */}
             {selectedTour && (
                 <div className="fixed inset-0 z-[100] flex justify-end">
-                    <div 
+                    <div
                         className="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity"
                         onClick={() => setSelectedTour(null)}
                     ></div>
@@ -971,7 +1010,7 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
                                     <MapPin className="w-12 h-12 text-gray-300" />
                                 </div>
                             )}
-                            <button 
+                            <button
                                 onClick={() => setSelectedTour(null)}
                                 className="absolute top-4 right-4 w-8 h-8 bg-black/50 hover:bg-black/70 backdrop-blur-md rounded-full flex items-center justify-center text-white transition-colors z-10"
                             >
@@ -1004,7 +1043,7 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
                                     </div>
                                 )}
                             </div>
-                            
+
                             <div className="space-y-4">
                                 <h4 className="text-[11px] font-bold text-brand tracking-wider mb-3 flex items-center gap-2">
                                     <Info className="w-4 h-4" /> Activity description

@@ -68,9 +68,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
     const [placeholderIndex, setPlaceholderIndex] = useState(0);
     const [isDeletingPlaceholder, setIsDeletingPlaceholder] = useState(false);
     const [mounted, setMounted] = useState(false);
+    const [imageReady, setImageReady] = useState(false);
 
     useEffect(() => {
         setMounted(true);
+        // Failsafe: Reveal UI after 1.5s regardless of image status to prevent getting stuck
+        const failsafe = setTimeout(() => setImageReady(true), 1500);
+        return () => clearTimeout(failsafe);
     }, []);
 
     // Typewriter effect for mobile search placeholder
@@ -199,29 +203,39 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         containerClasses = `relative w-full transition-all duration-500 h-[240px] md:h-[calc(100vh-110px)] lg:h-[600px] bg-white overflow-hidden px-0`;
     }
 
-    if (isLoading || heroDestinations.length === 0) {
+    if (isLoading || heroDestinations.length === 0 || (!imageReady && mounted)) {
         return (
             <section className={containerClasses}>
-                <div className="relative w-full h-full bg-gray-50 flex flex-col items-center justify-center pt-24 md:pt-0 pb-0 md:pb-16 lg:pb-20 overflow-hidden">
-                    {/* Background Glow Skeleton */}
-                    <div className="absolute inset-0 bg-gray-100/50 animate-pulse" />
+                <div className="relative w-full h-full bg-white flex flex-col items-center justify-center pt-24 md:pt-0 pb-0 md:pb-16 lg:pb-20 overflow-hidden">
+                    {/* Background Glow Skeleton (Dark Light Theme) */}
+                    <div className="absolute inset-0 bg-slate-50 animate-pulse" />
                     
                     {/* Content Skeleton */}
                     <div className="relative z-10 text-center space-y-4 md:space-y-6 px-4 w-full max-w-2xl mx-auto">
-                        <div className="h-3 w-32 bg-gray-200 rounded-full mx-auto animate-pulse" />
-                        <div className="h-12 md:h-20 w-3/4 bg-gray-200 rounded-2xl mx-auto animate-pulse" />
-                        <div className="h-4 w-48 bg-gray-200 rounded-full mx-auto animate-pulse" />
+                        <div className="h-3 w-32 bg-slate-200/60 rounded-full mx-auto animate-pulse" />
+                        <div className="h-12 md:h-20 w-3/4 bg-slate-200/40 rounded-2xl mx-auto animate-pulse" />
+                        <div className="h-4 w-48 bg-slate-100/60 rounded-full mx-auto animate-pulse" />
                         
                         {/* Search Bar Skeleton */}
-                        <div className="h-10 md:h-12 w-full max-w-sm bg-gray-100 rounded-xl mx-auto animate-pulse mt-8 border border-gray-200/50" />
+                        <div className="h-10 md:h-12 w-full max-w-sm bg-slate-50/50 rounded-xl mx-auto animate-pulse mt-8 border border-slate-100/40" />
                     </div>
+                </div>
+                {/* Absolute preloader for reliable onLoad trigger */}
+                <div className="absolute inset-0 opacity-0 pointer-events-none">
+                   <Image 
+                      src={activeDestination.heroImage || '/images/placeholder.svg'} 
+                      alt="" 
+                      fill
+                      priority
+                      onLoad={() => setImageReady(true)}
+                   />
                 </div>
             </section>
         );
     }
 
     return (
-        <section className={containerClasses}>
+        <section className={`${containerClasses} animate-in fade-in duration-1000`}>
             {/* Cinematic Blurred Background Glow (Desktop Only) */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none hidden lg:block z-0">
                 {heroDestinations.map((dest, index) => (
@@ -233,7 +247,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                             src={dest.heroImage || '/images/placeholder.svg'}
                             alt=""
                             fill
-                            quality={70}
+                            quality={60}
+                            priority={index === 0}
                             sizes="100vw"
                             className="object-cover blur-[80px] saturate-[2.5] brightness-[1.05] transform-gpu scale-110"
                         />
@@ -300,9 +315,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                                             src={dest.heroImage || '/images/placeholder.svg'}
                                             alt={dest.name}
                                             fill
-                                            quality={75}
-                                            priority={index === 0}
-                                            sizes="(max-width: 1024px) 100vw, 840px"
+                                            quality={85}
+                                            priority={index === activeIndex}
+                                            sizes="(max-width: 1024px) 100vw, 1200px"
                                             className="object-cover transform-gpu"
                                         />
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60" />
@@ -344,8 +359,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                                     src={dest.mobileImage || dest.heroImage || '/images/placeholder.svg'}
                                     alt={dest.name}
                                     fill
-                                    quality={75}
-                                    priority={index === 0}
+                                    quality={80}
+                                    priority={index === activeIndex}
                                     className="object-cover object-center transform-gpu"
                                     sizes="100vw"
                                 />

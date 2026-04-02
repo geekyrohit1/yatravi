@@ -47,18 +47,18 @@ export const SaleStrip: React.FC = () => {
             className="w-full h-8 md:h-10 flex items-center justify-center text-white z-[100] relative overflow-hidden shadow-sm border-b border-white/5 animate-gradient-xy"
         >
             <div className="max-w-7xl mx-auto w-full px-4 flex items-center justify-center relative z-10 gap-4 md:gap-8">
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3 w-full justify-center">
                     {settings.saleBannerLink ? (
-                        <Link href={settings.saleBannerLink} className="flex items-center hover:opacity-80 transition-all active:scale-95">
-                            <div className="flex items-center gap-3 font-sans">
-                                <span className="font-medium tracking-[0.1em] text-[10px] md:text-[11px] uppercase">
+                        <Link href={settings.saleBannerLink} className="flex items-center hover:opacity-80 transition-all active:scale-95 max-w-full overflow-hidden">
+                            <div className="flex items-center font-sans whitespace-nowrap">
+                                <span className="font-semibold tracking-[0.05em] uppercase text-[10px] md:text-[11px]" style={{ fontSize: 'clamp(8px, 2.5vw, 11px)' }}>
                                     {cleanText}
                                 </span>
                             </div>
                         </Link>
                     ) : (
-                        <div className="flex items-center gap-3 font-sans">
-                            <span className="font-medium tracking-[0.1em] text-[10px] md:text-[11px] uppercase">
+                        <div className="flex items-center font-sans whitespace-nowrap max-w-full overflow-hidden">
+                            <span className="font-semibold tracking-[0.05em] uppercase text-[10px] md:text-[11px]" style={{ fontSize: 'clamp(8px, 2.5vw, 11px)' }}>
                                 {cleanText}
                             </span>
                         </div>

@@ -83,6 +83,8 @@ const packageSchema = z.object({
     inclusionHighlights: z.array(z.string()).default([]),
     regionBreakdown: z.string().nullable().optional(),
     validityDate: z.string().nullable().optional(),
+    pickupPoint: z.string().optional().nullable(),
+    dropPoint: z.string().optional().nullable(),
 });
 
 type PackageFormValues = z.infer<typeof packageSchema>;
@@ -179,6 +181,8 @@ export default function PackageForm({ initialData, isEditMode = false }: Package
         inclusionHighlights: initialData?.inclusionHighlights || [],
         regionBreakdown: initialData?.regionBreakdown || '',
         validityDate: initialData?.validityDate || '',
+        pickupPoint: initialData?.pickupPoint || '',
+        dropPoint: initialData?.dropPoint || '',
     };
 
     const form = useForm<PackageFormValues>({
@@ -263,6 +267,8 @@ export default function PackageForm({ initialData, isEditMode = false }: Package
                 },
                 regionBreakdown: initialData.regionBreakdown || '',
                 validityDate: initialData.validityDate || '',
+                pickupPoint: initialData.pickupPoint || '',
+                dropPoint: initialData.dropPoint || '',
                 seo: {
                     title: initialData.seo?.title || '',
                     description: initialData.seo?.description || '',
@@ -578,6 +584,24 @@ export default function PackageForm({ initialData, isEditMode = false }: Package
                                     <span className="absolute left-3 top-2.5 text-gray-500">₹</span>
                                     <Input type="number" {...register('originalPrice')} className="h-11 pl-7 rounded-xl border-gray-200 focus:border-[#CD1C18] focus:ring-[#CD1C18]/20" />
                                 </div>
+                            </div>
+
+                            <div className="space-y-2">
+                                <Label className="text-sm font-medium text-gray-700">Pickup Point</Label>
+                                <Input 
+                                    {...register('pickupPoint')} 
+                                    className="h-11 rounded-xl border-gray-200 focus:border-[#CD1C18] focus:ring-[#CD1C18]/20" 
+                                    placeholder="e.g. Delhi - IGI Airport" 
+                                />
+                            </div>
+
+                            <div className="space-y-2">
+                                <Label className="text-sm font-medium text-gray-700">Drop Point</Label>
+                                <Input 
+                                    {...register('dropPoint')} 
+                                    className="h-11 rounded-xl border-gray-200 focus:border-[#CD1C18] focus:ring-[#CD1C18]/20" 
+                                    placeholder="e.g. Bangkok - Suvarnabhumi Airport" 
+                                />
                             </div>
 
                             <div className="space-y-2">

@@ -9,17 +9,21 @@ interface MobileDrawerProps {
 }
 
 export const MobileDrawer: React.FC<MobileDrawerProps> = ({ isOpen, onClose, onOpenQuote }) => {
-  if (!isOpen) return null;
-
   return (
     <>
       {/* Backdrop */}
       <div
-        className="lg:hidden fixed inset-0 z-[99998] bg-black/40 backdrop-blur-sm animate-in fade-in duration-500"
+        className={`lg:hidden fixed inset-0 z-[99998] bg-black/40 backdrop-blur-sm transition-opacity duration-500 ease-in-out ${
+          isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        }`}
         onClick={onClose}
       />
 
-      <div className="lg:hidden fixed top-0 right-0 bottom-0 w-[80%] z-[99999] bg-white flex flex-col animate-in slide-in-from-right duration-500 overflow-hidden shadow-[-10px_0_30px_rgba(0,0,0,0.1)]">
+      <div 
+        className={`lg:hidden fixed top-0 right-0 bottom-0 w-[80%] z-[99999] bg-white flex flex-col overflow-hidden shadow-[-10px_0_30px_rgba(0,0,0,0.1)] transform transition-transform duration-500 ease-out ${
+          isOpen ? 'translate-x-0' : 'translate-x-full'
+        }`}
+      >
         {/* Advanced Background Art */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden select-none">
           {/* Rotating Blobs for "Alive" feel */}

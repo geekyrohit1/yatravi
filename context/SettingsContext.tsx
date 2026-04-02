@@ -21,6 +21,7 @@ export interface SiteSettings {
     enableWhatsappChat: boolean;
     enableInquiryPopup: boolean;
     enableNewsletter: boolean;
+    enableAIChat: boolean;
 
     // Sale Banner
     enableSaleBanner: boolean;
@@ -68,6 +69,7 @@ const defaultSettings: SiteSettings = {
     enableWhatsappChat: true,
     enableInquiryPopup: true,
     enableNewsletter: true,
+    enableAIChat: true,
     enableSaleBanner: false,
     enableSaleBannerAnimation: true,
     enableSaleBannerTimer: true,
@@ -114,16 +116,20 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
     const [settings, setSettings] = useState<SiteSettings>(defaultSettings);
     const [loading, setLoading] = useState(true);
 
-    const fetchSettings = async () => {
+    const fetchSettings = async (isBackground = false) => {
+        if (!isBackground) setLoading(true);
         try {
             const timestamp = new Date().getTime();
             const res = await fetch(`${API_BASE_URL}/api/settings?t=${timestamp}`, { cache: 'no-store' });
             const contentType = res.headers.get("content-type");
             if (res.ok && contentType && contentType.includes("application/json")) {
                 const data = await res.json();
-                setSettings({ ...defaultSettings, ...data });
-            } else {
-                console.warn('API returned non-JSON response or error status', res.status);
+                const updatedSettings = { ...defaultSettings, ...data };
+                setSettings(updatedSettings);
+                // Cache the fresh settings
+                if (typeof window !== 'undefined') {
+                    localStorage.setItem('yatravi_settings', JSON.stringify(updatedSettings));
+                }
             }
         } catch (error) {
             console.error('Failed to fetch settings:', error);
@@ -133,11 +139,24 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
     };
 
     useEffect(() => {
-        fetchSettings();
+        // 1. Instant Load from Cache (Stale-While-Revalidate)
+        if (typeof window !== 'undefined') {
+            const cached = localStorage.getItem('yatravi_settings');
+            if (cached) {
+                try {
+                    setSettings(JSON.parse(cached));
+                    setLoading(false); // UI can reveal immediately with cached data
+                } catch (e) {
+                    console.error('Failed to parse cached settings');
+                }
+            }
+        }
+        // 2. Background Revalidate
+        fetchSettings(true);
     }, []);
 
     return (
-        <SettingsContext.Provider value={{ settings, loading, refetch: fetchSettings }}>
+        <SettingsContext.Provider value={{ settings, loading, refetch: () => fetchSettings(false) }}>
             {children}
         </SettingsContext.Provider>
     );

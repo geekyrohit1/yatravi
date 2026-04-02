@@ -209,14 +209,13 @@ export const Header: React.FC<HeaderProps> = ({
             </div>
           </div>
 
-          {/* Mobile Navigation Toggle (Hamburger) */}
           <div className="lg:hidden flex items-center">
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className={`${isMobileMenuOpen
                 ? 'text-gray-900'
                 : 'text-gray-900'
-                } h-[38px] w-10 md:h-[44px] md:w-11 flex items-center justify-center bg-gray-50 border border-gray-200/60 shadow-inner rounded-lg relative z-[210] transition-all duration-300`}
+                } h-[38px] w-10 md:h-[44px] md:w-11 flex items-center justify-center relative z-[210] transition-all duration-300 active:scale-95`}
             >
               {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>

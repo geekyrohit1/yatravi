@@ -100,9 +100,9 @@ export default function RootLayout({
     return (
         <html lang="en" className={`${montserrat.variable} ${montserratAlternates.variable} ${orangeAvenue.variable} ${satisfy.variable} ${engagement.variable} antialiased`}>
             <head>
-                {/* Preconnect links are handled by Next.js Font Optimization automatically for Google Fonts, 
-            but keeping explicit ones is fine if needed, though usually redundant with next/font. 
-            We will rely on next/font for best performance. */}
+                {/* Preconnect to improve TTFB for images and API */}
+                <link rel="preconnect" href="https://yatravi.com" />
+                <link rel="dns-prefetch" href="https://yatravi.com" />
             </head>
             <body className="bg-gray-50">
                 <ConsentProvider>
