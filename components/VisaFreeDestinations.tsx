@@ -120,7 +120,7 @@ export const VisaFreeDestinations: React.FC<VisaFreeDestinationsProps> = ({ data
                             onClick={() => router.push(`/destination/${item.slug}`)}
                             className="w-[calc((100vw-40px)/1.92)] md:w-[calc((100%-48px)/2.2)] lg:w-[calc((100%-72px)/4)] h-[260px] md:h-[420px] relative rounded-lg overflow-hidden cursor-pointer group shrink-0 snap-start shadow-md hover:shadow-xl transition-all duration-700 border border-white/10 isolate gpu-accelerated no-flicker"
                         >
-                            {/* Background Image with Zoom Effect */}
+                            {/* Background Image */}
                             <Image
                                 src={item.image}
                                 alt={item.country}

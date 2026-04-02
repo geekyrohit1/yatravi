@@ -233,9 +233,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                             src={dest.heroImage || '/images/placeholder.svg'}
                             alt=""
                             fill
-                            quality={80}
+                            quality={70}
                             sizes="100vw"
-                            className="object-cover blur-[80px] saturate-[2.5] brightness-[1.05] transform scale-110"
+                            className="object-cover blur-[80px] saturate-[2.5] brightness-[1.05] transform-gpu scale-110"
                         />
                     </div>
                 ))}
@@ -300,10 +300,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                                             src={dest.heroImage || '/images/placeholder.svg'}
                                             alt={dest.name}
                                             fill
-                                            quality={80}
+                                            quality={75}
                                             priority={index === 0}
                                             sizes="(max-width: 1024px) 100vw, 840px"
-                                            className="object-cover"
+                                            className="object-cover transform-gpu"
                                         />
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60" />
                                     </div>
@@ -344,9 +344,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                                     src={dest.mobileImage || dest.heroImage || '/images/placeholder.svg'}
                                     alt={dest.name}
                                     fill
-                                    quality={80}
+                                    quality={75}
                                     priority={index === 0}
-                                    className="object-cover object-center"
+                                    className="object-cover object-center transform-gpu"
                                     sizes="100vw"
                                 />
                                 {/* Enhanced Cinematic Darkened Overlay for maximum contrast */}

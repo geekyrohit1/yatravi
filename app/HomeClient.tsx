@@ -217,9 +217,18 @@ export const HomeClient: React.FC<HomeClientProps> = ({ initialPackages, initial
 
         if (!content) return null;
 
+        // Above the fold optimization: Disable FadeIn for the first 2 sections to prevent refresh jitter
+        if (index < 2) {
+            return (
+                <div key={section.key || `section-${index}`} className={`${index === 0 ? "pt-0" : ""} performance-section`}>
+                    {content}
+                </div>
+            );
+        }
+
         return (
             <div key={section.key || `section-${index}`} className={`${index === 0 ? "pt-0" : ""} performance-section`}>
-                <FadeIn delay={Math.min(index * 10, 50)}>
+                <FadeIn delay={Math.min(index * 20, 100)}>
                     {content}
                 </FadeIn>
             </div>
@@ -288,7 +297,9 @@ export const HomeClient: React.FC<HomeClientProps> = ({ initialPackages, initial
                             />
                         </FadeIn>
                         
-                        <PartnersMarquee />
+                        {!renderedDynamicKeys.has('partnersmarquee') && (
+                            <PartnersMarquee />
+                        )}
 
                         {!renderedDynamicKeys.has('faq') && (
                             <FadeIn delay={100}>
@@ -302,7 +313,9 @@ export const HomeClient: React.FC<HomeClientProps> = ({ initialPackages, initial
                             </FadeIn>
                         )}
                         
-                        <WhyChooseUs />
+                        {!renderedDynamicKeys.has('whychooseus') && (
+                            <WhyChooseUs />
+                        )}
                     </div>
                 </div>
             </div>

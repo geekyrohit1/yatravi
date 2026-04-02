@@ -109,10 +109,10 @@ export const TrendingCollections: React.FC<TrendingCollectionsProps> = ({ data }
                                 <div className="absolute bottom-6 left-6 text-white text-left">
                                     {card.subtitle && <p className="text-sm font-medium text-brand-light mb-1">{card.subtitle}</p>}
                                     <h3 className={`font-semibold ${index === 0 ? 'text-xl md:text-2xl' : 'text-base md:text-lg'}`}>{card.title}</h3>
-                                    {index === 0 && <div className="h-1 w-12 bg-brand mt-3 rounded-full group-hover:w-20 transition-all duration-300" />}
+                                    {index === 0 && <div className="h-1 w-12 bg-brand mt-3 rounded-full transition-all duration-300" />}
                                 </div>
                                 {index === 3 && (
-                                    <div className="absolute bottom-6 right-6 w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:bg-brand transition-colors">
+                                    <div className="absolute bottom-6 right-6 w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center transition-colors">
                                         <ArrowRight className="text-white w-5 h-5" />
                                     </div>
                                 )}

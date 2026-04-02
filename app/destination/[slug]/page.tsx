@@ -75,14 +75,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
         openGraph: {
             title: dest.seo?.ogTitle || dest.seo?.title || `${dest.name} Tour Packages`,
             description: dest.seo?.ogDescription || dest.seo?.description || dest.description,
-            images: [dest.seo?.ogImage || dest.heroImage || ''],
+            images: [dest.seo?.ogImage || dest.heroImage || '/og-image.png'],
             type: 'website',
         },
         twitter: {
             card: 'summary_large_image',
             title: dest.seo?.twitterTitle || dest.seo?.title || `${dest.name} Tour Packages`,
             description: dest.seo?.twitterDescription || dest.seo?.description || dest.description,
-            images: [dest.seo?.twitterImage || dest.seo?.ogImage || dest.heroImage || ''],
+            images: [dest.seo?.twitterImage || dest.seo?.ogImage || dest.heroImage || '/og-image.png'],
         },
         robots: {
             index: dest.seo?.robots?.includes('index'),

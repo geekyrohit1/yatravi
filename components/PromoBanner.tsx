@@ -33,10 +33,10 @@ export const PromoBanner: React.FC = () => {
 
                 <button
                     onClick={() => router.push('/listing')}
-                    className="group bg-white text-gray-800 hover:bg-brand hover:text-white px-8 py-4 rounded-full font-medium text-lg transition-all duration-300 shadow-xl hover:shadow-2xl flex items-center gap-2 mx-auto animate-fade-in-up delay-300"
+                    className="bg-white text-gray-800 px-8 py-4 rounded-full font-medium text-lg transition-all duration-300 shadow-xl flex items-center gap-2 mx-auto animate-fade-in-up delay-300"
                 >
                     Plan My Winter Trip
-                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight className="w-5 h-5 transition-transform" />
                 </button>
             </div>
         </section>

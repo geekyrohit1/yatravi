@@ -116,13 +116,13 @@ export const PromoSlider: React.FC<PromoSliderProps> = ({ data }) => {
                         <>
                             <button
                                 onClick={(e) => { e.preventDefault(); prev(); }}
-                                className="absolute left-4 md:left-6 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-brand text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all hover:scale-110 active:scale-95 shadow-xl z-20"
+                                className="absolute left-4 md:left-6 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-brand text-white flex items-center justify-center opacity-70 transition-all shadow-xl z-20"
                             >
                                 <ChevronLeft className="w-6 h-6" />
                             </button>
                             <button
                                 onClick={(e) => { e.preventDefault(); next(); }}
-                                className="absolute right-4 md:right-6 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-brand text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all hover:scale-110 active:scale-95 shadow-xl z-20"
+                                className="absolute right-4 md:right-6 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-brand text-white flex items-center justify-center opacity-70 transition-all shadow-xl z-20"
                             >
                                 <ChevronRight className="w-6 h-6" />
                             </button>
@@ -133,7 +133,7 @@ export const PromoSlider: React.FC<PromoSliderProps> = ({ data }) => {
                                     <button
                                         key={idx}
                                         onClick={() => setCurrentIndex(idx)}
-                                        className={`h-1 transition-all duration-300 rounded-full ${currentIndex === idx ? 'w-5 bg-white' : 'w-1 bg-white/40 hover:bg-white/60'
+                                        className={`h-1 transition-all duration-300 rounded-full ${currentIndex === idx ? 'w-5 bg-white' : 'w-1 bg-white/40'
                                             }`}
                                     />
                                 ))}

@@ -32,22 +32,6 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
   const [placeholder, setPlaceholder] = useState('');
   const router = useRouter();
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  // Handle body scroll locking when mobile menu is open
-  useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [isMobileMenuOpen]);
-
   // Search Implementation
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState<{ packages: any[], destinations: any[] } | null>(null);
@@ -92,61 +76,50 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
   }, [headerPlaceholder, headerIsDeleting, headerPlaceholderIndex]);
 
   useEffect(() => {
-    const handleToggle = (e: any) => setHasStickyMobileBar(!!e.detail);
-    const handleHideIcons = (e: any) => setIsExternalFormOpen(!!e.detail);
+    setMounted(true);
     
-    window.addEventListener('toggleFloatingButtons', handleToggle);
-    window.addEventListener('hideFloatingIcons', handleHideIcons);
-    
-    return () => {
-      window.removeEventListener('toggleFloatingButtons', handleToggle);
-      window.removeEventListener('hideFloatingIcons', handleHideIcons);
-    };
-  }, []);
-
-  // Fetch trending packages for mobile search
-  useEffect(() => {
-    const fetchTrending = async () => {
+    // 1. Fetch Global Search Data (Consolidated)
+    const fetchGlobalSearchData = async () => {
       try {
-        const res = await fetch(`${API_BASE_URL}/api/packages`);
-        const data = await res.json();
-        const trending = data
-          .filter((p: any) => p.isTrending || p.isBestSeller)
-          .slice(0, 6);
-        setTrendingPackages(trending);
-      } catch (err) {
-        console.error("Failed to fetch trending packages", err);
-      }
-    };
-    fetchTrending();
-  }, []);
+        const [pkgRes, configRes] = await Promise.all([
+          fetch(`${API_BASE_URL}/api/packages`),
+          fetch(`${API_BASE_URL}/api/homepage-config`)
+        ]);
 
-  // Fetch hero destinations for mobile search "Trending now"
-  useEffect(() => {
-    const fetchHeroData = async () => {
-      try {
-        const res = await fetch(`${API_BASE_URL}/api/homepage-config`);
-        const data = await res.json();
-        if (data && data.heroSlider) {
-          const slides = data.heroSlider
-            .filter((s: any) => s.enabled !== false)
-            .sort((a: any, b: any) => a.order - b.order)
-            .map((s: any) => ({
+        if (pkgRes.ok) {
+          const pkgData = await pkgRes.json();
+          if (Array.isArray(pkgData)) {
+            const trending = pkgData.filter((p: any) => p.isTrending || p.isBestSeller).slice(0, 6);
+            setTrendingPackages(trending.length > 0 ? trending : pkgData.slice(0, 6));
+          }
+        }
+
+        if (configRes.ok) {
+          const configData = await configRes.json();
+          if (configData && configData.heroSlider) {
+            const slides = configData.heroSlider
+              .filter((s: any) => s.enabled !== false)
+              .sort((a: any, b: any) => a.order - b.order)
+              .map((s: any) => ({
+                name: s.customTitle || s.name || 'Destination',
+                slug: s.slug || 'explore',
+                heroImage: s.customImage || s.heroImage || '/images/placeholder.svg'
+              }));
+            setHeroDestinations(slides.length > 0 ? slides : configData.heroSlider.slice(0, 5).map((s: any) => ({
               name: s.customTitle || s.name || 'Destination',
               slug: s.slug || 'explore',
               heroImage: s.customImage || s.heroImage || '/images/placeholder.svg'
-            }));
-          setHeroDestinations(slides);
+            })));
+          }
         }
       } catch (err) {
-        console.error("Failed to fetch hero data for search", err);
+        console.error("Failed to fetch search data", err);
       }
     };
-    fetchHeroData();
-  }, []);
 
-  // Load recent searches from localStorage
-  useEffect(() => {
+    fetchGlobalSearchData();
+
+    // 2. Load recent searches
     const saved = localStorage.getItem('recentSearches');
     if (saved) {
       try {
@@ -155,14 +128,34 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
         console.error("Failed to parse recent searches", e);
       }
     }
+
+    // 3. Register Global Event Listeners
+    const handleToggle = (e: any) => setHasStickyMobileBar(!!e.detail);
+    const handleHideIcons = (e: any) => setIsExternalFormOpen(!!e.detail);
+    const handleOpenSearch = () => setShowSearchModal(true);
+
+    window.addEventListener('toggleFloatingButtons', handleToggle);
+    window.addEventListener('hideFloatingIcons', handleHideIcons);
+    window.addEventListener('open-mobile-search', handleOpenSearch);
+    
+    return () => {
+      window.removeEventListener('toggleFloatingButtons', handleToggle);
+      window.removeEventListener('hideFloatingIcons', handleHideIcons);
+      window.removeEventListener('open-mobile-search', handleOpenSearch);
+    };
   }, []);
 
-  // Listen for global mobile search trigger
+  // Handle body scroll locking when mobile menu is open
   useEffect(() => {
-    const handleOpenSearch = () => setShowSearchModal(true);
-    window.addEventListener('open-mobile-search', handleOpenSearch);
-    return () => window.removeEventListener('open-mobile-search', handleOpenSearch);
-  }, []);
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileMenuOpen]);
 
   const saveRecentSearch = (query: string) => {
     if (!query.trim() || query.length < 2) return;
@@ -268,21 +261,13 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
     return () => clearTimeout(timeoutId);
   }, []);
 
-  // Hydration Stability
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  // Soft Hydration: Only block search interaction, not the whole UI
-  // This prevents the "Flash of Loader" during page transitions
-  const hydrationClass = mounted ? "opacity-100 transition-opacity duration-300" : "opacity-0";
 
   if (isAdmin) {
     return <div className="min-h-screen bg-gray-950 text-white">{children}</div>;
   }
 
   return (
-    <div className={`min-h-screen flex flex-col font-sans bg-white ${hydrationClass}`}>
+    <div className="min-h-screen flex flex-col font-sans bg-white opacity-100">
       {/* Reserving space for SaleStrip to prevent hydration jump */}
       <div className="relative z-[100] bg-white overflow-hidden h-8 md:h-10">
         <SaleStrip />

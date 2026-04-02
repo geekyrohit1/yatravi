@@ -51,14 +51,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
         openGraph: {
             title: pkg.seo?.ogTitle || pkg.seo?.title || pkg.title,
             description: pkg.seo?.ogDescription || pkg.seo?.description || pkg.overview?.substring(0, 160),
-            images: [pkg.seo?.ogImage || pkg.image || ''],
+            images: [pkg.seo?.ogImage || pkg.image || '/og-image.png'],
             type: 'website',
         },
         twitter: {
             card: 'summary_large_image',
             title: pkg.seo?.twitterTitle || pkg.seo?.title || pkg.title,
             description: pkg.seo?.twitterDescription || pkg.seo?.description || pkg.overview?.substring(0, 160),
-            images: [pkg.seo?.twitterImage || pkg.seo?.ogImage || pkg.image || ''],
+            images: [pkg.seo?.twitterImage || pkg.seo?.ogImage || pkg.image || '/og-image.png'],
         },
         robots: {
             index: pkg.seo?.robots?.includes('index'),

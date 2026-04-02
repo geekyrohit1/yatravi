@@ -79,7 +79,7 @@ export const HoneymoonSpecials: React.FC<HoneymoonSpecialsProps> = ({ packages, 
                     {displayPackages.map((pkg) => (
                         <div 
                             key={pkg._id || pkg.id} 
-                            className="w-[calc((100vw-40px)/1.92)] md:w-[calc((100%-48px)/2.2)] lg:w-[calc((100%-72px)/4)] flex-shrink-0 snap-start rounded-lg overflow-hidden"
+                            className="w-[calc((100vw-40px)/1.3)] md:w-[calc((100%-48px)/2.2)] lg:w-[calc((100%-72px)/4)] flex-shrink-0 snap-start rounded-lg overflow-hidden"
                         >
                             <PackageCard pkg={pkg} />
                         </div>

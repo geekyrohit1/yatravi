@@ -80,10 +80,10 @@ export const PackageSlider: React.FC<PackageSliderProps> = ({ title, subtitle, p
         <div className="relative">
           <div
             ref={scrollRef}
-            className="flex space-x-3 md:space-x-6 overflow-x-auto pb-2 no-scrollbar px-1 snap-x snap-mandatory md:snap-none"
+            className="flex space-x-3 md:space-x-6 overflow-x-auto pb-2 no-scrollbar px-1 snap-x snap-mandatory md:snap-none transform-gpu"
           >
             {packages.map((pkg, index) => (
-              <div key={pkg._id || pkg.id || index} className="w-[calc((100vw-40px)/1.92)] md:w-[calc((100%-48px)/2.2)] lg:w-[calc((100%-72px)/4)] flex-shrink-0 snap-start rounded-lg overflow-hidden">
+              <div key={pkg._id || pkg.id || index} className="w-[calc((100vw-40px)/1.3)] md:w-[calc((100%-48px)/2.2)] lg:w-[calc((100%-72px)/4)] flex-shrink-0 snap-start rounded-lg overflow-hidden">
                 <PackageCard pkg={pkg} />
               </div>
             ))}

@@ -51,31 +51,37 @@ export const MobileSearchModal: React.FC<MobileSearchModalProps> = ({
       <div className="absolute inset-0 md:inset-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:w-[90vw] md:max-w-3xl md:h-[85vh] md:rounded-3xl bg-white flex flex-col animate-in slide-in-from-bottom md:zoom-in-95 duration-500 overflow-hidden font-sans md:shadow-2xl">
         {/* Header with Depth */}
         <div className="px-4 pt-6 pb-6 border-b border-gray-100 flex flex-col gap-6 bg-white sticky top-0 z-20 shadow-sm">
-          <div className="flex items-center gap-4">
-            <button onClick={() => setShowSearchModal(false)} className="p-2 -ml-2 rounded-xl bg-gray-50/50 border border-gray-100 shadow-sm active:scale-90 transition-all">
-              <ArrowRight className="w-6 h-6 text-gray-900 rotate-180" />
-            </button>
+          <div className="flex items-center gap-2">
             <div className="flex-1 relative group">
-              <div className="absolute inset-0 bg-gray-50/50 rounded-xl border border-gray-100 shadow-inner group-focus-within:border-brand/20 transition-all duration-300" />
+              <div className="absolute inset-0 bg-gray-50/80 rounded-xl transition-all duration-300" />
+              <div className="absolute left-4 top-1/2 -translate-y-1/2 z-10">
+                <Search className="w-5 h-5 text-gray-400" />
+              </div>
               <input
                 autoFocus
                 type="text"
                 value={searchQuery}
                 onChange={handleSearchChange}
-                placeholder={settings?.heroSearchPlaceholder || "Where to next?"}
-                className="relative w-full px-5 py-3 bg-transparent border-0 focus:ring-0 text-[18px] font-semibold text-gray-900 placeholder-gray-500 font-sans"
+                placeholder={settings?.heroSearchPlaceholder || "Search destinations..."}
+                className="relative w-full pl-12 pr-10 py-3 bg-transparent border-0 focus:ring-0 text-[16px] font-semibold text-gray-900 placeholder-gray-400 font-sans"
               />
               {isSearching && (
                 <div className="absolute right-4 top-1/2 -translate-y-1/2 z-10">
-                  <Loader2 className="w-5 h-5 animate-spin text-brand" />
+                  <Loader2 className="w-4 h-4 animate-spin text-brand" />
                 </div>
               )}
               {searchQuery && !isSearching && (
-                <button onClick={() => { setSearchQuery(''); }} className="absolute right-4 top-1/2 -translate-y-1/2 p-1.5 rounded-full bg-gray-200/50 hover:bg-gray-200 z-10 transition-all">
-                  <X className="w-3 h-3 text-gray-600" />
+                <button onClick={() => { setSearchQuery(''); }} className="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 rounded-full bg-gray-200/50 hover:bg-gray-200 z-10 transition-all">
+                  <X className="w-3.5 h-3.5 text-gray-600" />
                 </button>
               )}
             </div>
+            <button 
+              onClick={() => setShowSearchModal(false)} 
+              className="p-2 -mr-2 rounded-xl text-gray-500 hover:text-gray-900 transition-colors"
+            >
+              <X className="w-7 h-7" />
+            </button>
           </div>
 
           {/* Advanced Filters with Depth */}
@@ -190,11 +196,17 @@ export const MobileSearchModal: React.FC<MobileSearchModalProps> = ({
                   {trendingPackages.length > 0 ? (
                     trendingPackages.map((pkg) => (
                       <button
-                        key={pkg._id}
-                        onClick={() => { router.push(`/packages/${pkg.slug}`); setShowSearchModal(false); }}
-                        className="flex-shrink-0 w-64 group text-left"
+                        key={pkg._id || pkg.id}
+                        onClick={() => { 
+                          const target = pkg.slug || pkg.id || pkg._id;
+                          if (target) {
+                            router.push(`/packages/${target}`); 
+                            setShowSearchModal(false); 
+                          }
+                        }}
+                        className="flex-shrink-0 w-64 group text-left bg-white rounded-xl border border-gray-200 p-2 pb-4 shadow-sm active:scale-[0.98] transition-all duration-300 hover:border-brand/30 font-sans"
                       >
-                        <div className="relative w-64 aspect-[4/3] rounded-2xl overflow-hidden mb-3 shadow-[0_12px_45px_rgba(0,0,0,0.08)] border-2 border-gray-100 group-active:scale-[0.98] transition-all duration-300 hover:border-brand/30">
+                        <div className="relative w-full aspect-[4/3] rounded-lg overflow-hidden mb-3">
                           <img
                             src={pkg.image || '/images/placeholder.svg'}
                             alt={pkg.title}
@@ -230,7 +242,7 @@ export const MobileSearchModal: React.FC<MobileSearchModalProps> = ({
                         <div className="flex items-center justify-between px-2">
                           <div className="flex flex-col">
                             <span className="text-[11px] text-gray-900 font-bold tracking-tight mb-1 font-sans">{pkg.duration || 5} Days</span>
-                            <span className="text-brand font-bold text-[19px] tracking-tight font-sans leading-none">₹{pkg.price?.toLocaleString()}</span>
+                            <span className="text-brand font-bold text-[19px] tracking-tight font-sans leading-none">₹{Number(pkg.price || 0).toLocaleString()}</span>
                           </div>
                           <div className="w-9 h-9 rounded-xl bg-gray-50 flex items-center justify-center text-gray-900 group-hover:bg-brand group-hover:text-white transition-all border border-gray-200 shadow-sm">
                             <ArrowRight className="w-4 h-4" />
@@ -261,10 +273,16 @@ export const MobileSearchModal: React.FC<MobileSearchModalProps> = ({
                   <div className="space-y-4">
                     <h3 className="text-[11px] font-medium text-gray-600 tracking-wider font-sans">Destinations ({searchResults.destinations.length})</h3>
                     <div className="grid grid-cols-1 gap-3">
-                      {searchResults.destinations.map((dest: any) => (
-                        <button
-                          key={dest._id}
-                          onClick={() => { router.push(`/destination/${dest.slug}`); setShowSearchModal(false); }}
+                        {searchResults.destinations.map((dest: any, index: number) => (
+                          <button
+                            key={dest._id || dest.id || `dest-${index}`}
+                            onClick={() => { 
+                              const target = dest.slug || dest.id || dest._id;
+                              if (target) {
+                                router.push(`/destination/${target}`); 
+                                setShowSearchModal(false); 
+                              }
+                            }}
                           className="w-full flex items-center gap-4 p-3 bg-white hover:bg-brand/[0.02] rounded-xl border border-gray-100 shadow-[0_8px_20px_rgba(0,0,0,0.04)] hover:border-brand/20 transition-all text-left group"
                         >
                           <div className="w-20 h-20 rounded-xl overflow-hidden flex-shrink-0 bg-gray-100 relative shadow-md group-hover:shadow-lg transition-all duration-300">
@@ -293,10 +311,16 @@ export const MobileSearchModal: React.FC<MobileSearchModalProps> = ({
                   <div className="space-y-4">
                     <h3 className="text-[11px] font-medium text-gray-600 tracking-wider font-sans">Packages found ({searchResults.packages.length})</h3>
                     <div className="grid grid-cols-2 gap-3">
-                      {searchResults.packages.map((pkg: any) => (
+                      {searchResults.packages.map((pkg: any, index: number) => (
                         <button
-                          key={pkg._id}
-                          onClick={() => { router.push(`/packages/${pkg.slug}`); setShowSearchModal(false); }}
+                          key={pkg._id || pkg.id || `pkg-${index}`}
+                          onClick={() => { 
+                            const target = pkg.slug || pkg.id || pkg._id;
+                            if (target) {
+                              router.push(`/packages/${target}`); 
+                              setShowSearchModal(false); 
+                            }
+                          }}
                           className="w-full flex flex-col bg-white rounded-2xl border-2 border-gray-200 shadow-[0_10px_30px_rgba(0,0,0,0.06)] hover:border-brand/40 transition-all text-left group overflow-hidden h-full"
                         >
                           <div className="relative w-full aspect-square overflow-hidden shrink-0">
@@ -322,7 +346,7 @@ export const MobileSearchModal: React.FC<MobileSearchModalProps> = ({
                             <p className="font-semibold text-gray-800 text-[13px] line-clamp-2 mb-2 tracking-tight leading-tight font-sans h-8 shrink-0">{pkg.title}</p>
                             <div className="flex flex-col gap-2 mt-auto">
                               <div className="flex items-center justify-between">
-                                <span className="text-brand text-[16px] font-bold leading-none font-sans tracking-tight">₹{pkg.price?.toLocaleString()}</span>
+                                <span className="text-brand text-[16px] font-bold leading-none font-sans tracking-tight">₹{Number(pkg.price || 0).toLocaleString()}</span>
                                 <div className="px-2 py-1 rounded-md bg-gray-50 border border-gray-100">
                                   <span className="text-[10px] text-gray-900 font-bold tracking-wide font-sans">{pkg.duration || 6} Days</span>
                                 </div>

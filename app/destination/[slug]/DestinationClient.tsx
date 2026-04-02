@@ -227,7 +227,7 @@ export default function DestinationClient({ initialDestination, initialPackages 
                                     </div>
                                 ) : packages.length > 0 ? (
                                     packages.map((pkg: Package) => (
-                                        <div key={pkg._id || pkg.id} className="w-[calc((100vw-40px)/1.92)] lg:w-full shrink-0 snap-start transition-all duration-300">
+                                        <div key={pkg._id || pkg.id} className="w-[calc((100vw-40px)/1.3)] lg:w-full shrink-0 snap-start transition-all duration-300">
                                             <PackageCard pkg={pkg} variant={(!mounted || isMobile) ? "vertical" : "horizontal"} />
                                         </div>
                                     ))
@@ -551,7 +551,7 @@ export default function DestinationClient({ initialDestination, initialPackages 
             {/* Refined Mobile Form - Bottom Drawer (Integrated Design) */}
             {showMobileForm && (
                 <div className="lg:hidden fixed inset-0 z-[100] flex items-end justify-center bg-black/60 backdrop-blur-sm animate-in fade-in duration-300 pointer-events-auto">
-                    <div className="relative w-full max-h-[92vh] animate-in slide-in-from-bottom-full duration-500">
+                    <div className="relative w-full max-h-[85vh] animate-in slide-in-from-bottom-full duration-500">
                         <div className="rounded-t-xl overflow-hidden shadow-2xl-up">
                              <InquiryWidget 
                                 title={`Planning a ${destination.name} Trip?`} 

@@ -61,7 +61,7 @@ export const OfferSlider: React.FC<OfferSliderProps> = ({ data }) => {
                         <div
                             key={index}
                             onClick={() => handleCardClick(card)}
-                            className="relative min-w-[280px] md:min-w-[450px] aspect-[16/9] md:aspect-[21/9] rounded-xl overflow-hidden cursor-pointer group snap-start shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-1"
+                            className="relative min-w-[280px] md:min-w-[450px] aspect-[16/9] md:aspect-[21/9] rounded-xl overflow-hidden cursor-pointer snap-start shadow-sm transition-all duration-500"
                         >
                             <div className="absolute inset-0">
                                 <Image
@@ -85,7 +85,7 @@ export const OfferSlider: React.FC<OfferSliderProps> = ({ data }) => {
                                     />
                                 </div>
                             )}
-                            <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                            <div className="absolute inset-0 bg-black/5 transition-opacity" />
                         </div>
                     ))}
                 </div>

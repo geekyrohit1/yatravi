@@ -685,17 +685,17 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
             {/* Mobile Form Popup Overlay */}
             {showMobileForm && (
                 <div className="lg:hidden fixed inset-0 z-50 flex flex-col justify-end bg-black/60 backdrop-blur-sm animate-in fade-in duration-300">
-                    <div className="bg-white rounded-t-3xl shadow-xl w-full max-h-[90vh] flex flex-col animate-in slide-in-from-bottom-full duration-500 relative">
+                    <div className="bg-white rounded-t-3xl shadow-xl w-full max-h-[85vh] flex flex-col animate-in slide-in-from-bottom-full duration-500 relative">
                         <button
                             onClick={() => setShowMobileForm(false)}
                             className="absolute top-4 right-4 z-50 p-2 bg-gray-50 rounded-xl text-gray-500 hover:text-gray-900 transition-colors border border-gray-200"
                         >
                             <X className="w-5 h-5" />
                         </button>
-                        <div className="overflow-y-auto p-6 pb-10 flex-1 mt-4">
-                             <div className="mb-6">
+                        <div className="overflow-y-auto px-6 py-2 pb-6 flex-1 mt-2">
+                             <div className="mb-2">
                                 <h3 className="text-xl font-semibold text-gray-900 font-heading tracking-tight">Get a Free Quote</h3>
-                                <p className="text-sm text-gray-500 mt-1 font-medium">For {packageData.title}</p>
+                                <p className="text-sm text-gray-500 mt-0.5 font-medium">For {packageData.title}</p>
                             </div>
                             
                             {enquirySuccess ? (
@@ -709,30 +709,30 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
                                     </p>
                                 </div>
                             ) : (
-                                <form onSubmit={handleInquirySubmit} className="space-y-4">
-                                    <div className="space-y-1.5">
+                                <form onSubmit={handleInquirySubmit} className="space-y-2.5">
+                                    <div className="space-y-1">
                                         <label className="text-[10px] font-semibold text-gray-400 uppercase tracking-widest ml-1">Full Name</label>
                                         <input
                                             type="text"
                                             placeholder="John Doe"
-                                            className="w-full border border-gray-100 bg-gray-50 rounded-xl px-4 py-3.5 text-sm text-gray-900 font-medium focus:outline-none focus:border-[#CD1C18] focus:bg-white transition-all shadow-sm"
+                                            className="w-full border border-gray-100 bg-gray-50 rounded-xl px-4 py-2.5 text-sm text-gray-900 font-medium focus:outline-none focus:border-[#CD1C18] focus:bg-white transition-all shadow-sm"
                                             value={enquiryData.name}
                                             onChange={(e) => setEnquiryData({ ...enquiryData, name: e.target.value })}
                                             required
                                         />
                                     </div>
-                                    <div className="space-y-1.5">
+                                    <div className="space-y-1">
                                         <label className="text-[10px] font-semibold text-gray-400 uppercase tracking-widest ml-1">Email Address</label>
                                         <input
                                             type="email"
                                             placeholder="john@example.com"
-                                            className="w-full border border-gray-100 bg-gray-50 rounded-xl px-4 py-3.5 text-sm text-gray-900 font-medium focus:outline-none focus:border-[#CD1C18] focus:bg-white transition-all shadow-sm"
+                                            className="w-full border border-gray-100 bg-gray-50 rounded-xl px-4 py-2.5 text-sm text-gray-900 font-medium focus:outline-none focus:border-[#CD1C18] focus:bg-white transition-all shadow-sm"
                                             value={enquiryData.email}
                                             onChange={(e) => setEnquiryData({ ...enquiryData, email: e.target.value })}
                                             required
                                         />
                                     </div>
-                                    <div className="space-y-1.5">
+                                    <div className="space-y-1">
                                         <label className="text-[10px] font-semibold text-gray-400 uppercase tracking-widest ml-1">Mobile Number</label>
                                         <div className="flex border border-gray-100 bg-gray-50 rounded-xl overflow-hidden focus-within:border-[#CD1C18] focus-within:bg-white transition-all shadow-sm">
                                             <div className="bg-gray-100 px-3 py-3.5 border-r border-gray-100 text-gray-400 text-xs font-bold font-sans">
@@ -741,19 +741,19 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
                                             <input
                                                 type="tel"
                                                 placeholder="Mobile Number*"
-                                                className="w-full bg-transparent px-3 py-3.5 text-sm text-gray-900 font-medium focus:outline-none"
+                                                className="w-full bg-transparent px-3 py-2.5 text-sm text-gray-900 font-medium focus:outline-none"
                                                 value={enquiryData.phone}
                                                 onChange={(e) => setEnquiryData({ ...enquiryData, phone: e.target.value })}
                                                 required
                                             />
                                         </div>
                                     </div>
-                                    <div className="space-y-1.5">
+                                    <div className="space-y-1">
                                         <label className="text-[10px] font-semibold text-gray-400 uppercase tracking-widest ml-1">Message (Optional)</label>
                                         <textarea
-                                            rows={3}
+                                            rows={2}
                                             placeholder="Additional requirements..."
-                                            className="w-full border border-gray-100 bg-gray-50 rounded-xl px-4 py-3.5 text-sm text-gray-900 font-medium focus:outline-none focus:border-[#CD1C18] focus:bg-white resize-none transition-all shadow-sm"
+                                            className="w-full border border-gray-100 bg-gray-50 rounded-xl px-4 py-2.5 text-sm text-gray-900 font-medium focus:outline-none focus:border-[#CD1C18] focus:bg-white resize-none transition-all shadow-sm"
                                             value={enquiryData.message}
                                             onChange={(e) => setEnquiryData({ ...enquiryData, message: e.target.value })}
                                         />
@@ -761,7 +761,7 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
                                     <button
                                         type="submit"
                                         disabled={enquirySubmitting}
-                                        className="w-full bg-[#CD1C18] text-white py-4 rounded-xl font-semibold tracking-wide text-[15px] hover:bg-[#9B1313] transition-all shadow-lg shadow-red-500/10 active:scale-[0.98] mt-4 flex items-center justify-center"
+                                        className="w-full bg-[#CD1C18] text-white py-3 rounded-xl font-semibold tracking-wide text-[14px] hover:bg-[#9B1313] transition-all shadow-lg shadow-red-500/10 active:scale-[0.98] mt-3 flex items-center justify-center"
                                     >
                                         {enquirySubmitting ? 'Sending Request...' : 'Get Free Quote Now'}
                                     </button>

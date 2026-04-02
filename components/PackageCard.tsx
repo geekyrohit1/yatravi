@@ -18,7 +18,7 @@ const ModalPortal = ({ children, mounted }: { children: React.ReactNode, mounted
   return createPortal(children, document.body);
 };
 
-export const PackageCard: React.FC<PackageCardProps> = ({ pkg, variant = 'vertical' }) => {
+const PackageCardComponent: React.FC<PackageCardProps> = ({ pkg, variant = 'vertical' }) => {
   const router = useRouter();
   const [currentImage] = useState(0);
   const [isCallbackOpen, setIsCallbackOpen] = useState(false);
@@ -175,7 +175,8 @@ export const PackageCard: React.FC<PackageCardProps> = ({ pkg, variant = 'vertic
             alt={pkg.title}
             fill
             className="object-cover"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 260px, 300px"
+            sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1200px) 300px, 400px"
+            quality={75}
           />
 
           {/* Overlay Badges removed from image overlay as requested */}
@@ -297,8 +298,9 @@ export const PackageCard: React.FC<PackageCardProps> = ({ pkg, variant = 'vertic
             src={safeImages[currentImage]}
             alt={pkg.title}
             fill
-            className="object-cover"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 300px, 400px"
+            className="object-cover transform-gpu"
+            sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 300px"
+            quality={75}
           />
 
 
@@ -328,11 +330,11 @@ export const PackageCard: React.FC<PackageCardProps> = ({ pkg, variant = 'vertic
           <div className="absolute bottom-1.5 left-1.5 right-1.5 flex justify-between items-end z-20">
             <div className="bg-white/95 backdrop-blur-md px-1.5 py-1 rounded-md shadow-sm flex items-center gap-1 border border-white/40 leading-none">
               <Clock className="w-3 h-3 text-gray-900" />
-              <span className="text-[9px] md:text-[11px] text-gray-900 font-bold tracking-tight">
+              <span className="text-[11.5px] md:text-[11px] text-gray-900 font-bold tracking-tight">
                 {pkg.duration}D / {pkg.duration - 1}N
               </span>
             </div>
-            <div className="flex items-center gap-1 bg-white/95 backdrop-blur-md px-1.5 py-1 rounded-md shadow-sm font-bold text-[9px] md:text-[11px] border border-white/40 leading-none">
+            <div className="flex items-center gap-1 bg-white/95 backdrop-blur-md px-1.5 py-1 rounded-md shadow-sm font-bold text-[11.5px] md:text-[11px] border border-white/40 leading-none">
               <Star className="w-3 h-3 fill-brand text-brand" />
               <span className="text-brand">{pkg.rating}</span>
             </div>
@@ -342,9 +344,9 @@ export const PackageCard: React.FC<PackageCardProps> = ({ pkg, variant = 'vertic
 
 
         {/* Content Section */}
-        <div className="p-1.5 md:p-2 lg:p-3.5 flex-1 flex flex-col">
-          <div className="mb-0.5">
-            <h3 className="text-[12.5px] lg:text-[16px] font-heading font-medium text-gray-900 leading-[1.2] tracking-tight group-hover:text-brand transition-colors truncate">
+        <div className="p-3.5 md:p-2 lg:p-3.5 flex-1 flex flex-col">
+          <div className="mb-1">
+            <h3 className="text-[16px] md:text-[12.5px] lg:text-[16px] font-heading font-medium text-gray-900 leading-[1.2] tracking-tight group-hover:text-brand transition-colors truncate">
               {pkg.title}
             </h3>
           </div>
@@ -370,13 +372,13 @@ export const PackageCard: React.FC<PackageCardProps> = ({ pkg, variant = 'vertic
             if (stays.length === 0) return null;
 
             return (
-              <div className="flex flex-wrap items-center gap-1 py-0.5 px-2 bg-[#fffaf0] border border-orange-100/20 rounded-sm mb-1.5 w-fit transform-gpu">
+              <div className="flex flex-wrap items-center gap-1.5 py-1 px-3 bg-[#fffaf0] border border-orange-100/20 rounded-sm mb-2 w-fit transform-gpu">
                 {stays.map((stay, idx) => (
                   <React.Fragment key={idx}>
                     <div className="flex items-center gap-0.5">
-                      <span className="text-[9px] font-bold text-gray-900">{stay?.nights}</span>
-                      <span className="text-[8px] font-extrabold text-[#fb5012] uppercase tracking-tighter">Stay</span>
-                      {stay?.location && <span className="text-[9.5px] text-gray-700 font-medium ml-0.5">{stay.location}</span>}
+                      <span className="text-[11px] md:text-[9px] font-bold text-gray-900">{stay?.nights}</span>
+                      <span className="text-[9px] md:text-[8px] font-extrabold text-[#fb5012] uppercase tracking-tighter">Stay</span>
+                      {stay?.location && <span className="text-[11px] md:text-[9.5px] text-gray-700 font-medium ml-0.5">{stay.location}</span>}
                     </div>
                     {idx < stays.length - 1 && <span className="text-gray-300 mx-0.5 text-[8px]">•</span>}
                   </React.Fragment>
@@ -387,30 +389,30 @@ export const PackageCard: React.FC<PackageCardProps> = ({ pkg, variant = 'vertic
 
 
           <div className="mt-auto">
-            <div className="flex items-center gap-1.5 mb-1">
-              <span className="text-[9px] text-gray-500 line-through font-medium tracking-tight">INR {originalPrice.toLocaleString()}</span>
-              <span className="bg-[#f0fdf4] text-[#0f766e] text-[7.5px] font-extrabold px-1.5 py-0.5 rounded-md border border-[#dcfce7]">
+            <div className="flex items-center gap-1.5 mb-1.5">
+              <span className="text-[10px] md:text-[9px] text-gray-500 line-through font-medium tracking-tight">INR {originalPrice.toLocaleString()}</span>
+              <span className="bg-[#f0fdf4] text-[#0f766e] text-[9px] md:text-[7.5px] font-extrabold px-1.5 py-0.5 rounded-md border border-[#dcfce7]">
                 SAVE INR {savedAmount.toLocaleString()}
               </span>
             </div>
-            <div className="flex items-baseline gap-1 mb-1.5 md:mb-3">
-              <h3 className="text-[14.5px] md:text-lg lg:text-xl font-bold text-gray-900 tracking-tight">INR {price.toLocaleString()}</h3>
-              <span className="text-[8.5px] lg:text-[10px] text-gray-400 font-medium whitespace-nowrap">/ person</span>
+            <div className="flex items-baseline gap-1 mb-2 md:mb-3">
+              <h3 className="text-[18.5px] md:text-[14.5px] lg:text-xl font-bold text-gray-900 tracking-tight">INR {price.toLocaleString()}</h3>
+              <span className="text-[10.5px] md:text-[8.5px] lg:text-[10px] text-gray-400 font-medium whitespace-nowrap">/ person</span>
             </div>
 
             <div className="flex gap-2.5">
               <button
                 onClick={(e) => { e.stopPropagation(); setIsCallbackOpen(true); }}
-                className="w-8 h-8 md:w-12 md:h-12 rounded-lg md:rounded-xl border-2 border-brand text-brand flex items-center justify-center hover:bg-brand hover:text-white transition-all shadow-sm shrink-0"
+                className="w-11 h-11 md:w-12 md:h-12 rounded-lg md:rounded-xl border-2 border-brand text-brand flex items-center justify-center hover:bg-brand hover:text-white transition-all shadow-sm shrink-0"
                 aria-label="Call for details"
               >
-                <Phone className="w-3 h-3 md:w-5 md:h-5" />
+                <Phone className="w-4 h-4 md:w-5 md:h-5" />
               </button>
               <button
                 onClick={() => router.push(`/packages/${pkg.slug || pkg.id}`)}
-                className="flex-1 bg-brand text-white font-semibold h-8 md:h-12 rounded-lg md:rounded-xl flex items-center justify-center gap-1 hover:shadow-lg hover:shadow-brand/20 transition-all text-[8px] md:text-[11px] uppercase tracking-wider px-2 md:px-8 whitespace-nowrap"
+                className="flex-1 bg-brand text-white font-semibold h-11 md:h-12 rounded-lg md:rounded-xl flex items-center justify-center gap-1 hover:shadow-lg hover:shadow-brand/20 transition-all text-[11px] md:text-[11px] uppercase tracking-wider px-2 md:px-8 whitespace-nowrap"
               >
-                View Details <ArrowRight className="w-2.5 h-2.5 md:w-4 md:h-4" />
+                View Details <ArrowRight className="w-3.5 h-3.5 md:w-4 md:h-4" />
               </button>
 
             </div>
@@ -424,3 +426,6 @@ export const PackageCard: React.FC<PackageCardProps> = ({ pkg, variant = 'vertic
     </>
   );
 };
+
+export const PackageCard = React.memo(PackageCardComponent);
+PackageCard.displayName = 'PackageCard';
