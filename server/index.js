@@ -17,6 +17,7 @@ const toolRoutes = require('./routes/tools');
 const settingsRoutes = require('./routes/settings');
 const searchRoutes = require('./routes/search');
 const homepageRoutes = require('./routes/homepage');
+const analyticsRoutes = require('./routes/analytics');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -102,6 +103,7 @@ app.use('/api/admin', toolRoutes);
 app.use('/api/dashboard', dashboardRoutes);
 app.use('/api/settings', settingsRoutes);
 app.use('/api/homepage', homepageRoutes);
+app.use('/api/analytics', analyticsRoutes);
 
 // API 404 Handler (Enforce JSON)
 app.use('/api', (req, res) => {

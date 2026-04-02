@@ -26,9 +26,13 @@ export const GlobalInquiryPopup = () => {
 
         if (!sessionDismissed) {
             const timer = setTimeout(() => {
-                setIsVisible(true);
-                trackEvent('lead_intent', { target: 'global_inquiry_popup_view' });
-            }, 7000); // Show after 7 seconds
+                // Ensure no other large overlays are present before showing
+                const isCookieBannerShowing = !!document.querySelector('.fixed.bottom-4.left-4');
+                if (!isCookieBannerShowing) {
+                    setIsVisible(true);
+                    trackEvent('lead_intent', { target: 'global_inquiry_popup_view' });
+                }
+            }, 8000); // Show after 8 seconds (spaced from possible initial noise)
 
             return () => clearTimeout(timer);
         }

@@ -35,6 +35,8 @@ export const SaleStrip: React.FC = () => {
 
     const pad = (n: number) => String(n).padStart(2, '0');
 
+    const cleanText = (settings.saleBannerText || 'Special Offer').replace(/^[^\s\w]+/, '').trim();
+
     return (
         <div
             style={{
@@ -44,25 +46,21 @@ export const SaleStrip: React.FC = () => {
             }}
             className="w-full h-8 md:h-10 flex items-center justify-center text-white z-[100] relative overflow-hidden shadow-sm border-b border-white/5 animate-gradient-xy"
         >
-            <div className="absolute inset-0 opacity-10 pointer-events-none">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_0%,_black_100%)] opacity-20"></div>
-            </div>
-
             <div className="max-w-7xl mx-auto w-full px-4 flex items-center justify-center relative z-10 gap-4 md:gap-8">
                 <div className="flex items-center gap-3">
                     {settings.saleBannerLink ? (
                         <Link href={settings.saleBannerLink} className="flex items-center hover:opacity-80 transition-all active:scale-95">
                             <div className="flex items-center gap-3 font-sans">
-                                <span className="font-bold tracking-[0.2em] text-[10px] md:text-[11px] uppercase">Holi Special</span>
-                                <span className="w-1.5 h-1.5 rounded-full bg-white/40"></span>
-                                <span className="font-light tracking-[0.1em] text-[10px] md:text-[11px] uppercase opacity-90">Up to 40% Off</span>
+                                <span className="font-medium tracking-[0.1em] text-[10px] md:text-[11px] uppercase">
+                                    {cleanText}
+                                </span>
                             </div>
                         </Link>
                     ) : (
                         <div className="flex items-center gap-3 font-sans">
-                            <span className="font-bold tracking-[0.2em] text-[10px] md:text-[11px] uppercase">Holi Special</span>
-                            <span className="w-1.5 h-1.5 rounded-full bg-white/40"></span>
-                            <span className="font-light tracking-[0.1em] text-[10px] md:text-[11px] uppercase opacity-90">Up to 40% Off</span>
+                            <span className="font-medium tracking-[0.1em] text-[10px] md:text-[11px] uppercase">
+                                {cleanText}
+                            </span>
                         </div>
                     )}
                 </div>

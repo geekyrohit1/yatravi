@@ -116,7 +116,8 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
 
     const fetchSettings = async () => {
         try {
-            const res = await fetch(`${API_BASE_URL}/api/settings`);
+            const timestamp = new Date().getTime();
+            const res = await fetch(`${API_BASE_URL}/api/settings?t=${timestamp}`, { cache: 'no-store' });
             const contentType = res.headers.get("content-type");
             if (res.ok && contentType && contentType.includes("application/json")) {
                 const data = await res.json();

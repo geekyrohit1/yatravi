@@ -2,13 +2,13 @@ import React from 'react';
 import { API_BASE_URL } from '../constants';
 import { HomeClient } from './HomeClient';
 
-// Enable ISR (Incremental Static Regeneration) for high-performance homepage
-export const revalidate = 3600; // Revalidate every hour
+// Enable Instant Revalidation (0 seconds) for truly real-time Admin updates
+export const revalidate = 0; 
 
 async function getHomepageData() {
     try {
         const timestamp = new Date().getTime();
-        const cacheTime = process.env.NODE_ENV === 'development' ? 0 : 3600;
+        const cacheTime = 0; 
         
         // Server-side fetch (no 'window' check needed here as it's a Server Component)
         const fetchPackages = fetch(`${API_BASE_URL}/api/packages?t=${timestamp}`, { next: { revalidate: cacheTime } }).then(res => res.json()).catch(err => {

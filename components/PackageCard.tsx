@@ -291,7 +291,7 @@ const PackageCardComponent: React.FC<PackageCardProps> = ({ pkg, variant = 'vert
       >
 
         {/* Image Section */}
-        <div className="relative aspect-[1.1/1] md:aspect-[1.15/1] overflow-hidden">
+        <div className="relative aspect-[1.1/1] sm:aspect-[1.15/1] overflow-hidden">
 
 
           <Image
@@ -395,9 +395,9 @@ const PackageCardComponent: React.FC<PackageCardProps> = ({ pkg, variant = 'vert
                 SAVE INR {savedAmount.toLocaleString()}
               </span>
             </div>
-            <div className="flex items-baseline gap-1 mb-2 md:mb-3">
-              <h3 className="text-[18.5px] md:text-[14.5px] lg:text-xl font-bold text-gray-900 tracking-tight">INR {price.toLocaleString()}</h3>
-              <span className="text-[10.5px] md:text-[8.5px] lg:text-[10px] text-gray-400 font-medium whitespace-nowrap">/ person</span>
+            <div className="flex items-baseline gap-1 mb-2.5 md:mb-3">
+              <h3 className="text-[21px] sm:text-[18.5px] md:text-[14.5px] lg:text-xl font-bold text-gray-900 tracking-tight">INR {price.toLocaleString()}</h3>
+              <span className="text-[11px] sm:text-[10.5px] md:text-[8.5px] lg:text-[10px] text-gray-400 font-medium whitespace-nowrap">/ person</span>
             </div>
 
             <div className="flex gap-2.5">
