@@ -40,25 +40,24 @@ export const SaleStrip: React.FC = () => {
     return (
         <div
             style={{
-                background: `linear-gradient(135deg, ${bgStart} 0%, ${bgEnd} 50%, ${bgStart} 100%)`,
-                backgroundSize: '200% auto',
-                fontFamily: 'var(--font-montserrat), sans-serif',
-            }}
-            className="w-full h-8 md:h-10 flex items-center justify-center text-white z-[100] relative overflow-hidden shadow-sm border-b border-white/5 animate-gradient-xy"
+                '--sale-bg-start': bgStart,
+                '--sale-bg-end': bgEnd,
+            } as React.CSSProperties}
+            className="w-full h-8 md:h-10 flex items-center justify-center text-white z-[100] relative overflow-hidden shadow-sm border-b border-white/5 animate-gradient-xy bg-[linear-gradient(135deg,var(--sale-bg-start)_0%,var(--sale-bg-end)_50%,var(--sale-bg-start)_100%)] bg-[length:200%_auto] font-sans"
         >
             <div className="max-w-7xl mx-auto w-full px-4 flex items-center justify-center relative z-10 gap-4 md:gap-8">
                 <div className="flex items-center gap-3 w-full justify-center">
                     {settings.saleBannerLink ? (
                         <Link href={settings.saleBannerLink} className="flex items-center hover:opacity-80 transition-all active:scale-95 max-w-full overflow-hidden">
                             <div className="flex items-center font-sans whitespace-nowrap">
-                                <span className="font-semibold tracking-[0.05em] uppercase text-[10px] md:text-[11px]" style={{ fontSize: 'clamp(8px, 2.5vw, 11px)' }}>
+                                <span className="font-semibold tracking-[0.05em] uppercase text-[10px] md:text-[11px]">
                                     {cleanText}
                                 </span>
                             </div>
                         </Link>
                     ) : (
                         <div className="flex items-center font-sans whitespace-nowrap max-w-full overflow-hidden">
-                            <span className="font-semibold tracking-[0.05em] uppercase text-[10px] md:text-[11px]" style={{ fontSize: 'clamp(8px, 2.5vw, 11px)' }}>
+                            <span className="font-semibold tracking-[0.05em] uppercase text-[10px] md:text-[11px]">
                                 {cleanText}
                             </span>
                         </div>

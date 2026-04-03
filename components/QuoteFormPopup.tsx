@@ -301,10 +301,7 @@ export const QuoteFormPopup: React.FC<QuoteFormPopupProps> = ({ isOpen, onClose 
                                 <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full translate-y-1/3 -translate-x-1/3" />
 
                                 {/* Dotted Pattern */}
-                                <div className="absolute inset-0 opacity-10" style={{
-                                    backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)',
-                                    backgroundSize: '24px 24px'
-                                }} />
+                                <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle,_white_1px,_transparent_1px)] bg-[length:24px_24px]" />
                             </div>
 
                             {/* Top Section - Title */}
@@ -387,8 +384,7 @@ export const QuoteFormPopup: React.FC<QuoteFormPopupProps> = ({ isOpen, onClose 
                                 <div className="absolute inset-0 pointer-events-none overflow-hidden select-none opacity-40">
                                     <div className="absolute -top-[20%] -right-[10%] w-[60%] h-[80%] bg-gradient-to-br from-brand/10 to-transparent blur-[60px] rounded-full animate-pulse" />
                                     <div className="absolute bottom-0 -left-[10%] w-[50%] h-[60%] bg-gradient-to-tr from-blue-500/5 to-transparent blur-[50px] rounded-full animate-pulse [animation-delay:2s]" />
-                                    <div className="absolute inset-0 opacity-[0.02]" 
-                                         style={{ backgroundImage: 'radial-gradient(#000 0.5px, transparent 0.5px)', backgroundSize: '16px 16px' }} />
+                                    <div className="absolute inset-0 opacity-[0.02] bg-[radial-gradient(#000_0.5px,_transparent_0.5px)] bg-[length:16px_16px]" />
                                 </div>
 
                                 <div className="relative z-10 flex flex-col items-center text-center">

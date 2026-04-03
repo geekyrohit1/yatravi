@@ -31,8 +31,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({ isOpen, onClose, onO
           <div className="absolute top-[20%] -left-[20%] w-[90%] h-[50%] bg-gradient-to-tr from-blue-500/5 to-transparent blur-[100px] rounded-full animate-pulse [animation-delay:2s]" />
 
           {/* Subtle Dots Pattern - Layered */}
-          <div className="absolute inset-0 opacity-[0.02]"
-            style={{ backgroundImage: 'radial-gradient(#000 0.5px, transparent 0.5px)', backgroundSize: '24px 24px' }} />
+          <div className="absolute inset-0 opacity-[0.02] bg-[radial-gradient(#000_0.5px,_transparent_0.5px)] bg-[length:24px_24px]" />
         </div>
 
         {/* Header Greetings - Glass Effect */}

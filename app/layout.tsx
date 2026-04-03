@@ -8,6 +8,7 @@ import { SettingsProvider } from '../context/SettingsContext';
 import { ThemeProvider } from '../context/ThemeContext';
 import { ConsentProvider } from '../context/ConsentContext';
 import { CookieBanner } from '../components/CookieBanner';
+import Script from 'next/script';
 
 const satisfy = Satisfy({
     subsets: ['latin'],
@@ -90,6 +91,9 @@ export const metadata: Metadata = {
         icon: '/favicon.svg',
     },
     metadataBase: new URL('https://yatravi.com'),
+    alternates: {
+        canonical: '/',
+    },
 };
 
 export default function RootLayout({
@@ -105,9 +109,10 @@ export default function RootLayout({
                 <link rel="dns-prefetch" href="https://yatravi.com" />
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-                
+
                 {/* JSON-LD Structured Data for Travel Agency */}
-                <script
+                <Script
+                    id="travel-agency-schema"
                     type="application/ld+json"
                     dangerouslySetInnerHTML={{
                         __html: JSON.stringify({

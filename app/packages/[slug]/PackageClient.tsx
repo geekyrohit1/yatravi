@@ -401,7 +401,7 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
                             ))}
                         </div>
                         <div className="flex justify-between items-start gap-4">
-                            <h1 className="text-[22px] md:text-2xl font-semibold text-gray-900 leading-tight tracking-tight pr-4">{packageData.title}</h1>
+                            <div className="text-[22px] md:text-2xl font-semibold text-gray-900 leading-tight tracking-tight pr-4">{packageData.title}</div>
 
                             {/* Rating (Compact - Top Right for Mobile) */}
                             <div className="flex items-center gap-1.5 bg-yellow-50/50 text-yellow-700 px-3 py-1.5 rounded-full border border-yellow-100 text-[10px] font-bold shrink-0 mt-1 shadow-sm">

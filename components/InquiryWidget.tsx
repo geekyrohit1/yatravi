@@ -147,10 +147,7 @@ export const InquiryWidget = ({ title, onClose, showPaxCount = false, roundedBot
                 <p className="text-[10px] md:text-[11px] text-white/90 mt-1 font-bold tracking-[0.05em] uppercase opacity-90 relative z-10">Free expert consultation</p>
                 
                 {/* Subtle Background pattern */}
-                <div className="absolute inset-0 opacity-10 pointer-events-none" style={{
-                    backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)',
-                    backgroundSize: '16px 16px'
-                }} />
+                <div className="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(circle,_white_1px,_transparent_1px)] bg-[length:16px_16px]" />
             </div>
 
             {/* Scrollable Form Body */}

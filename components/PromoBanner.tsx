@@ -11,10 +11,7 @@ export const PromoBanner: React.FC = () => {
         <section className="relative h-[500px] w-full flex items-center justify-center overflow-hidden my-16">
             {/* Background Image - Removed bg-fixed to prevent repaint overhead */}
             <div
-                className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-                style={{
-                    backgroundImage: `url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=2070&auto=format&fit=crop')`,
-                }}
+                className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-[url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=2070&auto=format&fit=crop')]"
             >
                 <div className="absolute inset-0 bg-black/40" />
             </div>

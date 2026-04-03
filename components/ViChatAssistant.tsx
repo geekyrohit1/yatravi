@@ -410,7 +410,7 @@ export default function ViChatAssistant({ isHidden = false }: { isHidden?: boole
                 <div className="flex-1 overflow-y-auto p-4 bg-transparent flex flex-col gap-4 relative">
                     <>
                         {messages.map((msg, i) => (
-                            <div key={i} className={`flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'} animate-in slide-in-from-bottom-3 fade-in duration-500 fill-mode-both`} style={{ animationDelay: `${i * 50}ms` }}>
+                            <div key={i} className={`flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'} animate-in slide-in-from-bottom-3 fade-in duration-500 fill-mode-both`}>
                                 {msg.reasoning_details && (
                                     <details className="mb-2 w-[85%] text-[11px] text-gray-500 bg-white/5 border border-white/10 rounded-lg overflow-hidden transition-all backdrop-blur-sm">
                                         <summary className="px-3 py-1 cursor-pointer hover:bg-white/5 font-medium flex items-center gap-2 tracking-tight">
