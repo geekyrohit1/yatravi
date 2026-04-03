@@ -60,7 +60,7 @@ export const metadata: Metadata = {
         template: '%s | Yatravi - We Care Your Trip'
     },
     description: 'Yatravi - We Care Your Trip. Explore the world with the lowest price holiday packages, hand-crafted itineraries, and expert travel guidance. Your trusted partner for domestic and international tours.',
-    keywords: ['Yatravi', 'We Care Your Trip', 'travel agency', 'holiday packages', 'tour packages', 'cheap flight deals', 'lowest price tours', 'domestic tours India', 'international travel packages'],
+    keywords: ['Yatravi', 'We Care Your Trip', 'travel agency', 'holiday packages', 'tour packages', 'cheap flight deals', 'lowest price tours', 'domestic tours India', 'international travel packages', 'luxury holiday packages', 'tour and travel agency'],
     authors: [{ name: 'Yatravi Travel Solutions' }],
     creator: 'Yatravi',
     publisher: 'Yatravi',
@@ -103,6 +103,34 @@ export default function RootLayout({
                 {/* Preconnect to improve TTFB for images and API */}
                 <link rel="preconnect" href="https://yatravi.com" />
                 <link rel="dns-prefetch" href="https://yatravi.com" />
+                <link rel="preconnect" href="https://fonts.googleapis.com" />
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+                
+                {/* JSON-LD Structured Data for Travel Agency */}
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                        __html: JSON.stringify({
+                            "@context": "https://schema.org",
+                            "@type": "TravelAgency",
+                            "name": "Yatravi",
+                            "url": "https://yatravi.com",
+                            "logo": "https://yatravi.com/favicon.svg",
+                            "image": "https://yatravi.com/og-image.png",
+                            "description": "Lowest price holiday packages, hand-crafted itineraries, and expert travel guidance.",
+                            "address": {
+                                "@type": "PostalAddress",
+                                "addressCountry": "IN"
+                            },
+                            "telephone": "+91 95875 05726",
+                            "priceRange": "$$",
+                            "sameAs": [
+                                "https://www.facebook.com/yatravi",
+                                "https://www.instagram.com/yatravi"
+                            ]
+                        })
+                    }}
+                />
             </head>
             <body className="bg-gray-50">
                 <ConsentProvider>

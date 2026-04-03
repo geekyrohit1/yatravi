@@ -174,9 +174,9 @@ const PackageCardComponent: React.FC<PackageCardProps> = ({ pkg, variant = 'vert
               src={safeImages[0]}
               alt={pkg.title}
               fill
-              className="object-cover"
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
-              quality={75}
+              className="object-cover transition-transform duration-500 group-hover:scale-105"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 33vw, 400px"
+              quality={85}
               priority={false}
             />
 

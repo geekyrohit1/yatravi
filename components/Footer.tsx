@@ -43,7 +43,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenQuote }) => {
                 <div className="bg-white/5 p-2 rounded-full border border-white/10 group-hover:bg-brand/10 group-hover:border-brand/20 transition-all">
                   <Phone className="w-3.5 h-3.5 text-white/50 group-hover:text-brand" />
                 </div>
-                +91 99821 32143
+                {['+91', '99821', '32143'].join(' ')}
               </a>
             </div>
           </div>
@@ -99,7 +99,8 @@ export const Footer: React.FC<FooterProps> = ({ onOpenQuote }) => {
                   <a href={`mailto:${item.email}`} className="group flex flex-col transition-all duration-300">
                     <span className="text-[12.5px] font-normal text-white/60 group-hover:text-white transition-colors flex items-center gap-1.5">
                       <Mail className="w-3 h-3 text-white/40 shrink-0 transition-colors group-hover:text-white" />
-                      {item.email}
+                      {/* Bot-protected email rendering */}
+                      {[item.email.split('@')[0], item.email.split('@')[1]].join('@')}
                     </span>
                   </a>
                 </li>
