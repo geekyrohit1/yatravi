@@ -85,7 +85,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
                     dangerouslySetInnerHTML={{ __html: pkg.seo.jsonLd }}
                 />
             )}
-            <h1 className="sr-only">{pkg.title} - Yatravi Holiday Package</h1>
+            <div className="sr-only">{pkg.title} - Yatravi Holiday Package</div>
             <PackageClient initialPkg={pkg} />
             <FooterQuickLinks
                 quickLinks={config?.quickLinks || []}

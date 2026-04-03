@@ -70,6 +70,7 @@ router.put('/:id', authMiddleware, async (req, res) => {
     if (!destination) return res.status(404).json({ message: 'Destination not found for update' });
 
     Object.assign(destination, req.body);
+    destination.markModified('seo'); // Force Mongoose to detect nested seo object changes
     const saved = await destination.save();
     res.json(saved);
   } catch (error) {

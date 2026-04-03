@@ -82,6 +82,7 @@ router.put('/:id', authMiddleware, async (req, res) => {
     }
     
     Object.assign(pkg, req.body);
+    pkg.markModified('seo'); // Force Mongoose to detect nested seo object changes
     const saved = await pkg.save();
     res.json(saved);
   } catch (error) {

@@ -1,4 +1,5 @@
 require('dotenv').config();
+require('dotenv').config({ path: '.env.local' });
 const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
@@ -18,6 +19,7 @@ const settingsRoutes = require('./routes/settings');
 const searchRoutes = require('./routes/search');
 const homepageRoutes = require('./routes/homepage');
 const analyticsRoutes = require('./routes/analytics');
+const seoToolsRoutes = require('./routes/seo-tools');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -98,6 +100,7 @@ app.use('/api/enquiries', enquiryRoutes);
 app.use('/api/pages', pageRoutes);
 app.use('/api/upload', uploadRoutes); 
 app.use('/api/images', uploadRoutes); 
+app.use('/api/admin/seo-tools', seoToolsRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/admin', toolRoutes); 
 app.use('/api/dashboard', dashboardRoutes);

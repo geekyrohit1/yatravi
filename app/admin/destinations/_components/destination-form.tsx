@@ -12,7 +12,7 @@ import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent } from '@/components/ui/card';
-import { Loader2, ArrowLeft, Upload, Plus, Trash2, X, ChevronDown, Save, Calendar, Wallet, FileText, Languages, Banknote, Globe, Car, Utensils, Clock, MapPin, Image as ImageIcon, HelpCircle, MessageCircle } from 'lucide-react';
+import { Loader2, ArrowLeft, Upload, Plus, Trash2, X, ChevronDown, Save, Calendar, Wallet, FileText, Languages, Banknote, Globe, Car, Utensils, Clock, MapPin, Image as ImageIcon, HelpCircle, MessageCircle, Info } from 'lucide-react';
 import { API_BASE_URL } from '@/constants';
 
 const destinationSchema = z.object({
@@ -286,9 +286,36 @@ export default function DestinationForm({ initialData, isEditMode = false }: Des
                                         <Input {...register('slug')} disabled className="h-11 rounded-xl border-gray-200 bg-gray-100 text-gray-500" />
                                     </div>
 
-                                    <div className="space-y-2">
-                                        <Label className="text-gray-700 font-medium">SEO Description</Label>
-                                        <Textarea {...register('description')} placeholder="Meta description for search engines..." className="min-h-[120px] rounded-xl border-gray-200 focus:border-[#CD1C18] focus:ring-[#CD1C18]/20 bg-gray-50/50 resize-none" />
+                                    <div className="space-y-4 pt-4 border-t border-gray-100 mt-6">
+                                        <h4 className="text-lg font-bold text-gray-900">Advanced SEO Management</h4>
+                                        <div className="bg-gradient-to-r from-gray-50 to-gray-100 p-6 rounded-2xl border border-gray-200">
+                                            <div className="flex items-start gap-4">
+                                                <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-sm shrink-0">
+                                                    <Globe className="w-6 h-6 text-gray-700" />
+                                                </div>
+                                                <div>
+                                                    <h5 className="font-bold text-gray-900">Master SEO Editor</h5>
+                                                    <p className="text-sm text-gray-600 mt-1 mb-4">
+                                                        Manage Meta Tags, Open Graph, Twitter Cards, and Content Analysis in one centralized place.
+                                                    </p>
+                                                    {initialData?._id ? (
+                                                        <Button 
+                                                            type="button"
+                                                            onClick={() => window.open(`/admin/seo/edit/destination/${initialData._id}`, '_blank')}
+                                                            className="bg-gray-900 text-white hover:bg-gray-800 shadow-md"
+                                                        >
+                                                            <Globe className="w-4 h-4 mr-2" />
+                                                            Open Advanced SEO Editor
+                                                        </Button>
+                                                    ) : (
+                                                        <div className="text-sm text-amber-600 font-medium flex items-center bg-amber-50 px-3 py-2 rounded-lg border border-amber-100 inline-block w-fit">
+                                                            <Info className="w-4 h-4 mr-2" />
+                                                            Please save this destination first to access the Advanced SEO Editor.
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </CardContent>
                             </Card>

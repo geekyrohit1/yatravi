@@ -38,6 +38,7 @@ const packageSchema = new mongoose.Schema({
     title: String,
     description: String,
     keywords: String,
+    focusKeyword: String, // Admin tool helper - not sent to Google
     canonicalUrl: String,
     ogTitle: String,
     ogDescription: String,
@@ -46,10 +47,19 @@ const packageSchema = new mongoose.Schema({
     twitterDescription: String,
     twitterImage: String,
     jsonLd: String, // Custom Structured Data
+    autoGenerateSchema: { type: Boolean, default: true },
+    schemaTypes: { type: [String], default: ['Product', 'FAQPage', 'BreadcrumbList'] },
     sitemapPriority: { type: Number, default: 0.8 },
     sitemapFrequency: { type: String, default: 'weekly' },
     robots: { type: String, default: 'index, follow' },
-    scriptTags: String // For custom JSON-LD or tracking scripts
+    scriptTags: String, // For custom JSON-LD or tracking scripts
+    currentRank: { type: Number, default: 0 },
+    previousRank: { type: Number, default: 0 },
+    rankHistory: [{
+      rank: Number,
+      date: { type: Date, default: Date.now }
+    }],
+    lastRankCheck: Date
   },
   id: { type: String, unique: true }, // Keeping string ID to match frontend (auto-generated if missing)
   slug: { type: String, unique: true }, // SEO-friendly URL slug
@@ -136,6 +146,89 @@ packageSchema.pre('save', async function () {
   // CRITICAL: Auto-generate 'id' if missing (fixes Admin Panel compatibility)
   if (!this.id) {
     this.id = `pkg_${this.slug || generateSlug(this.title)}`;
+  }
+
+  // Smart Auto-Schema Generation
+  if (!this.seo) this.seo = {};
+  
+  if (this.seo.autoGenerateSchema) {
+    const schemas = [];
+
+    // 1. Product Schema
+    if (this.seo.schemaTypes.includes('Product')) {
+      schemas.push({
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": this.title,
+        "image": this.image,
+        "description": this.seo.description || this.overview?.substring(0, 160),
+        "brand": {
+          "@type": "Brand",
+          "name": "Yatravi"
+        },
+        "offers": {
+          "@type": "Offer",
+          "price": this.price,
+          "priceCurrency": "INR",
+          "availability": "https://schema.org/InStock",
+          "url": `https://yatravi.com/packages/${this.slug}`
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": this.rating > 0 ? this.rating : 4.8,
+          "reviewCount": this.reviewsCount > 0 ? this.reviewsCount : 124
+        }
+      });
+    }
+
+    // 2. FAQ Schema
+    if (this.seo.schemaTypes.includes('FAQPage') && this.faqs && this.faqs.length > 0) {
+      schemas.push({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": this.faqs.filter(i => i.question && i.answer).map(item => ({
+          "@type": "Question",
+          "name": item.question,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": item.answer
+          }
+        }))
+      });
+    }
+
+    // 3. Breadcrumb Schema
+    if (this.seo.schemaTypes.includes('BreadcrumbList')) {
+      schemas.push({
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://yatravi.com"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Packages",
+            "item": "https://yatravi.com/packages"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": this.title,
+            "item": `https://yatravi.com/packages/${this.slug}`
+          }
+        ]
+      });
+    }
+
+    // Combine all and save as a single script block if multiple, or single object
+    if (schemas.length > 0) {
+      this.seo.jsonLd = JSON.stringify(schemas.length === 1 ? schemas[0] : schemas, null, 2);
+    }
   }
 });
 

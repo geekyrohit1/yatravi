@@ -1319,20 +1319,37 @@ export default function PackageForm({ initialData, isEditMode = false }: Package
                             </div>
 
                             <div className="space-y-4 pt-4 border-t border-gray-100 mb-8">
-                                <h4 className="text-lg font-bold text-gray-900">Custom SEO Metadata</h4>
-                                <div className="space-y-2">
-                                    <Label className="font-medium">Meta Title</Label>
-                                    <Input {...register('seo.title')} placeholder="e.g. Best 5 Days Bali Tour Package | Yatravi" className="h-11 rounded-xl" />
-                                </div>
-                                <div className="space-y-2">
-                                    <Label className="font-medium">Meta Description</Label>
-                                    <Textarea {...register('seo.description')} placeholder="e.g. Discover the ultimate Bali experience..." className="min-h-[80px] rounded-xl resize-y" />
-                                </div>
-                                <div className="space-y-2">
-                                    <Label className="font-medium">Meta Keywords</Label>
-                                    <Input {...register('seo.keywords')} placeholder="e.g. bali tour, adventure travel, yatravi bali" className="h-11 rounded-xl" />
+                                <h4 className="text-lg font-bold text-gray-900">Advanced SEO Management</h4>
+                                <div className="bg-gradient-to-r from-gray-50 to-gray-100 p-6 rounded-2xl border border-gray-200">
+                                    <div className="flex items-start gap-4">
+                                        <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-sm shrink-0">
+                                            <Globe className="w-6 h-6 text-gray-700" />
+                                        </div>
+                                        <div>
+                                            <h5 className="font-bold text-gray-900">Master SEO Editor</h5>
+                                            <p className="text-sm text-gray-600 mt-1 mb-4">
+                                                Manage Meta Tags, Open Graph, Twitter Cards, and Content Analysis in one centralized place. Auto-Schema is managed by the backend.
+                                            </p>
+                                            {initialData?.id ? (
+                                                <Button 
+                                                    type="button"
+                                                    onClick={() => window.open(`/admin/seo/edit/package/${initialData.id}`, '_blank')}
+                                                    className="bg-gray-900 text-white hover:bg-gray-800 shadow-md"
+                                                >
+                                                    <Globe className="w-4 h-4 mr-2" />
+                                                    Open Advanced SEO Editor
+                                                </Button>
+                                            ) : (
+                                                <div className="text-sm text-amber-600 font-medium flex items-center bg-amber-50 px-3 py-2 rounded-lg border border-amber-100 inline-block w-fit">
+                                                    <Info className="w-4 h-4 mr-2" />
+                                                    Please save this package first to access the Advanced SEO Editor.
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                 <div className="space-y-2">

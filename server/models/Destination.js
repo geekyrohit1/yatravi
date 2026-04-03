@@ -10,6 +10,7 @@ const destinationSchema = new mongoose.Schema({
         title: String,
         description: String,
         keywords: String,
+        focusKeyword: String, // Admin tool helper - not sent to Google
         canonicalUrl: String,
         ogTitle: String,
         ogDescription: String,
@@ -18,10 +19,19 @@ const destinationSchema = new mongoose.Schema({
         twitterDescription: String,
         twitterImage: String,
         jsonLd: String, // Custom Structured Data
+        autoGenerateSchema: { type: Boolean, default: true },
+        schemaTypes: { type: [String], default: ['TouristDestination', 'FAQPage', 'BreadcrumbList'] },
         sitemapPriority: { type: Number, default: 0.8 },
         sitemapFrequency: { type: String, default: 'weekly' },
         robots: { type: String, default: 'index, follow' },
-        scriptTags: String
+        scriptTags: String,
+        currentRank: { type: Number, default: 0 },
+        previousRank: { type: Number, default: 0 },
+        rankHistory: [{
+          rank: Number,
+          date: { type: Date, default: Date.now }
+        }],
+        lastRankCheck: Date
     },
     slug: {
         type: String,
@@ -109,7 +119,7 @@ function generateSlug(text) {
         .trim();
 }
 
-// Pre-save hook to generate slug
+// Pre-save hook to generate slug and auto-schema
 destinationSchema.pre('save', async function () {
     if (this.isModified('name')) {
         let baseSlug = generateSlug(this.name);
@@ -123,6 +133,74 @@ destinationSchema.pre('save', async function () {
         }
 
         this.slug = slug;
+    }
+
+    // Smart Auto-Schema Generation
+    if (!this.seo) this.seo = {};
+    
+    if (this.seo.autoGenerateSchema) {
+        const schemas = [];
+
+        // 1. TouristDestination Schema
+        if (this.seo.schemaTypes.includes('TouristDestination')) {
+            schemas.push({
+                "@context": "https://schema.org",
+                "@type": "TouristDestination",
+                "name": this.name,
+                "description": this.seo.description || this.description,
+                "image": this.heroImage,
+                "url": `https://yatravi.com/destination/${this.slug}`
+            });
+        }
+
+        // 2. FAQ Schema
+        if (this.seo.schemaTypes.includes('FAQPage') && this.faqs && this.faqs.length > 0) {
+            schemas.push({
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                "mainEntity": this.faqs.filter(i => i.question && i.answer).map(item => ({
+                    "@type": "Question",
+                    "name": item.question,
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": item.answer
+                    }
+                }))
+            });
+        }
+
+        // 3. Breadcrumb Schema
+        if (this.seo.schemaTypes.includes('BreadcrumbList')) {
+            schemas.push({
+                "@context": "https://schema.org",
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "Home",
+                        "item": "https://yatravi.com"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "Destinations",
+                        "item": "https://yatravi.com/destinations"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 3,
+                        "name": this.name,
+                        "item": `https://yatravi.com/destination/${this.slug}`
+                    }
+                ]
+            });
+        }
+
+        // Combine all and save
+        if (schemas.length > 0) {
+            this.seo.jsonLd = JSON.stringify(schemas.length === 1 ? schemas[0] : schemas, null, 2);
+        }
     }
 });
 
