@@ -41,6 +41,16 @@ const nextConfig = {
             bodySizeLimit: '200mb',
         },
     },
+    async redirects() {
+        return [
+            {
+                source: '/:path*',
+                has: [{ type: 'host', value: 'www.yatravi.com' }],
+                destination: 'https://yatravi.com/:path*',
+                permanent: true,
+            },
+        ];
+    },
     async rewrites() {
         return [
             {
