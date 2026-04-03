@@ -121,7 +121,8 @@ const AirlineCard = ({ airline }: { airline: { id: string, name: string, url: st
 
 export default function WebCheckInPage() {
     return (
-        <div className="min-h-screen bg-gray-50/50 py-24 relative overflow-hidden">
+        <main className="min-h-screen bg-gray-50/50 py-24 relative overflow-hidden">
+            <h1 className="sr-only">Online Flight Web Check-in - All Airlines</h1>
             <div className="absolute top-0 left-0 w-full h-[500px] bg-gradient-to-b from-brand/5 to-transparent pointer-events-none" />
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -132,9 +133,9 @@ export default function WebCheckInPage() {
                         <ShieldCheck className="w-4 h-4" />
                         <span>Hassle-Free Boarding</span>
                     </div>
-                    <h1 className="font-heading tracking-tight font-bold text-4xl md:text-6xl text-gray-950">
+                    <div className="font-heading tracking-tight font-bold text-4xl md:text-6xl text-gray-950">
                         Web Check-in
-                    </h1>
+                    </div>
                     <p className="text-lg text-gray-500 max-w-2xl mx-auto font-light leading-relaxed">
                         Skip the airport queues. Select your airline below to complete your check-in securely on their official portal using your booking reference.
                     </p>
@@ -185,6 +186,6 @@ export default function WebCheckInPage() {
                 </div>
 
             </div>
-        </div>
+        </main>
     );
 }

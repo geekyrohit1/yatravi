@@ -54,7 +54,8 @@ export default function AboutPage() {
     const c = data.content;
 
     return (
-        <div className="min-h-screen bg-white">
+        <main className="min-h-screen bg-white">
+            <h1 className="sr-only">About Yatravi - Our Story and Mission</h1>
             {/* Hero Section */}
             <div className="relative h-[60vh] flex items-center justify-center bg-gray-950 overflow-hidden">
                 <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/60 via-black/40 to-white" />
@@ -179,6 +180,6 @@ export default function AboutPage() {
                     </div>
                 </div>
             </div>
-        </div>
+        </main>
     );
 }

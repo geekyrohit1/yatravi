@@ -244,4 +244,17 @@ p {
 .admin-panel-root textarea::placeholder {
     color: #9ca3af !important; /* text-gray-400 */
 }
+
+/* Accessibility & SEO Utilities */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
 

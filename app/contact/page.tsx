@@ -76,7 +76,8 @@ export default function ContactPage() {
     };
 
     return (
-        <div className="min-h-screen bg-[#FDFDFD] selection:bg-brand/20">
+        <main className="min-h-screen bg-[#FDFDFD] selection:bg-brand/20">
+            <h1 className="sr-only">Contact Yatravi - Get in Touch with Travel Experts</h1>
             {/* HERO SECTION - Immersive & Minimal */}
             <div className="relative pt-32 pb-20 md:pt-48 md:pb-32 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
                 <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-gradient-to-br from-brand/5 to-transparent blur-[120px] rounded-full -mr-60 -mt-20 pointer-events-none" />
@@ -272,6 +273,6 @@ export default function ContactPage() {
                     animation: shimmer 1.5s infinite;
                 }
             `}</style>
-        </div>
+        </main>
     );
 }

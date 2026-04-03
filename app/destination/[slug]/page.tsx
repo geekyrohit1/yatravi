@@ -127,6 +127,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
                     dangerouslySetInnerHTML={{ __html: dest.seo.jsonLd }}
                 />
             )}
+            <h1 className="sr-only">{dest?.name} Tour Packages | Yatravi</h1>
             {/* Pass only relevant packages to client */}
             <DestinationClient initialDestination={dest} initialPackages={filteredPackages} />
         </>

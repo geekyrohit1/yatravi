@@ -38,9 +38,12 @@ export default async function HomePage() {
     const { packages, config } = await getHomepageData();
 
     return (
-        <HomeClient 
-            initialPackages={packages} 
-            initialConfig={config} 
-        />
+        <main>
+            <h1 className="sr-only">Yatravi | We Care Your Trip - Lowest Price Holiday Packages</h1>
+            <HomeClient 
+                initialPackages={packages} 
+                initialConfig={config} 
+            />
+        </main>
     );
 }

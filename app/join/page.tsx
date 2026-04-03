@@ -19,7 +19,8 @@ export default function JoinPage() {
     const [isSubmitting, setIsSubmitting] = React.useState(false);
     const [isSuccess, setIsSuccess] = React.useState(false);
     return (
-        <div className="min-h-screen bg-gray-50/30">
+        <main className="min-h-screen bg-gray-50/30">
+            <h1 className="sr-only">Join Yatravi - Partner with India's Fast Growing Travel Network</h1>
 
             {/* Premium Hero Section */}
             <div className="relative min-h-[500px] sm:h-[55vh] md:h-[65vh] flex items-center justify-center bg-gray-950 overflow-hidden">
@@ -222,7 +223,6 @@ export default function JoinPage() {
                     </div>
                 </div>
             </div>
-
-        </div>
+        </main>
     );
 }
