@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const Package = require('../models/Package');
 const Destination = require('../models/Destination');
 const authMiddleware = require('../middleware/auth');
+const { generateSEOQuickLinks } = require('../utils/seoHelper');
 
 // Search Packages & Destinations (Fallback)
 router.get('/search/all', async (req, res) => {
@@ -56,6 +57,12 @@ router.get('/:identifier', async (req, res) => {
 // POST create a package
 router.post('/', authMiddleware, async (req, res) => {
   try {
+    // Smart SEO: Auto-generate quick links if empty
+    if (req.body.seo && (!req.body.seo.quickLinks || req.body.seo.quickLinks.length === 0)) {
+        if (req.body.title && req.body.slug) {
+            req.body.seo.quickLinks = generateSEOQuickLinks(req.body.title, 'package', req.body.slug);
+        }
+    }
     const newPackage = new Package(req.body);
     const savedPackage = await newPackage.save();
     res.status(201).json(savedPackage);
@@ -82,6 +89,14 @@ router.put('/:id', authMiddleware, async (req, res) => {
     }
     
     Object.assign(pkg, req.body);
+    
+    // Smart SEO: Auto-generate quick links if empty during update
+    if (pkg.seo && (!pkg.seo.quickLinks || pkg.seo.quickLinks.length === 0)) {
+        if (pkg.title && pkg.slug) {
+            pkg.seo.quickLinks = generateSEOQuickLinks(pkg.title, 'package', pkg.slug);
+        }
+    }
+
     pkg.markModified('seo'); // Force Mongoose to detect nested seo object changes
     const saved = await pkg.save();
     res.json(saved);

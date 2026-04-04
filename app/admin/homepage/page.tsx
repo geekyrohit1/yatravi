@@ -80,8 +80,6 @@ interface HomepageConfig {
     heroSlider: HeroSlide[];
     sections: HomepageSection[];
     faq: FAQ[];
-    quickLinks?: LinkItem[];
-    importantLinks?: LinkItem[];
     mobileHeroVideo?: string;
     showMobileHeroVideo?: boolean;
 }
@@ -102,9 +100,7 @@ export default function HomepageConfigPage() {
     const [config, setConfig] = useState<HomepageConfig>({
         heroSlider: [],
         sections: [],
-        faq: [],
-        quickLinks: [],
-        importantLinks: []
+        faq: []
     });
 
     useEffect(() => {
@@ -174,8 +170,6 @@ export default function HomepageConfigPage() {
                     isVideo: s.isVideo || false
                 })),
                 faq: config.faq,
-                quickLinks: config.quickLinks || [],
-                importantLinks: config.importantLinks || [],
                 mobileHeroVideo: config.mobileHeroVideo || '',
                 showMobileHeroVideo: config.showMobileHeroVideo || false
             };
@@ -527,25 +521,6 @@ export default function HomepageConfigPage() {
         return new Intl.NumberFormat('en-IN').format(price);
     };
 
-    // SEO Links functions
-    const addQuickLink = (type: 'quickLinks' | 'importantLinks') => {
-        setConfig({
-            ...config,
-            [type]: [...(config[type] || []), { label: '', url: '' }]
-        });
-    };
-
-    const removeQuickLink = (type: 'quickLinks' | 'importantLinks', index: number) => {
-        const newList = (config[type] || []).filter((_, i) => i !== index);
-        setConfig({ ...config, [type]: newList });
-    };
-
-    const updateQuickLink = (type: 'quickLinks' | 'importantLinks', index: number, field: keyof LinkItem, value: string) => {
-        const newList = [...(config[type] || [])];
-        newList[index] = { ...newList[index], [field]: value };
-        setConfig({ ...config, [type]: newList });
-    };
-
     if (loading) {
         return (
             <div className="flex items-center justify-center h-64">
@@ -592,12 +567,6 @@ export default function HomepageConfigPage() {
                         className="rounded-none border-b-2 border-transparent px-0 py-3 text-sm font-medium text-gray-500 hover:text-gray-700 data-[state=active]:border-[#CD1C18] data-[state=active]:text-[#CD1C18] data-[state=active]:bg-transparent transition-all"
                     >
                         FAQ
-                    </TabsTrigger>
-                    <TabsTrigger
-                        value="seo-links"
-                        className="rounded-none border-b-2 border-transparent px-0 py-3 text-sm font-medium text-gray-500 hover:text-gray-700 data-[state=active]:border-[#CD1C18] data-[state=active]:text-[#CD1C18] data-[state=active]:bg-transparent transition-all"
-                    >
-                        SEO Links
                     </TabsTrigger>
                 </TabsList>
 
@@ -1474,75 +1443,6 @@ export default function HomepageConfigPage() {
                                                 </div>
                                             )}
 
-                                            {/* Links Config for 'links' type */}
-                                            {section.type === 'links' && (
-                                                <div className="space-y-6 pt-6 border-t border-gray-100">
-                                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                                        {/* Quick Links Group */}
-                                                        <div className="space-y-4">
-                                                            <div className="flex justify-between items-center">
-                                                                <Label className="text-sm font-bold text-gray-900">Quick Links (Category 1)</Label>
-                                                                <Button variant="outline" size="sm" onClick={() => addQuickLink('quickLinks')}>
-                                                                    <Plus className="w-3 h-3 mr-2" /> Add Link
-                                                                </Button>
-                                                            </div>
-                                                            <div className="grid gap-2 overflow-y-auto max-h-[300px] pr-2">
-                                                                {(config.quickLinks || []).map((link, lIdx) => (
-                                                                    <div key={lIdx} className="flex gap-2 items-center bg-gray-50/80 p-2 rounded-xl border border-gray-100">
-                                                                        <Input 
-                                                                            value={link.label} 
-                                                                            onChange={(e) => updateQuickLink('quickLinks', lIdx, 'label', e.target.value)}
-                                                                            placeholder="Label"
-                                                                            className="h-9 text-xs bg-white"
-                                                                        />
-                                                                        <Input 
-                                                                            value={link.url} 
-                                                                            onChange={(e) => updateQuickLink('quickLinks', lIdx, 'url', e.target.value)}
-                                                                            placeholder="URL"
-                                                                            className="h-9 text-xs bg-white"
-                                                                        />
-                                                                        <Button variant="ghost" size="icon" onClick={() => removeQuickLink('quickLinks', lIdx)} className="h-9 w-9 text-gray-400 hover:text-red-500 hover:bg-red-50">
-                                                                            <Trash2 className="h-4 w-4" />
-                                                                        </Button>
-                                                                    </div>
-                                                                ))}
-                                                            </div>
-                                                        </div>
-
-                                                        {/* Important Links Group */}
-                                                        <div className="space-y-4">
-                                                            <div className="flex justify-between items-center">
-                                                                <Label className="text-sm font-bold text-gray-900">Important Links (Category 2)</Label>
-                                                                <Button variant="outline" size="sm" onClick={() => addQuickLink('importantLinks')}>
-                                                                    <Plus className="w-3 h-3 mr-2" /> Add Link
-                                                                </Button>
-                                                            </div>
-                                                            <div className="grid gap-2 overflow-y-auto max-h-[300px] pr-2">
-                                                                {(config.importantLinks || []).map((link, lIdx) => (
-                                                                    <div key={lIdx} className="flex gap-2 items-center bg-gray-50/80 p-2 rounded-xl border border-gray-100">
-                                                                        <Input 
-                                                                            value={link.label} 
-                                                                            onChange={(e) => updateQuickLink('importantLinks', lIdx, 'label', e.target.value)}
-                                                                            placeholder="Label"
-                                                                            className="h-9 text-xs bg-white"
-                                                                        />
-                                                                        <Input 
-                                                                            value={link.url} 
-                                                                            onChange={(e) => updateQuickLink('importantLinks', lIdx, 'url', e.target.value)}
-                                                                            placeholder="URL"
-                                                                            className="h-9 text-xs bg-white"
-                                                                        />
-                                                                        <Button variant="ghost" size="icon" onClick={() => removeQuickLink('importantLinks', lIdx)} className="h-9 w-9 text-gray-400 hover:text-red-500 hover:bg-red-50">
-                                                                            <Trash2 className="h-4 w-4" />
-                                                                        </Button>
-                                                                    </div>
-                                                                ))}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            )}
-
                                             {/* Query Config for 'packages' type */}
                                             {section.type === 'packages' && (
                                                 <div className="space-y-4 pt-4 border-t border-gray-100 bg-gray-50/30 p-4 rounded-xl">
@@ -1650,93 +1550,6 @@ export default function HomepageConfigPage() {
                                 <p className="text-gray-400">No FAQs added yet. Click "Add FAQ" to start.</p>
                             </div>
                         )}
-                    </div>
-                </TabsContent>
-
-                {/* SEO LINKS TAB */}
-                <TabsContent value="seo-links" className="space-y-8 animate-in fade-in-50 slide-in-from-bottom-2 duration-300">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        {/* Quick Links */}
-                        <div className="space-y-6">
-                            <div className="flex justify-between items-center">
-                                <div>
-                                    <h3 className="text-lg font-bold text-gray-900">Quick Links</h3>
-                                    <p className="text-sm text-gray-500">Links for destinations, city-wise packages, etc.</p>
-                                </div>
-                                <Button onClick={() => addQuickLink('quickLinks')} variant="outline" size="sm" className="rounded-xl border-dashed border-2 hover:border-[#CD1C18] hover:text-[#CD1C18]">
-                                    <Plus className="mr-2 h-4 w-4" /> Add Link
-                                </Button>
-                            </div>
-                            <div className="space-y-3">
-                                {(config.quickLinks || []).map((link, idx) => (
-                                    <div key={idx} className="flex gap-3 bg-white p-3 rounded-xl border border-gray-100 shadow-sm group">
-                                        <div className="flex-1 space-y-3">
-                                            <Input
-                                                value={link.label}
-                                                onChange={(e) => updateQuickLink('quickLinks', idx, 'label', e.target.value)}
-                                                placeholder="Label (e.g. Packages from Delhi)"
-                                                className="h-9 text-sm font-medium"
-                                            />
-                                            <Input
-                                                value={link.url}
-                                                onChange={(e) => updateQuickLink('quickLinks', idx, 'url', e.target.value)}
-                                                placeholder="URL (e.g. /search?city=delhi)"
-                                                className="h-9 text-xs font-mono bg-gray-50/50"
-                                            />
-                                        </div>
-                                        <Button variant="ghost" size="icon" onClick={() => removeQuickLink('quickLinks', idx)} className="text-gray-400 hover:text-red-500 h-9 w-9 self-center">
-                                            <Trash2 className="h-4 w-4" />
-                                        </Button>
-                                    </div>
-                                ))}
-                                {(config.quickLinks || []).length === 0 && (
-                                    <div className="text-center py-10 bg-gray-50/50 rounded-2xl border border-dashed border-gray-200">
-                                        <p className="text-sm text-gray-400">No links added. Start for SEO.</p>
-                                    </div>
-                                )}
-                            </div>
-                        </div>
-
-                        {/* Important Links */}
-                        <div className="space-y-6">
-                            <div className="flex justify-between items-center">
-                                <div>
-                                    <h3 className="text-lg font-bold text-gray-900">Important Links</h3>
-                                    <p className="text-sm text-gray-500">Secondary SEO links for deep pages</p>
-                                </div>
-                                <Button onClick={() => addQuickLink('importantLinks')} variant="outline" size="sm" className="rounded-xl border-dashed border-2 hover:border-[#CD1C18] hover:text-[#CD1C18]">
-                                    <Plus className="mr-2 h-4 w-4" /> Add Link
-                                </Button>
-                            </div>
-                            <div className="space-y-3">
-                                {(config.importantLinks || []).map((link, idx) => (
-                                    <div key={idx} className="flex gap-3 bg-white p-3 rounded-xl border border-gray-100 shadow-sm group">
-                                        <div className="flex-1 space-y-3">
-                                            <Input
-                                                value={link.label}
-                                                onChange={(e) => updateQuickLink('importantLinks', idx, 'label', e.target.value)}
-                                                placeholder="Label (e.g. Best Honeymoon Deals)"
-                                                className="h-9 text-sm font-medium"
-                                            />
-                                            <Input
-                                                value={link.url}
-                                                onChange={(e) => updateQuickLink('importantLinks', idx, 'url', e.target.value)}
-                                                placeholder="URL (e.g. /search?tag=honeymoon)"
-                                                className="h-9 text-xs font-mono bg-gray-50/50"
-                                            />
-                                        </div>
-                                        <Button variant="ghost" size="icon" onClick={() => removeQuickLink('importantLinks', idx)} className="text-gray-400 hover:text-red-500 h-9 w-9 self-center">
-                                            <Trash2 className="h-4 w-4" />
-                                        </Button>
-                                    </div>
-                                ))}
-                                {(config.importantLinks || []).length === 0 && (
-                                    <div className="text-center py-10 bg-gray-50/50 rounded-2xl border border-dashed border-gray-200">
-                                        <p className="text-sm text-gray-400">No links added. Start for SEO.</p>
-                                    </div>
-                                )}
-                            </div>
-                        </div>
                     </div>
                 </TabsContent>
             </Tabs>

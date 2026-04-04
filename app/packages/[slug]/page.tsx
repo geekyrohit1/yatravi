@@ -1,7 +1,8 @@
 import { Metadata } from 'next';
-import { API_BASE_URL } from '../../../constants'; // Adjust path as needed
+import { API_BASE_URL } from '../../../constants';
 import PackageClient from './PackageClient';
-import { FooterQuickLinks } from '@/components/FooterQuickLinks';
+import SEOQuickLinks from '@/components/SEOQuickLinks';
+import { redirect } from 'next/navigation';
 
 export const dynamic = 'force-dynamic';
 
@@ -30,7 +31,6 @@ async function getHomepageConfig() {
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
-    // Await params object before accessing properties
     const { slug } = await params;
     const pkg = await getPackage(slug);
 
@@ -40,7 +40,6 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
         };
     }
 
-    // Use SEO object if available, fall back to package details
     return {
         title: pkg.seo?.title || `${pkg.title} | Yatravi`,
         description: pkg.seo?.description || pkg.overview?.substring(0, 160) || `Explore ${pkg.title} with Yatravi.`,
@@ -68,29 +67,23 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 }
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
-    // Await params object before accessing properties
     const { slug } = await params;
     const pkg = await getPackage(slug);
-    const config = await getHomepageConfig();
 
     if (!pkg) {
-        return <div>Package not found</div>;
+        redirect('/');
     }
 
     return (
-        <>
+        <div className="bg-white">
             {pkg.seo?.jsonLd && (
                 <script
                     type="application/ld+json"
                     dangerouslySetInnerHTML={{ __html: pkg.seo.jsonLd }}
                 />
             )}
-            <div className="sr-only">{pkg.title} - Yatravi Holiday Package</div>
             <PackageClient initialPkg={pkg} />
-            <FooterQuickLinks
-                quickLinks={config?.quickLinks || []}
-                importantLinks={config?.importantLinks || []}
-            />
-        </>
+            <SEOQuickLinks links={pkg.seo?.quickLinks || []} title="Important Links & Resources" />
+        </div>
     );
 }

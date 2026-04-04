@@ -52,7 +52,8 @@ export default function EditSEOPage() {
         autoGenerateSchema: true,
         schemaTypes: [] as string[],
         sitemapPriority: 0.8,
-        sitemapFrequency: 'weekly'
+        sitemapFrequency: 'weekly',
+        quickLinks: [] as { label: string, url: string }[]
     });
 
     useEffect(() => {
@@ -92,7 +93,8 @@ export default function EditSEOPage() {
                 autoGenerateSchema: data.seo?.autoGenerateSchema !== undefined ? data.seo.autoGenerateSchema : true,
                 schemaTypes: data.seo?.schemaTypes || (type === 'package' ? ['Product', 'FAQPage', 'BreadcrumbList'] : ['TouristDestination', 'FAQPage', 'BreadcrumbList']),
                 sitemapPriority: data.seo?.sitemapPriority || (type === 'package' ? 0.8 : 0.9),
-                sitemapFrequency: data.seo?.sitemapFrequency || 'weekly'
+                sitemapFrequency: data.seo?.sitemapFrequency || 'weekly',
+                quickLinks: data.seo?.quickLinks || []
             };
             
             setRankData({
@@ -387,6 +389,58 @@ export default function EditSEOPage() {
         setFaqItems(newItems);
     };
 
+    const generateQuickLinks = () => {
+        const subject = item?.title || item?.name || '';
+        if (!subject) return;
+
+        const cities = ["Mumbai", "Delhi", "Bangalore", "Ahmedabad", "Kolkata", "Hyderabad", "Pune", "Surat", "Jaipur", "Lucknow", "Chennai", "Chandigarh", "Amritsar", "Ludhiana", "Kanpur"];
+        const variations = ["Packages from", "Tour from", "Holidays from", "Trip from"];
+        const otherPhrases = [
+            "Itinerary", "Couple Package", "Family Trip", "7 Days Package", 
+            "5 Nights Package", "6 Nights Package", "Luxury Package", 
+            "Budget Tour", "Best Time to Visit", "Visa for Indians", 
+            "Cheap Packages", "Customized Tour", "Top Places to visit in"
+        ];
+
+        const generated: { label: string, url: string }[] = [];
+        const slug = item?.slug || '';
+        const baseUrl = type === 'package' ? `/packages/${slug}` : `/destination/${slug}`;
+
+        // 1. City Variations (Variations + Subject + City)
+        cities.forEach(city => {
+            const verb = variations[Math.floor(Math.random() * variations.length)];
+            generated.push({
+                label: `${subject} ${verb} ${city}`,
+                url: baseUrl
+            });
+        });
+
+        // 2. Keyword Variations
+        otherPhrases.forEach(phrase => {
+            generated.push({
+                label: phrase.includes('visit') ? `${phrase} ${subject}` : `${subject} ${phrase}`,
+                url: baseUrl
+            });
+        });
+
+        setSeoData({ ...seoData, quickLinks: generated.slice(0, 35) });
+        alert(`Generated ${generated.slice(0, 35).length} SEO Quick Links! Click Save to apply.`);
+    };
+
+    const addQuickLink = () => {
+        setSeoData({ ...seoData, quickLinks: [...seoData.quickLinks, { label: '', url: type === 'package' ? `/packages/${item?.slug}` : `/destination/${item?.slug}` }] });
+    };
+
+    const removeQuickLink = (index: number) => {
+        setSeoData({ ...seoData, quickLinks: seoData.quickLinks.filter((_, i) => i !== index) });
+    };
+
+    const updateQuickLink = (index: number, field: 'label' | 'url', value: string) => {
+        const newLinks = [...seoData.quickLinks];
+        newLinks[index][field] = value;
+        setSeoData({ ...seoData, quickLinks: newLinks });
+    };
+
     if (loading) return <div className="p-12 text-center">Loading...</div>;
 
     const hostname = typeof window !== 'undefined' ? window.location.hostname : 'yatravi.com';
@@ -439,6 +493,7 @@ export default function EditSEOPage() {
                             { id: 'general', label: 'General', icon: Globe },
                             { id: 'analysis', label: 'Content Analysis', icon: TrendingUp },
                             { id: 'social', label: 'Social Media', icon: Share2 },
+                            { id: 'links', label: 'Quick Links (SEO)', icon: Plus },
                             { id: 'advanced', label: 'Advanced & Schema', icon: Code },
                         ].map((tab) => (
                             <button
@@ -761,6 +816,71 @@ export default function EditSEOPage() {
                                             <p className="text-xs text-gray-600 line-clamp-1 mt-1">{seoData.ogDescription || seoData.description}</p>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Quick Links Tab */}
+                    {activeTab === 'links' && (
+                        <div className="space-y-6 animate-fade-in">
+                            <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+                                <div className="flex items-center justify-between mb-8">
+                                    <div className="flex items-center gap-3">
+                                        <div className="p-2.5 bg-brand/10 text-brand rounded-xl">
+                                            <Plus className="w-5 h-5" />
+                                        </div>
+                                        <div>
+                                            <h2 className="text-xl font-bold text-gray-900">SEO Quick Links</h2>
+                                            <p className="text-sm text-gray-500">Add city-wise variations and keywords for better ranking</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex gap-3">
+                                        <Button 
+                                            variant="outline" 
+                                            onClick={generateQuickLinks}
+                                            className="border-brand/20 text-brand hover:bg-brand/5"
+                                        >
+                                            <RefreshCw className="w-4 h-4 mr-2" /> Magic Generate (30+)
+                                        </Button>
+                                        <Button onClick={addQuickLink} variant="outline" className="bg-gray-50">
+                                            <Plus className="w-4 h-4 mr-2" /> Add Manual
+                                        </Button>
+                                    </div>
+                                </div>
+
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-h-[600px] overflow-y-auto pr-3 custom-scrollbar">
+                                    {seoData.quickLinks?.map((link, idx) => (
+                                        <div key={idx} className="group p-4 bg-gray-50/50 rounded-2xl border border-gray-100 hover:border-brand/30 hover:bg-white transition-all relative">
+                                            <div className="space-y-3">
+                                                <input
+                                                    type="text"
+                                                    value={link.label}
+                                                    onChange={(e) => updateQuickLink(idx, 'label', e.target.value)}
+                                                    placeholder="e.g. Dubai Tour from Mumbai"
+                                                    className="w-full bg-transparent text-sm font-bold text-gray-900 focus:outline-none"
+                                                />
+                                                <input
+                                                    type="text"
+                                                    value={link.url}
+                                                    onChange={(e) => updateQuickLink(idx, 'url', e.target.value)}
+                                                    placeholder="/packages/dubai..."
+                                                    className="w-full bg-transparent text-[10px] text-gray-400 font-mono focus:outline-none"
+                                                />
+                                            </div>
+                                            <button
+                                                onClick={() => removeQuickLink(idx)}
+                                                className="absolute top-2 right-2 p-1.5 text-gray-300 hover:text-red-500 hover:bg-red-50 rounded-lg opacity-0 group-hover:opacity-100 transition-all"
+                                            >
+                                                <Trash2 className="w-3.5 h-3.5" />
+                                            </button>
+                                        </div>
+                                    ))}
+                                    {(!seoData.quickLinks || seoData.quickLinks.length === 0) && (
+                                        <div className="col-span-full py-16 text-center bg-gray-50/50 rounded-3xl border-2 border-dashed border-gray-200">
+                                            <p className="text-gray-400 italic">No links generated yet. Click "Magic Generate" to build them instantly! ✨</p>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         </div>

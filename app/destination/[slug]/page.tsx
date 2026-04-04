@@ -1,7 +1,8 @@
 import { Metadata } from 'next';
 import { API_BASE_URL } from '../../../constants';
 import DestinationClient from './DestinationClient';
-import { FooterQuickLinks } from '@/components/FooterQuickLinks';
+import SEOQuickLinks from '@/components/SEOQuickLinks';
+import { redirect } from 'next/navigation';
 
 export const dynamic = 'force-dynamic';
 
@@ -113,14 +114,17 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
     const dest = await getDestination(slug);
     const allPackages = await getPackages();
     const config = await getHomepageConfig();
+    const { slug: searchSlug } = await params;
+
+    if (!dest) {
+        redirect('/');
+    }
 
     // Filter packages server-side if destination is found
-    const filteredPackages = dest
-        ? filterPackages(allPackages, dest.name, slug)
-        : [];
+    const filteredPackages = filterPackages(allPackages, dest.name, searchSlug);
 
     return (
-        <>
+        <div className="bg-white">
             {dest?.seo?.jsonLd && (
                 <script
                     type="application/ld+json"
@@ -128,8 +132,8 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
                 />
             )}
             <h1 className="sr-only">{dest?.name} Tour Packages | Yatravi</h1>
-            {/* Pass only relevant packages to client */}
             <DestinationClient initialDestination={dest} initialPackages={filteredPackages} />
-        </>
+            <SEOQuickLinks links={dest.seo?.quickLinks || []} title="Important Travel Links" />
+        </div>
     );
 }

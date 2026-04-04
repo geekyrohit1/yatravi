@@ -20,22 +20,28 @@ async function getHomepageData() {
             return null;
         });
 
-        const [pkgData, configData] = await Promise.all([fetchPackages, fetchConfig]);
+        const fetchDestinations = fetch(`${API_BASE_URL}/api/destinations?t=${timestamp}`, { next: { revalidate: cacheTime } }).then(res => res.json()).catch(err => {
+            console.error('Destinations fetch failed', err);
+            return [];
+        });
+
+        const [pkgData, configData, destData] = await Promise.all([fetchPackages, fetchConfig, fetchDestinations]);
         
         const packagesArray = Array.isArray(pkgData) ? pkgData : (pkgData?.packages || []);
         
         return {
             packages: packagesArray,
-            config: configData
+            config: configData,
+            destinations: destData
         };
     } catch (error) {
         console.error('SSR Data Fetch Error:', error);
-        return { packages: [], config: null };
+        return { packages: [], config: null, destinations: [] };
     }
 }
 
 export default async function HomePage() {
-    const { packages, config } = await getHomepageData();
+    const { packages, config, destinations } = await getHomepageData();
 
     return (
         <main>
@@ -43,6 +49,7 @@ export default async function HomePage() {
             <HomeClient 
                 initialPackages={packages} 
                 initialConfig={config} 
+                initialDestinations={destinations}
             />
         </main>
     );

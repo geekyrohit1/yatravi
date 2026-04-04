@@ -382,22 +382,19 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                             </p>
                         </div>
 
-                        {/* Repositioned Pill-Style Search Bar with deep shadow */}
+                        {/* Repositioned Pill-Style Search Bar with premium glassmorphism and deep shadow */}
                         <button
                             onClick={() => window.dispatchEvent(new CustomEvent('open-mobile-search'))}
-                            className="group w-full h-12 bg-white rounded-2xl shadow-[0_20px_40px_-5px_rgba(0,0,0,0.35)] flex items-center justify-between px-4 active:scale-[0.97] transition-all border border-white/10"
+                            className="group w-full h-12 bg-white/95 backdrop-blur-lg rounded-2xl shadow-[0_25px_50px_-12px_rgba(0,0,0,0.4)] flex items-center justify-between px-5 active:scale-[0.98] transition-all border border-white/40"
                         >
                             <div className="flex items-center gap-3">
-                                <Search className="w-4 h-4 text-gray-400 group-hover:text-brand transition-colors" />
+                                <Search className="w-4.5 h-4.5 text-gray-400 group-hover:text-brand transition-colors" />
                                 <div className="flex items-center gap-1.5 overflow-hidden">
-                                    <span className="text-gray-400 text-xs font-medium">Search</span>
+                                    <span className="text-gray-500/80 text-xs font-medium">Search</span>
                                     <span className="text-brand text-xs font-bold truncate">
                                         "{dynamicPlaceholder}"
                                     </span>
                                 </div>
-                            </div>
-                            <div className="w-8 h-8 flex items-center justify-center bg-gray-50 border border-gray-100 rounded-lg">
-                                <SlidersHorizontal className="w-3.5 h-3.5 text-gray-400" />
                             </div>
                         </button>
                     </div>

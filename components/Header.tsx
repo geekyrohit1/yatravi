@@ -40,7 +40,7 @@ export const Header: React.FC<HeaderProps> = ({
     <nav className={`${pathname === '/'
       ? 'sticky top-0 bg-white border-b border-gray-100 shadow-sm md:absolute md:top-8 md:bg-transparent md:border-0 md:shadow-none md:lg:bg-brand-dark lg:border-white/10 md:bg-white/80 md:backdrop-blur-md'
       : 'sticky top-0 lg:bg-brand-dark lg:border-white/10 bg-white/80 backdrop-blur-md border-b border-white/50'
-      } w-full ${isMobileMenuOpen ? 'z-[9999]' : 'z-50'} px-4 sm:px-6 lg:px-8 py-1.5 md:py-3 lg:py-5 transition-all duration-300 [backface-visibility:hidden] [transform:translateZ(0)]`}>
+      } w-full ${isMobileMenuOpen ? 'z-[9999]' : 'z-50'} px-4 sm:px-6 lg:px-8 py-2.5 md:py-3 lg:py-5 transition-all duration-300 [backface-visibility:hidden] [transform:translateZ(0)]`}>
       <div className="max-w-7xl mx-auto w-full">
         <div className="flex items-center justify-between gap-2 lg:gap-0">
           {/* Logo - Left */}

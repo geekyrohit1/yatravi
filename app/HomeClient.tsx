@@ -6,6 +6,7 @@ import { DOMESTIC_LOCATIONS } from '../constants';
 import dynamic from 'next/dynamic';
 import { HeroSection } from '../components/HeroSection';
 import { FadeIn } from '../components/FadeIn';
+import { cleanSlug } from '../lib/utils';
 
 // Reusable Skeleton Components
 const SectionHeaderSkeleton = () => (
@@ -86,9 +87,10 @@ const METRO_CITIES = ['Mumbai', 'Delhi', 'Jaipur', 'Bangalore', 'Chennai', 'Kolk
 interface HomeClientProps {
     initialPackages: Package[];
     initialConfig: any;
+    initialDestinations: any[];
 }
 
-export const HomeClient: React.FC<HomeClientProps> = ({ initialPackages, initialConfig }) => {
+export const HomeClient: React.FC<HomeClientProps> = ({ initialPackages, initialConfig, initialDestinations }) => {
     const [isMounted, setIsMounted] = React.useState(false);
 
     React.useEffect(() => {
@@ -99,6 +101,9 @@ export const HomeClient: React.FC<HomeClientProps> = ({ initialPackages, initial
     const calculatedSectionsData = React.useMemo(() => {
         if (!initialPackages.length || !initialConfig) return { dynamicSections: {}, cityDepartures: [], featuredCollections: [] };
 
+        // MASTER SWITCH: Filter out packages that are hidden from homepage or are drafts
+        const activePackages = initialPackages.filter(p => p.status === 'published' && p.showOnHomepage !== false);
+
         const tempRenderedIds = new Set<string>();
         const dynamicSections: Record<string, Package[]> = {};
 
@@ -106,7 +111,22 @@ export const HomeClient: React.FC<HomeClientProps> = ({ initialPackages, initial
         (initialConfig.sections || []).forEach((section: any) => {
             if (!section.enabled) return;
 
-            const explicitlyAssigned = initialPackages.filter(p => p.homepageSections?.includes(section.key));
+            // ADVANCED SYNC: Map Admin keys to Homepage Section keys
+            const sectionKey = section.key.toLowerCase();
+            const explicitlyAssigned = activePackages.filter(p => {
+                const sectArr = p.homepageSections || [];
+                // 1. Direct key match
+                if (sectArr.includes(section.key)) return true;
+                // 2. Map Admin keys -> Logic types
+                if (sectionKey.includes('weekend') && sectArr.includes('weekendGetaways')) return true;
+                if ((sectionKey.includes('deals') || sectionKey.includes('saver')) && sectArr.includes('superSaver')) return true;
+                if (sectionKey.includes('trending') && sectArr.includes('trending')) return true;
+                if (sectionKey.includes('honeymoon') && sectArr.includes('honeymoon')) return true;
+                if (sectionKey.includes('international') && sectArr.includes('international')) return true;
+                if ((sectionKey.includes('domestic') || sectionKey.includes('india')) && sectArr.includes('domestic')) return true;
+                return false;
+            });
+
             let filtered: Package[] = [];
             let effectiveFilter = section.filterType;
 
@@ -121,18 +141,32 @@ export const HomeClient: React.FC<HomeClientProps> = ({ initialPackages, initial
                 effectiveFilter = effectiveFilter.toLowerCase();
             }
 
+            // FILTER LOGIC: Enhanced to respect both badges, explicit assignments, and multiple aliases
             if (effectiveFilter === 'trending') {
-                filtered = initialPackages.filter(p => p.isTrending || p.isBestSeller);
+                filtered = activePackages.filter(p => p.isTrending || p.isBestSeller);
             } else if (effectiveFilter === 'honeymoon') {
-                filtered = initialPackages.filter(p => p.category?.toLowerCase() === 'honeymoon' || p.title?.toLowerCase().includes('honeymoon'));
+                filtered = activePackages.filter(p => {
+                    const cat = p.category?.toLowerCase();
+                    const title = p.title?.toLowerCase();
+                    return cat === 'honeymoon' || cat === 'romantic' || cat === 'couple' || title?.includes('honeymoon') || title?.includes('romantic');
+                });
             } else if (effectiveFilter === 'weekend') {
-                filtered = initialPackages.filter(p => p.duration <= 3 || p.title?.toLowerCase().includes('weekend'));
+                filtered = activePackages.filter(p => {
+                    const title = p.title?.toLowerCase();
+                    return p.duration <= 3 || title?.includes('weekend') || title?.includes('staycation') || title?.includes('short trip');
+                });
             } else if (effectiveFilter === 'international') {
-                filtered = initialPackages.filter(p => p.category?.toLowerCase() === 'international');
+                filtered = activePackages.filter(p => {
+                    const cat = p.category?.toLowerCase();
+                    return cat === 'international' || cat === 'worldwide' || cat === 'global' || cat === 'outbound';
+                });
             } else if (effectiveFilter === 'domestic') {
-                filtered = initialPackages.filter(p => p.category?.toLowerCase() === 'domestic');
+                filtered = activePackages.filter(p => {
+                    const cat = p.category?.toLowerCase();
+                    return cat === 'domestic' || cat === 'india' || cat === 'inbound' || cat === 'local';
+                });
             } else if (section.type === 'packages') {
-                filtered = initialPackages;
+                filtered = activePackages;
             }
 
             const freshAuto = filtered.filter(p => 
@@ -141,23 +175,22 @@ export const HomeClient: React.FC<HomeClientProps> = ({ initialPackages, initial
             );
 
             const limit = section.queryConfig?.limit || 8;
-            const combined = [...explicitlyAssigned, ...freshAuto].slice(0, limit);
+            // 100% MANUAL OVERRIDE: If it's a specific package section, only show explicitly assigned
+            // For general categories (international/domestic), keep auto-fill but remove global fallbacks
+            const combined = (section.type === 'packages' && !effectiveFilter) 
+                ? explicitlyAssigned.slice(0, limit)
+                : [...explicitlyAssigned, ...freshAuto].slice(0, limit);
+
             combined.forEach(p => tempRenderedIds.add(String(p._id || p.id)));
             dynamicSections[section.key] = combined;
         });
 
-        // Calculate City Departures
-        const cityExplicit = initialPackages.filter(p => p.homepageSections?.includes('cityDepartures'));
-        const cityAuto = initialPackages.filter(p => p.title?.toLowerCase().includes('from') || p.groupSize === 'Fixed Departure');
-        const cityFreshAuto = cityAuto.filter(p => 
-            !tempRenderedIds.has(String(p._id || p.id)) && 
-            !cityExplicit.some(e => String(e._id || e.id) === String(p._id || p.id))
-        );
-        const cityDepartures = [...cityExplicit, ...cityFreshAuto].slice(0, 8);
+        // 100% MANUAL: Only show packages explicitly checked for City Departures
+        const cityDepartures = activePackages.filter(p => p.homepageSections?.includes('cityDepartures')).slice(0, 8);
         cityDepartures.forEach(p => tempRenderedIds.add(String(p._id || p.id)));
 
-        // Featured Collections
-        const featuredCollections = initialPackages.filter(p => !tempRenderedIds.has(String(p._id || p.id))).slice(0, 12);
+        // Featured Collections (Only from active packages)
+        const featuredCollections = activePackages.filter(p => !tempRenderedIds.has(String(p._id || p.id))).slice(0, 12);
 
         return { dynamicSections, cityDepartures, featuredCollections };
     }, [initialPackages, initialConfig]);
@@ -173,31 +206,20 @@ export const HomeClient: React.FC<HomeClientProps> = ({ initialPackages, initial
             'superSaver': sectionPackages.length > 0 ? <SuperSaverDeals packages={sectionPackages} data={section} /> : null,
             'honeymoon': sectionPackages.length > 0 ? <HoneymoonSpecials packages={sectionPackages} data={section} /> : null,
             'topDestinations': <VisaFreeDestinations data={section} />,
-            'trendingPackages': <PackageSlider title={section.title || "Trending Packages"} subtitle={section.subtitle || "Most popular choices among travelers"} packages={sectionPackages.length > 0 ? sectionPackages : initialPackages.slice(0, 8)} />,
+            'trendingPackages': sectionPackages.length > 0 ? <PackageSlider title={section.title || "Trending Packages"} subtitle={section.subtitle || "Most popular choices among travelers"} packages={sectionPackages} /> : null,
             'media': <MediaBanner data={section} />,
             'slider': <PromoSlider data={section} />,
             'consultation': <ConsultationBanner />,
             'quicklinks': <FooterQuickLinks quickLinks={initialConfig?.quickLinks || []} importantLinks={initialConfig?.importantLinks || []} />,
-            'citydepartures': (
+            'citydepartures': calculatedSectionsData.cityDepartures.length > 0 ? (
                 <section className="py-12 md:py-20 overflow-hidden relative">
                     <PackageSlider
                         title={section.title || "Packages From Your City"}
                         subtitle={section.subtitle || "Curated for travelers from your region"}
-                        packages={calculatedSectionsData.cityDepartures.length > 0 ? calculatedSectionsData.cityDepartures : initialPackages.slice(0, 8)}
+                        packages={calculatedSectionsData.cityDepartures}
                     />
-                    <div className="mt-12 relative overflow-hidden group">
-                        <div className="flex w-max animate-scroll hover:[animation-play-state:paused] py-2">
-                            {[...METRO_CITIES, ...METRO_CITIES].map((city, idx) => (
-                                <div key={`city-${city}-${idx}`} className="mx-2 md:mx-3 bg-white border border-gray-100 px-4 py-3 md:px-6 md:py-4 rounded-xl min-w-[140px] md:min-w-[180px] text-center hover:bg-gray-50 hover:border-gray-200 transition-all cursor-pointer shadow-sm flex items-center justify-center">
-                                    <span className="text-gray-600 font-medium tracking-wider text-[9px] md:text-[10px] group-hover:text-black">{city}</span>
-                                </div>
-                            ))}
-                        </div>
-                        <div className="absolute inset-y-0 left-0 w-16 md:w-32 bg-gradient-to-r from-white/90 to-transparent z-10 pointer-events-none" />
-                        <div className="absolute inset-y-0 right-0 w-16 md:w-32 bg-gradient-to-l from-white/90 to-transparent z-10 pointer-events-none" />
-                    </div>
                 </section>
-            )
+            ) : null
         };
 
         let content = components[section.key];
@@ -247,6 +269,15 @@ export const HomeClient: React.FC<HomeClientProps> = ({ initialPackages, initial
         'whychooseus'
     ]);
 
+    // Cleanup: Filter packages once for reuse in the footer/auto-links
+    const allPublishedPackages = React.useMemo(() => 
+        initialPackages.filter(p => p.status === 'published'),
+    [initialPackages]);
+
+    const allPublishedDestinations = React.useMemo(() => 
+        initialDestinations.filter(d => d.status !== 'draft'),
+    [initialDestinations]);
+
     return (
         <div className={`flex flex-col gap-0 text-gray-800 bg-white ${isMounted ? 'animate-in fade-in duration-500' : 'opacity-0'}`}>
             <HeroSection 
@@ -276,39 +307,38 @@ export const HomeClient: React.FC<HomeClientProps> = ({ initialPackages, initial
 
                 <div className="flex flex-col gap-0 bg-white">
                     {!renderedDynamicKeys.has('consultation') && (
-                        <FadeIn delay={20}><ConsultationBanner /></FadeIn>
+                        <>
+                            <FadeIn delay={15}>
+                                <FooterQuickLinks
+                                    quickLinks={allPublishedPackages.map((p: any) => ({
+                                        label: p.title,
+                                        url: `/packages/${p.slug}`
+                                    }))}
+                                    importantLinks={allPublishedDestinations.map((d: any) => ({
+                                        label: d.name,
+                                        url: `/destination/${d.slug || cleanSlug(d.name)}`
+                                    }))}
+                                />
+                            </FadeIn>
+                            <FadeIn delay={20}>
+                                <ConsultationBanner />
+                            </FadeIn>
+                        </>
                     )}
 
-                    {!renderedDynamicKeys.has('citydepartures') && (
+                    {!renderedDynamicKeys.has('citydepartures') && calculatedSectionsData.cityDepartures.length > 0 && (
                         <FadeIn delay={30}>
                             <section className="py-12 md:py-20 overflow-hidden relative">
                                 <PackageSlider
                                     title="Packages From Your City"
                                     subtitle="Curated for travelers from your region"
-                                    packages={calculatedSectionsData.cityDepartures.length > 0 ? calculatedSectionsData.cityDepartures : initialPackages.slice(0, 8)}
+                                    packages={calculatedSectionsData.cityDepartures}
                                 />
-                                <div className="mt-12 relative overflow-hidden group">
-                                    <div className="flex w-max animate-scroll hover:[animation-play-state:paused] py-2">
-                                        {[...METRO_CITIES, ...METRO_CITIES].map((city, idx) => (
-                                            <div key={`city-${city}-${idx}`} className="mx-2 md:mx-3 bg-white border border-gray-100 px-4 py-3 md:px-6 md:py-4 rounded-xl min-w-[140px] md:min-w-[180px] text-center hover:bg-gray-50 hover:border-gray-200 transition-all cursor-pointer shadow-sm flex items-center justify-center">
-                                                <span className="text-gray-600 font-medium tracking-wider text-[9px] md:text-[10px] group-hover:text-black">{city}</span>
-                                            </div>
-                                        ))}
-                                    </div>
-                                    <div className="absolute inset-y-0 left-0 w-16 md:w-32 bg-gradient-to-r from-white/90 to-transparent z-10 pointer-events-none" />
-                                    <div className="absolute inset-y-0 right-0 w-16 md:w-32 bg-gradient-to-l from-white/90 to-transparent z-10 pointer-events-none" />
-                                </div>
-                            </section>
-                        </FadeIn>
-                    )}
+                </section>
+            </FadeIn>
+        )}
 
-                    <div className="py-8 space-y-0">
-                        <FadeIn delay={80}>
-                            <FooterQuickLinks
-                                quickLinks={initialPackages.map(p => ({ label: p.title, url: `/package/${p.slug}` }))}
-                                importantLinks={Array.from(new Set(initialPackages.map(p => p.location))).map(loc => ({ label: loc, url: `/destination/${loc.toLowerCase().replace(/\\s+/g, '-')}` }))}
-                            />
-                        </FadeIn>
+        <div className="py-8 space-y-0">
                         
                         {!renderedDynamicKeys.has('partnersmarquee') && (
                             <PartnersMarquee />

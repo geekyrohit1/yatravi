@@ -44,16 +44,17 @@ export const MobileSearchModal: React.FC<MobileSearchModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-[10000] lg:hidden">
-      {/* Backdrop with heavy blur */}
-      <div className="absolute inset-0 bg-black/40 backdrop-blur-md animate-in fade-in duration-500" onClick={() => setShowSearchModal(false)} />
+      {/* Backdrop with custom snappy fade-in animation */}
+      <div className="absolute inset-0 bg-black/40 backdrop-blur-md animate-fade-in" onClick={() => setShowSearchModal(false)} />
 
-      {/* Modal Content - Full Height Slide Up */}
-      <div className="absolute inset-0 md:inset-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:w-[90vw] md:max-w-3xl md:h-[85vh] md:rounded-3xl bg-white flex flex-col animate-in slide-in-from-bottom md:zoom-in-95 duration-500 overflow-hidden font-sans md:shadow-2xl">
+      {/* Modal Content - Cinematic Modal Expand Animation from Search Bar Position */}
+      <div className="absolute inset-0 md:inset-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:w-[90vw] md:max-w-3xl md:h-[85vh] md:rounded-3xl bg-white flex flex-col animate-search-pill-expand overflow-hidden font-sans md:shadow-2xl">
         {/* Header with Depth */}
         <div className="px-4 pt-6 pb-6 border-b border-gray-100 flex flex-col gap-6 bg-white sticky top-0 z-20 shadow-sm">
           <div className="flex items-center gap-2">
             <div className="flex-1 relative group">
-              <div className="absolute inset-0 bg-gray-50/80 rounded-xl transition-all duration-300" />
+              {/* Premium Pill Background Sync with Hero Section + Simple Single Depth */}
+              <div className="absolute inset-0 bg-white/95 backdrop-blur-lg rounded-2xl shadow-[0_15px_35px_-10px_rgba(0,0,0,0.25)] border border-gray-200/50 transition-all duration-300" />
               <div className="absolute left-4 top-1/2 -translate-y-1/2 z-10">
                 <Search className="w-5 h-5 text-gray-400" />
               </div>
@@ -63,7 +64,7 @@ export const MobileSearchModal: React.FC<MobileSearchModalProps> = ({
                 value={searchQuery}
                 onChange={handleSearchChange}
                 placeholder={settings?.heroSearchPlaceholder || "Search destinations..."}
-                className="relative w-full pl-12 pr-10 py-3 bg-transparent border-0 focus:ring-0 text-[16px] font-semibold text-gray-900 placeholder-gray-400 font-sans"
+                className="relative w-full pl-12 pr-10 py-3.5 bg-transparent border-0 focus:ring-0 focus:outline-none text-[14px] font-semibold text-gray-900 placeholder-gray-400 font-sans"
               />
               {isSearching && (
                 <div className="absolute right-4 top-1/2 -translate-y-1/2 z-10">

@@ -85,6 +85,14 @@ export default {
                         'background-size': '200% 200%',
                         'background-position': 'right center'
                     }
+                },
+                'search-pill-expand': {
+                    '0%': { 'clip-path': 'circle(30% at 50% 90%)', opacity: '0', transform: 'scale(0.98)' },
+                    '100%': { 'clip-path': 'circle(150% at 50% 90%)', opacity: '1', transform: 'scale(1)' },
+                },
+                'fade-in': {
+                    '0%': { opacity: '0' },
+                    '100%': { opacity: '1' },
                 }
             },
             animation: {
@@ -92,6 +100,8 @@ export default {
                 'fade-in-down': 'fade-in-down 0.5s ease-out forwards',
                 'shimmer': 'shimmer 2s infinite linear',
                 'gradient-xy': 'gradient-xy 8s ease infinite',
+                'search-pill-expand': 'search-pill-expand 0.15s ease-out forwards',
+                'fade-in': 'fade-in 0.3s ease-out forwards',
             },
         },
     },

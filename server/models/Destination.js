@@ -31,7 +31,11 @@ const destinationSchema = new mongoose.Schema({
           rank: Number,
           date: { type: Date, default: Date.now }
         }],
-        lastRankCheck: Date
+        lastRankCheck: Date,
+        quickLinks: [{
+            label: { type: String, trim: true },
+            url: { type: String, trim: true }
+        }]
     },
     slug: {
         type: String,

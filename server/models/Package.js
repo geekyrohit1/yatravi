@@ -59,7 +59,11 @@ const packageSchema = new mongoose.Schema({
       rank: Number,
       date: { type: Date, default: Date.now }
     }],
-    lastRankCheck: Date
+    lastRankCheck: Date,
+    quickLinks: [{
+      label: { type: String, trim: true },
+      url: { type: String, trim: true }
+    }]
   },
   id: { type: String, unique: true }, // Keeping string ID to match frontend (auto-generated if missing)
   slug: { type: String, unique: true }, // SEO-friendly URL slug

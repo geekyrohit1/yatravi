@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const Destination = require('../models/Destination');
 const Package = require('../models/Package');
 const authMiddleware = require('../middleware/auth');
+const { generateSEOQuickLinks } = require('../utils/seoHelper');
 
 // GET all destinations
 router.get('/', async (req, res) => {
@@ -45,6 +46,12 @@ router.get('/:identifier', async (req, res) => {
 // POST create destination
 router.post('/', authMiddleware, async (req, res) => {
   try {
+    // Smart SEO: Auto-generate quick links if empty
+    if (req.body.seo && (!req.body.seo.quickLinks || req.body.seo.quickLinks.length === 0)) {
+        if (req.body.name && req.body.slug) {
+            req.body.seo.quickLinks = generateSEOQuickLinks(req.body.name, 'destination', req.body.slug);
+        }
+    }
     const destination = new Destination(req.body);
     const saved = await destination.save();
     res.status(201).json(saved);
@@ -70,6 +77,14 @@ router.put('/:id', authMiddleware, async (req, res) => {
     if (!destination) return res.status(404).json({ message: 'Destination not found for update' });
 
     Object.assign(destination, req.body);
+    
+    // Smart SEO: Auto-generate quick links if empty during update
+    if (destination.seo && (!destination.seo.quickLinks || destination.seo.quickLinks.length === 0)) {
+        if (destination.name && destination.slug) {
+            destination.seo.quickLinks = generateSEOQuickLinks(destination.name, 'destination', destination.slug);
+        }
+    }
+
     destination.markModified('seo'); // Force Mongoose to detect nested seo object changes
     const saved = await destination.save();
     res.json(saved);

@@ -43,14 +43,14 @@ export const SaleStrip: React.FC = () => {
                 '--sale-bg-start': bgStart,
                 '--sale-bg-end': bgEnd,
             } as React.CSSProperties}
-            className="w-full h-8 md:h-10 flex items-center justify-center text-white z-[100] relative overflow-hidden shadow-sm border-b border-white/5 animate-gradient-xy bg-[linear-gradient(135deg,var(--sale-bg-start)_0%,var(--sale-bg-end)_50%,var(--sale-bg-start)_100%)] bg-[length:200%_auto] font-sans"
+            className="w-full py-2 min-h-[32px] md:min-h-[40px] flex items-center justify-center text-white z-[100] relative shadow-sm border-b border-white/5 animate-gradient-xy bg-[linear-gradient(135deg,var(--sale-bg-start)_0%,var(--sale-bg-end)_50%,var(--sale-bg-start)_100%)] bg-[length:200%_auto] font-sans"
         >
-            <div className="max-w-7xl mx-auto w-full px-4 flex items-center justify-center relative z-10 gap-4 md:gap-8">
+            <div className="max-w-7xl mx-auto w-full px-4 flex flex-col sm:flex-row items-center justify-center relative z-10 gap-2 md:gap-8">
                 <div className="flex items-center gap-3 w-full justify-center">
                     {settings.saleBannerLink ? (
                         <Link href={settings.saleBannerLink} className="flex items-center hover:opacity-80 transition-all active:scale-95 max-w-full overflow-hidden">
-                            <div className="flex items-center font-sans whitespace-nowrap">
-                                <span className="font-semibold tracking-[0.05em] uppercase text-[10px] md:text-[11px]">
+                            <div className="flex items-center font-sans">
+                                <span className="font-semibold tracking-[0.05em] uppercase text-[10px] md:text-[11px] text-center block">
                                     {cleanText}
                                 </span>
                             </div>

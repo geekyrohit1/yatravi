@@ -127,4 +127,4 @@ export const Footer: React.FC<FooterProps> = ({ onOpenQuote }) => {
       </div>
     </footer>
   );
-};
+}
