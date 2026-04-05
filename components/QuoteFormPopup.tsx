@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     Phone, CheckCircle, User, Mail, MapPin, Users,
     Wallet, MessageSquare, Plane, Globe, MapPinned, Sparkles, X,
@@ -155,6 +155,24 @@ interface QuoteFormPopupProps {
 }
 
 export const QuoteFormPopup: React.FC<QuoteFormPopupProps> = ({ isOpen, onClose }) => {
+    useEffect(() => {
+        if (isOpen) {
+            const handlePopState = () => {
+                onClose();
+            };
+            
+            window.history.pushState({ popup: 'QuoteFormPopup' }, '');
+            window.addEventListener('popstate', handlePopState);
+            
+            return () => {
+                window.removeEventListener('popstate', handlePopState);
+                if (window.history.state && window.history.state.popup === 'QuoteFormPopup') {
+                    window.history.back();
+                }
+            };
+        }
+    }, [isOpen, onClose]);
+
     const [submitted, setSubmitted] = useState(false);
     const [loading, setLoading] = useState(false);
     const [departureDate, setDepartureDate] = useState<Dayjs | null>(null);

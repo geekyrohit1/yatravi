@@ -80,8 +80,6 @@ interface HomepageConfig {
     heroSlider: HeroSlide[];
     sections: HomepageSection[];
     faq: FAQ[];
-    mobileHeroVideo?: string;
-    showMobileHeroVideo?: boolean;
 }
 
 export default function HomepageConfigPage() {
@@ -170,8 +168,6 @@ export default function HomepageConfigPage() {
                     isVideo: s.isVideo || false
                 })),
                 faq: config.faq,
-                mobileHeroVideo: config.mobileHeroVideo || '',
-                showMobileHeroVideo: config.showMobileHeroVideo || false
             };
 
             const res = await fetch(`${API_BASE_URL}/api/homepage`, {
@@ -788,99 +784,7 @@ export default function HomepageConfigPage() {
                         )}
                     </div>
 
-                    {/* Mobile Hero Video Section */}
-                    <Card className="border-none shadow-sm ring-1 ring-gray-100 rounded-2xl overflow-hidden bg-white mt-8">
-                        <CardHeader className="bg-gray-50/50 border-b border-gray-100 pb-4">
-                            <div className="flex items-center justify-between">
-                                <div>
-                                    <CardTitle className="text-base font-semibold text-gray-900">Mobile Hero Video</CardTitle>
-                                    <CardDescription>Upload a background video for the mobile hero section</CardDescription>
-                                </div>
-                                <div className="flex items-center gap-2">
-                                    <Label className="text-sm font-medium text-gray-700">{config.showMobileHeroVideo ? 'Enabled' : 'Disabled'}</Label>
-                                    <Switch
-                                        checked={config.showMobileHeroVideo || false}
-                                        onCheckedChange={(checked) => setConfig({ ...config, showMobileHeroVideo: checked })}
-                                    />
-                                </div>
-                            </div>
-                        </CardHeader>
-                        <CardContent className="p-6">
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div className="space-y-2">
-                                    <Label className="text-xs text-gray-500 font-medium uppercase tracking-wider">Video URL</Label>
-                                    <p className="text-[10px] text-gray-400 -mt-1">Direct link to MP4 or WebM video</p>
-                                    <div className="flex gap-2">
-                                        <Input
-                                            value={config.mobileHeroVideo || ''}
-                                            onChange={(e) => setConfig({ ...config, mobileHeroVideo: e.target.value })}
-                                            placeholder="https://example.com/video.mp4"
-                                            className="h-10 rounded-lg border-gray-200"
-                                        />
-                                        <div className="relative">
-                                            <Button variant="outline" className="h-10 rounded-lg" disabled={uploading}>
-                                                <Upload className="w-4 h-4 mr-2" />
-                                                Upload
-                                            </Button>
-                                            <input
-                                                type="file"
-                                                accept="video/*"
-                                                className="absolute inset-0 opacity-0 cursor-pointer"
-                                                onChange={async (e) => {
-                                                    const file = e.target.files?.[0];
-                                                    if (!file) return;
-                                                    const formData = new FormData();
-                                                    formData.append('image', file); // API uses 'image' key for all uploads
-                                                    setUploading(true);
-                                                    try {
-                                                        const res = await fetch(UPLOAD_API_URL, {
-                                                            method: 'POST',
-                                                            body: formData,
-                                                            credentials: 'include'
-                                                        });
-                                                        const data = await res.json();
-                                                        if (!res.ok) throw new Error(data.message || 'Upload failed');
-                                                        setConfig({ ...config, mobileHeroVideo: data.url });
-                                                    } catch (error) {
-                                                        alert("Upload failed. Please check file size and try again.");
-                                                    } finally {
-                                                        setUploading(false);
-                                                    }
-                                                }}
-                                                disabled={uploading}
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="space-y-2">
-                                    <Label className="text-xs text-gray-500 font-medium uppercase tracking-wider">Preview</Label>
-                                    <div className="h-[200px] w-full bg-gray-100 rounded-xl overflow-hidden flex items-center justify-center border border-gray-100 relative group">
-                                        {config.mobileHeroVideo ? (
-                                            <video 
-                                                src={config.mobileHeroVideo} 
-                                                className="w-full h-full object-cover"
-                                                autoPlay muted loop playsInline
-                                            />
-                                        ) : (
-                                            <div className="flex flex-col items-center gap-2 text-gray-400">
-                                                <ImageIcon className="w-8 h-8" />
-                                                <span className="text-xs">No video uploaded</span>
-                                            </div>
-                                        )}
-                                        {config.mobileHeroVideo && (
-                                            <button 
-                                                onClick={() => setConfig({ ...config, mobileHeroVideo: '' })}
-                                                className="absolute top-2 right-2 p-1.5 bg-black/50 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
-                                            >
-                                                <X className="w-4 h-4" />
-                                            </button>
-                                        )}
-                                    </div>
-                                </div>
-                            </div>
-                        </CardContent>
-                    </Card>
-                </TabsContent>
+                    </TabsContent>
 
                 {/* SECTIONS TAB */}
                 <TabsContent value="sections" className="space-y-8 animate-in fade-in-50 slide-in-from-bottom-2 duration-300">

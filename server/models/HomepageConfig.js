@@ -60,8 +60,6 @@ const homepageConfigSchema = new mongoose.Schema({
     heroSlider: [heroSlideSchema],
     sections: [homepageSectionSchema],
     faq: [homepageFaqSchema],
-    mobileHeroVideo: String, // URL for background video on mobile
-    showMobileHeroVideo: { type: Boolean, default: false },
     updatedAt: { type: Date, default: Date.now }
 });
 

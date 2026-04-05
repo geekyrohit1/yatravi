@@ -59,6 +59,21 @@ export default function DestinationClient({ initialDestination, initialPackages 
         window.dispatchEvent(new CustomEvent('hideFloatingIcons', { detail: showMobileForm }));
     }, [showMobileForm]);
 
+    // Back button trap for mobile form
+    useEffect(() => {
+        if (showMobileForm) {
+            const handlePopState = () => setShowMobileForm(false);
+            window.history.pushState({ popup: 'MobileFormDest' }, '');
+            window.addEventListener('popstate', handlePopState);
+            return () => {
+                window.removeEventListener('popstate', handlePopState);
+                if (window.history.state && window.history.state.popup === 'MobileFormDest') {
+                    window.history.back();
+                }
+            };
+        }
+    }, [showMobileForm]);
+
     // Filter packages based on the slug/name
     const filterPackages = (allPackages: Package[], destName: string, searchSlug: string) => {
         const normalize = (str: string) => str?.toLowerCase().replace(/[^a-z0-9]/g, '') || '';
@@ -542,7 +557,7 @@ export default function DestinationClient({ initialDestination, initialPackages 
                 </div>
                 <button
                     onClick={() => setShowMobileForm(true)}
-                    className="bg-brand text-white px-6 py-3 rounded-full font-semibold text-sm shadow-md hover:bg-brand-dark transition-colors"
+                    className="bg-brand text-white px-6 py-3 rounded-xl font-semibold text-sm shadow-md hover:bg-brand-dark transition-colors"
                 >
                     Inquire Now
                 </button>

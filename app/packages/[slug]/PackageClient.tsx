@@ -76,6 +76,21 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
         window.dispatchEvent(new CustomEvent('hideFloatingIcons', { detail: showMobileForm }));
     }, [showMobileForm]);
 
+    // Back button trap for mobile form
+    useEffect(() => {
+        if (showMobileForm) {
+            const handlePopState = () => setShowMobileForm(false);
+            window.history.pushState({ popup: 'MobileFormPkg' }, '');
+            window.addEventListener('popstate', handlePopState);
+            return () => {
+                window.removeEventListener('popstate', handlePopState);
+                if (window.history.state && window.history.state.popup === 'MobileFormPkg') {
+                    window.history.back();
+                }
+            };
+        }
+    }, [showMobileForm]);
+
     // Countdown timer logic (unchanged)
     const [timeLeft, setTimeLeft] = useState({ hours: 23, minutes: 59, seconds: 59 });
     const [showOverviewButton, setShowOverviewButton] = useState(false);
@@ -618,7 +633,7 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
                             {packageData.itinerary && packageData.itinerary.length > 0 ? (
                                 <div className="relative">
                                     {/* Vertical connecting line */}
-                                    <div className="absolute left-[19px] top-8 bottom-8 w-px bg-gray-200 z-0"></div>
+                                    <div className="absolute left-[19px] top-8 bottom-8 w-0 border-l-2 border-dashed border-brand/60 z-0"></div>
 
                                     <div className="space-y-3">
                                         {packageData.itinerary.map((day, i) => (
@@ -642,7 +657,7 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
                                                     >
                                                         <div className="flex-1 flex flex-col items-start gap-1 min-w-0">
                                                             <span className="text-[10px] font-extrabold tracking-widest text-[#9b1313] shrink-0 uppercase py-0.5 px-2 bg-orange-50/80 rounded-md border border-orange-100/50">Day {day.day}</span>
-                                                            <h3 className="text-[14px] md:text-[15px] font-bold text-gray-900 group-hover:text-brand transition-colors leading-snug">{day.title}</h3>
+                                                            <h3 className="text-[14px] md:text-[15px] font-bold text-gray-900 leading-snug">{day.title}</h3>
                                                         </div>
                                                         <div className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-500 ml-3 ${expandedDays.includes(i) ? 'bg-brand text-white rotate-180 shadow-lg shadow-brand/20' : 'bg-gray-50 text-gray-400 group-hover:bg-gray-100'}`}>
                                                             <svg className={`w-4 h-4 transition-transform duration-500`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -899,16 +914,18 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
             </div>
 
             {/* 5. Mobile Sticky Bottom Bar */}
-            <div className="lg:hidden fixed bottom-1 left-1 right-1 bg-white/95 backdrop-blur-md border border-gray-100 p-4 rounded-3xl z-40 flex items-center justify-between shadow-2xl shadow-gray-200/50 safe-area-bottom mx-2">
-                <div className="flex flex-col">
-                    <span className="text-[9px] text-gray-400 font-bold tracking-wider">Starting from</span>
-                    <span className="text-lg font-bold tracking-tight text-gray-900 leading-none">₹{packageData.price.toLocaleString()}</span>
+            <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] z-40 flex items-center justify-between">
+                <div>
+                    <p className="text-xs text-gray-600 font-semibold tracking-widest leading-none mb-1">Starting from</p>
+                    <div className="flex items-baseline gap-2">
+                        <span className="text-xl font-semibold tracking-tight text-brand">₹{packageData.price.toLocaleString()}</span>
+                    </div>
                 </div>
                 <button
                     onClick={() => setShowMobileForm(true)}
-                    className="bg-gradient-to-br from-brand-deep to-brand-dark text-white px-8 py-3.5 rounded-2xl font-bold text-[11px] tracking-wide shadow-lg shadow-brand/20 transition-transform active:scale-95"
+                    className="bg-brand text-white px-6 py-3 rounded-xl font-semibold text-sm shadow-md hover:bg-brand-dark transition-colors"
                 >
-                    Inquire now
+                    Inquire Now
                 </button>
             </div>
 

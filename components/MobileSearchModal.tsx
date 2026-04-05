@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ArrowRight, Loader2, X, SlidersHorizontal, MapPin, Calendar, Star, Search } from 'lucide-react';
 
 interface MobileSearchModalProps {
@@ -40,6 +40,24 @@ export const MobileSearchModal: React.FC<MobileSearchModalProps> = ({
   trendingPackages,
   router
 }) => {
+  useEffect(() => {
+    if (showSearchModal) {
+      const handlePopState = () => {
+        setShowSearchModal(false);
+      };
+      
+      window.history.pushState({ popup: 'MobileSearchModal' }, '');
+      window.addEventListener('popstate', handlePopState);
+      
+      return () => {
+        window.removeEventListener('popstate', handlePopState);
+        if (window.history.state && window.history.state.popup === 'MobileSearchModal') {
+          window.history.back();
+        }
+      };
+    }
+  }, [showSearchModal, setShowSearchModal]);
+
   if (!showSearchModal) return null;
 
   return (

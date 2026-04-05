@@ -48,16 +48,16 @@ export const SaleStrip: React.FC = () => {
             <div className="max-w-7xl mx-auto w-full px-4 flex flex-col sm:flex-row items-center justify-center relative z-10 gap-2 md:gap-8">
                 <div className="flex items-center gap-3 w-full justify-center">
                     {settings.saleBannerLink ? (
-                        <Link href={settings.saleBannerLink} className="flex items-center hover:opacity-80 transition-all active:scale-95 max-w-full overflow-hidden">
-                            <div className="flex items-center font-sans">
-                                <span className="font-semibold tracking-[0.05em] uppercase text-[10px] md:text-[11px] text-center block">
+                        <Link href={settings.saleBannerLink} className="flex items-center justify-center hover:opacity-80 transition-all active:scale-95 w-full overflow-hidden">
+                            <div className="flex items-center justify-center font-sans w-full text-center">
+                                <span className="font-semibold tracking-[0.05em] uppercase text-[clamp(6px,2.5vw,11px)] md:text-[11px] whitespace-nowrap truncate w-full">
                                     {cleanText}
                                 </span>
                             </div>
                         </Link>
                     ) : (
-                        <div className="flex items-center font-sans whitespace-nowrap max-w-full overflow-hidden">
-                            <span className="font-semibold tracking-[0.05em] uppercase text-[10px] md:text-[11px]">
+                        <div className="flex items-center justify-center font-sans w-full text-center overflow-hidden">
+                            <span className="font-semibold tracking-[0.05em] uppercase text-[clamp(6px,2.5vw,11px)] md:text-[11px] whitespace-nowrap truncate w-full">
                                 {cleanText}
                             </span>
                         </div>

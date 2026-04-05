@@ -47,15 +47,11 @@ const FALLBACK_DESTINATIONS: HeroDestination[] = [
 interface HeroSectionProps {
     heroData?: any[];
     isLoading?: boolean;
-    mobileVideo?: string;
-    showMobileVideo?: boolean;
 }
 
 export const HeroSection: React.FC<HeroSectionProps> = ({ 
     heroData = [], 
-    isLoading = false,
-    mobileVideo,
-    showMobileVideo 
+    isLoading = false
 }) => {
     const router = useRouter();
     const { settings, loading: settingsLoading } = useSettings();

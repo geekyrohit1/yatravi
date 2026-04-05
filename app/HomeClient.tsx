@@ -283,8 +283,6 @@ export const HomeClient: React.FC<HomeClientProps> = ({ initialPackages, initial
             <HeroSection 
                 heroData={initialConfig?.heroSlider} 
                 isLoading={!isMounted} 
-                mobileVideo={initialConfig?.mobileHeroVideo}
-                showMobileVideo={initialConfig?.showMobileHeroVideo}
             />
 
             <div className="flex flex-col gap-0">

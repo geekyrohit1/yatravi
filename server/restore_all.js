@@ -59,9 +59,9 @@ async function restore() {
         console.log('Importing packages...');
         const allPackages = [...PACKAGES, ...ADDITIONAL_PACKAGES];
         const importedPackages = await Package.insertMany(allPackages.map(p => ({
-             ...p,
-             _id: new mongoose.Types.ObjectId(),
-             slug: p.slug || p.title.toLowerCase().replace(/ /g, '-')
+            ...p,
+            _id: new mongoose.Types.ObjectId(),
+            slug: p.slug || p.title.toLowerCase().replace(/ /g, '-')
         })));
         console.log(`Imported ${importedPackages.length} packages.`);
 
@@ -86,9 +86,7 @@ async function restore() {
                 { key: 'domestic', title: 'Domestic Getaways', subtitle: 'Explore the beauty of India', type: 'packages', filterType: 'domestic', enabled: true, order: 5 },
                 { key: 'international', title: 'International Getaways', subtitle: 'Explore the world', type: 'packages', filterType: 'international', enabled: true, order: 6 },
                 { key: 'superSaver', title: 'Super Saver Deals', subtitle: 'Best value packages', type: 'packages', filterType: 'superSaver', enabled: true, order: 7 }
-            ],
-            mobileHeroVideo: "/videos/hero-mobile.mp4", 
-            showMobileHeroVideo: true 
+            ]
         });
         await config.save();
         console.log('Homepage configuration restored to Classic state.');

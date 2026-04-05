@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Phone, CheckCircle, User, Mail, Calendar, Loader2, ArrowRight, X, Users } from 'lucide-react';
 import { API_BASE_URL } from '@/constants';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -89,6 +89,11 @@ export const InquiryWidget = ({ title, onClose, showPaxCount = false, roundedBot
         email: '',
         phone: '',
     });
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -165,7 +170,7 @@ export const InquiryWidget = ({ title, onClose, showPaxCount = false, roundedBot
                 ) : (
                     <form onSubmit={handleSubmit} className="space-y-2 md:space-y-4">
                         <div className="space-y-1">
-                            <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">Full Name</label>
+                            <label className="text-[10px] font-semibold md:font-bold text-gray-500 md:text-gray-400 uppercase tracking-wider md:tracking-widest ml-1">Full Name</label>
                             <div className="relative group">
                                 <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-300 group-focus-within:text-brand transition-colors" />
                                 <input
@@ -181,7 +186,7 @@ export const InquiryWidget = ({ title, onClose, showPaxCount = false, roundedBot
                         </div>
 
                         <div className="space-y-1">
-                            <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">Email Address</label>
+                            <label className="text-[10px] font-semibold md:font-bold text-gray-500 md:text-gray-400 uppercase tracking-wider md:tracking-widest ml-1">Email Address</label>
                             <div className="relative group">
                                 <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-300 group-focus-within:text-brand transition-colors" />
                                 <input
@@ -197,7 +202,7 @@ export const InquiryWidget = ({ title, onClose, showPaxCount = false, roundedBot
                         </div>
 
                         <div className="space-y-1">
-                            <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">Mobile Number</label>
+                            <label className="text-[10px] font-semibold md:font-bold text-gray-500 md:text-gray-400 uppercase tracking-wider md:tracking-widest ml-1">Mobile Number</label>
                             <div className="relative group">
                                 <div className="absolute left-4 top-1/2 -translate-y-1/2 flex items-center gap-1 border-r border-gray-200 pr-3 mr-2">
                                     <span className="text-[13px] font-bold text-gray-400">+91</span>
@@ -216,30 +221,39 @@ export const InquiryWidget = ({ title, onClose, showPaxCount = false, roundedBot
                         </div>
 
                         <div className="space-y-1">
-                            <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">Travel Date</label>
+                            <label className="text-[10px] font-semibold md:font-bold text-gray-500 md:text-gray-400 uppercase tracking-wider md:tracking-widest ml-1">Travel Date</label>
                             <div className="relative group inquiry-datepicker">
-                                <DatePicker
-                                    value={travelDate}
-                                    onChange={(newValue) => setTravelDate(newValue)}
-                                    minDate={dayjs()}
-                                    format="DD MMM YYYY"
-                                    slotProps={{
-                                        textField: {
-                                            fullWidth: true,
-                                            placeholder: "Select Travel Date",
-                                            required: true,
-                                        },
-                                        popper: {
-                                            sx: { zIndex: 10000 }
-                                        }
-                                    }}
-                                />
+                                {mounted ? (
+                                    <DatePicker
+                                        value={travelDate}
+                                        onChange={(newValue) => setTravelDate(newValue)}
+                                        minDate={dayjs()}
+                                        format="DD MMM YYYY"
+                                        slotProps={{
+                                            textField: {
+                                                fullWidth: true,
+                                                placeholder: "Select Travel Date",
+                                                required: true,
+                                            },
+                                            popper: {
+                                                sx: { zIndex: 10000 }
+                                            }
+                                        }}
+                                    />
+                                ) : (
+                                    <input 
+                                        type="text" 
+                                        placeholder="Select Travel Date" 
+                                        disabled 
+                                        className="w-full pl-4 pr-4 py-[9px] md:py-[11px] border border-gray-100 rounded-xl text-[13px] font-medium bg-gray-50/50 text-gray-400" 
+                                    />
+                                )}
                             </div>
                         </div>
 
                         {showPaxCount && (
                             <div className="space-y-1">
-                                <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">No. of Travellers</label>
+                                <label className="text-[10px] font-semibold md:font-bold text-gray-500 md:text-gray-400 uppercase tracking-wider md:tracking-widest ml-1">No. of Travellers</label>
                                 <div className="flex items-center justify-between border border-gray-100 rounded-xl px-4 py-2 bg-gray-50/50">
                                     <div className="flex items-center gap-3">
                                         <Users className="w-4 h-4 text-gray-300" />

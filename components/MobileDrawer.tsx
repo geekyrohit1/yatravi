@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { X, ArrowRight } from 'lucide-react';
 
@@ -9,6 +9,24 @@ interface MobileDrawerProps {
 }
 
 export const MobileDrawer: React.FC<MobileDrawerProps> = ({ isOpen, onClose, onOpenQuote }) => {
+  useEffect(() => {
+    if (isOpen) {
+      const handlePopState = () => {
+        onClose();
+      };
+      
+      window.history.pushState({ popup: 'MobileDrawer' }, '');
+      window.addEventListener('popstate', handlePopState);
+      
+      return () => {
+        window.removeEventListener('popstate', handlePopState);
+        if (window.history.state && window.history.state.popup === 'MobileDrawer') {
+          window.history.back();
+        }
+      };
+    }
+  }, [isOpen, onClose]);
+
   return (
     <>
       {/* Backdrop */}

@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Loader2, Phone, Share2, Megaphone, Save, Shield, CheckCircle, LayoutDashboard, Upload } from 'lucide-react';
+import { Loader2, Phone, Share2, Megaphone, Save, Shield, CheckCircle, LayoutDashboard, Upload, Lock, Eye, EyeOff } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { API_BASE_URL } from '@/constants';
 
@@ -656,6 +656,139 @@ export default function SettingsPage() {
                     </Button>
                 </div>
             </form>
+
+            {/* ── Security Section (outside main form, separate API call) ── */}
+            <SecurityCard />
         </div >
+    );
+}
+
+// ── Separate Security Card Component ──────────────────────────────────────────
+function SecurityCard() {
+    const [currentPassword, setCurrentPassword] = useState('');
+    const [newPassword, setNewPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [showCurrent, setShowCurrent] = useState(false);
+    const [showNew, setShowNew] = useState(false);
+    const [saving, setSaving] = useState(false);
+    const [error, setError] = useState('');
+    const [success, setSuccess] = useState(false);
+
+    const handleUpdatePassword = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setError('');
+        setSuccess(false);
+
+        if (newPassword !== confirmPassword) {
+            setError('New passwords do not match');
+            return;
+        }
+        if (newPassword.length < 6) {
+            setError('Password must be at least 6 characters');
+            return;
+        }
+
+        setSaving(true);
+        try {
+            const res = await fetch(`${API_BASE_URL}/api/auth/update-password`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ currentPassword, newPassword }),
+                credentials: 'include',
+            });
+            const data = await res.json();
+            if (res.ok && data.success) {
+                setSuccess(true);
+                setCurrentPassword('');
+                setNewPassword('');
+                setConfirmPassword('');
+                setTimeout(() => setSuccess(false), 4000);
+            } else {
+                setError(data.message || 'Failed to update password');
+            }
+        } catch {
+            setError('An error occurred. Please try again.');
+        } finally {
+            setSaving(false);
+        }
+    };
+
+    return (
+        <Card className="bg-white border-0 shadow-sm rounded-2xl mt-6">
+            <CardHeader className="pb-4">
+                <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center">
+                        <Lock className="w-5 h-5 text-slate-700" />
+                    </div>
+                    <div>
+                        <CardTitle className="text-lg font-semibold text-gray-900">Security</CardTitle>
+                        <CardDescription>Change your admin panel password.</CardDescription>
+                    </div>
+                </div>
+            </CardHeader>
+            <CardContent>
+                <form onSubmit={handleUpdatePassword} className="space-y-4 max-w-sm">
+                    {error && (
+                        <div className="p-3 text-sm text-red-700 bg-red-50 border border-red-200 rounded-lg">{error}</div>
+                    )}
+                    {success && (
+                        <div className="p-3 text-sm text-green-700 bg-green-50 border border-green-200 rounded-lg flex items-center gap-2">
+                            <CheckCircle className="h-4 w-4" /> Password updated successfully!
+                        </div>
+                    )}
+                    <div className="space-y-2">
+                        <Label className="text-gray-700">Current Password</Label>
+                        <div className="relative">
+                            <input
+                                type={showCurrent ? 'text' : 'password'}
+                                value={currentPassword}
+                                onChange={(e) => setCurrentPassword(e.target.value)}
+                                required
+                                placeholder="••••••••"
+                                className="w-full h-11 px-3 pr-10 rounded-xl border border-gray-200 bg-white text-sm focus:outline-none focus:border-slate-400 focus:ring-2 focus:ring-slate-200"
+                            />
+                            <button type="button" onClick={() => setShowCurrent(!showCurrent)} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                                {showCurrent ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                            </button>
+                        </div>
+                    </div>
+                    <div className="space-y-2">
+                        <Label className="text-gray-700">New Password</Label>
+                        <div className="relative">
+                            <input
+                                type={showNew ? 'text' : 'password'}
+                                value={newPassword}
+                                onChange={(e) => setNewPassword(e.target.value)}
+                                required
+                                placeholder="Min. 6 characters"
+                                className="w-full h-11 px-3 pr-10 rounded-xl border border-gray-200 bg-white text-sm focus:outline-none focus:border-slate-400 focus:ring-2 focus:ring-slate-200"
+                            />
+                            <button type="button" onClick={() => setShowNew(!showNew)} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                                {showNew ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                            </button>
+                        </div>
+                    </div>
+                    <div className="space-y-2">
+                        <Label className="text-gray-700">Confirm New Password</Label>
+                        <input
+                            type="password"
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                            required
+                            placeholder="Re-enter new password"
+                            className="w-full h-11 px-3 rounded-xl border border-gray-200 bg-white text-sm focus:outline-none focus:border-slate-400 focus:ring-2 focus:ring-slate-200"
+                        />
+                    </div>
+                    <Button
+                        type="submit"
+                        disabled={saving}
+                        className="bg-slate-900 hover:bg-slate-800 text-white rounded-xl px-6"
+                    >
+                        {saving ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Lock className="w-4 h-4 mr-2" />}
+                        Update Password
+                    </Button>
+                </form>
+            </CardContent>
+        </Card>
     );
 }
