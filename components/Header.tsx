@@ -120,7 +120,10 @@ export const Header: React.FC<HeaderProps> = ({
                          shadow-inner focus:outline-none focus:bg-white focus:border-brand-light/50 focus:ring-2 focus:ring-brand-light/20 focus:w-64 focus:shadow-md
                          transition-all duration-300 backdrop-blur-sm lg:bg-white lg:border-white/20 lg:text-gray-900 lg:placeholder-gray-500"
               />
-              <button className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 lg:text-gray-400 hover:text-gray-600 lg:hover:text-brand transition-colors">
+              <button 
+                aria-label="Search"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 lg:text-gray-400 hover:text-gray-600 lg:hover:text-brand transition-colors"
+              >
                 {isSearching ? <Loader2 className="h-4 w-4 animate-spin" /> : <Search className="h-4 w-4" />}
               </button>
 
@@ -212,6 +215,7 @@ export const Header: React.FC<HeaderProps> = ({
           <div className="lg:hidden flex items-center">
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
               className={`${isMobileMenuOpen
                 ? 'text-gray-900'
                 : 'text-gray-900'

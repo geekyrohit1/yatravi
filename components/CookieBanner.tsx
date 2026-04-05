@@ -33,6 +33,7 @@ export const CookieBanner: React.FC = () => {
                 {/* Minimal Close */}
                 <button 
                     onClick={denyAll}
+                    aria-label="Close cookie banner"
                     className="absolute top-4 right-4 p-1 text-gray-300 hover:text-gray-900 transition-colors"
                 >
                     <X className="w-4 h-4" />

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { Destination, Package } from '../../../types';
@@ -37,7 +37,8 @@ export default function DestinationClient({ initialDestination, initialPackages 
     const [selectedAttraction, setSelectedAttraction] = useState<any>(null);
     const [isMobile, setIsMobile] = useState(false);
     const [mounted, setMounted] = useState(false);
- 
+    const isNavigating = useRef(false);
+
     useEffect(() => {
         setMounted(true);
         const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -53,7 +54,7 @@ export default function DestinationClient({ initialDestination, initialPackages 
             window.dispatchEvent(new CustomEvent('toggleFloatingButtons', { detail: false }));
         };
     }, []);
-    
+
     // Hide floating icons when mobile inquiry form is open
     useEffect(() => {
         window.dispatchEvent(new CustomEvent('hideFloatingIcons', { detail: showMobileForm }));
@@ -67,7 +68,7 @@ export default function DestinationClient({ initialDestination, initialPackages 
             window.addEventListener('popstate', handlePopState);
             return () => {
                 window.removeEventListener('popstate', handlePopState);
-                if (window.history.state && window.history.state.popup === 'MobileFormDest') {
+                if (!isNavigating.current && window.history.state && window.history.state.popup === 'MobileFormDest') {
                     window.history.back();
                 }
             };
@@ -113,10 +114,10 @@ export default function DestinationClient({ initialDestination, initialPackages 
 
                 // Find matching destination from API
                 const searchSlug = normalize(slug);
-                
+
                 // 1. Exact slug match
                 let match = allDestinations.find((d: any) => normalize(d.slug) === searchSlug);
-                
+
                 // 2. Exact name match
                 if (!match) {
                     match = allDestinations.find((d: any) => normalize(d.name) === searchSlug);
@@ -249,8 +250,8 @@ export default function DestinationClient({ initialDestination, initialPackages 
                                 ) : (
                                     <div className="w-full p-16 text-center bg-gray-50/50 rounded-lg border-2 border-dashed border-gray-100">
                                         <p className="text-gray-600 mb-6 text-sm font-semibold">No packages available for {destination.name} right now.</p>
-                                        <button 
-                                            onClick={() => router.push('/')} 
+                                        <button
+                                            onClick={() => router.push('/')}
                                             className="bg-brand text-white px-8 py-3 rounded-xl font-semibold text-sm shadow-lg shadow-brand/10 hover:bg-brand-dark transition-all"
                                         >
                                             View All Collections
@@ -359,7 +360,7 @@ export default function DestinationClient({ initialDestination, initialPackages 
                                                     {/* Highlights/Must Try */}
                                                     {selectedAttraction.mustTry && selectedAttraction.mustTry.length > 0 && (
                                                         <section>
-                                                        <h3 className="text-[11px] md:text-xs font-semibold text-gray-400">Highlights & activities</h3>
+                                                            <h3 className="text-[11px] md:text-xs font-semibold text-gray-400">Highlights & activities</h3>
                                                             <div className="grid grid-cols-1 gap-3">
                                                                 {selectedAttraction.mustTry.map((activity: string, idx: number) => (
                                                                     <div key={idx} className="flex items-center gap-4 p-4 bg-gray-50/50 rounded-2xl border border-gray-100/50 hover:bg-white hover:shadow-sm transition-all duration-300">
@@ -568,10 +569,10 @@ export default function DestinationClient({ initialDestination, initialPackages 
                 <div className="lg:hidden fixed inset-0 z-[100] flex items-end justify-center bg-black/60 backdrop-blur-sm animate-in fade-in duration-300 pointer-events-auto">
                     <div className="relative w-full max-h-[85vh] animate-in slide-in-from-bottom-full duration-500">
                         <div className="rounded-t-xl overflow-hidden shadow-2xl-up">
-                             <InquiryWidget 
-                                title={`Planning a ${destination.name} Trip?`} 
+                            <InquiryWidget
+                                title={`Planning a ${destination.name} Trip?`}
                                 onClose={() => setShowMobileForm(false)}
-                             />
+                            />
                         </div>
                     </div>
                 </div>

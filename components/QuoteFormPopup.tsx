@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
     Phone, CheckCircle, User, Mail, MapPin, Users,
     Wallet, MessageSquare, Plane, Globe, MapPinned, Sparkles, X,
@@ -155,6 +155,8 @@ interface QuoteFormPopupProps {
 }
 
 export const QuoteFormPopup: React.FC<QuoteFormPopupProps> = ({ isOpen, onClose }) => {
+    const isNavigating = useRef(false);
+
     useEffect(() => {
         if (isOpen) {
             const handlePopState = () => {
@@ -166,12 +168,13 @@ export const QuoteFormPopup: React.FC<QuoteFormPopupProps> = ({ isOpen, onClose 
             
             return () => {
                 window.removeEventListener('popstate', handlePopState);
-                if (window.history.state && window.history.state.popup === 'QuoteFormPopup') {
+                if (!isNavigating.current && window.history.state && window.history.state.popup === 'QuoteFormPopup') {
                     window.history.back();
                 }
             };
         }
-    }, [isOpen, onClose]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isOpen]);
 
     const [submitted, setSubmitted] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -298,9 +301,9 @@ export const QuoteFormPopup: React.FC<QuoteFormPopupProps> = ({ isOpen, onClose 
                         className="relative w-full max-w-5xl bg-white rounded-t-3xl lg:rounded-3xl shadow-2xl overflow-hidden animate-in slide-in-from-bottom lg:zoom-in-95 duration-500 flex flex-col lg:flex-row h-[92vh] lg:max-h-[95vh]"
                         onClick={(e) => e.stopPropagation()}
                     >
-                        {/* Close Button */}
                         <button
                             onClick={onClose}
+                            aria-label="Close quote form"
                             className="absolute top-4 right-4 z-20 p-2.5 rounded-full bg-white shadow-xl hover:bg-gray-100 text-gray-400 hover:text-gray-800 transition-all hover:scale-110"
                         >
                             <X className="w-5 h-5" />

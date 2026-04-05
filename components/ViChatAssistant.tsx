@@ -399,6 +399,7 @@ export default function ViChatAssistant({ isHidden = false }: { isHidden?: boole
                         </button>
                         <button
                             onClick={() => setIsOpen(false)}
+                            aria-label="Close chat"
                             className="p-2 hover:bg-white/10 hover:rotate-90 rounded-full transition-all duration-300"
                         >
                             <X className="w-5 h-5 text-gray-300" />
@@ -486,6 +487,7 @@ export default function ViChatAssistant({ isHidden = false }: { isHidden?: boole
                         />
                         <button
                             type="submit"
+                            aria-label="Send message"
                             disabled={!inputMessage.trim() || isLoading}
                             className="absolute right-2 p-3 bg-gradient-to-br from-brand to-brand-light text-white rounded-full disabled:opacity-40 transition-all shadow-[0_4px_15px_-5px_rgba(58,123,213,0.6)] disabled:shadow-none hover:scale-105 active:scale-95"
                         >

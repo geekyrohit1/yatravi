@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { X, ArrowRight } from 'lucide-react';
 
@@ -9,6 +9,8 @@ interface MobileDrawerProps {
 }
 
 export const MobileDrawer: React.FC<MobileDrawerProps> = ({ isOpen, onClose, onOpenQuote }) => {
+  const isNavigating = useRef(false);
+
   useEffect(() => {
     if (isOpen) {
       const handlePopState = () => {
@@ -20,12 +22,13 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({ isOpen, onClose, onO
       
       return () => {
         window.removeEventListener('popstate', handlePopState);
-        if (window.history.state && window.history.state.popup === 'MobileDrawer') {
+        if (!isNavigating.current && window.history.state && window.history.state.popup === 'MobileDrawer') {
           window.history.back();
         }
       };
     }
-  }, [isOpen, onClose]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen]);
 
   return (
     <>
@@ -80,7 +83,10 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({ isOpen, onClose, onO
               <Link
                 key={link.name}
                 href={link.href}
-                onClick={onClose}
+                onClick={() => {
+                  isNavigating.current = true;
+                  onClose();
+                }}
                 style={{ animationDelay: `${i * 60}ms` }}
                 className="w-full px-5 py-3.5 bg-gray-50/50 border border-gray-100/50 rounded-xl text-[13px] font-medium text-gray-700 tracking-[0.02em] active:bg-brand/5 active:text-brand transition-all flex items-center justify-between group animate-in fade-in slide-in-from-right-4 duration-500 fill-mode-both"
               >
@@ -93,7 +99,12 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({ isOpen, onClose, onO
 
         <div className="p-4 pb-16 bg-white/50 backdrop-blur-xl border-t border-gray-100/50 flex flex-col items-center relative z-10">
           <button
-            onClick={() => { onClose(); onOpenQuote(); }}
+            onClick={() => { 
+              isNavigating.current = true;
+              onClose(); 
+              // Wait for drawer history to pop before pushing QuoteForm history
+              setTimeout(() => onOpenQuote(), 150); 
+            }}
             className="w-full px-8 py-4 text-[12px] font-bold tracking-wider text-white bg-brand shadow-[0_10px_30px_rgba(58,123,213,0.15)] rounded-full flex items-center justify-center gap-3 transition-transform active:scale-95"
           >
             <span>Get Free Quote</span>

@@ -62,6 +62,7 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
     const [selectedTour, setSelectedTour] = useState<any | null>(null);
     const [paxCount, setPaxCount] = useState<number>(2);
     const [showMobileForm, setShowMobileForm] = useState(false);
+    const isNavigating = useRef(false);
 
     useEffect(() => {
         // Shift floating buttons up if mobile bar is present
@@ -84,7 +85,7 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
             window.addEventListener('popstate', handlePopState);
             return () => {
                 window.removeEventListener('popstate', handlePopState);
-                if (window.history.state && window.history.state.popup === 'MobileFormPkg') {
+                if (!isNavigating.current && window.history.state && window.history.state.popup === 'MobileFormPkg') {
                     window.history.back();
                 }
             };

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { ArrowRight, Loader2, X, SlidersHorizontal, MapPin, Calendar, Star, Search } from 'lucide-react';
 
 interface MobileSearchModalProps {
@@ -40,18 +40,22 @@ export const MobileSearchModal: React.FC<MobileSearchModalProps> = ({
   trendingPackages,
   router
 }) => {
+  const isNavigating = useRef(false);
+
   useEffect(() => {
     if (showSearchModal) {
       const handlePopState = () => {
         setShowSearchModal(false);
       };
-      
+
       window.history.pushState({ popup: 'MobileSearchModal' }, '');
       window.addEventListener('popstate', handlePopState);
-      
+
       return () => {
         window.removeEventListener('popstate', handlePopState);
-        if (window.history.state && window.history.state.popup === 'MobileSearchModal') {
+        // Only call back() if we are NOT intentionally navigating to a new page
+        // and if our fake state is still at the top of the history stack.
+        if (!isNavigating.current && window.history.state && window.history.state.popup === 'MobileSearchModal') {
           window.history.back();
         }
       };
@@ -90,13 +94,18 @@ export const MobileSearchModal: React.FC<MobileSearchModalProps> = ({
                 </div>
               )}
               {searchQuery && !isSearching && (
-                <button onClick={() => { setSearchQuery(''); }} className="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 rounded-full bg-gray-200/50 hover:bg-gray-200 z-10 transition-all">
+                <button 
+                  onClick={() => { setSearchQuery(''); }} 
+                  aria-label="Clear search"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 rounded-full bg-gray-200/50 hover:bg-gray-200 z-10 transition-all"
+                >
                   <X className="w-3.5 h-3.5 text-gray-600" />
                 </button>
               )}
             </div>
-            <button 
-              onClick={() => setShowSearchModal(false)} 
+            <button
+              onClick={() => setShowSearchModal(false)}
+              aria-label="Close search modal"
               className="p-2 -mr-2 rounded-xl text-gray-500 hover:text-gray-900 transition-colors"
             >
               <X className="w-7 h-7" />
@@ -185,7 +194,7 @@ export const MobileSearchModal: React.FC<MobileSearchModalProps> = ({
                     {heroDestinations.slice(0, 5).map(dest => (
                       <button
                         key={dest.slug}
-                        onClick={() => { router.push(`/destination/${dest.slug}`); setShowSearchModal(false); }}
+                        onClick={() => { isNavigating.current = true; router.push(`/destination/${dest.slug}`); setShowSearchModal(false); }}
                         className="flex-shrink-0 w-36 group"
                       >
                         <div className="relative w-36 h-48 rounded-xl overflow-hidden mb-3 shadow-[0_8px_30px_rgba(0,0,0,0.12)] border border-white/20 group-active:scale-95 transition-all duration-300">
@@ -209,18 +218,19 @@ export const MobileSearchModal: React.FC<MobileSearchModalProps> = ({
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <h3 className="text-[11px] font-medium text-gray-600 tracking-wider font-sans">Trending packages</h3>
-                  <button onClick={() => { router.push('/packages'); setShowSearchModal(false); }} className="text-[10px] font-semibold text-brand tracking-wide hover:opacity-70 transition-opacity">View all</button>
+                  <button onClick={() => { isNavigating.current = true; router.push('/packages'); setShowSearchModal(false); }} className="text-[10px] font-semibold text-brand tracking-wide hover:opacity-70 transition-opacity">View all</button>
                 </div>
                 <div className="flex overflow-x-auto gap-4 pb-4 -mx-4 px-4 no-scrollbar">
                   {trendingPackages.length > 0 ? (
                     trendingPackages.map((pkg) => (
                       <button
                         key={pkg._id || pkg.id}
-                        onClick={() => { 
+                        onClick={() => {
                           const target = pkg.slug || pkg.id || pkg._id;
                           if (target) {
-                            router.push(`/packages/${target}`); 
-                            setShowSearchModal(false); 
+                            isNavigating.current = true;
+                            router.push(`/packages/${target}`);
+                            setShowSearchModal(false);
                           }
                         }}
                         className="flex-shrink-0 w-64 group text-left bg-white rounded-xl border border-gray-200 p-2 pb-4 shadow-sm active:scale-[0.98] transition-all duration-300 hover:border-brand/30 font-sans"
@@ -292,16 +302,17 @@ export const MobileSearchModal: React.FC<MobileSearchModalProps> = ({
                   <div className="space-y-4">
                     <h3 className="text-[11px] font-medium text-gray-600 tracking-wider font-sans">Destinations ({searchResults.destinations.length})</h3>
                     <div className="grid grid-cols-1 gap-3">
-                        {searchResults.destinations.map((dest: any, index: number) => (
-                          <button
-                            key={dest._id || dest.id || `dest-${index}`}
-                            onClick={() => { 
-                              const target = dest.slug || dest.id || dest._id;
-                              if (target) {
-                                router.push(`/destination/${target}`); 
-                                setShowSearchModal(false); 
-                              }
-                            }}
+                      {searchResults.destinations.map((dest: any, index: number) => (
+                        <button
+                          key={dest._id || dest.id || `dest-${index}`}
+                          onClick={() => {
+                            const target = dest.slug || dest.id || dest._id;
+                            if (target) {
+                              isNavigating.current = true;
+                              router.push(`/destination/${target}`);
+                              setShowSearchModal(false);
+                            }
+                          }}
                           className="w-full flex items-center gap-4 p-3 bg-white hover:bg-brand/[0.02] rounded-xl border border-gray-100 shadow-[0_8px_20px_rgba(0,0,0,0.04)] hover:border-brand/20 transition-all text-left group"
                         >
                           <div className="w-20 h-20 rounded-xl overflow-hidden flex-shrink-0 bg-gray-100 relative shadow-md group-hover:shadow-lg transition-all duration-300">
@@ -333,11 +344,12 @@ export const MobileSearchModal: React.FC<MobileSearchModalProps> = ({
                       {searchResults.packages.map((pkg: any, index: number) => (
                         <button
                           key={pkg._id || pkg.id || `pkg-${index}`}
-                          onClick={() => { 
+                          onClick={() => {
                             const target = pkg.slug || pkg.id || pkg._id;
                             if (target) {
-                              router.push(`/packages/${target}`); 
-                              setShowSearchModal(false); 
+                              isNavigating.current = true;
+                              router.push(`/packages/${target}`);
+                              setShowSearchModal(false);
                             }
                           }}
                           className="w-full flex flex-col bg-white rounded-2xl border-2 border-gray-200 shadow-[0_10px_30px_rgba(0,0,0,0.06)] hover:border-brand/40 transition-all text-left group overflow-hidden h-full"
@@ -349,15 +361,15 @@ export const MobileSearchModal: React.FC<MobileSearchModalProps> = ({
                               <div className="w-full h-full flex items-center justify-center bg-gray-50"><Search className="w-6 h-6 text-gray-200" /></div>
                             )}
                             <div className="absolute top-2 left-2 z-10 flex flex-col gap-1">
-                                <div className="px-1.5 py-0.5 rounded-md bg-white/95 backdrop-blur-sm text-[9px] font-bold text-gray-900 border border-gray-100 shadow-sm flex items-center gap-1 font-sans">
-                                  <Star className="w-2.5 h-2.5 fill-brand text-brand" />
-                                  {pkg.rating || '4.8'}
-                                </div>
-                                {/* Days Badge over Search Result Image for Visibility */}
-                                <div className="px-1.5 py-0.5 rounded-md bg-white/95 backdrop-blur-sm text-[9px] font-bold text-gray-900 border border-gray-100 shadow-sm flex items-center gap-1 font-sans">
-                                  <Calendar className="w-2.5 h-2.5 text-brand" />
-                                  <span>{pkg.duration || 6} Days</span>
-                                </div>
+                              <div className="px-1.5 py-0.5 rounded-md bg-white/95 backdrop-blur-sm text-[9px] font-bold text-gray-900 border border-gray-100 shadow-sm flex items-center gap-1 font-sans">
+                                <Star className="w-2.5 h-2.5 fill-brand text-brand" />
+                                {pkg.rating || '4.8'}
+                              </div>
+                              {/* Days Badge over Search Result Image for Visibility */}
+                              <div className="px-1.5 py-0.5 rounded-md bg-white/95 backdrop-blur-sm text-[9px] font-bold text-gray-900 border border-gray-100 shadow-sm flex items-center gap-1 font-sans">
+                                <Calendar className="w-2.5 h-2.5 text-brand" />
+                                <span>{pkg.duration || 6} Days</span>
+                              </div>
                             </div>
                             <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
                           </div>
