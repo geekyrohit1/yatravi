@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useEffect } from 'react';
 import { ArrowRight, Loader2, X, SlidersHorizontal, MapPin, Calendar, Star, Search } from 'lucide-react';
 
