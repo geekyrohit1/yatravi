@@ -47,10 +47,10 @@ export const MobileSearchModal: React.FC<MobileSearchModalProps> = ({
       const handlePopState = () => {
         setShowSearchModal(false);
       };
-      
+
       window.history.pushState({ popup: 'MobileSearchModal' }, '');
       window.addEventListener('popstate', handlePopState);
-      
+
       return () => {
         window.removeEventListener('popstate', handlePopState);
         if (window.history.state && window.history.state.popup === 'MobileSearchModal') {
@@ -97,8 +97,8 @@ export const MobileSearchModal: React.FC<MobileSearchModalProps> = ({
                 </button>
               )}
             </div>
-            <button 
-              onClick={() => setShowSearchModal(false)} 
+            <button
+              onClick={() => setShowSearchModal(false)}
               className="p-2 -mr-2 rounded-xl text-gray-500 hover:text-gray-900 transition-colors"
             >
               <X className="w-7 h-7" />
@@ -218,11 +218,11 @@ export const MobileSearchModal: React.FC<MobileSearchModalProps> = ({
                     trendingPackages.map((pkg) => (
                       <button
                         key={pkg._id || pkg.id}
-                        onClick={() => { 
+                        onClick={() => {
                           const target = pkg.slug || pkg.id || pkg._id;
                           if (target) {
-                            router.push(`/packages/${target}`); 
-                            setShowSearchModal(false); 
+                            router.push(`/packages/${target}`);
+                            setShowSearchModal(false);
                           }
                         }}
                         className="flex-shrink-0 w-64 group text-left bg-white rounded-xl border border-gray-200 p-2 pb-4 shadow-sm active:scale-[0.98] transition-all duration-300 hover:border-brand/30 font-sans"
@@ -294,16 +294,16 @@ export const MobileSearchModal: React.FC<MobileSearchModalProps> = ({
                   <div className="space-y-4">
                     <h3 className="text-[11px] font-medium text-gray-600 tracking-wider font-sans">Destinations ({searchResults.destinations.length})</h3>
                     <div className="grid grid-cols-1 gap-3">
-                        {searchResults.destinations.map((dest: any, index: number) => (
-                          <button
-                            key={dest._id || dest.id || `dest-${index}`}
-                            onClick={() => { 
-                              const target = dest.slug || dest.id || dest._id;
-                              if (target) {
-                                router.push(`/destination/${target}`); 
-                                setShowSearchModal(false); 
-                              }
-                            }}
+                      {searchResults.destinations.map((dest: any, index: number) => (
+                        <button
+                          key={dest._id || dest.id || `dest-${index}`}
+                          onClick={() => {
+                            const target = dest.slug || dest.id || dest._id;
+                            if (target) {
+                              router.push(`/destination/${target}`);
+                              setShowSearchModal(false);
+                            }
+                          }}
                           className="w-full flex items-center gap-4 p-3 bg-white hover:bg-brand/[0.02] rounded-xl border border-gray-100 shadow-[0_8px_20px_rgba(0,0,0,0.04)] hover:border-brand/20 transition-all text-left group"
                         >
                           <div className="w-20 h-20 rounded-xl overflow-hidden flex-shrink-0 bg-gray-100 relative shadow-md group-hover:shadow-lg transition-all duration-300">
@@ -335,11 +335,11 @@ export const MobileSearchModal: React.FC<MobileSearchModalProps> = ({
                       {searchResults.packages.map((pkg: any, index: number) => (
                         <button
                           key={pkg._id || pkg.id || `pkg-${index}`}
-                          onClick={() => { 
+                          onClick={() => {
                             const target = pkg.slug || pkg.id || pkg._id;
                             if (target) {
-                              router.push(`/packages/${target}`); 
-                              setShowSearchModal(false); 
+                              router.push(`/packages/${target}`);
+                              setShowSearchModal(false);
                             }
                           }}
                           className="w-full flex flex-col bg-white rounded-2xl border-2 border-gray-200 shadow-[0_10px_30px_rgba(0,0,0,0.06)] hover:border-brand/40 transition-all text-left group overflow-hidden h-full"
@@ -351,15 +351,15 @@ export const MobileSearchModal: React.FC<MobileSearchModalProps> = ({
                               <div className="w-full h-full flex items-center justify-center bg-gray-50"><Search className="w-6 h-6 text-gray-200" /></div>
                             )}
                             <div className="absolute top-2 left-2 z-10 flex flex-col gap-1">
-                                <div className="px-1.5 py-0.5 rounded-md bg-white/95 backdrop-blur-sm text-[9px] font-bold text-gray-900 border border-gray-100 shadow-sm flex items-center gap-1 font-sans">
-                                  <Star className="w-2.5 h-2.5 fill-brand text-brand" />
-                                  {pkg.rating || '4.8'}
-                                </div>
-                                {/* Days Badge over Search Result Image for Visibility */}
-                                <div className="px-1.5 py-0.5 rounded-md bg-white/95 backdrop-blur-sm text-[9px] font-bold text-gray-900 border border-gray-100 shadow-sm flex items-center gap-1 font-sans">
-                                  <Calendar className="w-2.5 h-2.5 text-brand" />
-                                  <span>{pkg.duration || 6} Days</span>
-                                </div>
+                              <div className="px-1.5 py-0.5 rounded-md bg-white/95 backdrop-blur-sm text-[9px] font-bold text-gray-900 border border-gray-100 shadow-sm flex items-center gap-1 font-sans">
+                                <Star className="w-2.5 h-2.5 fill-brand text-brand" />
+                                {pkg.rating || '4.8'}
+                              </div>
+                              {/* Days Badge over Search Result Image for Visibility */}
+                              <div className="px-1.5 py-0.5 rounded-md bg-white/95 backdrop-blur-sm text-[9px] font-bold text-gray-900 border border-gray-100 shadow-sm flex items-center gap-1 font-sans">
+                                <Calendar className="w-2.5 h-2.5 text-brand" />
+                                <span>{pkg.duration || 6} Days</span>
+                              </div>
                             </div>
                             <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
                           </div>
