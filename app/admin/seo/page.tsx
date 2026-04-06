@@ -9,7 +9,7 @@ import { Button } from '@/components/Button';
 export default function SEOManager() {
     const [items, setItems] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
-    const [filter, setFilter] = useState('all'); // all, package, destination
+    const [filter, setFilter] = useState('all'); // all, package, destination, page
     const [search, setSearch] = useState('');
 
     useEffect(() => {
@@ -18,36 +18,48 @@ export default function SEOManager() {
 
     const fetchData = async () => {
         try {
-            const [packagesRes, destinationsRes] = await Promise.all([
+            const [packagesRes, destinationsRes, pagesRes] = await Promise.all([
                 fetch(`${API_BASE_URL}/api/packages?all=true`),
-                fetch(`${API_BASE_URL}/api/destinations`)
+                fetch(`${API_BASE_URL}/api/destinations`),
+                fetch(`${API_BASE_URL}/api/pages/admin/list`)
             ]);
-
+    
             const packages = await packagesRes.json();
             const destinations = await destinationsRes.json();
-
+            const pages = await pagesRes.json();
+    
             // Normalize data
             const normalizedPackages = packages.map((p: any) => ({
                 id: p._id,
                 title: p.title,
                 slug: p.slug,
                 type: 'package',
-                image: p.image,
+                image: p.image || '/images/placeholder.svg',
                 seo: p.seo || {},
                 status: p.status
             }));
-
+    
             const normalizedDestinations = destinations.map((d: any) => ({
                 id: d._id,
                 title: d.name,
                 slug: d.slug,
                 type: 'destination',
-                image: d.heroImage,
+                image: d.heroImage || '/images/placeholder.svg',
                 seo: d.seo || {},
                 status: 'published'
             }));
-
-            setItems([...normalizedPackages, ...normalizedDestinations]);
+    
+            const normalizedPages = pages.map((pg: any) => ({
+                id: pg._id,
+                title: pg.title || pg.slug,
+                slug: pg.slug,
+                type: 'page',
+                image: pg.heroImage || '/images/placeholder.svg',
+                seo: pg.seo || {},
+                status: 'published'
+            }));
+    
+            setItems([...normalizedPackages, ...normalizedDestinations, ...normalizedPages]);
             setLoading(false);
         } catch (error) {
             console.error('Failed to fetch data:', error);
@@ -98,7 +110,19 @@ export default function SEOManager() {
                             >
                                 Destinations
                             </button>
+                            <button
+                                onClick={() => setFilter('page')}
+                                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${filter === 'page' ? 'bg-gray-900 text-white' : 'text-gray-500 hover:text-gray-900'}`}
+                            >
+                                Static Pages
+                            </button>
                         </div>
+                        <Link href="/admin/seo/edit/global/site">
+                            <Button className="rounded-xl flex items-center gap-2">
+                                <Globe className="w-4 h-4" />
+                                Global SEO Settings
+                            </Button>
+                        </Link>
                     </div>
                 </div>
 
@@ -189,9 +213,14 @@ export default function SEOManager() {
                                                 </div>
                                             </td>
                                             <td className="px-6 py-4">
-                                                <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-bold uppercase tracking-wider ${item.type === 'package' ? 'bg-blue-50 text-blue-700' : 'bg-purple-50 text-purple-700'
+                                                <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-bold uppercase tracking-wider ${
+                                                    item.type === 'package' ? 'bg-blue-50 text-blue-700' : 
+                                                    item.type === 'destination' ? 'bg-purple-50 text-purple-700' :
+                                                    'bg-orange-50 text-orange-700'
                                                     }`}>
-                                                    {item.type === 'package' ? <LayoutTemplate className="w-3 h-3" /> : <MapPin className="w-3 h-3" />}
+                                                    {item.type === 'package' ? <LayoutTemplate className="w-3 h-3" /> : 
+                                                     item.type === 'destination' ? <MapPin className="w-3 h-3" /> :
+                                                     <Globe className="w-3 h-3" />}
                                                     {item.type}
                                                 </span>
                                             </td>

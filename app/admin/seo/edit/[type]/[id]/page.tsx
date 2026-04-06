@@ -53,7 +53,10 @@ export default function EditSEOPage() {
         schemaTypes: [] as string[],
         sitemapPriority: 0.8,
         sitemapFrequency: 'weekly',
-        quickLinks: [] as { label: string, url: string }[]
+        quickLinks: [] as { label: string, url: string }[],
+        // Branding fields
+        siteName: '',
+        titleSeparator: '|'
     });
 
     useEffect(() => {
@@ -66,9 +69,11 @@ export default function EditSEOPage() {
 
     const fetchItemDetails = async () => {
         try {
-            const endpoint = type === 'package'
-                ? `${API_BASE_URL}/api/packages/${id}`
-                : `${API_BASE_URL}/api/destinations/${id}`;
+            let endpoint = '';
+            if (type === 'package') endpoint = `${API_BASE_URL}/api/packages/${id}`;
+            else if (type === 'destination') endpoint = `${API_BASE_URL}/api/destinations/${id}`;
+            else if (type === 'page') endpoint = `${API_BASE_URL}/api/pages/id/${id}`;
+            else if (type === 'global') endpoint = `${API_BASE_URL}/api/settings`;
 
             const res = await fetch(endpoint, { cache: 'no-store' });
             if (!res.ok) throw new Error('Failed to fetch details');
@@ -76,32 +81,57 @@ export default function EditSEOPage() {
             const data = await res.json();
             setItem(data);
 
+            const seoSource = type === 'global' ? data.globalSeo : data.seo;
+
+            // Clean up old defaults if they exist in DB
+            const dbTitle = seoSource?.defaultTitle || '';
+            const dbDesc = seoSource?.defaultDescription || '';
+            const dbKeywords = seoSource?.defaultKeywords || '';
+
+            // Old defaults to ignore
+            const oldTitle = 'Yatravi - We Care Your Trip';
+            const oldDesc = 'Book the best holiday packages and travel experiences with Yatravi.';
+            const oldKeywords = 'travel, tourism, holiday packages, yatravi';
+
             const newSeoData = {
-                title: data.seo?.title || data.title || data.name || '',
-                description: data.seo?.description || data.overview || data.description || '',
-                keywords: data.seo?.keywords || '',
-                focusKeyword: data.seo?.focusKeyword || (data.seo?.keywords ? data.seo.keywords.split(',')[0].trim() : '') || data.title || data.name || '',
-                canonicalUrl: data.seo?.canonicalUrl || '',
-                robots: data.seo?.robots || 'index, follow',
-                ogTitle: data.seo?.ogTitle || '',
-                ogDescription: data.seo?.ogDescription || '',
-                ogImage: data.seo?.ogImage || data.image || data.heroImage || '',
-                twitterTitle: data.seo?.twitterTitle || '',
-                twitterDescription: data.seo?.twitterDescription || '',
-                twitterImage: data.seo?.twitterImage || '',
-                jsonLd: data.seo?.jsonLd || '',
-                autoGenerateSchema: data.seo?.autoGenerateSchema !== undefined ? data.seo.autoGenerateSchema : true,
-                schemaTypes: data.seo?.schemaTypes || (type === 'package' ? ['Product', 'FAQPage', 'BreadcrumbList'] : ['TouristDestination', 'FAQPage', 'BreadcrumbList']),
-                sitemapPriority: data.seo?.sitemapPriority || (type === 'package' ? 0.8 : 0.9),
-                sitemapFrequency: data.seo?.sitemapFrequency || 'weekly',
-                quickLinks: data.seo?.quickLinks || []
+                title: type === 'global' 
+                    ? (dbTitle === oldTitle || !dbTitle ? 'Yatravi | We Care Your Trip - Lowest Price Holiday Packages' : dbTitle) 
+                    : (seoSource?.title || data.title || data.name || ''),
+                description: type === 'global' 
+                    ? (dbDesc === oldDesc || !dbDesc ? 'Explore the world with Yatravi. Lowest price holiday packages and premium travel experiences.' : dbDesc) 
+                    : (seoSource?.description || data.overview || data.description || ''),
+                keywords: type === 'global' 
+                    ? (dbKeywords === oldKeywords || !dbKeywords ? 'travel agency, holiday packages, tour packages, cheapest tours' : dbKeywords) 
+                    : (seoSource?.keywords || ''),
+                focusKeyword: type === 'global' 
+                    ? (seoSource?.defaultKeywords ? (dbKeywords === oldKeywords ? 'holiday packages' : seoSource.defaultKeywords.split(',')[0].trim()) : 'holiday packages') 
+                    : (seoSource?.focusKeyword || (seoSource?.keywords ? seoSource.keywords.split(',')[0].trim() : '') || data.title || data.name || ''),
+                canonicalUrl: seoSource?.canonicalUrl || '',
+                robots: seoSource?.robots || 'index, follow',
+                ogTitle: seoSource?.ogTitle || '',
+                ogDescription: seoSource?.ogDescription || '',
+                ogImage: type === 'global' 
+                    ? (seoSource?.defaultOgImage || '/og-image.png') 
+                    : (seoSource?.ogImage || data.image || data.heroImage || ''),
+                twitterTitle: seoSource?.twitterTitle || '',
+                twitterDescription: seoSource?.twitterDescription || '',
+                twitterImage: seoSource?.twitterImage || '',
+                jsonLd: seoSource?.jsonLd || (type === 'global' ? JSON.stringify(data.globalSeo?.organizationSchema || {}, null, 2) : ''),
+                autoGenerateSchema: seoSource?.autoGenerateSchema !== undefined ? seoSource.autoGenerateSchema : true,
+                schemaTypes: seoSource?.schemaTypes || (type === 'package' ? ['Product', 'FAQPage', 'BreadcrumbList'] : type === 'destination' ? ['TouristDestination', 'FAQPage', 'BreadcrumbList'] : ['WebPage']),
+                sitemapPriority: seoSource?.sitemapPriority || (type === 'package' ? 0.8 : type === 'destination' ? 0.9 : 0.5),
+                sitemapFrequency: seoSource?.sitemapFrequency || (type === 'global' ? 'monthly' : 'weekly'),
+                quickLinks: seoSource?.quickLinks || [],
+                // Branding mapping
+                siteName: type === 'global' ? (seoSource?.siteName || 'Yatravi') : 'Yatravi',
+                titleSeparator: type === 'global' ? (seoSource?.titleSeparator || '|') : '|'
             };
             
             setRankData({
-                rank: data.seo?.currentRank || 0,
-                previousRank: data.seo?.previousRank || 0,
-                lastChecked: data.seo?.lastRankCheck,
-                history: data.seo?.rankHistory || []
+                rank: seoSource?.currentRank || 0,
+                previousRank: seoSource?.previousRank || 0,
+                lastChecked: seoSource?.lastRankCheck,
+                history: seoSource?.rankHistory || []
             });
 
             setSeoData(newSeoData);
@@ -252,17 +282,38 @@ export default function EditSEOPage() {
             const directBase = typeof window !== 'undefined' && window.location.hostname === 'localhost'
                 ? 'http://localhost:5000'
                 : '';
-
-            const endpoint = type === 'package'
-                ? `${directBase}/api/packages/${id}`
-                : `${directBase}/api/destinations/${id}`;
-
+    
+            let endpoint = '';
+            if (type === 'package') endpoint = `${directBase}/api/packages/${id}`;
+            else if (type === 'destination') endpoint = `${directBase}/api/destinations/${id}`;
+            else if (type === 'page') endpoint = `${directBase}/api/pages/id/${id}`;
+            else if (type === 'global') endpoint = `${directBase}/api/settings`;
+    
             const { __v, ...itemWithoutVersion } = item || {};
-            const payload = {
-                ...itemWithoutVersion,
-                seo: seoData
-            };
-
+            let payload = {};
+            
+            if (type === 'global') {
+                payload = {
+                    ...itemWithoutVersion,
+                    globalSeo: {
+                        ...itemWithoutVersion.globalSeo,
+                        defaultTitle: seoData.title,
+                        defaultDescription: seoData.description,
+                        defaultKeywords: seoData.keywords,
+                        defaultOgImage: seoData.ogImage,
+                        // Update branding fields (Mapping fix)
+                        siteName: seoData.siteName || 'Yatravi',
+                        titleSeparator: seoData.titleSeparator || '|',
+                        twitterHandle: itemWithoutVersion.globalSeo?.twitterHandle || '@yatravi'
+                    }
+                };
+            } else {
+                payload = {
+                    ...itemWithoutVersion,
+                    seo: seoData
+                };
+            }
+    
             const res = await fetch(endpoint, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
@@ -521,6 +572,35 @@ export default function EditSEOPage() {
                                 <h2 className="text-lg font-bold text-gray-900 mb-6 flex items-center gap-2">
                                     <Globe className="w-5 h-5 text-gray-400" /> Search Engine Listing
                                 </h2>
+                                
+                                {type === 'global' && (
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8 p-5 bg-brand/5 rounded-3xl border border-brand/10">
+                                        <div className="md:col-span-2">
+                                            <p className="text-[10px] font-black text-brand uppercase tracking-widest mb-4">Site Identity Setting</p>
+                                        </div>
+                                        <div>
+                                            <label className="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Global Site Name</label>
+                                            <input
+                                                type="text"
+                                                value={seoData.siteName}
+                                                onChange={(e) => setSeoData({ ...seoData, siteName: e.target.value })}
+                                                placeholder="e.g. Yatravi"
+                                                className="w-full px-4 py-3 rounded-xl bg-white border border-gray-100 focus:border-brand focus:ring-1 focus:ring-brand outline-none transition-all font-medium"
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Title Separator</label>
+                                            <input
+                                                type="text"
+                                                value={seoData.titleSeparator}
+                                                onChange={(e) => setSeoData({ ...seoData, titleSeparator: e.target.value })}
+                                                placeholder="e.g. | or -"
+                                                className="w-full px-4 py-3 rounded-xl bg-white border border-gray-100 focus:border-brand focus:ring-1 focus:ring-brand outline-none transition-all font-medium"
+                                            />
+                                        </div>
+                                    </div>
+                                )}
+
                                 <div className="space-y-5">
                                     <div>
                                         <label className="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Meta Title</label>
@@ -948,9 +1028,15 @@ export default function EditSEOPage() {
                                                     <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-3">Enabled Schema Types</p>
                                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                                                         {[
-                                                            { id: type === 'package' ? 'Product' : 'TouristDestination', label: type === 'package' ? 'Product (Price & Rating)' : 'Tourist Destination' },
-                                                            { id: 'FAQPage', label: 'FAQ Page (Google Q&A)' },
-                                                            { id: 'BreadcrumbList', label: 'Breadcrumb (Site Path)' }
+                                                            { 
+                                                                id: type === 'global' ? 'Organization' : (type === 'package' ? 'Product' : (type === 'page' ? 'Organization' : 'TouristDestination')), 
+                                                                label: type === 'global' ? 'Travel Agency (Brand Info)' : (type === 'package' ? 'Product (Price & Rating)' : (type === 'page' ? 'Brand Info (Company Profile)' : 'Tourist Destination')) 
+                                                            },
+                                                            { id: 'FAQPage', label: type === 'page' ? 'FAQ (Q&A Sections)' : (type === 'global' ? 'FAQ Page (Homepage Q&A)' : 'FAQ Page (Google Q&A)') },
+                                                            { 
+                                                                id: type === 'global' ? 'WebSite' : 'BreadcrumbList', 
+                                                                label: type === 'global' ? 'WebSite (Site Search)' : 'Breadcrumb (Site Path)' 
+                                                            }
                                                         ].map((st) => (
                                                             <label key={st.id} className="flex items-center gap-3 p-3 bg-white border border-gray-100 rounded-xl cursor-pointer hover:border-brand transition-all">
                                                                 <input

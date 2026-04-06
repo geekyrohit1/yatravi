@@ -394,9 +394,15 @@ export default function DestinationClient({ initialDestination, initialPackages 
                                             {/* Action Bar */}
                                             <div className="p-8 bg-white border-t border-gray-50">
                                                 <button
-                                                    onClick={() => {
+                                                     onClick={() => {
                                                         setSelectedAttraction(null);
-                                                        window.dispatchEvent(new CustomEvent('toggleInquiryPopup', { detail: true }));
+                                                        window.dispatchEvent(new CustomEvent('toggleInquiryPopup', { 
+                                                            detail: { 
+                                                                source: 'Destination: Attraction', 
+                                                                packageTitle: destination?.name,
+                                                                title: `Inquiry for ${selectedAttraction?.name} (${destination?.name})`
+                                                            } 
+                                                        }));
                                                     }}
                                                     className="w-full group relative overflow-hidden py-4 bg-brand text-white font-semibold rounded-2xl transition-all duration-300 hover:shadow-xl hover:shadow-brand/20 active:scale-95"
                                                 >
@@ -509,7 +515,11 @@ export default function DestinationClient({ initialDestination, initialPackages 
                     {/* Right/Sidebar Column - Hidden on Mobile */}
                     <div className="hidden lg:block lg:col-span-4 relative">
                         <div className="sticky top-24 space-y-6 pb-10">
-                            <InquiryWidget />
+                            <InquiryWidget 
+                                packageTitle={destination?.name} 
+                                source="Destination Page" 
+                                title={`Inquiry for ${destination?.name}`}
+                            />
 
                             <div className="bg-gray-50 border border-gray-100 rounded-lg p-6">
                                 <h3 className="font-semibold text-gray-800 mb-4">Why Book With Us?</h3>
@@ -572,6 +582,8 @@ export default function DestinationClient({ initialDestination, initialPackages 
                             <InquiryWidget
                                 title={`Planning a ${destination.name} Trip?`}
                                 onClose={() => setShowMobileForm(false)}
+                                packageTitle={destination.name}
+                                source="Destination Page"
                             />
                         </div>
                     </div>

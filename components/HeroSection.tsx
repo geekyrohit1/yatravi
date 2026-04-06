@@ -199,7 +199,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         containerClasses = `relative w-full transition-all duration-500 h-[240px] md:h-[calc(100vh-110px)] lg:h-[600px] bg-white overflow-hidden px-0`;
     }
 
-    if (isLoading || heroDestinations.length === 0 || (!imageReady && mounted)) {
+    if (isLoading || heroDestinations.length === 0) {
         return (
             <section className={containerClasses}>
                 <div className="relative w-full h-full bg-white flex flex-col items-center justify-center pt-24 md:pt-0 pb-0 md:pb-16 lg:pb-20 overflow-hidden">
@@ -215,16 +215,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                         {/* Search Bar Skeleton */}
                         <div className="h-10 md:h-12 w-full max-w-sm bg-slate-50/50 rounded-xl mx-auto animate-pulse mt-8 border border-slate-100/40" />
                     </div>
-                </div>
-                {/* Absolute preloader for reliable onLoad trigger */}
-                <div className="absolute inset-0 opacity-0 pointer-events-none">
-                   <Image 
-                      src={activeDestination.heroImage || '/images/placeholder.svg'} 
-                      alt="" 
-                      fill
-                      priority
-                      onLoad={() => setImageReady(true)}
-                   />
                 </div>
             </section>
         );

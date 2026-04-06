@@ -77,9 +77,20 @@ interface InquiryWidgetProps {
     onClose?: () => void;
     showPaxCount?: boolean;
     roundedBottom?: boolean;
+    packageId?: string;
+    packageTitle?: string;
+    source?: string;
 }
 
-export const InquiryWidget = ({ title, onClose, showPaxCount = false, roundedBottom = false }: InquiryWidgetProps) => {
+export const InquiryWidget = ({ 
+    title, 
+    onClose, 
+    showPaxCount = false, 
+    roundedBottom = false,
+    packageId = undefined,
+    packageTitle = undefined,
+    source = 'Inquiry Widget'
+}: InquiryWidgetProps) => {
     const [submitted, setSubmitted] = useState(false);
     const [paxCount, setPaxCount] = useState(2);
     const [loading, setLoading] = useState(false);
@@ -112,7 +123,11 @@ export const InquiryWidget = ({ title, onClose, showPaxCount = false, roundedBot
                     email: formData.email,
                     phone: formData.phone,
                     message: `Travel Date: ${travelDate?.format('DD MMM YYYY') || 'Not specified'} | Travellers: ${showPaxCount ? paxCount : 'N/A'}`,
-                    source: 'Inquiry Widget'
+                    packageId,
+                    packageTitle,
+                    travelDate: travelDate?.format('DD MMM YYYY') || 'Not specified',
+                    travellers: showPaxCount ? paxCount : 0,
+                    source
                 })
             });
 
@@ -120,7 +135,16 @@ export const InquiryWidget = ({ title, onClose, showPaxCount = false, roundedBot
                 setSubmitted(true);
                 setFormData({ name: '', email: '', phone: '' });
                 setTravelDate(null);
-                setTimeout(() => setSubmitted(false), 3000);
+                
+                // Auto-close after 2.5 seconds if onClose is provided
+                if (onClose) {
+                    setTimeout(() => {
+                        onClose();
+                        setSubmitted(false);
+                    }, 2500);
+                } else {
+                    setTimeout(() => setSubmitted(false), 3000);
+                }
             } else {
                 alert('Failed to submit. Please try again.');
             }
@@ -204,17 +228,16 @@ export const InquiryWidget = ({ title, onClose, showPaxCount = false, roundedBot
                         <div className="space-y-1">
                             <label className="text-[10px] font-semibold md:font-bold text-gray-500 md:text-gray-400 uppercase tracking-wider md:tracking-widest ml-1">Mobile Number</label>
                             <div className="relative group">
-                                <div className="absolute left-4 top-1/2 -translate-y-1/2 flex items-center gap-1 border-r border-gray-200 pr-3 mr-2">
-                                    <span className="text-[13px] font-bold text-gray-400">+91</span>
+                                <div className="absolute left-4 top-1/2 -translate-y-1/2 flex items-center pr-3 mr-2">
+                                    <Phone className="w-4 h-4 text-gray-400" />
                                 </div>
                                 <input
                                     type="tel"
                                     name="phone"
-                                    pattern="[0-9]{10}"
                                     value={formData.phone}
                                     onChange={handleChange}
-                                    placeholder="9876543210"
-                                    className="w-full pl-14 md:pl-16 pr-4 py-2 md:py-3 border border-gray-100 rounded-xl text-[13px] font-medium focus:outline-none focus:border-brand focus:ring-4 focus:ring-brand/5 transition-all bg-gray-50/50 placeholder:text-gray-300"
+                                    placeholder="+91 98765 43210"
+                                    className="w-full pl-11 md:pl-12 pr-4 py-2 md:py-3 border border-gray-100 rounded-xl text-[13px] font-medium focus:outline-none focus:border-brand focus:ring-4 focus:ring-brand/5 transition-all bg-gray-50/50 placeholder:text-gray-300"
                                     required
                                 />
                             </div>

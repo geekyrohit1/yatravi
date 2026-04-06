@@ -8,6 +8,7 @@ import { SettingsProvider } from '../context/SettingsContext';
 import { ThemeProvider } from '../context/ThemeContext';
 import { ConsentProvider } from '../context/ConsentContext';
 import { CookieBanner } from '../components/CookieBanner';
+import { API_BASE_URL } from '@/constants';
 import Script from 'next/script';
 
 const satisfy = Satisfy({
@@ -55,46 +56,61 @@ const orangeAvenue = localFont({
     display: 'swap',
 });
 
-export const metadata: Metadata = {
-    title: {
-        default: 'Yatravi | We Care Your Trip - Lowest Price Holiday Packages',
-        template: '%s | Yatravi - We Care Your Trip'
-    },
-    description: 'Yatravi - We Care Your Trip. Explore the world with the lowest price holiday packages, hand-crafted itineraries, and expert travel guidance. Your trusted partner for domestic and international tours.',
-    keywords: ['Yatravi', 'We Care Your Trip', 'travel agency', 'holiday packages', 'tour packages', 'cheap flight deals', 'lowest price tours', 'domestic tours India', 'international travel packages', 'luxury holiday packages', 'tour and travel agency'],
-    authors: [{ name: 'Yatravi Travel Solutions' }],
-    creator: 'Yatravi',
-    publisher: 'Yatravi',
-    openGraph: {
-        type: 'website',
-        locale: 'en_IN',
-        url: 'https://yatravi.com',
-        siteName: 'Yatravi',
-        title: 'Yatravi | We Care Your Trip',
-        description: 'Explore the world with Yatravi. We care for your trip with the lowest price holiday packages and premium travel experiences.',
-        images: [
-            {
-                url: '/og-image.png',
-                width: 1200,
-                height: 630,
-                alt: 'Yatravi - We Care Your Trip'
-            }
-        ]
-    },
-    twitter: {
-        card: 'summary_large_image',
-        title: 'Yatravi | We Care Your Trip',
-        description: 'Lowest price holiday packages and premium travel experiences. We care for your trip.',
-        images: ['/og-image.png'],
-    },
-    icons: {
-        icon: '/favicon.svg',
-    },
-    metadataBase: new URL('https://yatravi.com'),
-    alternates: {
-        canonical: '/',
-    },
-};
+export async function generateMetadata(): Promise<Metadata> {
+    const res = await fetch(`${API_BASE_URL}/api/settings`, { next: { revalidate: 3600 } }).catch(() => null);
+    const settings = res ? await res.json() : null;
+    const globalSeo = settings?.globalSeo || {};
+
+    const siteName = globalSeo.siteName || 'Yatravi';
+    const titleSeparator = globalSeo.titleSeparator || '|';
+    const defaultTitle = globalSeo.defaultTitle || 'Yatravi | We Care Your Trip - Lowest Price Holiday Packages';
+    const defaultDescription = globalSeo.defaultDescription || 'Explore the world with Yatravi. Lowest price holiday packages and premium travel experiences.';
+    const defaultKeywords = globalSeo.defaultKeywords || 'travel agency, holiday packages, tour packages, cheapest tours';
+    const ogImage = globalSeo.defaultOgImage || '/og-image.png';
+
+    return {
+        title: {
+            default: defaultTitle,
+            template: `%s ${titleSeparator} ${siteName} - We Care Your Trip`
+        },
+        description: defaultDescription,
+        keywords: defaultKeywords.split(',').map((k: string) => k.trim()),
+        authors: [{ name: 'Yatravi Travel Solutions' }],
+        creator: siteName,
+        publisher: siteName,
+        openGraph: {
+            type: 'website',
+            locale: 'en_IN',
+            url: 'https://yatravi.com',
+            siteName: siteName,
+            title: defaultTitle,
+            description: defaultDescription,
+            images: [
+                {
+                    url: ogImage,
+                    width: 1200,
+                    height: 630,
+                    alt: siteName
+                }
+            ]
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title: defaultTitle,
+            description: defaultDescription,
+            images: [ogImage],
+            creator: globalSeo.twitterHandle || '@yatravi'
+        },
+        icons: {
+            icon: '/favicon.svg',
+            apple: '/yatraviicon.png',
+        },
+        metadataBase: new URL('https://yatravi.com'),
+        alternates: {
+            canonical: '/',
+        },
+    };
+}
 
 export default function RootLayout({
     children,
@@ -120,7 +136,7 @@ export default function RootLayout({
                             "@type": "TravelAgency",
                             "name": "Yatravi",
                             "url": "https://yatravi.com",
-                            "logo": "https://yatravi.com/favicon.svg",
+                            "logo": "https://yatravi.com/yatraviicon.png",
                             "image": "https://yatravi.com/og-image.png",
                             "description": "Lowest price holiday packages, hand-crafted itineraries, and expert travel guidance.",
                             "address": {

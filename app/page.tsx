@@ -40,6 +40,29 @@ async function getHomepageData() {
     }
 }
 
+export async function generateMetadata() {
+    try {
+        const res = await fetch(`${API_BASE_URL}/api/pages/home`, { next: { revalidate: 3600 } }).catch(() => null);
+        const pageData = res ? await res.json() : null;
+        
+        if (!pageData || !pageData.seo) return {};
+        
+        const { seo } = pageData;
+        return {
+            title: seo.title,
+            description: seo.description,
+            keywords: seo.keywords,
+            openGraph: {
+                title: seo.ogTitle || seo.title,
+                description: seo.ogDescription || seo.description,
+                images: seo.ogImage ? [{ url: seo.ogImage }] : [],
+            }
+        };
+    } catch (error) {
+        return {};
+    }
+}
+
 export default async function HomePage() {
     const { packages, config, destinations } = await getHomepageData();
 

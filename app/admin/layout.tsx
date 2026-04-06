@@ -269,7 +269,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <aside className="hidden md:flex w-64 flex-col bg-white border-r border-gray-200 fixed inset-y-0 z-50">
                 <div className="h-16 flex items-center px-6 border-b border-gray-100">
                     <img
-                        src="/logo-desktop.png"
+                        src="/yatraviicon.png"
                         alt="Yatravi Admin"
                         className="h-10 w-auto object-contain"
                     />
@@ -298,7 +298,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 <SheetContent side="left" className="w-[240px] p-0">
                     <div className="h-16 flex items-center px-6 border-b border-gray-100">
                         <img
-                            src="/logo-desktop.png"
+                            src="/yatraviicon.png"
                             alt="Yatravi Admin"
                             className="h-9 w-auto object-contain"
                         />

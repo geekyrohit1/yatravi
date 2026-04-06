@@ -907,6 +907,9 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
                                 <InquiryWidget
                                     title={`Inquiry for ${packageData.title}`}
                                     showPaxCount={true}
+                                    packageId={pkg._id}
+                                    packageTitle={pkg.title}
+                                    source="Package Detail Page"
                                 />
                             </div>
                         </div>
@@ -939,6 +942,9 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
                                 title={`Inquiry for ${packageData.title}`}
                                 onClose={() => setShowMobileForm(false)}
                                 showPaxCount={true}
+                                packageId={pkg._id}
+                                packageTitle={pkg.title}
+                                source="Package Detail Page"
                             />
                         </div>
                     </div>

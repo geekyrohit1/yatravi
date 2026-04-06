@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { Package } from '../types';
-import { DOMESTIC_LOCATIONS } from '../constants';
 import dynamic from 'next/dynamic';
 import { HeroSection } from '../components/HeroSection';
 import { FadeIn } from '../components/FadeIn';

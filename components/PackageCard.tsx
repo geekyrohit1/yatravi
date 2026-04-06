@@ -123,13 +123,14 @@ const PackageCardComponent: React.FC<PackageCardProps> = ({ pkg, variant = 'vert
                   <div className="space-y-1.5">
                     <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-[0.1em] ml-1">Mobile Number</label>
                     <div className="relative">
-                      <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 font-bold text-sm">+91</span>
+                      <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
+                        <Phone className="w-4 h-4" />
+                      </div>
                       <input
                         required
                         type="tel"
-                        pattern="[0-9]{10}"
-                        className="w-full pl-14 pr-4 py-3 bg-gray-50 border border-gray-100 rounded-xl focus:bg-white focus:ring-4 focus:ring-brand/5 focus:border-brand outline-none transition-all placeholder:text-gray-300 font-medium text-sm"
-                        placeholder="9876543210"
+                        className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-100 rounded-xl focus:bg-white focus:ring-4 focus:ring-brand/5 focus:border-brand outline-none transition-all placeholder:text-gray-300 font-medium text-sm"
+                        placeholder="+91 98765 43210"
                         value={callbackData.phone}
                         onChange={(e) => setCallbackData({ ...callbackData, phone: e.target.value })}
                       />

@@ -14,6 +14,11 @@ export const GlobalInquiryPopup = () => {
     const { trackEvent } = useTracking();
     const { hasResponded, preferences } = useConsent();
     const [isVisible, setIsVisible] = useState(false);
+    const [popupContext, setPopupContext] = useState({ 
+        source: 'Global Inquiry Popup', 
+        packageTitle: undefined as string | undefined,
+        title: undefined as string | undefined 
+    });
 
     // Don't show on admin pages
     if (pathname?.startsWith('/admin')) return null;
@@ -69,12 +74,30 @@ export const GlobalInquiryPopup = () => {
             window.addEventListener('scroll', handleScroll);
         }, 10000);
 
+        const handleToggle = (e: any) => {
+            if (e.detail) {
+                if (typeof e.detail === 'object') {
+                    setPopupContext({
+                        source: e.detail.source || 'Global Inquiry Popup',
+                        packageTitle: e.detail.packageTitle || undefined,
+                        title: e.detail.title || undefined
+                    });
+                }
+                triggerPopup();
+            } else {
+                setIsVisible(false);
+            }
+        };
+
+        window.addEventListener('toggleInquiryPopup', handleToggle);
+
         const timer = setTimeout(triggerPopup, 45000); // 45s safety trigger (increased from 30s)
 
         return () => {
             clearTimeout(graceTimer);
             clearTimeout(timer);
             window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('toggleInquiryPopup', handleToggle);
         };
     }, [settings.enableInquiryPopup, loading, trackEvent, hasResponded]);
 
@@ -88,7 +111,12 @@ export const GlobalInquiryPopup = () => {
     return (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm p-4 animate-in fade-in duration-300">
             <div className="relative w-full max-w-md animate-in zoom-in-95 duration-300">
-                <InquiryWidget roundedBottom={true} />
+                <InquiryWidget 
+                    roundedBottom={true} 
+                    source={popupContext.source} 
+                    packageTitle={popupContext.packageTitle}
+                    title={popupContext.title}
+                />
 
                 <button
                     onClick={handleClose}
