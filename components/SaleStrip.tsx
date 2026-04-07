@@ -35,7 +35,33 @@ export const SaleStrip: React.FC = () => {
 
     const pad = (n: number) => String(n).padStart(2, '0');
 
-    const cleanText = (settings.saleBannerText || 'Special Offer').replace(/^[^\s\w]+/, '').trim();
+    const parseFormattedText = (text: string) => {
+        if (!text) return null;
+        
+        // Regex to match **bold** content
+        const parts = text.split(/(\*\*.*?\*\*)/g);
+        
+        return parts.map((part, index) => {
+            if (part.startsWith('**') && part.endsWith('**')) {
+                // Bold part
+                const content = part.substring(2, part.length - 2);
+                return (
+                    <span key={index} className="font-bold tracking-tight px-0.5">
+                        <span translate="no">{content}</span>
+                    </span>
+                );
+            } else {
+                // Thin/Minimalist part
+                return (
+                    <span key={index} className="font-extralight tracking-[0.08em] opacity-90 mx-0.5">
+                        <span>{part}</span>
+                    </span>
+                );
+            }
+        });
+    };
+
+    const rawText = settings.saleBannerText || 'Special Offer';
 
     return (
         <div
@@ -43,23 +69,23 @@ export const SaleStrip: React.FC = () => {
                 '--sale-bg-start': bgStart,
                 '--sale-bg-end': bgEnd,
             } as React.CSSProperties}
-            className="w-full py-2 min-h-[32px] md:min-h-[40px] flex items-center justify-center text-white z-[100] relative shadow-sm border-b border-white/5 animate-gradient-xy bg-[linear-gradient(135deg,var(--sale-bg-start)_0%,var(--sale-bg-end)_50%,var(--sale-bg-start)_100%)] bg-[length:200%_auto] font-sans"
+            className="w-full py-2.5 min-h-[32px] md:min-h-[44px] flex items-center justify-center text-white z-[100] relative shadow-sm border-b border-white/5 animate-gradient-xy bg-[linear-gradient(135deg,var(--sale-bg-start)_0%,var(--sale-bg-end)_50%,var(--sale-bg-start)_100%)] bg-[length:200%_auto] font-sans"
         >
             <div className="max-w-7xl mx-auto w-full px-4 flex flex-col sm:flex-row items-center justify-center relative z-10 gap-2 md:gap-8">
                 <div className="flex items-center gap-3 w-full justify-center">
                     {settings.saleBannerLink ? (
-                        <Link href={settings.saleBannerLink} className="flex items-center justify-center hover:opacity-80 transition-all active:scale-95 w-full overflow-hidden">
+                        <Link href={settings.saleBannerLink} className="flex items-center justify-center hover:opacity-90 transition-all active:scale-95 w-full overflow-hidden">
                             <div className="flex items-center justify-center font-sans w-full text-center">
-                                <span className="font-semibold tracking-[0.05em] uppercase text-[clamp(6px,2.5vw,11px)] md:text-[11px] whitespace-nowrap truncate w-full">
-                                    {cleanText}
-                                </span>
+                                <div className="text-[clamp(10px,2.8vw,13px)] md:text-[13px] flex items-center justify-center flex-wrap gap-y-1">
+                                    {parseFormattedText(rawText)}
+                                </div>
                             </div>
                         </Link>
                     ) : (
                         <div className="flex items-center justify-center font-sans w-full text-center overflow-hidden">
-                            <span className="font-semibold tracking-[0.05em] uppercase text-[clamp(6px,2.5vw,11px)] md:text-[11px] whitespace-nowrap truncate w-full">
-                                {cleanText}
-                            </span>
+                            <div className="text-[clamp(10px,2.8vw,13px)] md:text-[13px] flex items-center justify-center flex-wrap gap-y-1">
+                                {parseFormattedText(rawText)}
+                            </div>
                         </div>
                     )}
                 </div>

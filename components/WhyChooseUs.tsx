@@ -20,7 +20,7 @@ export const WhyChooseUs: React.FC = () => {
         : FALLBACK_FEATURES;
 
     return (
-        <section className="pt-4 md:pt-8 pb-0 bg-white">
+        <section className="pt-4 md:pt-8 pb-0 bg-white min-h-[100px] md:min-h-[140px]">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
                     {features.slice(0, 4).map((feature, idx) => {

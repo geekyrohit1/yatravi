@@ -31,7 +31,7 @@ interface HoneymoonSpecialsProps {
 export const HoneymoonSpecials: React.FC<HoneymoonSpecialsProps> = ({ packages, data }) => {
     const router = useRouter();
     const scrollRef = useRef<HTMLDivElement>(null);
-    const [displayPackages, setDisplayPackages] = useState<Package[]>([]);
+    const [displayPackages, setDisplayPackages] = useState<Package[]>(packages || []);
     const title = data?.title || "Honeymoon Specials";
     const subtitle = data?.subtitle || "Create unforgettable memories with your better half. Handpicked romantic getaways with exclusive perks.";
 
@@ -58,9 +58,13 @@ export const HoneymoonSpecials: React.FC<HoneymoonSpecialsProps> = ({ packages, 
                     <div>
                         <div className="flex items-center gap-3 mb-1">
                             <div className="w-1 h-5 md:h-6 bg-brand rounded-full"></div>
-                            <h2 className="text-xl md:text-2xl font-bold tracking-tight text-gray-900 py-1">{title}</h2>
+                            <h2 className="text-xl md:text-2xl font-bold tracking-tight text-gray-900 py-1">
+                                <span>{title}</span>
+                            </h2>
                         </div>
-                        {subtitle && <p className="text-gray-500 text-[10px] md:text-xs ml-4 pl-3 border-l-2 border-gray-200 tracking-wide font-medium">{subtitle}</p>}
+                        {subtitle && <p className="text-gray-500 text-[10px] md:text-xs ml-4 pl-3 border-l-2 border-gray-200 tracking-wide font-medium">
+                            <span>{subtitle}</span>
+                        </p>}
                     </div>
                     <div className="hidden md:flex gap-2">
                         <button onClick={() => scroll('left')} className="w-10 h-10 rounded-full border border-brand/20 flex items-center justify-center text-brand hover:bg-brand hover:text-white transition-all">

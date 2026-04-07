@@ -15,12 +15,13 @@ const SectionHeaderSkeleton = () => (
     </div>
 );
 
-const SliderSkeleton = ({ cardCount = 4 }) => (
-    <div className="py-6 md:py-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full border-b border-gray-100 last:border-0 overflow-hidden">
+// 1. Package Slider Skeleton (Standard width)
+const PackageSliderSkeleton = ({ cardCount = 4 }) => (
+    <div className="pt-4 md:pt-10 pb-0 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full border-b border-gray-100 last:border-0 overflow-hidden">
         <SectionHeaderSkeleton />
         <div className="flex gap-4 md:gap-6 overflow-hidden">
             {[...Array(cardCount)].map((_, j) => (
-                <div key={j} className="w-[72vw] md:w-[calc((100%-48px)/2.2)] lg:w-[calc((100%-72px)/4)] flex-shrink-0 flex flex-col gap-4">
+                <div key={j} className="w-[calc((100vw-40px)/1.3)] md:w-[calc((100%-48px)/2.2)] lg:w-[calc((100%-72px)/4)] flex-shrink-0 flex flex-col gap-4">
                     <div className="aspect-[4/3] bg-slate-200/40 rounded-xl animate-pulse"></div>
                     <div className="space-y-3 px-1">
                         <div className="h-4 w-3/4 bg-slate-100/60 rounded-lg animate-pulse"></div>
@@ -28,6 +29,31 @@ const SliderSkeleton = ({ cardCount = 4 }) => (
                     </div>
                 </div>
             ))}
+        </div>
+    </div>
+);
+
+// 2. Destination Slider Skeleton (Taller, distinct width)
+const DestinationSliderSkeleton = ({ cardCount = 4 }) => (
+    <div className="pt-4 md:pt-10 pb-0 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full border-b border-gray-100 last:border-0 overflow-hidden">
+        <SectionHeaderSkeleton />
+        <div className="flex gap-3 overflow-hidden">
+            {[...Array(cardCount)].map((_, j) => (
+                <div key={j} className="w-[calc((100vw-40px)/1.92)] md:w-[calc((100%-48px)/2.2)] lg:w-[calc((100%-72px)/4)] h-[260px] md:h-[420px] flex-shrink-0 bg-slate-200/40 rounded-xl animate-pulse"></div>
+            ))}
+        </div>
+    </div>
+);
+
+// 3. Collection Grid Skeleton (Trending Collections)
+const CollectionGridSkeleton = () => (
+    <div className="pt-4 md:pt-10 pb-0 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full overflow-hidden">
+        <SectionHeaderSkeleton />
+        <div className="flex md:grid md:grid-cols-4 gap-4 h-[300px] md:h-[500px]">
+            <div className="min-w-[85vw] md:min-w-0 md:col-span-2 md:row-span-2 bg-slate-200/40 rounded-xl animate-pulse"></div>
+            <div className="hidden md:block md:col-span-1 md:row-span-1 bg-slate-200/40 rounded-xl animate-pulse"></div>
+            <div className="hidden md:block md:col-span-1 md:row-span-1 bg-slate-200/40 rounded-xl animate-pulse"></div>
+            <div className="hidden md:block md:col-span-2 md:row-span-1 bg-slate-200/40 rounded-xl animate-pulse"></div>
         </div>
     </div>
 );
@@ -65,20 +91,21 @@ const MarqueeSkeleton = () => (
 );
 
 // Dynamic imports
-const PackageSlider = dynamic(() => import('../components/PackageSlider').then(m => m.PackageSlider), { loading: () => <SliderSkeleton /> });
+// Dynamic imports
+const PackageSlider = dynamic(() => import('../components/PackageSlider').then(m => m.PackageSlider), { loading: () => <PackageSliderSkeleton /> });
 const PartnersMarquee = dynamic(() => import('../components/PartnersMarquee').then(m => m.PartnersMarquee), { loading: () => <MarqueeSkeleton /> });
-const TrendingCollections = dynamic(() => import('../components/TrendingCollections').then(m => m.TrendingCollections), { loading: () => <SliderSkeleton /> });
+const TrendingCollections = dynamic(() => import('../components/TrendingCollections').then(m => m.TrendingCollections), { loading: () => <CollectionGridSkeleton /> });
 const WhyChooseUs = dynamic(() => import('../components/WhyChooseUs').then(m => m.WhyChooseUs), { loading: () => <GridSkeleton /> });
 const ConsultationBanner = dynamic(() => import('../components/ConsultationBanner').then(m => m.ConsultationBanner), { loading: () => <BannerSkeleton aspectRatio="aspect-[2/1] md:aspect-[5/1]" /> });
 const FAQSection = dynamic(() => import('../components/FAQSection').then(m => m.FAQSection), { loading: () => <div className="py-10 max-w-7xl mx-auto px-4"><SectionHeaderSkeleton /><div className="space-y-4">{[1, 2, 3].map(i => <div key={i} className="h-12 bg-gray-50 rounded-xl animate-pulse" />)}</div></div> });
 const Newsletter = dynamic(() => import('../components/Newsletter').then(m => m.Newsletter), { loading: () => <BannerSkeleton aspectRatio="aspect-[3/1] md:aspect-[6/1]" /> });
-const WeekendTrips = dynamic(() => import('../components/WeekendTrips').then(m => m.WeekendTrips), { loading: () => <SliderSkeleton /> });
-const VisaFreeDestinations = dynamic(() => import('../components/VisaFreeDestinations').then(m => m.VisaFreeDestinations), { loading: () => <SliderSkeleton /> });
-const SuperSaverDeals = dynamic(() => import('../components/SuperSaverDeals').then(m => m.SuperSaverDeals), { loading: () => <SliderSkeleton /> });
-const HoneymoonSpecials = dynamic(() => import('../components/HoneymoonSpecials').then(m => m.HoneymoonSpecials), { loading: () => <SliderSkeleton /> });
-const OfferSlider = dynamic(() => import('../components/OfferSlider').then(m => m.OfferSlider), { loading: () => <SliderSkeleton /> });
+const WeekendTrips = dynamic(() => import('../components/WeekendTrips').then(m => m.WeekendTrips), { loading: () => <PackageSliderSkeleton /> });
+const VisaFreeDestinations = dynamic(() => import('../components/VisaFreeDestinations').then(m => m.VisaFreeDestinations), { loading: () => <DestinationSliderSkeleton /> });
+const SuperSaverDeals = dynamic(() => import('../components/SuperSaverDeals').then(m => m.SuperSaverDeals), { loading: () => <PackageSliderSkeleton /> });
+const HoneymoonSpecials = dynamic(() => import('../components/HoneymoonSpecials').then(m => m.HoneymoonSpecials), { loading: () => <PackageSliderSkeleton /> });
+const OfferSlider = dynamic(() => import('../components/OfferSlider').then(m => m.OfferSlider), { loading: () => <PackageSliderSkeleton /> });
 const MediaBanner = dynamic(() => import('../components/MediaBanner').then(m => m.MediaBanner), { loading: () => <BannerSkeleton aspectRatio="aspect-[3/1] md:aspect-[6/1]" /> });
-const PromoSlider = dynamic(() => import('../components/PromoSlider').then(m => m.PromoSlider), { loading: () => <SliderSkeleton /> });
+const PromoSlider = dynamic(() => import('../components/PromoSlider').then(m => m.PromoSlider), { loading: () => <PackageSliderSkeleton /> });
 const FooterQuickLinks = dynamic(() => import('../components/FooterQuickLinks').then(m => m.FooterQuickLinks), { loading: () => <div className="py-10 bg-gray-50"><div className="max-w-7xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-8">{[1,2,3,4].map(i => <div key={i} className="space-y-4"><div className="h-4 w-24 bg-gray-200 rounded animate-pulse" /><div className="space-y-2">{[1,2,3].map(j => <div key={j} className="h-3 w-32 bg-gray-100 rounded animate-pulse" />)}</div></div>)}</div></div> });
 
 const METRO_CITIES = ['Mumbai', 'Delhi', 'Jaipur', 'Bangalore', 'Chennai', 'Kolkata', 'Ahmedabad', 'Pune', 'Hyderabad', 'Lucknow'];
@@ -278,28 +305,21 @@ export const HomeClient: React.FC<HomeClientProps> = ({ initialPackages, initial
     [initialDestinations]);
 
     return (
-        <div className={`flex flex-col gap-0 text-gray-800 bg-white ${isMounted ? 'animate-in fade-in duration-500' : 'opacity-0'}`}>
+        <div className="flex flex-col gap-0 text-gray-800 bg-white">
             <HeroSection 
                 heroData={initialConfig?.heroSlider} 
-                isLoading={!isMounted} 
+                isLoading={!initialConfig?.heroSlider} 
             />
 
             <div className="flex flex-col gap-0">
-                {!isMounted ? (
+                {initialConfig && Array.isArray(initialConfig.sections) && (
                     <div className="flex flex-col gap-0">
-                         <SliderSkeleton />
-                         <BannerSkeleton />
+                        {[...initialConfig.sections]
+                            .filter((s: any) => s && s.enabled && s.key !== 'quicklinks')
+                            .sort((a: any, b: any) => (parseFloat(a.order) || 999) - (parseFloat(b.order) || 999))
+                            .map((section: any, index: number) => renderSection(section, index))
+                        }
                     </div>
-                ) : (
-                    initialConfig && Array.isArray(initialConfig.sections) && (
-                        <div className="flex flex-col gap-0">
-                            {[...initialConfig.sections]
-                                .filter((s: any) => s && s.enabled && s.key !== 'quicklinks')
-                                .sort((a: any, b: any) => (parseFloat(a.order) || 999) - (parseFloat(b.order) || 999))
-                                .map((section: any, index: number) => renderSection(section, index))
-                            }
-                        </div>
-                    )
                 )}
 
                 <div className="flex flex-col gap-0 bg-white">

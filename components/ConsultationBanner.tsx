@@ -39,10 +39,10 @@ export const ConsultationBanner: React.FC = () => {
                             Expert travel guidance
                         </div>
                         <h2 className="text-[22px] md:text-5xl font-extrabold text-white mb-4 md:mb-6 tracking-tight leading-[1.2] md:leading-[1.1]">
-                            {headline}
+                            <span>{headline}</span>
                         </h2>
                         <p className="text-white/80 text-sm md:text-lg font-medium leading-relaxed max-w-xl">
-                            {subtext}
+                            <span>{subtext}</span>
                         </p>
                     </div>
 
@@ -55,8 +55,12 @@ export const ConsultationBanner: React.FC = () => {
                                 <Phone className="w-4 h-4 md:w-5 md:h-5" />
                             </div>
                             <div className="text-left">
-                                <p className="text-white/60 text-[9px] md:text-[10px] font-bold uppercase tracking-wider mb-0.5">Consult with us</p>
-                                <p className="text-white font-bold text-[15px] md:text-lg tracking-tight leading-none whitespace-nowrap">{phoneNumber}</p>
+                                <p className="text-white/60 text-[9px] md:text-[10px] font-bold uppercase tracking-wider mb-0.5">
+                                    <span>Consult with us</span>
+                                </p>
+                                <p className="text-white font-bold text-[15px] md:text-lg tracking-tight leading-none whitespace-nowrap" translate="no">
+                                    <span>{phoneNumber}</span>
+                                </p>
                             </div>
                         </a>
 

@@ -112,19 +112,37 @@ export async function generateMetadata(): Promise<Metadata> {
     };
 }
 
-export default function RootLayout({
+export default async function RootLayout({
     children,
 }: {
     children: React.ReactNode;
 }) {
+    const res = await fetch(`${API_BASE_URL}/api/settings`, { next: { revalidate: 3600 } }).catch(() => null);
+    const settings = res ? await res.json() : null;
+
     return (
-        <html lang="en" className={`${montserrat.variable} ${montserratAlternates.variable} ${orangeAvenue.variable} ${satisfy.variable} ${engagement.variable} antialiased`}>
+        <html lang="en" suppressHydrationWarning className={`${montserrat.variable} ${montserratAlternates.variable} ${orangeAvenue.variable} ${satisfy.variable} ${engagement.variable} antialiased`}>
             <head>
                 {/* Preconnect to improve TTFB for images and API */}
                 <link rel="preconnect" href="https://yatravi.com" />
                 <link rel="dns-prefetch" href="https://yatravi.com" />
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+                
+                {/* Google Translate can modify the DOM during hydration, these suppressions prevent crashes */}
+                <Script id="google-translate-fix" strategy="afterInteractive">
+                  {`
+                    document.addEventListener('DOMContentLoaded', function() {
+                      var observer = new MutationObserver(function(mutations) {
+                        mutations.forEach(function(mutation) {
+                          if (mutation.type === 'childList') {
+                            // Check for Google Translate injected elements or attribute changes
+                          }
+                        });
+                      });
+                    });
+                  `}
+                </Script>
 
                 {/* JSON-LD Structured Data for Travel Agency */}
                 <Script
@@ -153,9 +171,9 @@ export default function RootLayout({
                     }}
                 />
             </head>
-            <body className="bg-gray-50">
+            <body className="bg-gray-50" suppressHydrationWarning>
                 <ConsentProvider>
-                    <SettingsProvider>
+                    <SettingsProvider initialSettings={settings}>
                         <ThemeProvider defaultTheme="light" storageKey="yatravi-theme">
                             <GlobalInquiryPopup />
                             <CookieBanner />

@@ -162,6 +162,36 @@ const globalSettingSchema = new mongoose.Schema({
         autoGenerateSchema: { type: Boolean, default: true },
         schemaTypes: { type: [String], default: ['Organization', 'WebSite', 'FAQPage'] },
         jsonLd: { type: String, default: '' }
+    },
+
+    // Creative Mobile Banner
+    enableCreativeBanner: {
+        type: Boolean,
+        default: false
+    },
+    creativeBannerTitle: {
+        type: String,
+        default: 'Discover Hidden Gems'
+    },
+    creativeBannerSubtitle: {
+        type: String,
+        default: 'Explore exclusive deals on top-rated destinations.'
+    },
+    creativeBannerImage: {
+        type: String,
+        default: '/images/placeholder.svg'
+    },
+    creativeBannerBgColor: {
+        type: String,
+        default: '#CD1C18'
+    },
+    creativeBannerBtnText: {
+        type: String,
+        default: 'Book Now'
+    },
+    creativeBannerLink: {
+        type: String,
+        default: '/packages'
     }
 }, {
     timestamps: true

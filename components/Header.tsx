@@ -51,30 +51,30 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Center Navigation */}
           <div className="hidden lg:flex items-center flex-1 mx-4">
             <div className="flex items-center justify-evenly w-full">
-              <Link href="/" className="text-gray-700 lg:text-white/90 hover:text-brand transition-colors text-[13px] font-medium tracking-[0.02em] relative group">
-                Home
+              <Link href="/" className="text-gray-700 lg:text-white/90 lg:hover:text-brand transition-colors text-[13px] font-medium tracking-[0.02em] relative group">
+                <span>Home</span>
                 <span className="absolute -bottom-1.5 left-0 w-0 h-[2px] bg-brand group-hover:w-full transition-all duration-300 rounded-full"></span>
               </Link>
 
-              <Link href="/web-check-in" className="text-gray-700 lg:text-white/90 hover:text-brand transition-colors text-[13px] font-medium tracking-[0.02em] relative group">
-                Web Check-in
+              <Link href="/web-check-in" className="text-gray-700 lg:text-white/90 lg:hover:text-brand transition-colors text-[13px] font-medium tracking-[0.02em] relative group">
+                <span>Web Check-in</span>
                 <span className="absolute -bottom-1.5 left-0 w-0 h-[2px] bg-brand group-hover:w-full transition-all duration-300 rounded-full"></span>
               </Link>
-              <Link href="/contact" className="text-gray-700 lg:text-white/90 hover:text-brand transition-colors text-[13px] font-medium tracking-[0.02em] relative group">
-                Contact
+              <Link href="/contact" className="text-gray-700 lg:text-white/90 lg:hover:text-brand transition-colors text-[13px] font-medium tracking-[0.02em] relative group">
+                <span>Contact</span>
                 <span className="absolute -bottom-1.5 left-0 w-0 h-[2px] bg-brand group-hover:w-full transition-all duration-300 rounded-full"></span>
               </Link>
-              <Link href="/about" className="text-gray-700 lg:text-white/90 hover:text-brand transition-colors text-[13px] font-medium tracking-[0.02em] relative group">
-                About Us
+              <Link href="/about" className="text-gray-700 lg:text-white/90 lg:hover:text-brand transition-colors text-[13px] font-medium tracking-[0.02em] relative group">
+                <span>About Us</span>
                 <span className="absolute -bottom-1.5 left-0 w-0 h-[2px] bg-brand group-hover:w-full transition-all duration-300 rounded-full"></span>
               </Link>
-              <Link href="/join" className="text-gray-700 lg:text-white/90 hover:text-brand transition-colors text-[13px] font-medium tracking-[0.02em] relative group">
-                Join Us
+              <Link href="/join" className="text-gray-700 lg:text-white/90 lg:hover:text-brand transition-colors text-[13px] font-medium tracking-[0.02em] relative group">
+                <span>Join Us</span>
                 <span className="absolute -bottom-1.5 left-0 w-0 h-[2px] bg-brand group-hover:w-full transition-all duration-300 rounded-full"></span>
               </Link>
-              <Link href="/support-center" className="text-gray-700 lg:text-white/90 hover:text-brand transition-colors text-[13px] font-medium tracking-[0.02em] relative group flex items-center gap-1.5">
+              <Link href="/support-center" className="text-gray-700 lg:text-white/90 lg:hover:text-brand transition-colors text-[13px] font-medium tracking-[0.02em] relative group flex items-center gap-1.5">
                 <Headphones className="w-4 h-4" />
-                Support
+                <span>Support</span>
                 <span className="absolute -bottom-1.5 left-0 w-0 h-[2px] bg-brand group-hover:w-full transition-all duration-300 rounded-full"></span>
               </Link>
               <button
@@ -98,7 +98,7 @@ export const Header: React.FC<HeaderProps> = ({
                 <Search className="w-4 h-4 text-gray-400" />
                 <div className="text-[12px] font-semibold font-sans flex items-center gap-1">
                   <span className="text-gray-600">Search</span>
-                  <span className="text-brand">{headerPlaceholder}</span>
+                  <span className="text-brand" translate="no">{headerPlaceholder}</span>
                   <span className="inline-block w-[1.5px] h-3.5 bg-brand/60 animate-pulse" />
                 </div>
               </div>
@@ -194,10 +194,17 @@ export const Header: React.FC<HeaderProps> = ({
                                   )}
                                 </div>
                                 <div className="flex-1 min-w-0">
-                                  <p className="font-medium text-gray-800 text-xs line-clamp-2 leading-tight mb-0.5">{pkg.title}</p>
+                                  <p className="font-medium text-gray-800 text-xs line-clamp-2 leading-tight mb-0.5" translate="no">
+                                    <span>{pkg.title}</span>
+                                  </p>
                                   <div className="flex items-center justify-between">
-                                    <p className="text-[10px] text-gray-400 truncate max-w-[60%]">{pkg.location}</p>
-                                    <p className="text-[10px] font-bold tracking-wide text-brand">₹{pkg.price?.toLocaleString()}</p>
+                                    <p className="text-[10px] text-gray-400 truncate max-w-[60%]">
+                                      <span>{pkg.location}</span>
+                                    </p>
+                                    <p className="text-[10px] font-bold tracking-wide text-brand" translate="no">
+                                      <span className="mr-0.5">₹</span>
+                                      <span>{pkg.price?.toLocaleString()}</span>
+                                    </p>
                                   </div>
                                 </div>
                               </button>

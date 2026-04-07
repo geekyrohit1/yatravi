@@ -11,8 +11,13 @@ export const Newsletter: React.FC = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
 
+    // Show placeholder while loading to prevent layout shift
+    if (loading) {
+        return <div className="h-[280px] md:h-[350px] w-full bg-white" />;
+    }
+
     // Don't render if disabled in admin settings
-    if (!settings.enableNewsletter || loading) return null;
+    if (!settings.enableNewsletter) return null;
 
     const headline = settings.newsletterHeadline || 'Unlock Exclusive Travel Deals!';
     const subtext = settings.newsletterSubtext || 'Subscribe to our newsletter and get up to';
@@ -49,7 +54,7 @@ export const Newsletter: React.FC = () => {
     };
 
     return (
-        <section className="pt-6 md:pt-10 pb-0 bg-white relative overflow-hidden text-center">
+        <section className="pt-4 md:pt-8 pb-0 bg-white min-h-[80px] md:min-h-[100px] relative overflow-hidden text-center">
 
             <div className="max-w-4xl mx-auto px-4 relative z-10 text-center">
                 <div className="inline-block p-3 rounded-full bg-white shadow-sm mb-3 md:mb-4">

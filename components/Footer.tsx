@@ -33,13 +33,13 @@ export const Footer: React.FC<FooterProps> = ({ onOpenQuote }) => {
               Curating the world's most beautiful destinations for your premium journeys.
             </p>
             <div className="space-y-2 mb-5 w-full">
-              <a href="tel:+919587505726" className="group flex items-center text-[12.5px] font-normal tracking-wide text-white/70 hover:text-brand transition-all duration-300 gap-3">
+              <a href="tel:+919587505726" className="group flex items-center text-[12.5px] font-normal tracking-wide text-white/70 lg:hover:text-brand transition-all duration-300 gap-3">
                 <div className="bg-white/5 p-2 rounded-full border border-white/10 group-hover:bg-brand/10 group-hover:border-brand/20 transition-all">
                   <Phone className="w-3.5 h-3.5 text-white/50 group-hover:text-brand" />
                 </div>
                 +91 95875 05726
               </a>
-              <a href="tel:+919982132143" className="group flex items-center text-[12.5px] font-normal tracking-wide text-white/60 hover:text-brand transition-all duration-300 gap-3">
+              <a href="tel:+919982132143" className="group flex items-center text-[12.5px] font-normal tracking-wide text-white/60 lg:hover:text-brand transition-all duration-300 gap-3">
                 <div className="bg-white/5 p-2 rounded-full border border-white/10 group-hover:bg-brand/10 group-hover:border-brand/20 transition-all">
                   <Phone className="w-3.5 h-3.5 text-white/50 group-hover:text-brand" />
                 </div>

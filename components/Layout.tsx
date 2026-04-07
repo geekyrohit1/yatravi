@@ -21,7 +21,7 @@ const MobileSearchModal = dynamic(() => import('./MobileSearchModal').then(m => 
 
 
 export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const { settings } = useSettings();
+  const { settings, loading } = useSettings();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isQuotePopupOpen, setIsQuotePopupOpen] = useState(false);
   const [isExternalPopupOpen, setIsExternalPopupOpen] = useState(false);
@@ -306,12 +306,12 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
       <Footer onOpenQuote={() => setIsQuotePopupOpen(true)} />
 
       {/* AI Assistant Chat Widget */}
-      {settings?.enableAIChat !== false && !isHideIconsPage && (
+      {mounted && !loading && settings?.enableAIChat === true && !isHideIconsPage && (
         <ViChatAssistant isHidden={isQuotePopupOpen || isExternalPopupOpen || isExternalFormOpen} />
       )}
 
       {/* Floating WhatsApp Button */}
-      {settings?.enableWhatsappChat !== false && !isHideIconsPage && !isQuotePopupOpen && !isExternalPopupOpen && !isExternalFormOpen && (
+      {mounted && !loading && settings?.enableWhatsappChat === true && !isHideIconsPage && !isQuotePopupOpen && !isExternalPopupOpen && !isExternalFormOpen && (
         <a
           href={`https://wa.me/${(settings?.whatsappNumber || '9587505726').replace(/[^0-9]/g, '')}`}
           target="_blank"

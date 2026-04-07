@@ -46,7 +46,7 @@ const SuperSaverCard = ({ pkg }: { pkg: Package }) => {
                         <p className="text-[8.5px] md:text-[10px] text-white font-medium leading-[1.4] md:leading-snug">
                             {(pkg.regionBreakdown || pkg.itinerarySummary || '').split(/[•|·]| - /).map((part, i) => (
                                 <React.Fragment key={`saver-r-${i}`}>
-                                    {part.trim().split(/(\d+[Nn])/).map((subPart, j) => 
+                                    {part.trim().split(/(\d+[Nn])/).map((subPart, j) =>
                                         /^\d+[Nn]$/.test(subPart) ? <span key={`saver-s-${j}`} className="font-bold text-white">{subPart}</span> : <span key={`saver-p-${j}`} className="opacity-80">{subPart}</span>
                                     )}
                                     {i < ((pkg.regionBreakdown || pkg.itinerarySummary || '').split(/[•|·]| - /).length || 0) - 1 && <span className="mx-2 opacity-30">•</span>}
@@ -57,15 +57,17 @@ const SuperSaverCard = ({ pkg }: { pkg: Package }) => {
                 )}
                 <div className="flex flex-col">
                     <span className="text-white/60 text-[8px] md:text-[10px] font-medium tracking-wider mb-0.5">
-                        Starts at
+                        <span>Starts at</span>
                     </span>
-                    <div className="flex items-baseline gap-1">
+                    <div className="flex items-baseline gap-1" translate="no">
                         <span className="text-white text-[14.5px] md:text-2xl font-bold tracking-tight">
-                            ₹{(pkg.price || 0).toLocaleString()}
+                            <span className="mr-0.5">₹</span>
+                            <span>{(pkg.price || 0).toLocaleString()}</span>
                         </span>
                         {pkg.originalPrice && pkg.originalPrice > pkg.price && (
                             <span className="text-white/40 text-[8.5px] md:text-xs line-through font-normal ml-2">
-                                ₹{pkg.originalPrice.toLocaleString()}
+                                <span className="mr-0.5">₹</span>
+                                <span>{pkg.originalPrice.toLocaleString()}</span>
                             </span>
                         )}
                     </div>
@@ -130,9 +132,13 @@ export const SuperSaverDeals: React.FC<SuperSaverDealsProps> = ({ packages, data
                     <div>
                         <div className="flex items-center gap-3 mb-1">
                             <div className="w-1 h-5 md:h-6 bg-brand rounded-full"></div>
-                            <h2 className="text-xl md:text-2xl font-bold tracking-tight text-gray-900 py-1">{title}</h2>
+                            <h2 className="text-xl md:text-2xl font-bold tracking-tight text-gray-900 py-1">
+                                <span>{title}</span>
+                            </h2>
                         </div>
-                        {subtitle && <p className="text-gray-500 text-[10px] md:text-xs ml-4 pl-3 border-l-2 border-gray-200 tracking-wide font-medium">{subtitle}</p>}
+                        {subtitle && <p className="text-gray-500 text-[10px] md:text-xs ml-4 pl-3 border-l-2 border-gray-200 tracking-wide font-medium">
+                            <span>{subtitle}</span>
+                        </p>}
                     </div>
                     <div className="hidden md:flex gap-2">
                         <button onClick={() => scroll('left')} className="w-10 h-10 rounded-full border border-brand/20 flex items-center justify-center text-brand hover:bg-brand hover:text-white transition-all">

@@ -329,9 +329,9 @@ export default function SettingsPage() {
                                     <Input
                                         {...register('saleBannerText')}
                                         className="rounded-xl border-gray-200"
-                                        placeholder="🎉 Summer Sale: Get 20% off on all packages!"
+                                        placeholder="**Summer Sale** Get 20% off on all packages!"
                                     />
-                                    <p className="text-xs text-gray-400">You can use HTML like &lt;b&gt;bold&lt;/b&gt; or emojis 🎉</p>
+                                    <p className="text-xs text-gray-400">Use <b>**text**</b> for bold and normal for thin (minimalistic) 🎉</p>
                                 </div>
                                 <div className="space-y-2">
                                     <Label className="text-gray-700">Banner Link (Optional)</Label>

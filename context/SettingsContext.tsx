@@ -112,12 +112,14 @@ const SettingsContext = createContext<SettingsContextType>({
 
 export const useSettings = () => useContext(SettingsContext);
 
-export function SettingsProvider({ children }: { children: ReactNode }) {
-    const [settings, setSettings] = useState<SiteSettings>(defaultSettings);
-    const [loading, setLoading] = useState(true);
+export function SettingsProvider({ children, initialSettings }: { children: ReactNode, initialSettings?: SiteSettings }) {
+    const [settings, setSettings] = useState<SiteSettings>(() => {
+        return initialSettings ? { ...defaultSettings, ...initialSettings } : defaultSettings;
+    });
+    const [loading, setLoading] = useState(!initialSettings);
 
     const fetchSettings = async (isBackground = false) => {
-        if (!isBackground) setLoading(true);
+        if (!isBackground && !initialSettings) setLoading(true);
         try {
             const timestamp = new Date().getTime();
             const res = await fetch(`${API_BASE_URL}/api/settings?t=${timestamp}`, { cache: 'no-store' });
@@ -134,26 +136,32 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
         } catch (error) {
             console.error('Failed to fetch settings:', error);
         } finally {
-            setLoading(false);
+            if (!initialSettings || !isBackground) setLoading(false);
         }
     };
 
     useEffect(() => {
-        // 1. Instant Load from Cache (Stale-While-Revalidate)
-        if (typeof window !== 'undefined') {
+        // 1. Sync initialSettings to cache if provided (keeps cache fresh)
+        if (typeof window !== 'undefined' && initialSettings) {
+            localStorage.setItem('yatravi_settings', JSON.stringify({ ...defaultSettings, ...initialSettings }));
+        }
+
+        // 2. Load from Cache ONLY if we don't have initialSettings from Server
+        if (typeof window !== 'undefined' && !initialSettings) {
             const cached = localStorage.getItem('yatravi_settings');
             if (cached) {
                 try {
                     setSettings(JSON.parse(cached));
-                    setLoading(false); // UI can reveal immediately with cached data
+                    setLoading(false); 
                 } catch (e) {
                     console.error('Failed to parse cached settings');
                 }
             }
         }
-        // 2. Background Revalidate
+        
+        // 3. Background Revalidate (Keep it always fresh)
         fetchSettings(true);
-    }, []);
+    }, [initialSettings]);
 
     return (
         <SettingsContext.Provider value={{ settings, loading, refetch: () => fetchSettings(false) }}>

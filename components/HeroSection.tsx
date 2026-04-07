@@ -59,7 +59,22 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
     const [isTransitioning, setIsTransitioning] = useState(false);
     const [displayedText, setDisplayedText] = useState('');
     const [isTyping, setIsTyping] = useState(true);
-    const [heroDestinationsState, setHeroDestinationsState] = useState<HeroDestination[]>([]);
+    const [heroDestinationsState, setHeroDestinationsState] = useState<HeroDestination[]>(() => {
+        if (heroData && heroData.length > 0) {
+            return heroData
+                .filter((s: any) => s.enabled !== false)
+                .sort((a: any, b: any) => (a.order || 0) - (b.order || 0))
+                .map((s: any) => ({
+                    name: (s.customTitle || s.name || 'Destination'),
+                    slug: s.slug || 'explore',
+                    heroImage: s.customImage || s.heroImage || FALLBACK_DESTINATIONS[0].heroImage,
+                    mobileImage: s.customMobileImage || s.mobileMediaUrl || s.mobileImage,
+                    tagline: s.customTagline || s.tagline || 'Explore Now',
+                    startingPrice: s.startingPrice || 99000
+                }));
+        }
+        return [];
+    });
     const [dynamicPlaceholder, setDynamicPlaceholder] = useState('');
     const [placeholderIndex, setPlaceholderIndex] = useState(0);
     const [isDeletingPlaceholder, setIsDeletingPlaceholder] = useState(false);
@@ -75,6 +90,27 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             // Still show skeleton if data is missing, but with a shorter failsafe
             const failsafe = setTimeout(() => setImageReady(true), 800);
             return () => clearTimeout(failsafe);
+        }
+    }, [heroData]);
+
+    // Update state if props change after initial load
+    useEffect(() => {
+        if (heroData && heroData.length > 0) {
+            const slides = heroData
+                .filter((s: any) => s.enabled !== false)
+                .sort((a: any, b: any) => (a.order || 0) - (b.order || 0))
+                .map((s: any) => ({
+                    name: (s.customTitle || s.name || 'Destination'),
+                    slug: s.slug || 'explore',
+                    heroImage: s.customImage || s.heroImage || FALLBACK_DESTINATIONS[0].heroImage,
+                    mobileImage: s.customMobileImage || s.mobileMediaUrl || s.mobileImage,
+                    tagline: s.customTagline || s.tagline || 'Explore Now',
+                    startingPrice: s.startingPrice || 99000
+                }));
+
+            if (slides.length > 0) {
+                setHeroDestinationsState(slides);
+            }
         }
     }, [heroData]);
 
@@ -107,25 +143,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
         return () => clearTimeout(timeout);
     }, [dynamicPlaceholder, isDeletingPlaceholder, placeholderIndex, heroDestinationsState]);
-    useEffect(() => {
-        if (heroData && heroData.length > 0) {
-            const slides = heroData
-                .filter((s: any) => s.enabled !== false)
-                .sort((a: any, b: any) => a.order - b.order)
-                .map((s: any) => ({
-                    name: (s.customTitle || s.name || 'Destination'),
-                    slug: s.slug || 'explore',
-                    heroImage: s.customImage || s.heroImage || FALLBACK_DESTINATIONS[0].heroImage,
-                    mobileImage: s.customMobileImage || s.mobileMediaUrl || s.mobileImage,
-                    tagline: s.customTagline || s.tagline || 'Explore Now',
-                    startingPrice: s.startingPrice || 99000
-                }));
-
-            if (slides.length > 0) {
-                setHeroDestinationsState(slides);
-            }
-        }
-    }, [heroData]);
 
     const heroDestinations: HeroDestination[] = heroDestinationsState.length > 0 ? heroDestinationsState : FALLBACK_DESTINATIONS;
     const activeDestination = heroDestinations[activeIndex] || FALLBACK_DESTINATIONS[0];
@@ -263,10 +280,17 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                         </h1>
 
                         <div className="flex flex-col mb-10 border-l-2 border-brand/30 pl-5">
-                            <span className="text-[10px] font-bold text-brand lowercase tracking-[0.25em] mb-1.5 capitalize-first">starting from</span>
-                            <div className="flex items-baseline gap-1">
-                                <span className="text-4xl font-bold text-gray-900 tracking-tight">₹{formatPrice(activeDestination.startingPrice)}</span>
-                                <span className="text-[10px] font-medium text-gray-500 lowercase tracking-widest ml-1 capitalize-first">per person</span>
+                            <span className="text-[10px] font-bold text-brand lowercase tracking-[0.25em] mb-1.5 capitalize-first">
+                                <span>starting from</span>
+                            </span>
+                            <div className="flex items-baseline gap-1" translate="no">
+                                <span className="text-4xl font-bold text-gray-900 tracking-tight">
+                                    <span className="mr-1">₹</span>
+                                    <span>{formatPrice(activeDestination.startingPrice)}</span>
+                                </span>
+                                <span className="text-[10px] font-medium text-gray-500 lowercase tracking-widest ml-1 capitalize-first" translate="yes">
+                                    <span>per person</span>
+                                </span>
                             </div>
                         </div>
 
@@ -368,10 +392,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                         {/* Personalized Greeting matches user mockup */}
                         <div className="mb-3 transform transition-all duration-700 delay-100 translate-y-0 opacity-100">
                             <div className="flex items-center gap-2 mb-0.5">
-                                <h2 className="text-white text-xl font-bold tracking-tight drop-shadow-md">Hey explorer, 👋</h2>
+                                <h2 className="text-white text-xl font-bold tracking-tight drop-shadow-md">
+                                    <span>Hey explorer, 👋</span>
+                                </h2>
                             </div>
                             <p className="text-white/90 text-[10px] font-medium tracking-wide drop-shadow-sm">
-                                Discover your next perfect adventure
+                                <span>Discover your next perfect adventure</span>
                             </p>
                         </div>
 
@@ -385,7 +411,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                                 <div className="flex items-center gap-1.5 overflow-hidden">
                                     <span className="text-gray-500/80 text-xs font-medium">Search</span>
                                     <span className="text-brand text-xs font-bold truncate">
-                                        "{dynamicPlaceholder}"
+                                        <span translate="no">"{dynamicPlaceholder}"</span>
                                     </span>
                                 </div>
                             </div>
