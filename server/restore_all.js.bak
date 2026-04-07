@@ -34,7 +34,6 @@ const DESTINATIONS = [
 ];
 
 const ADDITIONAL_PACKAGES = [
-    /*
     { id: 't_1', title: 'Thailand Adventure Buffet', location: 'Thailand', duration: 5, price: 29999, originalPrice: 45000, category: 'International', image: 'https://ik.imagekit.io/2nikzq08c/Thailand.jpg', status: 'published', showOnHomepage: true },
     { id: 'w_1', title: 'Rishikesh Rafting Adventure', location: 'Rishikesh, India', duration: 3, price: 5999, originalPrice: 8999, category: 'Adventure', image: 'https://images.unsplash.com/photo-1530590394457-e7ecbc19c08d', groupSize: '1-10', status: 'published', showOnHomepage: true },
     { id: 'w_2', title: 'Manali Volvo Special', location: 'Manali, India', duration: 4, price: 7999, originalPrice: 12999, category: 'Family', image: 'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23', groupSize: '1-12', status: 'published', showOnHomepage: true },
@@ -42,7 +41,6 @@ const ADDITIONAL_PACKAGES = [
     { id: 'w_4', title: 'McLeodGanj Triund Trek', location: 'Dharamshala, India', duration: 4, price: 5500, originalPrice: 8500, category: 'Adventure', image: 'https://images.unsplash.com/photo-1581793745862-99fde7fa73d2', groupSize: '1-10', status: 'published', showOnHomepage: true },
     { id: 's_1', title: 'Jaipur Weekend Getaway', location: 'Jaipur, India', duration: 2, price: 4999, originalPrice: 7999, category: 'Culture', image: 'https://images.unsplash.com/photo-1599661046289-e31897846e41', groupSize: 'Private', status: 'published', showOnHomepage: true },
     { id: 's_2', title: 'Agra Day Trip', location: 'Agra, India', duration: 1, price: 2500, originalPrice: 4500, category: 'Culture', image: 'https://images.unsplash.com/photo-1564507592333-c60657eea023', groupSize: 'Private', status: 'published', showOnHomepage: true }
-    */
 ];
 
 async function restore() {
@@ -51,8 +49,6 @@ async function restore() {
         await mongoose.connect(MONGO_URI);
         console.log('Connected to Atlas.');
 
-        console.log('NOTICE: Purge and restore logic has been commented out to protect real data.');
-        /*
         console.log('Purging current production data...');
         await Destination.deleteMany({});
         await Package.deleteMany({});
@@ -68,7 +64,6 @@ async function restore() {
             slug: p.slug || p.title.toLowerCase().replace(/ /g, '-')
         })));
         console.log(`Imported ${importedPackages.length} packages.`);
-        */
 
         // 2. Import Destinations
         console.log('Importing destinations...');

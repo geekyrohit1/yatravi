@@ -68,10 +68,15 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
     useEffect(() => {
         setMounted(true);
-        // Failsafe: Reveal UI after 1.5s regardless of image status to prevent getting stuck
-        const failsafe = setTimeout(() => setImageReady(true), 1500);
-        return () => clearTimeout(failsafe);
-    }, []);
+        // If data is already present, reveal immediately
+        if (heroData && heroData.length > 0) {
+            setImageReady(true);
+        } else {
+            // Still show skeleton if data is missing, but with a shorter failsafe
+            const failsafe = setTimeout(() => setImageReady(true), 800);
+            return () => clearTimeout(failsafe);
+        }
+    }, [heroData]);
 
     // Typewriter effect for mobile search placeholder
     useEffect(() => {
@@ -233,8 +238,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                             src={dest.heroImage || '/images/placeholder.svg'}
                             alt=""
                             fill
-                            quality={60}
-                            priority={index === 0}
+                            quality={50}
+                            priority={false}
                             sizes="100vw"
                             className="object-cover blur-[80px] saturate-[2.5] brightness-[1.05] transform-gpu scale-110"
                         />
@@ -302,7 +307,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                                             alt={dest.name}
                                             fill
                                             quality={85}
-                                            priority={index === activeIndex}
+                                            priority={index === 0}
+                                            loading={index === 0 ? "eager" : "lazy"}
                                             sizes="(max-width: 1024px) 100vw, 1200px"
                                             className="object-cover transform-gpu"
                                         />
@@ -346,7 +352,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                                     alt={dest.name}
                                     fill
                                     quality={80}
-                                    priority={index === activeIndex}
+                                    priority={index === 0}
+                                    loading={index === 0 ? "eager" : "lazy"}
                                     className="object-cover object-center transform-gpu"
                                     sizes="100vw"
                                 />

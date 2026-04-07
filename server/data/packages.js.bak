@@ -1,5 +1,4 @@
 const PACKAGES = [
-    /*
     // --- BALI (Indonesia) ---
     {
         id: 'bali_classic_1',
@@ -263,8 +262,6 @@ const PACKAGES = [
         inclusions: ['Internal Flights', 'Hotels', 'Breakfast', 'Visa Letter'],
         exclusions: ['International Flights', 'Visa Stamp Fee']
     }
-    */
 ];
-
 
 module.exports = PACKAGES;

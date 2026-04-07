@@ -78,14 +78,14 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
 
   useEffect(() => {
     setMounted(true);
-    
+
     // 1. Fetch Global Search Data (Consolidated)
     const fetchGlobalSearchData = async () => {
       try {
         const timestamp = new Date().getTime();
         const [pkgRes, configRes] = await Promise.all([
           fetch(`${API_BASE_URL}/api/packages?t=${timestamp}`, { cache: 'no-store' }),
-          fetch(`${API_BASE_URL}/api/homepage-config?t=${timestamp}`, { cache: 'no-store' })
+          fetch(`${API_BASE_URL}/api/homepage?t=${timestamp}`, { cache: 'no-store' })
         ]);
 
         if (pkgRes.ok) {
@@ -139,7 +139,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
     window.addEventListener('toggleFloatingButtons', handleToggle);
     window.addEventListener('hideFloatingIcons', handleHideIcons);
     window.addEventListener('open-mobile-search', handleOpenSearch);
-    
+
     return () => {
       window.removeEventListener('toggleFloatingButtons', handleToggle);
       window.removeEventListener('hideFloatingIcons', handleHideIcons);
