@@ -629,7 +629,7 @@ export default function HomepageConfigPage() {
 
                                         return (
                                             <div
-                                                key={slide.destinationId}
+                                                key={slide.destinationId || `slide-${index}`}
                                                 className={`group relative flex flex-col gap-4 p-4 rounded-2xl border border-gray-100 bg-white shadow-sm hover:shadow-md transition-all ${!slide.enabled ? 'opacity-60 grayscale' : ''}`}
                                             >
                                                 <div className="flex gap-6">

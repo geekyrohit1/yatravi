@@ -231,7 +231,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             <div className="absolute inset-0 overflow-hidden pointer-events-none hidden lg:block z-0">
                 {heroDestinations.map((dest, index) => (
                     <div
-                        key={`bg-glow-${index}`}
+                        key={`bg-glow-${index}-${dest.slug}`}
                         className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === activeIndex ? 'opacity-20' : 'opacity-0'}`}
                     >
                         <Image
@@ -298,7 +298,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                         <div className="relative w-full h-full">
                             {heroDestinations.map((dest, index) => (
                                 <div
-                                    key={`desktop-${dest.slug}`}
+                                    key={`desktop-${dest.slug}-${index}`}
                                     className={`absolute inset-0 transition-all duration-1000 ease-in-out ${index === activeIndex ? 'opacity-100 scale-100 translate-x-0' : 'opacity-0 scale-95 translate-x-12'}`}
                                 >
                                     <div className="relative w-full h-full rounded-3xl overflow-hidden shadow-[0_25px_50px_-12px_rgba(0,0,0,0.3)] border border-white/20 group">
@@ -344,7 +344,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                     <div className="absolute inset-0 z-0">
                         {heroDestinations.map((dest, index) => (
                             <div
-                                key={`mobile-slider-${dest.slug}`}
+                                key={`mobile-slider-${dest.slug}-${index}`}
                                 className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === activeIndex ? 'opacity-100' : 'opacity-0'}`}
                             >
                                 <Image
