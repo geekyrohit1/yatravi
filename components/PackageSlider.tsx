@@ -47,7 +47,7 @@ export const PackageSlider: React.FC<PackageSliderProps> = ({ title, subtitle, p
   };
 
   return (
-    <section className="pt-4 md:pt-10 pb-0 bg-white performance-section gpu-accelerated">
+    <section className="pt-4 md:pt-10 pb-0 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center mb-4 md:mb-6">
           <div>

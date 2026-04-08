@@ -17,7 +17,7 @@ export const FadeIn: React.FC<FadeInProps> = ({ children, delay = 0, className =
                     setIsVisible(true);
                 }
             });
-        }, { threshold: 0.05, rootMargin: '0px 0px -50px 0px' });
+        }, { threshold: 0.01, rootMargin: '0px' });
 
         const currentRef = domRef.current;
         if (currentRef) {
@@ -34,10 +34,10 @@ export const FadeIn: React.FC<FadeInProps> = ({ children, delay = 0, className =
     return (
         <div
             ref={domRef}
-            className={`${className} ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}
+            className={`${className} transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
             style={{ 
-                animationDelay: `${delay}ms`,
-                willChange: isVisible ? 'opacity, transform' : 'auto'
+                transitionDelay: `${delay}ms`,
+                willChange: 'opacity, transform'
             }}
         >
             {children}

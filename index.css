@@ -109,9 +109,6 @@ h6 {
     font-weight: 600;
     text-wrap: balance;
     line-height: 1.15;
-    /* Prevent flickering on scroll */
-    backface-visibility: hidden;
-    transform: translateZ(0);
 }
 
 /* Premium Typography Scale (Highlights Travel Inspired) */
@@ -163,24 +160,14 @@ p {
     will-change: opacity, transform;
 }
 
-.gpu-accelerated {
-    transform: translateZ(0);
-    backface-visibility: hidden;
-    perspective: 1000px;
-    will-change: transform;
-}
-
-.performance-section {
-    /* Stability-first performance settings */
-    backface-visibility: hidden;
-    transform: translateZ(0);
-}
-
-.no-flicker {
+.performance-section, .gpu-accelerated, .no-flicker {
+    /* Unified high-performance rendering layer */
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    outline: 1px solid transparent; /* Anti-aliasing fix */
+    will-change: transform, opacity;
 }
 
 /* Global Styles from index.html */

@@ -11,12 +11,6 @@ import { Package } from '../types';
 // Local type removed in favor of global Package type to prevent data loss
 type WeekendPackage = Package;
 
-const FALLBACK_TRIPS: WeekendPackage[] = [
-    { id: '1', title: 'Rishikesh Rafting', duration: 2, price: 4999, image: '/images/placeholder.svg', location: 'Rishikesh', slug: 'rishikesh-rafting', rating: 4.5, reviewsCount: 10, category: 'Adventure' } as any,
-    { id: '2', title: 'Manali Volvo', duration: 3, price: 6499, image: '/images/placeholder.svg', location: 'Manali', slug: 'manali-volvo', rating: 4.6, reviewsCount: 15, category: 'Nature' } as any,
-    { id: '3', title: 'Kasol Kheerganga', duration: 3, price: 5999, image: '/images/placeholder.svg', location: 'Himachal', slug: 'kasol-kheerganga', rating: 4.7, reviewsCount: 20, category: 'Adventure' } as any,
-    { id: '4', title: 'McLeodGanj Triund', duration: 2, price: 5499, image: '/images/placeholder.svg', location: 'Dharamshala', slug: 'mcleodganj-triund', rating: 4.4, reviewsCount: 12, category: 'Nature' } as any
-];
 
 
 interface WeekendTripsProps {
@@ -37,15 +31,15 @@ interface WeekendTripsProps {
 export const WeekendTrips: React.FC<WeekendTripsProps> = ({ packages, data }) => {
     const router = useRouter();
     const scrollRef = useRef<HTMLDivElement>(null);
-    const [trips, setTrips] = useState<WeekendPackage[]>(FALLBACK_TRIPS);
+    const [trips, setTrips] = useState<WeekendPackage[]>(packages || []);
     const title = data?.title || "Weekend Getaways";
     const subtitle = data?.subtitle || "Short breaks for the busy bees";
 
     useEffect(() => {
         if (packages && packages.length > 0) {
             setTrips(packages);
-        } else if (!packages || packages.length === 0) {
-            setTrips(FALLBACK_TRIPS);
+        } else {
+            setTrips([]);
         }
     }, [packages]);
 

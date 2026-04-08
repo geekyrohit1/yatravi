@@ -4,28 +4,34 @@ import React from 'react';
 import { Package } from '../types';
 import dynamic from 'next/dynamic';
 import { HeroSection } from '../components/HeroSection';
-import { FadeIn } from '../components/FadeIn';
 import { cleanSlug } from '../lib/utils';
 
 // Reusable Skeleton Components
 const SectionHeaderSkeleton = () => (
-    <div className="flex items-center gap-3 mb-6 md:mb-8">
-        <div className="w-1 h-6 md:h-8 bg-slate-300/50 rounded-full animate-pulse"></div>
-        <div className="h-7 w-48 bg-slate-200/60 rounded-lg animate-pulse"></div>
+    <div className="flex flex-col gap-1 mb-4 md:mb-6">
+        <div className="flex items-center gap-3">
+            <div className="w-1 h-5 md:h-6 bg-brand rounded-full"></div>
+            <div className="h-8 w-48 bg-slate-200/60 rounded-lg animate-pulse py-1"></div>
+        </div>
+        <div className="ml-4 pl-3 border-l-2 border-gray-100 h-3 w-64 bg-slate-100/40 rounded animate-pulse mt-0.5"></div>
     </div>
 );
 
 // 1. Package Slider Skeleton (Standard width)
 const PackageSliderSkeleton = ({ cardCount = 4 }) => (
-    <div className="pt-4 md:pt-10 pb-0 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full border-b border-gray-100 last:border-0 overflow-hidden">
+    <div className="pt-4 md:pt-10 pb-0 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full overflow-hidden">
         <SectionHeaderSkeleton />
         <div className="flex gap-4 md:gap-6 overflow-hidden">
             {[...Array(cardCount)].map((_, j) => (
                 <div key={j} className="w-[calc((100vw-40px)/1.3)] md:w-[calc((100%-48px)/2.2)] lg:w-[calc((100%-72px)/4)] flex-shrink-0 flex flex-col gap-4">
-                    <div className="aspect-[4/3] bg-slate-200/40 rounded-xl animate-pulse"></div>
+                    <div className="aspect-[1.1/1] sm:aspect-[1.15/1] bg-slate-200/40 rounded-xl animate-pulse"></div>
                     <div className="space-y-3 px-1">
                         <div className="h-4 w-3/4 bg-slate-100/60 rounded-lg animate-pulse"></div>
-                        <div className="h-3 w-1/2 bg-slate-100/40 rounded-lg animate-pulse"></div>
+                        <div className="h-8 w-full bg-slate-50/40 rounded-lg animate-pulse"></div>
+                        <div className="flex justify-between items-center pt-2">
+                            <div className="h-6 w-24 bg-slate-100/60 rounded-lg animate-pulse"></div>
+                            <div className="h-10 w-10 bg-slate-100/40 rounded-lg animate-pulse"></div>
+                        </div>
                     </div>
                 </div>
             ))}
@@ -35,11 +41,11 @@ const PackageSliderSkeleton = ({ cardCount = 4 }) => (
 
 // 2. Destination Slider Skeleton (Taller, distinct width)
 const DestinationSliderSkeleton = ({ cardCount = 4 }) => (
-    <div className="pt-4 md:pt-10 pb-0 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full border-b border-gray-100 last:border-0 overflow-hidden">
+    <div className="pt-4 md:pt-10 pb-0 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full overflow-hidden bg-brand/[0.04]">
         <SectionHeaderSkeleton />
         <div className="flex gap-3 overflow-hidden">
             {[...Array(cardCount)].map((_, j) => (
-                <div key={j} className="w-[calc((100vw-40px)/1.92)] md:w-[calc((100%-48px)/2.2)] lg:w-[calc((100%-72px)/4)] h-[260px] md:h-[420px] flex-shrink-0 bg-slate-200/40 rounded-xl animate-pulse"></div>
+                <div key={j} className="w-[calc((100vw-40px)/1.3)] md:w-[calc((100%-48px)/2.2)] lg:w-[calc((100%-72px)/4)] h-[290px] md:h-[360px] flex-shrink-0 bg-slate-200/40 rounded-xl animate-pulse"></div>
             ))}
         </div>
     </div>
@@ -58,9 +64,9 @@ const CollectionGridSkeleton = () => (
     </div>
 );
 
-const BannerSkeleton = ({ aspectRatio = "aspect-[16/9] md:aspect-[21/9]" }) => (
-    <div className="py-4 md:py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
-        <div className={`${aspectRatio} w-full bg-slate-200/40 rounded-xl animate-pulse`}></div>
+const BannerSkeleton = ({ aspectRatio = "aspect-[800/266] md:aspect-[1920/450]" }) => (
+    <div className="pt-2 md:pt-4 pb-0 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+        <div className={`${aspectRatio} w-full bg-slate-200/40 rounded-xl animate-pulse shadow-sm`}></div>
     </div>
 );
 
@@ -91,10 +97,9 @@ const MarqueeSkeleton = () => (
 );
 
 // Dynamic imports
-// Dynamic imports
 const PackageSlider = dynamic(() => import('../components/PackageSlider').then(m => m.PackageSlider), { loading: () => <PackageSliderSkeleton /> });
 const PartnersMarquee = dynamic(() => import('../components/PartnersMarquee').then(m => m.PartnersMarquee), { loading: () => <MarqueeSkeleton /> });
-const TrendingCollections = dynamic(() => import('../components/TrendingCollections').then(m => m.TrendingCollections), { loading: () => <CollectionGridSkeleton /> });
+// const TrendingCollections = dynamic(() => import('../components/TrendingCollections').then(m => m.TrendingCollections), { loading: () => <CollectionGridSkeleton /> });
 const WhyChooseUs = dynamic(() => import('../components/WhyChooseUs').then(m => m.WhyChooseUs), { loading: () => <GridSkeleton /> });
 const ConsultationBanner = dynamic(() => import('../components/ConsultationBanner').then(m => m.ConsultationBanner), { loading: () => <BannerSkeleton aspectRatio="aspect-[2/1] md:aspect-[5/1]" /> });
 const FAQSection = dynamic(() => import('../components/FAQSection').then(m => m.FAQSection), { loading: () => <div className="py-10 max-w-7xl mx-auto px-4"><SectionHeaderSkeleton /><div className="space-y-4">{[1, 2, 3].map(i => <div key={i} className="h-12 bg-gray-50 rounded-xl animate-pulse" />)}</div></div> });
@@ -108,8 +113,6 @@ const MediaBanner = dynamic(() => import('../components/MediaBanner').then(m => 
 const PromoSlider = dynamic(() => import('../components/PromoSlider').then(m => m.PromoSlider), { loading: () => <PackageSliderSkeleton /> });
 const FooterQuickLinks = dynamic(() => import('../components/FooterQuickLinks').then(m => m.FooterQuickLinks), { loading: () => <div className="py-10 bg-gray-50"><div className="max-w-7xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-8">{[1,2,3,4].map(i => <div key={i} className="space-y-4"><div className="h-4 w-24 bg-gray-200 rounded animate-pulse" /><div className="space-y-2">{[1,2,3].map(j => <div key={j} className="h-3 w-32 bg-gray-100 rounded animate-pulse" />)}</div></div>)}</div></div> });
 
-const METRO_CITIES = ['Mumbai', 'Delhi', 'Jaipur', 'Bangalore', 'Chennai', 'Kolkata', 'Ahmedabad', 'Pune', 'Hyderabad', 'Lucknow'];
-
 interface HomeClientProps {
     initialPackages: Package[];
     initialConfig: any;
@@ -117,33 +120,21 @@ interface HomeClientProps {
 }
 
 export const HomeClient: React.FC<HomeClientProps> = ({ initialPackages, initialConfig, initialDestinations }) => {
-    const [isMounted, setIsMounted] = React.useState(false);
-
-    React.useEffect(() => {
-        setIsMounted(true);
-    }, []);
-
     // Memoized section data calculation
     const calculatedSectionsData = React.useMemo(() => {
         if (!initialPackages.length || !initialConfig) return { dynamicSections: {}, cityDepartures: [], featuredCollections: [] };
 
-        // MASTER SWITCH: Filter out packages that are hidden from homepage or are drafts
         const activePackages = initialPackages.filter(p => p.status === 'published' && p.showOnHomepage !== false);
-
         const tempRenderedIds = new Set<string>();
         const dynamicSections: Record<string, Package[]> = {};
 
-        // Calculate dynamic sections
         (initialConfig.sections || []).forEach((section: any) => {
             if (!section.enabled) return;
 
-            // ADVANCED SYNC: Map Admin keys to Homepage Section keys
             const sectionKey = section.key.toLowerCase();
             const explicitlyAssigned = activePackages.filter(p => {
                 const sectArr = p.homepageSections || [];
-                // 1. Direct key match
                 if (sectArr.includes(section.key)) return true;
-                // 2. Map Admin keys -> Logic types
                 if (sectionKey.includes('weekend') && sectArr.includes('weekendGetaways')) return true;
                 if ((sectionKey.includes('deals') || sectionKey.includes('saver')) && sectArr.includes('superSaver')) return true;
                 if (sectionKey.includes('trending') && sectArr.includes('trending')) return true;
@@ -167,7 +158,6 @@ export const HomeClient: React.FC<HomeClientProps> = ({ initialPackages, initial
                 effectiveFilter = effectiveFilter.toLowerCase();
             }
 
-            // FILTER LOGIC: Enhanced to respect both badges, explicit assignments, and multiple aliases
             if (effectiveFilter === 'trending') {
                 filtered = activePackages.filter(p => p.isTrending || p.isBestSeller);
             } else if (effectiveFilter === 'honeymoon') {
@@ -201,8 +191,6 @@ export const HomeClient: React.FC<HomeClientProps> = ({ initialPackages, initial
             );
 
             const limit = section.queryConfig?.limit || 8;
-            // 100% MANUAL OVERRIDE: If it's a specific package section, only show explicitly assigned
-            // For general categories (international/domestic), keep auto-fill but remove global fallbacks
             const combined = (section.type === 'packages' && !effectiveFilter) 
                 ? explicitlyAssigned.slice(0, limit)
                 : [...explicitlyAssigned, ...freshAuto].slice(0, limit);
@@ -211,11 +199,9 @@ export const HomeClient: React.FC<HomeClientProps> = ({ initialPackages, initial
             dynamicSections[section.key] = combined;
         });
 
-        // 100% MANUAL: Only show packages explicitly checked for City Departures
         const cityDepartures = activePackages.filter(p => p.homepageSections?.includes('cityDepartures')).slice(0, 8);
         cityDepartures.forEach(p => tempRenderedIds.add(String(p._id || p.id)));
 
-        // Featured Collections (Only from active packages)
         const featuredCollections = activePackages.filter(p => !tempRenderedIds.has(String(p._id || p.id))).slice(0, 12);
 
         return { dynamicSections, cityDepartures, featuredCollections };
@@ -236,15 +222,17 @@ export const HomeClient: React.FC<HomeClientProps> = ({ initialPackages, initial
             'media': <MediaBanner data={section} />,
             'slider': <PromoSlider data={section} />,
             'consultation': <ConsultationBanner />,
+            'partnersmarquee': <PartnersMarquee />,
+            'faq': <FAQSection faqData={initialConfig?.faq} />,
+            'newsletter': <Newsletter />,
+            'whychooseus': <WhyChooseUs />,
             'quicklinks': <FooterQuickLinks quickLinks={initialConfig?.quickLinks || []} importantLinks={initialConfig?.importantLinks || []} />,
             'citydepartures': calculatedSectionsData.cityDepartures.length > 0 ? (
-                <section className="py-12 md:py-20 overflow-hidden relative">
-                    <PackageSlider
-                        title={section.title || "Packages From Your City"}
-                        subtitle={section.subtitle || "Curated for travelers from your region"}
-                        packages={calculatedSectionsData.cityDepartures}
-                    />
-                </section>
+                <PackageSlider
+                    title={section.title || "Packages From Your City"}
+                    subtitle={section.subtitle || "Curated for travelers from your region"}
+                    packages={calculatedSectionsData.cityDepartures}
+                />
             ) : null
         };
 
@@ -257,7 +245,6 @@ export const HomeClient: React.FC<HomeClientProps> = ({ initialPackages, initial
             else if (section.type === 'cards') {
                 content = (
                     <div className="flex flex-col gap-0">
-                        <TrendingCollections data={section} />
                         {sectionPackages.length > 0 && (
                             <PackageSlider title="Trending Packages" packages={sectionPackages} />
                         )}
@@ -271,31 +258,13 @@ export const HomeClient: React.FC<HomeClientProps> = ({ initialPackages, initial
 
         if (!content) return null;
 
-        // Above the fold optimization: Disable FadeIn for the first 2 sections to prevent refresh jitter
-        if (index < 2) {
-            return (
-                <div key={section.key || `section-${index}`} className={`${index === 0 ? "pt-0" : ""} performance-section`}>
-                    {content}
-                </div>
-            );
-        }
-
         return (
             <div key={section.key || `section-${index}`} className={`${index === 0 ? "pt-0" : ""} performance-section`}>
-                <FadeIn delay={Math.min(index * 20, 100)}>
-                    {content}
-                </FadeIn>
+                {content}
             </div>
         );
     };
 
-    const renderedDynamicKeys = new Set([
-        ...(initialConfig?.sections?.filter((s: any) => s.enabled).map((s: any) => s.key?.toLowerCase()) || []),
-        'partnersmarquee',
-        'whychooseus'
-    ]);
-
-    // Cleanup: Filter packages once for reuse in the footer/auto-links
     const allPublishedPackages = React.useMemo(() => 
         initialPackages.filter(p => p.status === 'published'),
     [initialPackages]);
@@ -311,74 +280,23 @@ export const HomeClient: React.FC<HomeClientProps> = ({ initialPackages, initial
                 isLoading={!initialConfig?.heroSlider} 
             />
 
-            {/* Overlapping Content Section for Mobile "Reverse Curve" Design */}
             <div className="relative z-20 -mt-10 lg:mt-0 bg-white rounded-none overflow-hidden flex flex-col gap-0">
                 {initialConfig && Array.isArray(initialConfig.sections) && (
                     <div className="flex flex-col gap-0">
-                        {[...initialConfig.sections]
+                        {[...initialConfig.sections, 
+                          ...(!initialConfig.sections.some((s: any) => s.key?.toLowerCase() === 'consultation') ? [{ key: 'consultation', enabled: true, order: 16 }] : []),
+                          ...(!initialConfig.sections.some((s: any) => s.key?.toLowerCase() === 'partnersmarquee') ? [{ key: 'partnersmarquee', enabled: true, order: 17 }] : []),
+                          ...(!initialConfig.sections.some((s: any) => s.key?.toLowerCase() === 'faq') ? [{ key: 'faq', enabled: true, order: 18 }] : []),
+                          ...(!initialConfig.sections.some((s: any) => s.key?.toLowerCase() === 'newsletter') ? [{ key: 'newsletter', enabled: true, order: 19 }] : []),
+                          ...(!initialConfig.sections.some((s: any) => s.key?.toLowerCase() === 'whychooseus') ? [{ key: 'whychooseus', enabled: true, order: 21 }] : []),
+                          ...(!initialConfig.sections.some((s: any) => s.key?.toLowerCase() === 'citydepartures') ? [{ key: 'citydepartures', enabled: true, order: 15 }] : [])
+                        ]
                             .filter((s: any) => s && s.enabled && s.key !== 'quicklinks')
                             .sort((a: any, b: any) => (parseFloat(a.order) || 999) - (parseFloat(b.order) || 999))
                             .map((section: any, index: number) => renderSection(section, index))
                         }
                     </div>
                 )}
-
-                <div className="flex flex-col gap-0 bg-white">
-                    {!renderedDynamicKeys.has('consultation') && (
-                        <>
-                            <FadeIn delay={15}>
-                                <FooterQuickLinks
-                                    quickLinks={allPublishedPackages.map((p: any) => ({
-                                        label: p.title,
-                                        url: `/packages/${p.slug}`
-                                    }))}
-                                    importantLinks={allPublishedDestinations.map((d: any) => ({
-                                        label: d.name,
-                                        url: `/destination/${d.slug || cleanSlug(d.name)}`
-                                    }))}
-                                />
-                            </FadeIn>
-                            <FadeIn delay={20}>
-                                <ConsultationBanner />
-                            </FadeIn>
-                        </>
-                    )}
-
-                    {!renderedDynamicKeys.has('citydepartures') && calculatedSectionsData.cityDepartures.length > 0 && (
-                        <FadeIn delay={30}>
-                            <section className="py-12 md:py-20 overflow-hidden relative">
-                                <PackageSlider
-                                    title="Packages From Your City"
-                                    subtitle="Curated for travelers from your region"
-                                    packages={calculatedSectionsData.cityDepartures}
-                                />
-                </section>
-            </FadeIn>
-        )}
-
-        <div className="py-8 space-y-0">
-                        
-                        {!renderedDynamicKeys.has('partnersmarquee') && (
-                            <PartnersMarquee />
-                        )}
-
-                        {!renderedDynamicKeys.has('faq') && (
-                            <FadeIn delay={100}>
-                                <FAQSection faqData={initialConfig?.faq} />
-                            </FadeIn>
-                        )}
-
-                        {!renderedDynamicKeys.has('newsletter') && (
-                            <FadeIn delay={100}>
-                                <Newsletter />
-                            </FadeIn>
-                        )}
-                        
-                        {!renderedDynamicKeys.has('whychooseus') && (
-                            <WhyChooseUs />
-                        )}
-                    </div>
-                </div>
             </div>
         </div>
     );

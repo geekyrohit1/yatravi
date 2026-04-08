@@ -1,8 +1,849 @@
 {
-  "packages": [],
-  "destinations": [],
-  "images": [],
-  "homepageconfigs": [],
-  "globalsettings": [],
-  "admins": []
+  "packages": [
+    {
+      "_id": "69d4a04a54f7dabda5d6453c",
+      "seo": {
+        "title": "",
+        "description": "",
+        "keywords": "",
+        "quickLinks": [
+          {
+            "label": "Test Packages Trip from Mumbai",
+            "url": "/packages/test-package",
+            "_id": "69d4fa0fea80abf6e9dc3305"
+          },
+          {
+            "label": "Test Packages Packages from Delhi",
+            "url": "/packages/test-package",
+            "_id": "69d4fa0fea80abf6e9dc3306"
+          },
+          {
+            "label": "Test Packages Packages from Bangalore",
+            "url": "/packages/test-package",
+            "_id": "69d4fa0fea80abf6e9dc3307"
+          },
+          {
+            "label": "Test Packages Tour from Ahmedabad",
+            "url": "/packages/test-package",
+            "_id": "69d4fa0fea80abf6e9dc3308"
+          },
+          {
+            "label": "Test Packages Holidays from Kolkata",
+            "url": "/packages/test-package",
+            "_id": "69d4fa0fea80abf6e9dc3309"
+          },
+          {
+            "label": "Test Packages Tour from Hyderabad",
+            "url": "/packages/test-package",
+            "_id": "69d4fa0fea80abf6e9dc330a"
+          },
+          {
+            "label": "Test Packages Trip from Pune",
+            "url": "/packages/test-package",
+            "_id": "69d4fa0fea80abf6e9dc330b"
+          },
+          {
+            "label": "Test Packages Trip from Surat",
+            "url": "/packages/test-package",
+            "_id": "69d4fa0fea80abf6e9dc330c"
+          },
+          {
+            "label": "Test Packages Tour from Jaipur",
+            "url": "/packages/test-package",
+            "_id": "69d4fa0fea80abf6e9dc330d"
+          },
+          {
+            "label": "Test Packages Holidays from Lucknow",
+            "url": "/packages/test-package",
+            "_id": "69d4fa0fea80abf6e9dc330e"
+          },
+          {
+            "label": "Test Packages Trip from Chennai",
+            "url": "/packages/test-package",
+            "_id": "69d4fa0fea80abf6e9dc330f"
+          },
+          {
+            "label": "Test Packages Tour from Chandigarh",
+            "url": "/packages/test-package",
+            "_id": "69d4fa0fea80abf6e9dc3310"
+          },
+          {
+            "label": "Test Packages Trip from Amritsar",
+            "url": "/packages/test-package",
+            "_id": "69d4fa0fea80abf6e9dc3311"
+          },
+          {
+            "label": "Test Packages Tour from Ludhiana",
+            "url": "/packages/test-package",
+            "_id": "69d4fa0fea80abf6e9dc3312"
+          },
+          {
+            "label": "Test Packages Trip from Kanpur",
+            "url": "/packages/test-package",
+            "_id": "69d4fa0fea80abf6e9dc3313"
+          },
+          {
+            "label": "Test Packages Itinerary",
+            "url": "/packages/test-package",
+            "_id": "69d4fa0fea80abf6e9dc3314"
+          },
+          {
+            "label": "Test Packages Couple Package",
+            "url": "/packages/test-package",
+            "_id": "69d4fa0fea80abf6e9dc3315"
+          },
+          {
+            "label": "Test Packages Family Trip",
+            "url": "/packages/test-package",
+            "_id": "69d4fa0fea80abf6e9dc3316"
+          },
+          {
+            "label": "Test Packages 7 Days Package",
+            "url": "/packages/test-package",
+            "_id": "69d4fa0fea80abf6e9dc3317"
+          },
+          {
+            "label": "Test Packages 5 Nights Package",
+            "url": "/packages/test-package",
+            "_id": "69d4fa0fea80abf6e9dc3318"
+          },
+          {
+            "label": "Test Packages 6 Nights Package",
+            "url": "/packages/test-package",
+            "_id": "69d4fa0fea80abf6e9dc3319"
+          },
+          {
+            "label": "Test Packages Luxury Package",
+            "url": "/packages/test-package",
+            "_id": "69d4fa0fea80abf6e9dc331a"
+          },
+          {
+            "label": "Test Packages Budget Tour",
+            "url": "/packages/test-package",
+            "_id": "69d4fa0fea80abf6e9dc331b"
+          },
+          {
+            "label": "Test Packages Best Time to Visit",
+            "url": "/packages/test-package",
+            "_id": "69d4fa0fea80abf6e9dc331c"
+          },
+          {
+            "label": "Test Packages Visa for Indians",
+            "url": "/packages/test-package",
+            "_id": "69d4fa0fea80abf6e9dc331d"
+          },
+          {
+            "label": "Test Packages Cheap Packages",
+            "url": "/packages/test-package",
+            "_id": "69d4fa0fea80abf6e9dc331e"
+          },
+          {
+            "label": "Test Packages Customized Tour",
+            "url": "/packages/test-package",
+            "_id": "69d4fa0fea80abf6e9dc331f"
+          },
+          {
+            "label": "Top Places to visit in Test Packages",
+            "url": "/packages/test-package",
+            "_id": "69d4fa0fea80abf6e9dc3320"
+          }
+        ]
+      },
+      "id": "pkg_1775542346174",
+      "slug": "test-package",
+      "title": "Test Packages",
+      "location": "Thailand",
+      "duration": 3,
+      "price": 12997,
+      "originalPrice": 15999,
+      "rating": 0,
+      "reviewsCount": 0,
+      "image": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/350_kyeqp2zgM.jpg",
+      "verticalImage": "",
+      "gallery": [],
+      "category": "Adventure",
+      "groupSize": "Fixed Departure",
+      "overview": "Celebrate the world’s biggest water festival with this specially curated 5-day journey. This package perfectly balances the high-energy celebrations in Pattaya with the cultural charm and vibrant city life of Bangkok. From the spectacular Alcazar Show to the crystal-clear waters of Coral Island, you will experience the best of Thailand's hospitality and festive spirit.",
+      "highlights": [
+        "3 Night Pattaya & 1 Night Bangkok"
+      ],
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Arrival in Bangkok & Transfer to Pattaya",
+          "description": "Arrival & Alcazar Show Transfer: Arrival at DMK Airport and Private Transfer to GLOW Pattaya. Evening: Enjoy the Alcazar Show (Standard/VIP Seats included). Stay: Pattaya",
+          "highlights": [
+            "Private Airport Transfer"
+          ],
+          "meals": {
+            "breakfastIncluded": true,
+            "lunchIncluded": true,
+            "dinnerIncluded": true
+          },
+          "activities": [],
+          "detailedActivities": [],
+          "stay": null,
+          "itineraryImages": [],
+          "flights": [],
+          "_id": "69d4fa0eea80abf6e9dc3304"
+        }
+      ],
+      "itinerarySummary": "",
+      "inclusions": [
+        "3 Night Pattaya & 1 Night Bangkok"
+      ],
+      "exclusions": [
+        "3 Night Pattaya & 1 Night Bangkok"
+      ],
+      "thingsToPack": [],
+      "policies": {
+        "cancellation": "In the event that you need to cancel your trip, the following charges will apply based on the total billing amount:\n\nInitial Cancellation: 30% of the total bill is non-refundable once the booking is confirmed.\n\n30 – 15 Days before Check-in: 50% of the total bill will be charged as a cancellation fee.\n\n15 – 07 Days before Check-in: 75% of the total bill will be charged as a cancellation fee.\n\nWithin 07 Days of Check-in: 100% of the total bill (No Refund).",
+        "refund": "Refunds (if applicable after cancellation charges) are processed back to the original payment method.\n\nAccording to Yatravi's standard policy, refunds are typically processed within 5-7 business days.",
+        "payment": "To ensure a seamless booking experience for your Songkran trip, we follow a structured payment schedule:\n\nBooking Token: 30% of the total package cost is required to initiate the booking.\n\nVoucher Issuance: 20% payment is due upon receipt of your booking vouchers.\n\nFinal Balance: The remaining 50% must be cleared 1 week before the trip departure.\n\nFull Payment: Total payment must be completed by the time of Check-in.\n\nDocumentation: A scanned copy of a valid ID proof is required for hotel reservations.\n\nModes of Payment:\n\nOnline: NEFT, IMPS, Google Pay, PhonePe, or UPI.\n\nIn-Person: Visit our office for direct payments.\n\nConvenience: Cash and Cheque pickup services are available within Office Only."
+      },
+      "faqs": [],
+      "status": "published",
+      "showOnHomepage": true,
+      "showInCollections": true,
+      "isBestSeller": false,
+      "isTrending": true,
+      "isAlmostFull": true,
+      "validityDate": "Vaild Until Jun 25th, 2026",
+      "homepageSections": [
+        "trending",
+        "international",
+        "superSaver",
+        "honeymoon",
+        "weekendGetaways",
+        "domestic",
+        "cityDepartures"
+      ],
+      "inclusionHighlights": [
+        "flight",
+        "stay",
+        "transfer",
+        "breakfast",
+        "sightseeing",
+        "visa"
+      ],
+      "regionBreakdown": "3N Pattaya 1N Bangkokk",
+      "pickupPoint": "DMK Airport",
+      "dropPoint": "DMK Airport",
+      "tags": [],
+      "createdAt": "2026-04-07T06:12:26.250Z",
+      "__v": 3
+    }
+  ],
+  "destinations": [
+    {
+      "_id": "69d49e6a54f7dabda5d642f5",
+      "name": "Thailand",
+      "seo": {
+        "autoGenerateSchema": true,
+        "schemaTypes": [
+          "TouristDestination",
+          "FAQPage",
+          "BreadcrumbList"
+        ],
+        "sitemapPriority": 0.8,
+        "sitemapFrequency": "weekly",
+        "robots": "index, follow",
+        "currentRank": 0,
+        "previousRank": 0,
+        "rankHistory": [],
+        "quickLinks": [],
+        "jsonLd": "[\n  {\n    \"@context\": \"https://schema.org\",\n    \"@type\": \"TouristDestination\",\n    \"name\": \"Thailand\",\n    \"description\": \"\",\n    \"image\": \"https://ik.imagekit.io/2nikzq08c/yatravi_uploads/pexels-satheesh-cholakkal-17628918-6437645_GU85kSTBY.jpg\",\n    \"url\": \"https://yatravi.com/destination/thailand\"\n  },\n  {\n    \"@context\": \"https://schema.org\",\n    \"@type\": \"BreadcrumbList\",\n    \"itemListElement\": [\n      {\n        \"@type\": \"ListItem\",\n        \"position\": 1,\n        \"name\": \"Home\",\n        \"item\": \"https://yatravi.com\"\n      },\n      {\n        \"@type\": \"ListItem\",\n        \"position\": 2,\n        \"name\": \"Destinations\",\n        \"item\": \"https://yatravi.com/destinations\"\n      },\n      {\n        \"@type\": \"ListItem\",\n        \"position\": 3,\n        \"name\": \"Thailand\",\n        \"item\": \"https://yatravi.com/destination/thailand\"\n      }\n    ]\n  }\n]"
+      },
+      "slug": "thailand",
+      "heroImage": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/pexels-satheesh-cholakkal-17628918-6437645_GU85kSTBY.jpg",
+      "verticalImage": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/pexels-samma97-31754070_2lvR5-g7N.jpg",
+      "bannerImage": "",
+      "tagline": "Land of Smiles",
+      "description": "",
+      "isFeatured": true,
+      "isVisaFree": false,
+      "order": 1,
+      "startingPrice": 12999,
+      "priceLabel": "per person",
+      "packageCount": 0,
+      "region": "International",
+      "facts": {
+        "currency": "",
+        "language": "",
+        "timezone": "",
+        "bestTime": "",
+        "budget": "",
+        "visaInfo": "",
+        "gettingAround": "",
+        "localDish": ""
+      },
+      "attractions": [],
+      "faqs": [],
+      "createdAt": "2026-04-07T06:04:26.284Z",
+      "updatedAt": "2026-04-07T06:04:26.284Z",
+      "__v": 0
+    },
+    {
+      "_id": "69d607c5bfc848732d64b2f2",
+      "name": "Vietnam",
+      "seo": {
+        "autoGenerateSchema": true,
+        "schemaTypes": [
+          "TouristDestination",
+          "FAQPage",
+          "BreadcrumbList"
+        ],
+        "sitemapPriority": 0.8,
+        "sitemapFrequency": "weekly",
+        "robots": "index, follow",
+        "currentRank": 0,
+        "previousRank": 0,
+        "rankHistory": [],
+        "quickLinks": [],
+        "jsonLd": "[\n  {\n    \"@context\": \"https://schema.org\",\n    \"@type\": \"TouristDestination\",\n    \"name\": \"Vietnam\",\n    \"description\": \"\",\n    \"image\": \"https://ik.imagekit.io/2nikzq08c/yatravi_uploads/dff0c3d931477898578febeeca3d8b04_-s8hTSHX0.jpg\",\n    \"url\": \"https://yatravi.com/destination/vietnam\"\n  },\n  {\n    \"@context\": \"https://schema.org\",\n    \"@type\": \"BreadcrumbList\",\n    \"itemListElement\": [\n      {\n        \"@type\": \"ListItem\",\n        \"position\": 1,\n        \"name\": \"Home\",\n        \"item\": \"https://yatravi.com\"\n      },\n      {\n        \"@type\": \"ListItem\",\n        \"position\": 2,\n        \"name\": \"Destinations\",\n        \"item\": \"https://yatravi.com/destinations\"\n      },\n      {\n        \"@type\": \"ListItem\",\n        \"position\": 3,\n        \"name\": \"Vietnam\",\n        \"item\": \"https://yatravi.com/destination/vietnam\"\n      }\n    ]\n  }\n]"
+      },
+      "slug": "vietnam",
+      "heroImage": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/dff0c3d931477898578febeeca3d8b04_-s8hTSHX0.jpg",
+      "verticalImage": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/b02b1da7ae0b6c8d89b5e761cc1f6628_qfifEPPbV.jpg",
+      "bannerImage": "",
+      "tagline": "Emerald Islands of Veitnam",
+      "description": "",
+      "isFeatured": false,
+      "isVisaFree": false,
+      "order": 0,
+      "startingPrice": 34998,
+      "priceLabel": "per person",
+      "packageCount": 0,
+      "region": "International",
+      "facts": {
+        "currency": "",
+        "language": "",
+        "timezone": "",
+        "bestTime": "",
+        "budget": "",
+        "visaInfo": "",
+        "gettingAround": "",
+        "localDish": ""
+      },
+      "attractions": [],
+      "faqs": [],
+      "createdAt": "2026-04-08T07:46:13.099Z",
+      "updatedAt": "2026-04-08T07:46:13.099Z",
+      "__v": 0
+    }
+  ],
+  "images": [
+    {
+      "_id": "69d49e4454f7dabda5d642ef",
+      "title": "Untitled",
+      "filename": "pexels-samma97-31754070_2lvR5-g7N.jpg",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/pexels-samma97-31754070_2lvR5-g7N.jpg",
+      "uploadedAt": "2026-04-07T06:03:48.392Z",
+      "__v": 0
+    },
+    {
+      "_id": "69d49e6754f7dabda5d642f2",
+      "title": "Untitled",
+      "filename": "pexels-satheesh-cholakkal-17628918-6437645_GU85kSTBY.jpg",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/pexels-satheesh-cholakkal-17628918-6437645_GU85kSTBY.jpg",
+      "uploadedAt": "2026-04-07T06:04:23.121Z",
+      "__v": 0
+    },
+    {
+      "_id": "69d4a01054f7dabda5d64539",
+      "title": "Untitled",
+      "filename": "d88b2a600aa288ff0abea7c5bfa35528_V7oKok5D5.jpg",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/d88b2a600aa288ff0abea7c5bfa35528_V7oKok5D5.jpg",
+      "uploadedAt": "2026-04-07T06:11:28.648Z",
+      "__v": 0
+    },
+    {
+      "_id": "69d4d435ff5675bb0aa6ffac",
+      "title": "Untitled",
+      "filename": "350_kyeqp2zgM.jpg",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/350_kyeqp2zgM.jpg",
+      "uploadedAt": "2026-04-07T09:53:57.766Z",
+      "__v": 0
+    },
+    {
+      "_id": "69d4f339ff5675bb0aa70ddc",
+      "title": "Untitled",
+      "filename": "pexels-akos-szabo-145938-440731_kr80zSttU.jpg",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/pexels-akos-szabo-145938-440731_kr80zSttU.jpg",
+      "uploadedAt": "2026-04-07T12:06:17.099Z",
+      "__v": 0
+    },
+    {
+      "_id": "69d600ddd7885f6800903fb7",
+      "title": "Untitled",
+      "filename": "20607f9df99a701a8951844f3b5d0ca8_D3RX5hSxo.jpg",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/20607f9df99a701a8951844f3b5d0ca8_D3RX5hSxo.jpg",
+      "uploadedAt": "2026-04-08T07:16:45.687Z",
+      "__v": 0
+    },
+    {
+      "_id": "69d60396d7885f68009040d9",
+      "title": "Untitled",
+      "filename": "20607f9df99a701a8951844f3b5d0ca8_J9aiO_K1B.jpg",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/20607f9df99a701a8951844f3b5d0ca8_J9aiO_K1B.jpg",
+      "uploadedAt": "2026-04-08T07:28:22.707Z",
+      "__v": 0
+    },
+    {
+      "_id": "69d6039ed7885f68009040dc",
+      "title": "Untitled",
+      "filename": "72ff2dc3f34bb0ca8b4e236f0173c50f_HcpO2Vg0s.jpg",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/72ff2dc3f34bb0ca8b4e236f0173c50f_HcpO2Vg0s.jpg",
+      "uploadedAt": "2026-04-08T07:28:30.816Z",
+      "__v": 0
+    },
+    {
+      "_id": "69d60492d7885f68009042b7",
+      "title": "Untitled",
+      "filename": "20607f9df99a701a8951844f3b5d0ca8_2COoWx38t.jpg",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/20607f9df99a701a8951844f3b5d0ca8_2COoWx38t.jpg",
+      "uploadedAt": "2026-04-08T07:32:34.787Z",
+      "__v": 0
+    },
+    {
+      "_id": "69d60768bfc848732d64b236",
+      "title": "Untitled",
+      "filename": "20607f9df99a701a8951844f3b5d0ca8_DWDcMEGdM.jpg",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/20607f9df99a701a8951844f3b5d0ca8_DWDcMEGdM.jpg",
+      "uploadedAt": "2026-04-08T07:44:40.933Z",
+      "__v": 0
+    },
+    {
+      "_id": "69d607b4bfc848732d64b2ec",
+      "title": "Untitled",
+      "filename": "dff0c3d931477898578febeeca3d8b04_-s8hTSHX0.jpg",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/dff0c3d931477898578febeeca3d8b04_-s8hTSHX0.jpg",
+      "uploadedAt": "2026-04-08T07:45:56.206Z",
+      "__v": 0
+    },
+    {
+      "_id": "69d607bfbfc848732d64b2ef",
+      "title": "Untitled",
+      "filename": "b02b1da7ae0b6c8d89b5e761cc1f6628_qfifEPPbV.jpg",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/b02b1da7ae0b6c8d89b5e761cc1f6628_qfifEPPbV.jpg",
+      "uploadedAt": "2026-04-08T07:46:07.660Z",
+      "__v": 0
+    },
+    {
+      "_id": "69d607dcbfc848732d64b331",
+      "title": "Untitled",
+      "filename": "20607f9df99a701a8951844f3b5d0ca8_oXZ0yvJH8.jpg",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/20607f9df99a701a8951844f3b5d0ca8_oXZ0yvJH8.jpg",
+      "uploadedAt": "2026-04-08T07:46:36.347Z",
+      "__v": 0
+    },
+    {
+      "_id": "69d60805bfc848732d64b3e5",
+      "title": "Untitled",
+      "filename": "b02b1da7ae0b6c8d89b5e761cc1f6628_dgEHCDdjB.jpg",
+      "path": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/b02b1da7ae0b6c8d89b5e761cc1f6628_dgEHCDdjB.jpg",
+      "uploadedAt": "2026-04-08T07:47:17.110Z",
+      "__v": 0
+    }
+  ],
+  "homepageconfigs": [
+    {
+      "_id": "69c291efd382d77cd18746cc",
+      "heroSlider": [
+        {
+          "destinationId": "69d49e6a54f7dabda5d642f5",
+          "enabled": true,
+          "order": 0,
+          "customTagline": "",
+          "customImage": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/72ff2dc3f34bb0ca8b4e236f0173c50f_HcpO2Vg0s.jpg",
+          "customMobileImage": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/20607f9df99a701a8951844f3b5d0ca8_DWDcMEGdM.jpg",
+          "_id": "69d60808bfc848732d64b3fb"
+        },
+        {
+          "destinationId": "69d607c5bfc848732d64b2f2",
+          "enabled": true,
+          "order": 1,
+          "customTagline": "",
+          "customImage": "",
+          "customMobileImage": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/b02b1da7ae0b6c8d89b5e761cc1f6628_dgEHCDdjB.jpg",
+          "_id": "69d60808bfc848732d64b3fc"
+        }
+      ],
+      "sections": [
+        {
+          "key": "topDestinations",
+          "title": "Top Destinations",
+          "subtitle": "Global Hotspots",
+          "enabled": true,
+          "order": 1,
+          "type": "destinations",
+          "destinationItems": [
+            "69d49e6a54f7dabda5d642f5"
+          ],
+          "cards": [],
+          "mediaUrl": "",
+          "mobileMediaUrl": "",
+          "mediaSlides": [],
+          "isVideo": false,
+          "queryConfig": {
+            "limit": 6
+          },
+          "_id": "69c291efd382d77cd18746d2"
+        },
+        {
+          "key": "trendingPackages",
+          "title": "Trending Right Now",
+          "subtitle": "Most loved by travelers",
+          "enabled": true,
+          "order": 2,
+          "type": "packages",
+          "destinationItems": [],
+          "cards": [],
+          "mediaUrl": "",
+          "mobileMediaUrl": "",
+          "mediaSlides": [],
+          "isVideo": false,
+          "queryConfig": {
+            "tag": "Trending",
+            "limit": 6
+          },
+          "_id": "69c291efd382d77cd18746d6"
+        },
+        {
+          "key": "offersAndUpdates",
+          "title": "",
+          "subtitle": "",
+          "enabled": true,
+          "order": 3,
+          "type": "offers",
+          "destinationItems": [],
+          "cards": [
+            {
+              "title": "Swiss Rail Special",
+              "image": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/jhdksfgdk_-nnkvWmau.png",
+              "mobileImage": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/Untitled_designhgggggggg_mmCCG1dX-.jpg",
+              "linkType": "url",
+              "linkValue": "/search?q=swiss",
+              "_id": "69c291efd382d77cd18746d5"
+            },
+            {
+              "title": "Offer",
+              "image": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/EVERYTHING_48LP8irRc.png",
+              "linkType": "destination",
+              "linkValue": "",
+              "_id": "69ca6d04a6da7f9e1066e3bb"
+            },
+            {
+              "title": "Offer",
+              "image": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/pexels-alleksana-4239627_7fE7Frjyk.jpg",
+              "linkType": "destination",
+              "linkValue": "",
+              "_id": "69ccb3cad878a438c40371c6"
+            }
+          ],
+          "mediaUrl": "",
+          "mobileMediaUrl": "",
+          "mediaSlides": [],
+          "isVideo": false,
+          "queryConfig": {
+            "limit": 6
+          },
+          "_id": "69c291efd382d77cd18746d3"
+        },
+        {
+          "key": "international",
+          "title": "World at your reach",
+          "subtitle": "Explore the world",
+          "enabled": true,
+          "order": 4,
+          "type": "packages",
+          "destinationItems": [],
+          "cards": [],
+          "mediaUrl": "",
+          "mobileMediaUrl": "",
+          "mediaSlides": [],
+          "isVideo": false,
+          "filterType": "International",
+          "queryConfig": {
+            "limit": 6
+          },
+          "_id": "69c291efd382d77cd18746d9"
+        },
+        {
+          "key": "domestic",
+          "title": "Explore India",
+          "subtitle": "Discover India",
+          "enabled": true,
+          "order": 5,
+          "type": "packages",
+          "destinationItems": [],
+          "cards": [],
+          "mediaUrl": "",
+          "mobileMediaUrl": "",
+          "mediaSlides": [],
+          "isVideo": false,
+          "filterType": "Domestic",
+          "queryConfig": {
+            "limit": 6
+          },
+          "_id": "69c291efd382d77cd18746da"
+        },
+        {
+          "key": "promoBanner",
+          "title": "Summer Sale Live!",
+          "subtitle": "Get up to 30% off on all bookings",
+          "enabled": true,
+          "order": 6,
+          "type": "media",
+          "destinationItems": [],
+          "cards": [],
+          "mediaUrl": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/EVERYTHING_aH_t3QCWN.png",
+          "mobileMediaUrl": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/EVERYTHING_0d537o-8y.png",
+          "mediaSlides": [],
+          "isVideo": false,
+          "queryConfig": {
+            "limit": 6
+          },
+          "_id": "69c291efd382d77cd18746d7"
+        },
+        {
+          "key": "superSaver",
+          "title": "Budget Friendly",
+          "subtitle": "Best value for your money",
+          "enabled": true,
+          "order": 7,
+          "type": "packages",
+          "destinationItems": [],
+          "cards": [],
+          "mediaUrl": "",
+          "mobileMediaUrl": "",
+          "mediaSlides": [],
+          "isVideo": false,
+          "queryConfig": {
+            "tag": "Super Saver",
+            "limit": 6
+          },
+          "_id": "69c291efd382d77cd18746db"
+        },
+        {
+          "key": "communityBanner",
+          "title": "Join Our Community",
+          "subtitle": "Connect with fellow travelers and get exclusive tips",
+          "enabled": true,
+          "order": 8,
+          "type": "media",
+          "destinationItems": [],
+          "cards": [],
+          "mediaUrl": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/EVERYTHING-jorunery_-PBG7U5Oj.png",
+          "mobileMediaUrl": "",
+          "mediaSlides": [
+            {
+              "desktop": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/EVERYTHING-jorunery_HoVRXtwpz.png",
+              "mobile": "",
+              "_id": "69ca76e442e4bd9de6c5e51d"
+            },
+            {
+              "desktop": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/EVERYTHING_TkrRPznXt.png",
+              "mobile": "",
+              "_id": "69ca76e442e4bd9de6c5e51e"
+            }
+          ],
+          "isVideo": false,
+          "queryConfig": {
+            "limit": 6
+          },
+          "_id": "69c291efd382d77cd18746d8"
+        },
+        {
+          "key": "honeymoon",
+          "title": "Honeymoon",
+          "subtitle": "",
+          "enabled": true,
+          "order": 9,
+          "type": "packages",
+          "destinationItems": [],
+          "cards": [],
+          "mediaUrl": "",
+          "mobileMediaUrl": "",
+          "mediaSlides": [],
+          "isVideo": false,
+          "queryConfig": {
+            "tag": "",
+            "limit": 6
+          },
+          "_id": "69d08cc67410f4fea8cb754b"
+        },
+        {
+          "key": "citydepartures",
+          "title": "From Your City",
+          "subtitle": "Regional departures",
+          "enabled": true,
+          "order": 10,
+          "type": "packages",
+          "destinationItems": [],
+          "cards": [],
+          "mediaUrl": "",
+          "mobileMediaUrl": "",
+          "mediaSlides": [],
+          "isVideo": false,
+          "queryConfig": {
+            "limit": 6
+          },
+          "_id": "69c291efd382d77cd18746dc"
+        },
+        {
+          "key": "quicklinks",
+          "title": "Quick Links",
+          "subtitle": "",
+          "enabled": true,
+          "order": 11,
+          "type": "links",
+          "destinationItems": [],
+          "cards": [],
+          "mediaUrl": "",
+          "mobileMediaUrl": "",
+          "mediaSlides": [],
+          "isVideo": false,
+          "queryConfig": {
+            "limit": 6
+          },
+          "_id": "69c291efd382d77cd18746dd"
+        }
+      ],
+      "quickLinks": [
+        {
+          "label": "Thailand Tour",
+          "url": "/thailand",
+          "_id": "69c291efd382d77cd18746de"
+        },
+        {
+          "label": "Bali Holidays",
+          "url": "/bali-indonesia",
+          "_id": "69c291efd382d77cd18746df"
+        }
+      ],
+      "importantLinks": [
+        {
+          "label": "About",
+          "url": "/about",
+          "_id": "69c291efd382d77cd18746e0"
+        },
+        {
+          "label": "Contact",
+          "url": "/contact",
+          "_id": "69c291efd382d77cd18746e1"
+        }
+      ],
+      "faq": [],
+      "updatedAt": "2026-03-24T13:30:23.677Z",
+      "__v": 65
+    }
+  ],
+  "globalsettings": [
+    {
+      "_id": "69c2950b5165045a3aa395d8",
+      "contactPhone": "+91 98765 43210",
+      "whatsappNumber": "+91 9587505726",
+      "socialLinks": {
+        "instagram": "",
+        "facebook": "",
+        "twitter": "",
+        "youtube": "",
+        "linkedin": ""
+      },
+      "enableWhatsappChat": false,
+      "enableInquiryPopup": true,
+      "enableNewsletter": true,
+      "enableSaleBanner": true,
+      "enableSaleBannerAnimation": true,
+      "enableSaleBannerTimer": false,
+      "saleBannerText": " **Summer Special** Up To **20% OFF** on International Package",
+      "saleBannerLink": "",
+      "saleBannerBgColor": "#f12711",
+      "saleBannerTextColor": "#f5af19",
+      "saleBannerBorderColor": "#fdcf58",
+      "consultationBannerHeadline": "Confused about where to go?",
+      "consultationBannerSubtext": "Talk to our travel experts and get a personalized itinerary crafted just for you.",
+      "newsletterHeadline": "Unlock Exclusive Travel Deals!",
+      "newsletterSubtext": "Subscribe to our newsletter and get up to",
+      "newsletterDiscount": "40% OFF",
+      "joinPageHeroTitle": "Grow with Yatravi",
+      "joinPageHeroSubtitle": "Join India's fastest-growing travel network. Whether you're a travel agent, hotelier, or corporate partner, let's build success together.",
+      "joinPageHeroBadge": "Partner with Excellence",
+      "joinPageHeroImage": "https://ik.imagekit.io/2nikzq08c/yatravi_uploads/EVERYTHING-jorunery_L0fcnvxHQ.png",
+      "heroMobileTagline": "We care your trip • Yatravi",
+      "heroSearchPlaceholder": "Search your destination",
+      "heroPriceLabel": "Starting from",
+      "saleBannerTimerEndDate": "2026-04-03T13:03:36.569Z",
+      "whyChooseUs": [
+        {
+          "title": "100% Verified Packages",
+          "desc": "Trusted by thousands",
+          "_id": "69c2950b5165045a3aa395d9"
+        },
+        {
+          "title": "24/7 Expert Support",
+          "desc": "Always here for you",
+          "_id": "69c2950b5165045a3aa395da"
+        },
+        {
+          "title": "Best Price Guarantee",
+          "desc": "Unbeatable value",
+          "_id": "69c2950b5165045a3aa395db"
+        },
+        {
+          "title": "Hassle-free Planning",
+          "desc": "Transparent process",
+          "_id": "69c2950b5165045a3aa395dc"
+        }
+      ],
+      "createdAt": "2026-03-24T13:43:39.073Z",
+      "updatedAt": "2026-04-07T12:36:38.872Z",
+      "__v": 1,
+      "enableAIChat": false,
+      "globalSeo": {
+        "siteName": "Yatravi",
+        "titleSeparator": "|",
+        "defaultTitle": "Yatravi | We Care Your Trip - Lowest Price Holiday Packages",
+        "defaultDescription": "Explore the world with Yatravi. Lowest price holiday packages and premium travel experiences.",
+        "defaultKeywords": "travel agency, holiday packages, tour packages, cheapest tours",
+        "defaultOgImage": "/og-image.png",
+        "fbAppId": "",
+        "twitterHandle": "@yatravi",
+        "organizationSchema": {
+          "name": "Yatravi",
+          "url": "https://yatravi.com",
+          "logo": "/logo-desktop.png",
+          "sameAs": []
+        },
+        "autoGenerateSchema": true,
+        "schemaTypes": [
+          "Organization",
+          "WebSite",
+          "FAQPage"
+        ],
+        "jsonLd": "[\n  {\n    \"@context\": \"https://schema.org\",\n    \"@type\": \"TravelAgency\",\n    \"name\": \"Yatravi\",\n    \"url\": \"https://yatravi.com\",\n    \"logo\": \"https://yatravi.com/logo-desktop.png\",\n    \"image\": \"https://yatravi.com/og-image.png\",\n    \"description\": \"Explore the world with Yatravi. Lowest price holiday packages and premium travel experiences.\",\n    \"telephone\": \"+91- 9587505726\",\n    \"priceRange\": \"$$\",\n    \"address\": {\n      \"@type\": \"PostalAddress\",\n      \"addressLocality\": \"Rajasthan\",\n      \"addressRegion\": \"Rajasthan\",\n      \"addressCountry\": \"IN\"\n    },\n    \"sameAs\": []\n  },\n  {\n    \"@context\": \"https://schema.org\",\n    \"@type\": \"WebSite\",\n    \"url\": \"https://yatravi.com\",\n    \"potentialAction\": {\n      \"@type\": \"SearchAction\",\n      \"target\": \"https://yatravi.com/search?q={search_term_string}\",\n      \"query-input\": \"required name=search_term_string\"\n    }\n  }\n]"
+      },
+      "creativeBannerBgColor": "#CD1C18",
+      "creativeBannerBtnText": "Book Now",
+      "creativeBannerImage": "https://ik.imagekit.io/2nikzq08c/dubai-hero.png",
+      "creativeBannerLink": "/packages",
+      "creativeBannerSubtitle": "Explore exclusive deals on top-rated destinations.",
+      "creativeBannerTitle": "Discover Hidden Gems",
+      "enableCreativeBanner": true
+    }
+  ],
+  "admins": [
+    {
+      "_id": "69c7dd0583352707cebb42fb",
+      "name": "Main Admin",
+      "email": "yatraviholidays@gmail.com",
+      "username": null,
+      "password": "$2b$10$cOeITRye3rRE9q/N2bp0M.Ib25c3Z8kflHMLK7Q3zptf8jhCSE5Gy",
+      "role": "superadmin",
+      "sessionVersion": 0,
+      "createdAt": "2026-03-28T13:52:05.662Z",
+      "__v": 0
+    }
+  ]
 }

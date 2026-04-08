@@ -20,14 +20,6 @@ interface DestinationItem {
     slug?: string;
 }
 
-const FALLBACK_DESTINATIONS = [
-    { id: 1, country: 'Europe', prefix: 'THE BEAUTY OF', image: '/images/placeholder.svg', startingPrice: 149999 },
-    { id: 2, country: 'Vietnam', prefix: 'THE HIDDEN GEM', image: '/images/placeholder.svg', startingPrice: 59999 },
-    { id: 3, country: 'Bali', prefix: 'THE ISLAND OF GODS', image: '/images/placeholder.svg', startingPrice: 49999 },
-    { id: 4, country: 'Thailand', prefix: 'THE KINGDOM OF', image: '/images/placeholder.svg', startingPrice: 44999 },
-    { id: 5, country: 'Japan', prefix: 'THE LAND OF RISING SUN', image: '/images/placeholder.svg', startingPrice: 129999 },
-    { id: 6, country: 'Malaysia', prefix: 'TRULY ASIA', image: '/images/placeholder.svg', startingPrice: 38000 },
-];
 
 interface VisaFreeDestinationsProps {
     data?: {
@@ -40,20 +32,13 @@ interface VisaFreeDestinationsProps {
 export const VisaFreeDestinations: React.FC<VisaFreeDestinationsProps> = ({ data }) => {
     const router = useRouter();
     const scrollContainerRef = useRef<HTMLDivElement>(null);
-    const [destinations, setDestinations] = useState<DestinationItem[]>(() => {
-        if (data && data.destinationItems && data.destinationItems.length > 0) {
-            return data.destinationItems;
-        } else if (!data) {
-            return FALLBACK_DESTINATIONS;
-        }
-        return [];
-    });
+    const [destinations, setDestinations] = useState<DestinationItem[]>(data?.destinationItems || []);
 
     useEffect(() => {
-        if (data && data.destinationItems && data.destinationItems.length > 0) {
+        if (data?.destinationItems && data.destinationItems.length > 0) {
             setDestinations(data.destinationItems);
-        } else if (!data) {
-            setDestinations(FALLBACK_DESTINATIONS);
+        } else {
+            setDestinations([]);
         }
     }, [data]);
 

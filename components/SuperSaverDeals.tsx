@@ -4,7 +4,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { Tag, TrendingDown, ChevronLeft, ChevronRight, Star, TrendingUp, Calendar } from 'lucide-react';
-import { API_BASE_URL } from '@/constants';
 import { PackageCard } from './PackageCard';
 import { Package } from '../types';
 
@@ -77,12 +76,6 @@ const SuperSaverCard = ({ pkg }: { pkg: Package }) => {
     );
 };
 
-const FALLBACK_DEALS: SaverDeal[] = [
-    { id: '1', title: 'Jaipur Weekend', price: 4499, image: 'https://images.unsplash.com/photo-1477587458883-47145ed94245?q=80&w=1000', location: 'Jaipur', slug: 'jaipur-weekend', duration: 2, rating: 4.5, reviewsCount: 10 } as any,
-    { id: '2', title: 'Agra Day Trip', price: 2999, image: 'https://images.unsplash.com/photo-1564507592333-c60657eea523?q=80&w=1000', location: 'Agra', slug: 'agra-day-trip', duration: 1, rating: 4.8, reviewsCount: 25 } as any,
-    { id: '3', title: 'Rishikesh Camping', price: 3999, image: 'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?q=80&w=1000', location: 'Rishikesh', slug: 'rishikesh-camping', duration: 2, rating: 4.6, reviewsCount: 18 } as any,
-    { id: '4', title: 'Nainital Stay', price: 7999, image: 'https://images.unsplash.com/photo-1470246973918-29a53295c561?q=80&w=1000', location: 'Nainital', slug: 'nainital-stay', duration: 3, rating: 4.4, reviewsCount: 14 } as any
-];
 
 
 interface SuperSaverDealsProps {
@@ -103,15 +96,15 @@ interface SuperSaverDealsProps {
 export const SuperSaverDeals: React.FC<SuperSaverDealsProps> = ({ packages, data }) => {
     const router = useRouter();
     const scrollRef = useRef<HTMLDivElement>(null);
-    const [deals, setDeals] = useState<SaverDeal[]>(FALLBACK_DEALS);
+    const [deals, setDeals] = useState<SaverDeal[]>(packages || []);
     const title = data?.title || "Super Saver Deals";
     const subtitle = data?.subtitle || "Pocket friendly vacations for you";
 
     useEffect(() => {
         if (packages && packages.length > 0) {
             setDeals(packages);
-        } else if (!packages || packages.length === 0) {
-            setDeals(FALLBACK_DEALS);
+        } else {
+            setDeals([]);
         }
     }, [packages]);
 

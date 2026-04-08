@@ -36,6 +36,23 @@ export const Header: React.FC<HeaderProps> = ({
   handleBlur,
   placeholder
 }) => {
+  const [mounted, setMounted] = React.useState(false);
+  const [isMobile, setIsMobile] = React.useState(false);
+
+  React.useEffect(() => {
+    setMounted(true);
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Performance Optimization: Prevent mounting the global header on mobile homepage
+  // since HeroSection provides its own integrated header.
+  if (mounted && isMobile && pathname === '/') {
+    return null;
+  }
+
   return (
     <nav className={`${pathname === '/'
       ? 'hidden lg:flex md:absolute md:top-8 md:bg-transparent md:border-0 md:shadow-none md:lg:bg-brand-dark lg:border-white/10 md:bg-white/80 md:backdrop-blur-md'

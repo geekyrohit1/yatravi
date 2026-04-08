@@ -39,12 +39,6 @@ interface HeroDestination {
 
 // Fallback destinations in case API is empty
 // Fallback destinations with local placeholders
-const FALLBACK_DESTINATIONS: HeroDestination[] = [
-    { name: "NORWAY", slug: "norway", heroImage: "/images/placeholder.svg", tagline: "Land of the Midnight Sun", startingPrice: 195000 },
-    { name: "BALI", slug: "bali", heroImage: "/images/placeholder.svg", tagline: "Island of the Gods", startingPrice: 85000 },
-    { name: "JAPAN", slug: "japan", heroImage: "/images/placeholder.svg", tagline: "Where Tradition Meets Tomorrow", startingPrice: 165000 },
-    { name: "MALDIVES", slug: "maldives", heroImage: "/images/placeholder.svg", tagline: "Paradise on Earth", startingPrice: 125000 }
-];
 
 interface HeroSectionProps {
     heroData?: any[];
@@ -59,8 +53,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
     const { settings, loading: settingsLoading } = useSettings();
     const [activeIndex, setActiveIndex] = useState(0);
     const [isTransitioning, setIsTransitioning] = useState(false);
-    const [displayedText, setDisplayedText] = useState('');
-    const [isTyping, setIsTyping] = useState(true);
     const [heroDestinationsState, setHeroDestinationsState] = useState<HeroDestination[]>(() => {
         if (heroData && heroData.length > 0) {
             return heroData
@@ -69,7 +61,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 .map((s: any) => ({
                     name: (s.customTitle || s.name || 'Destination'),
                     slug: s.slug || 'explore',
-                    heroImage: s.customImage || s.heroImage || FALLBACK_DESTINATIONS[0].heroImage,
+                    heroImage: s.customImage || s.heroImage || '/images/placeholder.svg',
                     mobileImage: s.customMobileImage || s.mobileMediaUrl || s.mobileImage,
                     tagline: s.customTagline || s.tagline || 'Explore Now',
                     startingPrice: s.startingPrice || 99000
@@ -104,7 +96,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 .map((s: any) => ({
                     name: (s.customTitle || s.name || 'Destination'),
                     slug: s.slug || 'explore',
-                    heroImage: s.customImage || s.heroImage || FALLBACK_DESTINATIONS[0].heroImage,
+                    heroImage: s.customImage || s.heroImage || '/images/placeholder.svg',
                     mobileImage: s.customMobileImage || s.mobileMediaUrl || s.mobileImage,
                     tagline: s.customTagline || s.tagline || 'Explore Now',
                     startingPrice: s.startingPrice || 99000
@@ -146,50 +138,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         return () => clearTimeout(timeout);
     }, [dynamicPlaceholder, isDeletingPlaceholder, placeholderIndex, heroDestinationsState]);
 
-    const heroDestinations: HeroDestination[] = heroDestinationsState.length > 0 ? heroDestinationsState : FALLBACK_DESTINATIONS;
-    const activeDestination = heroDestinations[activeIndex] || FALLBACK_DESTINATIONS[0];
-
-    // Typewriter effect
-    useEffect(() => {
-        if (!mounted) return;
-        const targetText = activeDestination.name;
-        let currentIndex = 0;
-        let isDeleting = false;
-        let timeoutId: ReturnType<typeof setTimeout>;
-
-        const tick = () => {
-            if (!isDeleting) {
-                if (currentIndex <= targetText.length) {
-                    setDisplayedText(targetText.substring(0, currentIndex));
-                    currentIndex++;
-                    setIsTyping(true);
-                    timeoutId = setTimeout(tick, 80);
-                } else {
-                    setIsTyping(false);
-                    timeoutId = setTimeout(() => {
-                        isDeleting = true;
-                        currentIndex = targetText.length;
-                        tick();
-                    }, 2500);
-                }
-            } else {
-                if (currentIndex >= 0) {
-                    setDisplayedText(targetText.substring(0, currentIndex));
-                    currentIndex--;
-                    setIsTyping(true);
-                    timeoutId = setTimeout(tick, 40);
-                } else {
-                    setIsTyping(false);
-                    setIsTransitioning(true);
-                    setActiveIndex((prev) => (prev + 1) % heroDestinations.length);
-                    setTimeout(() => setIsTransitioning(false), 600);
-                }
-            }
-        };
-
-        timeoutId = setTimeout(tick, 300);
-        return () => clearTimeout(timeoutId);
-    }, [activeIndex, activeDestination.name, heroDestinations.length, mounted]);
+    const heroDestinations: HeroDestination[] = heroDestinationsState;
+    const activeDestination = heroDestinations[activeIndex] || { name: 'Loading...', slug: '', heroImage: '', tagline: '', startingPrice: 0 };
 
     const handlePrev = () => {
         if (isTransitioning) return;
