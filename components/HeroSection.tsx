@@ -141,6 +141,17 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
     const heroDestinations: HeroDestination[] = heroDestinationsState;
     const activeDestination = heroDestinations[activeIndex] || { name: 'Loading...', slug: '', heroImage: '', tagline: '', startingPrice: 0 };
 
+    // Auto-slide effect
+    useEffect(() => {
+        if (heroDestinations.length <= 1) return;
+
+        const interval = setInterval(() => {
+            handleNext();
+        }, 5000); // Change slide every 5 seconds
+
+        return () => clearInterval(interval);
+    }, [heroDestinations.length, activeIndex]); // Restart timer on slide change to prevent overlapping transitions
+
     const handlePrev = () => {
         if (isTransitioning) return;
         setIsTransitioning(true);

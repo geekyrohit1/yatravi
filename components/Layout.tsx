@@ -276,7 +276,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
   return (
     <div className="min-h-screen flex flex-col font-sans bg-white opacity-100">
       {/* Reserving space for SaleStrip to prevent hydration jump */}
-      <div className="relative z-[100] bg-white h-auto border-b border-gray-100">
+      <div className="relative z-[100] h-auto">
         <SaleStrip />
       </div>
       <Header

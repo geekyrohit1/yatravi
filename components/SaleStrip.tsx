@@ -69,7 +69,7 @@ export const SaleStrip: React.FC = () => {
                 '--sale-bg-start': bgStart,
                 '--sale-bg-end': bgEnd,
             } as React.CSSProperties}
-            className="w-full py-2.5 min-h-[32px] md:min-h-[44px] flex items-center justify-center text-white z-[100] relative shadow-sm border-b border-white/5 animate-gradient-xy bg-[linear-gradient(135deg,var(--sale-bg-start)_0%,var(--sale-bg-end)_50%,var(--sale-bg-start)_100%)] bg-[length:200%_auto] font-sans"
+            className="w-full py-3.5 min-h-[42px] md:min-h-[50px] flex items-center justify-center text-white z-[100] relative animate-gradient-xy bg-[linear-gradient(135deg,var(--sale-bg-start)_0%,var(--sale-bg-end)_50%,var(--sale-bg-start)_100%)] bg-[length:200%_auto] font-sans"
         >
             <div className="max-w-7xl mx-auto w-full px-4 flex flex-col sm:flex-row items-center justify-center relative z-10 gap-2 md:gap-8">
                 <div className="flex items-center gap-3 w-full justify-center">
