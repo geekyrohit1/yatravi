@@ -139,11 +139,16 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
     window.addEventListener('toggleFloatingButtons', handleToggle);
     window.addEventListener('hideFloatingIcons', handleHideIcons);
     window.addEventListener('open-mobile-search', handleOpenSearch);
+    
+    // Custom event to trigger mobile drawer from HeroSection
+    const handleOpenMenu = () => setIsMobileMenuOpen(true);
+    window.addEventListener('open-mobile-menu', handleOpenMenu);
 
     return () => {
       window.removeEventListener('toggleFloatingButtons', handleToggle);
       window.removeEventListener('hideFloatingIcons', handleHideIcons);
       window.removeEventListener('open-mobile-search', handleOpenSearch);
+      window.removeEventListener('open-mobile-menu', handleOpenMenu);
     };
   }, []);
 

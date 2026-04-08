@@ -389,7 +389,7 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
                                                         )}
 
                                                         <p className="text-gray-600 text-[15px] leading-relaxed pt-3">{day.description}</p>
-                                                        
+
                                                         {day.meals && (
                                                             <div className="flex gap-4 mt-4 pt-4 border-t border-gray-50 items-center">
                                                                 <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Meals:</span>
@@ -693,11 +693,11 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
                             <X className="w-5 h-5" />
                         </button>
                         <div className="overflow-y-auto px-6 py-2 pb-6 flex-1 mt-2">
-                             <div className="mb-2">
+                            <div className="mb-2">
                                 <h3 className="text-xl font-semibold text-gray-900 font-heading tracking-tight">Get a Free Quote</h3>
                                 <p className="text-sm text-gray-500 mt-0.5 font-medium">For {packageData.title}</p>
                             </div>
-                            
+
                             {enquirySuccess ? (
                                 <div className="flex-1 flex flex-col items-center justify-center py-10 text-center animate-in zoom-in duration-500">
                                     <div className="w-20 h-20 bg-gradient-to-br from-green-400 to-emerald-600 text-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl shadow-green-200">

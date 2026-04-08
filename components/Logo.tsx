@@ -9,7 +9,7 @@ export const Logo = ({
 }) => (
   <div className={`relative flex items-center ${className} select-none flex-shrink-0 group`}>
     {!forceDesktop && (
-      <div className="md:hidden w-[38px] h-[38px] bg-brand flex items-center justify-center rounded-lg shadow-sm active:scale-95 transition-all overflow-hidden relative">
+      <div className="md:hidden w-10 h-10 bg-brand flex items-center justify-center rounded-lg shadow-sm active:scale-95 transition-all overflow-hidden relative">
         {/* Decorative Bubble Art Outlines */}
         <div className="absolute -top-1.5 -right-1.5 w-5 h-5 border border-white/30 rounded-full" />
         <div className="absolute -bottom-2 -left-2 w-8 h-8 border border-white/10 rounded-full" />

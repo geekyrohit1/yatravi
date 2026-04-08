@@ -6,7 +6,8 @@ const heroSlideSchema = new mongoose.Schema({
     order: { type: Number, default: 0 },
     customTitle: String,
     customTagline: String,
-    customImage: String // URL
+    customImage: String, // URL
+    customMobileImage: String // Mobile URL override
 });
 
 const cardSchema = new mongoose.Schema({
@@ -111,6 +112,7 @@ homepageConfigSchema.statics.getConfig = async function () {
                     name: slide.customTitle || dest.name,
                     tagline: slide.customTagline || dest.tagline,
                     heroImage: slide.customImage || dest.heroImage,
+                    customMobileImage: slide.customMobileImage || "",
                     startingPrice: dest.startingPrice,
                     slug: dest.slug,
                     // Keep destinationId as string ID for reference

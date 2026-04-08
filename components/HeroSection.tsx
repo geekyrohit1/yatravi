@@ -4,26 +4,28 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import {
-    Loader2, 
-    X, 
-    ChevronLeft, 
-    Clock, 
-    Filter, 
+    Loader2,
+    X,
+    ChevronLeft,
+    Clock,
+    Filter,
     Wallet,
-    Star, 
-    ArrowRight, 
-    MapPin, 
-    ChevronRight, 
+    Star,
+    ArrowRight,
+    MapPin,
+    ChevronRight,
     Search,
     Gift,
     SlidersHorizontal,
     Phone,
     Play,
     Volume2,
-    VolumeX
+    VolumeX,
+    Menu
 } from 'lucide-react';
 import { API_BASE_URL } from '@/constants';
 import { useSettings } from '@/context/SettingsContext';
+import { Logo } from './Logo';
 
 // Hero destination data structure
 interface HeroDestination {
@@ -49,8 +51,8 @@ interface HeroSectionProps {
     isLoading?: boolean;
 }
 
-export const HeroSection: React.FC<HeroSectionProps> = ({ 
-    heroData = [], 
+export const HeroSection: React.FC<HeroSectionProps> = ({
+    heroData = [],
     isLoading = false
 }) => {
     const router = useRouter();
@@ -120,12 +122,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
         const currentFullText = heroDestinationsState[placeholderIndex].name;
         const typingSpeed = isDeletingPlaceholder ? 40 : 100;
-        
+
         const timeout = setTimeout(() => {
             if (!isDeletingPlaceholder) {
                 // Typing
                 setDynamicPlaceholder(currentFullText.substring(0, dynamicPlaceholder.length + 1));
-                
+
                 if (dynamicPlaceholder === currentFullText) {
                     // Start deleting after a pause
                     setTimeout(() => setIsDeletingPlaceholder(true), 2000);
@@ -133,7 +135,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             } else {
                 // Deleting
                 setDynamicPlaceholder(currentFullText.substring(0, dynamicPlaceholder.length - 1));
-                
+
                 if (dynamicPlaceholder === '') {
                     setIsDeletingPlaceholder(false);
                     setPlaceholderIndex((prev) => (prev + 1) % heroDestinationsState.length);
@@ -213,12 +215,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
     // Stabilized height calculation to prevent Cumulative Layout Shift (CLS)
     // Aggressively reduced mobile height to 240px for an ultra-compact wide-screen panoramic look.
-    const baseHeight = "h-[240px] md:h-[calc(100vh-70px)] lg:h-[600px]";
+    const baseHeight = "h-[500px] md:h-[calc(100vh-70px)] lg:h-[600px]";
     let containerClasses = `relative w-full transition-all duration-500 ${baseHeight} bg-white overflow-hidden px-0`;
-    
+
     // Only adjust if sale banner is explicitly enabled (which is rare/specific)
     if (!settingsLoading && settings?.enableSaleBanner === true) {
-        containerClasses = `relative w-full transition-all duration-500 h-[240px] md:h-[calc(100vh-110px)] lg:h-[600px] bg-white overflow-hidden px-0`;
+        containerClasses = `relative w-full transition-all duration-500 h-[500px] md:h-[calc(100vh-110px)] lg:h-[600px] bg-white overflow-hidden px-0`;
     }
 
     if (isLoading || heroDestinations.length === 0) {
@@ -227,13 +229,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 <div className="relative w-full h-full bg-white flex flex-col items-center justify-center pt-24 md:pt-0 pb-0 md:pb-16 lg:pb-20 overflow-hidden">
                     {/* Background Glow Skeleton (Dark Light Theme) */}
                     <div className="absolute inset-0 bg-slate-50 animate-pulse" />
-                    
+
                     {/* Content Skeleton */}
                     <div className="relative z-10 text-center space-y-4 md:space-y-6 px-4 w-full max-w-2xl mx-auto">
                         <div className="h-3 w-32 bg-slate-200/60 rounded-full mx-auto animate-pulse" />
                         <div className="h-12 md:h-20 w-3/4 bg-slate-200/40 rounded-2xl mx-auto animate-pulse" />
                         <div className="h-4 w-48 bg-slate-100/60 rounded-full mx-auto animate-pulse" />
-                        
+
                         {/* Search Bar Skeleton */}
                         <div className="h-10 md:h-12 w-full max-w-sm bg-slate-50/50 rounded-xl mx-auto animate-pulse mt-8 border border-slate-100/40" />
                     </div>
@@ -295,14 +297,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                         </div>
 
                         <div className="flex items-center gap-4">
-                             <button
+                            <button
                                 onClick={handleExplore}
                                 className="px-10 py-4 bg-gray-900 text-white rounded-xl font-medium tracking-wider text-[11px] hover:bg-brand transition-all duration-300 shadow-lg shadow-gray-900/10 group flex items-center gap-3 whitespace-nowrap"
                             >
                                 Visit Destination
                                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                             </button>
-                            
+
                             <button
                                 onClick={() => {
                                     const waNumber = (settings?.whatsappNumber || '9587505726').replace(/[^0-9]/g, '');
@@ -362,60 +364,103 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                     </div>
                 </div>
 
-                {/* REDESIGNED MOBILE/TABLET LAYOUT - Panoramic Background Slider with Standardized Rounded Bottom Corners */}
-                <div className="lg:hidden relative w-full h-full rounded-b-lg overflow-hidden shadow-sm">
-                    {/* Background Destination Slider for Mobile */}
+                {/* REDESIGNED MOBILE/TABLET LAYOUT - Dynamic Image Background with Minimalist UI overlay */}
+                <div className="lg:hidden relative w-full h-full overflow-hidden shadow-sm">
+                    {/* Background Image Slider Layer */}
                     <div className="absolute inset-0 z-0">
-                        {heroDestinations.map((dest, index) => (
+                        {heroDestinationsState.map((dest, index) => (
                             <div
-                                key={`mobile-slider-${dest.slug}-${index}`}
-                                className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === activeIndex ? 'opacity-100' : 'opacity-0'}`}
+                                key={index}
+                                className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === activeIndex ? 'opacity-100' : 'opacity-0'
+                                    }`}
                             >
                                 <Image
-                                    src={dest.mobileImage || dest.heroImage || '/images/placeholder.svg'}
+                                    src={dest.mobileImage || dest.heroImage}
                                     alt={dest.name}
                                     fill
                                     quality={80}
+                                    sizes="(max-width: 1024px) 100vw, 50vw"
+                                    className="object-cover"
                                     priority={index === 0}
-                                    loading={index === 0 ? "eager" : "lazy"}
-                                    className="object-cover object-center transform-gpu"
-                                    sizes="100vw"
                                 />
-                                {/* Enhanced Cinematic Darkened Overlay for maximum contrast */}
-                                <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-black/50" />
+                                {/* Refined Overlay: Clear on top, dark at bottom for text legibility */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/100 via-black/40 to-transparent" />
                             </div>
                         ))}
                     </div>
 
-                    {/* Mobile Content Layer */}
-                    <div className="relative z-10 h-full flex flex-col justify-end pb-6 px-5">
-                        {/* Personalized Greeting matches user mockup */}
-                        <div className="mb-3 transform transition-all duration-700 delay-100 translate-y-0 opacity-100">
-                            <div className="flex items-center gap-2 mb-0.5">
-                                <h2 className="text-white text-xl font-bold tracking-tight drop-shadow-md">
-                                    <span>Hey explorer, 👋</span>
-                                </h2>
+                    {/* Mobile Content Layer - Positioned over the background slider */}
+                    <div className="relative z-10 h-full flex flex-col justify-between pt-5 pb-6 px-5">
+                        {/* Integrated Header Row */}
+                        <div className="flex items-center justify-between w-full mb-8">
+                            {/* Logo - No Background */}
+                            <div className="flex items-center">
+                                <Logo className="origin-left" forceDesktop={false} />
                             </div>
-                            <p className="text-white/90 text-[10px] font-medium tracking-wide drop-shadow-sm">
-                                <span>Discover your next perfect adventure</span>
-                            </p>
+
+                            {/* Action Icons - White Background with proper radius and subtle shadow */}
+                            <div className="flex items-center gap-3">
+                                {/* Call Icon */}
+                                <a
+                                    href={`tel:${(settings?.contactPhone || '9587505726').replace(/[^0-9+]/g, '')}`}
+                                    className="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-[#1A2326] shadow-md active:scale-95 transition-all outline-none"
+                                    aria-label="Call Us"
+                                >
+                                    <Phone className="w-5 h-5" />
+                                </a>
+
+                                {/* Menu Icon */}
+                                <button
+                                    onClick={() => window.dispatchEvent(new CustomEvent('open-mobile-menu'))}
+                                    className="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-[#1A2326] shadow-md active:scale-95 transition-all outline-none"
+                                    aria-label="Open Menu"
+                                >
+                                    <Menu className="w-5 h-5" />
+                                </button>
+                            </div>
                         </div>
 
-                        {/* Repositioned Pill-Style Search Bar with premium glassmorphism and deep shadow */}
-                        <button
-                            onClick={() => window.dispatchEvent(new CustomEvent('open-mobile-search'))}
-                            className="group w-full h-12 bg-white/95 backdrop-blur-lg rounded-2xl shadow-[0_25px_50px_-12px_rgba(0,0,0,0.4)] flex items-center justify-between px-5 active:scale-[0.98] transition-all border border-white/40"
-                        >
-                            <div className="flex items-center gap-3">
-                                <Search className="w-4.5 h-4.5 text-gray-400 group-hover:text-brand transition-colors" />
+                        {/* Content Block pushed towards bottom with a subtle gap */}
+                        <div className="flex-1 flex flex-col justify-end pb-10">
+                            {/* Personalized Greeting matches user mockup */}
+                            <div className="mb-3 transform transition-all duration-700 delay-100 translate-y-0 opacity-100">
+                                <div className="flex items-center gap-2 mb-1.5">
+                                    <h2 className="text-white text-3xl font-bold tracking-tight leading-tight drop-shadow-md max-w-[90%]">
+                                        <span>Where Do You Want to Go?</span>
+                                    </h2>
+                                </div>
+                                <p className="text-white/90 text-[13px] font-medium tracking-tight drop-shadow-sm">
+                                    <span>Thoughtfully planned trips from<span className="text-[#ffea00] font-semibold">" ₹7,999/- Per Person"</span></span>
+                                </p>
+                            </div>
+
+                            {/* Repositioned Pill-Style Search Bar - Icon on Right side with subtle shadow */}
+                            <button
+                                onClick={() => window.dispatchEvent(new CustomEvent('open-mobile-search'))}
+                                className="group w-full h-11 bg-white rounded-lg shadow-[0_8px_20px_-6px_rgba(0,0,0,0.3)] flex items-center justify-between px-5 active:scale-[0.98] transition-all border border-white/40"
+                            >
                                 <div className="flex items-center gap-1.5 overflow-hidden">
-                                    <span className="text-gray-500/80 text-xs font-medium">Search</span>
-                                    <span className="text-brand text-xs font-bold truncate">
+                                    <span className="text-gray-900 text-[13px] font-medium tracking-tight">Search your destination</span>
+                                    <span className="text-brand text-[13px] font-semibold truncate text-left">
                                         <span translate="no">"{dynamicPlaceholder}"</span>
                                     </span>
                                 </div>
+                                <Search className="w-4 h-4 text-gray-400 group-hover:text-brand transition-colors" />
+                            </button>
+
+                            {/* Pagination Dots - Rounded & Solid White for active, moved further down */}
+                            <div className="flex justify-center gap-2 mt-8">
+                                {heroDestinationsState.map((_, i) => (
+                                    <div
+                                        key={i}
+                                        className={`transition-all duration-300 rounded-full ${i === activeIndex
+                                            ? 'w-1.5 h-1.5 bg-white'
+                                            : 'w-1.5 h-1.5 bg-white/30'
+                                            }`}
+                                    />
+                                ))}
                             </div>
-                        </button>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -130,7 +130,8 @@ export default function HomepageConfigPage() {
                 startingPrice: slide.destinationId?.startingPrice || slide.startingPrice,
                 customTitle: slide.customTitle || '',
                 customTagline: slide.customTagline || '',
-                customImage: slide.customImage || ''
+                customImage: slide.customImage || '',
+                customMobileImage: slide.customMobileImage || ''
             })) || [];
 
             setConfig({

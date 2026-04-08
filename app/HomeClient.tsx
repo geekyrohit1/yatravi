@@ -311,7 +311,8 @@ export const HomeClient: React.FC<HomeClientProps> = ({ initialPackages, initial
                 isLoading={!initialConfig?.heroSlider} 
             />
 
-            <div className="flex flex-col gap-0">
+            {/* Overlapping Content Section for Mobile "Reverse Curve" Design */}
+            <div className="relative z-20 -mt-10 lg:mt-0 bg-white rounded-none overflow-hidden flex flex-col gap-0">
                 {initialConfig && Array.isArray(initialConfig.sections) && (
                     <div className="flex flex-col gap-0">
                         {[...initialConfig.sections]
