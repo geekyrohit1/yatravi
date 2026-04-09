@@ -33,7 +33,14 @@ const DEFAULTS = {
 };
 
 export default function AboutClient({ initialData }: { initialData?: any }) {
-    const [data, setData] = useState(initialData || DEFAULTS);
+    const [data, setData] = useState(() => {
+        if (!initialData) return DEFAULTS;
+        return {
+            ...DEFAULTS,
+            ...initialData,
+            content: { ...DEFAULTS.content, ...(initialData?.content || {}) }
+        };
+    });
 
     useEffect(() => {
         if (!initialData) {
@@ -62,7 +69,14 @@ export default function AboutClient({ initialData }: { initialData?: any }) {
             <div className="relative h-[60vh] flex items-center justify-center bg-gray-950 overflow-hidden">
                 <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/60 via-black/40 to-white" />
                 <div className="absolute inset-0">
-                    <Image src={data.heroImage} alt="About Hero" fill quality={100} className="object-cover shrink-0 opacity-60 scale-105" priority />
+                    <Image 
+                        src={(typeof data.heroImage === 'string' && data.heroImage.trim() !== '') ? data.heroImage : DEFAULTS.heroImage} 
+                        alt="About Hero" 
+                        fill 
+                        quality={100} 
+                        className="object-cover shrink-0 opacity-60 scale-105" 
+                        priority 
+                    />
                 </div>
 
                 <div className="relative z-20 text-center px-4 max-w-4xl mx-auto flex flex-col items-center">
@@ -85,11 +99,11 @@ export default function AboutClient({ initialData }: { initialData?: any }) {
                         <div className="space-y-2">
                             <h2 className="text-sm font-bold text-brand tracking-wider">Our founding</h2>
                             <h2 className="text-4xl md:text-5xl font-heading tracking-tight font-bold text-gray-900 leading-tight">
-                                {c.storyTitle}
+                                {data?.content?.storyTitle || DEFAULTS.content.storyTitle}
                             </h2>
                         </div>
                         <div className="space-y-6 text-gray-500 text-lg leading-relaxed font-light">
-                            {(c.storyBody || '').split('\n\n').filter(Boolean).map((para: string, i: number) => (
+                            {(data?.content?.storyBody || '').split('\n\n').filter(Boolean).map((para: string, i: number) => (
                                 <p key={i}>{para}</p>
                             ))}
                         </div>
@@ -97,7 +111,13 @@ export default function AboutClient({ initialData }: { initialData?: any }) {
 
                     <div className="relative group">
                         <div className="aspect-[4/5] rounded-[2.5rem] overflow-hidden shadow-2xl relative">
-                            <Image src={c.storyImage || '/images/placeholder.svg'} alt="Our Story" fill quality={100} className="object-cover shrink-0 group-hover:scale-105 transition-transform duration-1000" />
+                            <Image 
+                                src={(typeof data.content?.storyImage === 'string' && data.content?.storyImage.trim() !== '') ? data.content?.storyImage : (DEFAULTS.content.storyImage || '/images/placeholder.svg')} 
+                                alt="Our Story" 
+                                fill 
+                                quality={100} 
+                                className="object-cover shrink-0 group-hover:scale-105 transition-transform duration-1000" 
+                            />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                         </div>
                         <div className="absolute -bottom-10 -left-10 bg-white/80 backdrop-blur-xl p-8 rounded-[2rem] shadow-2xl border border-white/20 hidden md:block max-w-xs">
@@ -122,9 +142,9 @@ export default function AboutClient({ initialData }: { initialData?: any }) {
                                         <Icon className="w-7 h-7 text-brand group-hover:text-white transition-colors" />
                                     </div>
                                     <div className="text-5xl md:text-6xl font-heading tracking-tighter font-bold text-gray-950 mb-2 tabular-nums">
-                                        {stat.value}
+                                        {stat?.value}
                                     </div>
-                                    <div className="text-sm font-bold text-gray-400 tracking-widest">{stat.label}</div>
+                                    <div className="text-sm font-bold text-gray-400 tracking-widest">{stat?.label}</div>
                                 </div>
                             );
                         })}
@@ -149,8 +169,8 @@ export default function AboutClient({ initialData }: { initialData?: any }) {
                                     <div className="w-20 h-20 bg-gray-50 rounded-[1.5rem] flex items-center justify-center mb-8 group-hover:bg-brand/10 transition-colors duration-500">
                                         <Icon className="w-10 h-10 text-brand transition-transform duration-500 group-hover:scale-110" />
                                     </div>
-                                    <h4 className="font-heading tracking-tight font-bold text-2xl text-gray-900 mb-4">{item.title}</h4>
-                                    <p className="text-gray-500 leading-relaxed font-light">{item.desc}</p>
+                                    <h4 className="font-heading tracking-tight font-bold text-2xl text-gray-900 mb-4">{item?.title}</h4>
+                                    <p className="text-gray-500 leading-relaxed font-light">{item?.desc}</p>
                                 </CardContent>
                             </Card>
                         );
