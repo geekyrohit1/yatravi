@@ -5,6 +5,7 @@ import { Package } from '../types';
 import dynamic from 'next/dynamic';
 import { HeroSection } from '../components/HeroSection';
 import { cleanSlug } from '../lib/utils';
+import ImagePreloader from '../components/ImagePreloader';
 
 // Reusable Skeleton Components
 const SectionHeaderSkeleton = () => (
@@ -256,10 +257,11 @@ export const HomeClient: React.FC<HomeClientProps> = ({ initialPackages, initial
             else if (section.type === 'slider') content = <PromoSlider data={section} />;
         }
 
-        if (!content) return null;
-
         return (
-            <div key={section.key || `section-${index}`} className={`${index === 0 ? "pt-0" : ""} performance-section`}>
+            <div 
+                key={section.key || `section-${index}`} 
+                className={`relative ${index === 0 ? "pt-0" : ""} performance-section w-full overflow-hidden`}
+            >
                 {content}
             </div>
         );
@@ -273,8 +275,25 @@ export const HomeClient: React.FC<HomeClientProps> = ({ initialPackages, initial
         initialDestinations.filter(d => d.status !== 'draft'),
     [initialDestinations]);
 
+    // PRELOADING LOGIC: Collect URLs for background caching
+    const preloadUrls = React.useMemo(() => {
+        const urls = new Set<string>();
+        // Add top 15 packages
+        initialPackages.slice(0, 15).forEach(p => {
+            if (p.image) urls.add(p.image);
+            if (p.gallery && p.gallery[0]) urls.add(p.gallery[0]);
+        });
+        // Add top 10 destinations
+        initialDestinations.slice(0, 10).forEach(d => {
+            if (d.heroImage) urls.add(d.heroImage);
+            if (d.mobileMediaUrl) urls.add(d.mobileMediaUrl);
+        });
+        return Array.from(urls);
+    }, [initialPackages, initialDestinations]);
+
     return (
         <div className="flex flex-col gap-0 text-gray-800 bg-white">
+            <ImagePreloader urls={preloadUrls} />
             <HeroSection 
                 heroData={initialConfig?.heroSlider} 
                 isLoading={!initialConfig?.heroSlider} 

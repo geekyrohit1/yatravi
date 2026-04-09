@@ -163,14 +163,19 @@ p {
     will-change: opacity, transform;
 }
 
-.performance-section, .gpu-accelerated, .no-flicker {
-    /* Unified high-performance rendering layer */
+.performance-section, .gpu-accelerated {
+    /* High-performance rendering layer without over-taxing GPU */
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-    outline: 1px solid transparent; /* Anti-aliasing fix */
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
     will-change: transform, opacity;
+    contain: content;
+}
+
+.no-flicker {
+    -webkit-font-smoothing: antialiased;
+    transform: translateZ(0);
 }
 
 /* Global Styles from index.html */

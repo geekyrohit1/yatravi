@@ -141,6 +141,21 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
     const heroDestinations: HeroDestination[] = heroDestinationsState;
     const activeDestination = heroDestinations[activeIndex] || { name: 'Loading...', slug: '', heroImage: '', tagline: '', startingPrice: 0 };
 
+    // Stable Handlers
+    const handleNext = React.useCallback(() => {
+        if (isTransitioning || heroDestinations.length <= 1) return;
+        setIsTransitioning(true);
+        setActiveIndex((prev) => (prev + 1) % heroDestinations.length);
+        setTimeout(() => setIsTransitioning(false), 600);
+    }, [isTransitioning, heroDestinations.length]);
+
+    const handlePrev = React.useCallback(() => {
+        if (isTransitioning || heroDestinations.length <= 1) return;
+        setIsTransitioning(true);
+        setActiveIndex((prev) => (prev === 0 ? heroDestinations.length - 1 : prev - 1));
+        setTimeout(() => setIsTransitioning(false), 600);
+    }, [isTransitioning, heroDestinations.length]);
+
     // Mobile Swipe Handling
     const [touchStart, setTouchStart] = useState<number | null>(null);
     const [touchEnd, setTouchEnd] = useState<number | null>(null);
@@ -170,7 +185,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         }
     };
 
-    // Auto-slide effect
+    // 5. Robust Auto-slide effect
     useEffect(() => {
         if (heroDestinations.length <= 1) return;
 
@@ -179,21 +194,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         }, 5000); // Change slide every 5 seconds
 
         return () => clearInterval(interval);
-    }, [heroDestinations.length, activeIndex]); // Restart timer on slide change to prevent overlapping transitions
-
-    const handlePrev = () => {
-        if (isTransitioning) return;
-        setIsTransitioning(true);
-        setActiveIndex((prev) => (prev === 0 ? heroDestinations.length - 1 : prev - 1));
-        setTimeout(() => setIsTransitioning(false), 600);
-    };
-
-    const handleNext = () => {
-        if (isTransitioning) return;
-        setIsTransitioning(true);
-        setActiveIndex((prev) => (prev + 1) % heroDestinations.length);
-        setTimeout(() => setIsTransitioning(false), 600);
-    };
+    }, [handleNext, heroDestinations.length]); 
 
     const handleExplore = () => {
         router.push(`/destination/${activeDestination.slug}`);
