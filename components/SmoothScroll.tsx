@@ -13,7 +13,11 @@ export default function SmoothScroll() {
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
-    // 2. Initialize Lenis (Active for ALL devices now)
+    // 1. Check if device is desktop
+    const isMobile = window.innerWidth < 1024;
+    if (isMobile) return;
+
+    // 2. Initialize Lenis (Only for Desktop)
     const lenis = new Lenis({
       duration: 1.0,          // Reduced from 1.2 to 1.0 for faster response
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
