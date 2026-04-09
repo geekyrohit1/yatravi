@@ -17,34 +17,39 @@ export default function SmoothScroll() {
     const isMobile = window.innerWidth < 1024;
     if (isMobile) return;
 
-    // 2. Initialize Lenis (Only for Desktop)
-    const lenis = new Lenis({
-      duration: 1.0,          // Reduced from 1.2 to 1.0 for faster response
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
-      orientation: 'vertical',
-      gestureOrientation: 'vertical',
-      smoothWheel: true,
-      wheelMultiplier: 1.1,     // Increased from 0.9 for more distance per scroll
-      touchMultiplier: 1.5,     
-      infinite: false,
-    });
+    // 2. Wrap initialization in a timeout to sync with sequential reveal
+    const initTimeout = setTimeout(() => {
+      const lenis = new Lenis({
+        duration: 1.2,          
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
+        orientation: 'vertical',
+        smoothWheel: true,
+        wheelMultiplier: 1.0,     
+        infinite: false,
+      });
 
-    lenisRef.current = lenis;
+      lenisRef.current = lenis;
 
-    // 3. Animation Loop
-    let rafId: number;
-    function raf(time: number) {
-      lenis.raf(time);
+      // Animation Loop
+      let rafId: number;
+      function raf(time: number) {
+        lenis.raf(time);
+        rafId = requestAnimationFrame(raf);
+      }
+
       rafId = requestAnimationFrame(raf);
-    }
+      
+      return () => {
+        cancelAnimationFrame(rafId);
+        lenis.destroy();
+      };
+    }, 500); // 500ms delay gives the orchestration head-start
 
-    rafId = requestAnimationFrame(raf);
-
-    // 4. Cleanup on unmount
     return () => {
-      cancelAnimationFrame(rafId);
-      lenis.destroy();
-      lenisRef.current = null;
+      clearTimeout(initTimeout);
+      if (lenisRef.current) {
+        lenisRef.current.destroy();
+      }
     };
   }, []);
 

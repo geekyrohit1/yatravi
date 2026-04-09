@@ -3,6 +3,9 @@ import { API_BASE_URL } from '@/constants';
 import ContactClient from './ContactClient';
 import { Metadata } from 'next';
 
+// Enable ISR with 60-second revalidation
+export const revalidate = 60;
+
 async function getContactData() {
     try {
         const res = await fetch(`${API_BASE_URL}/api/pages/contact`, { next: { revalidate: 30 } });

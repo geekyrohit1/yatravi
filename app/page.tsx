@@ -3,9 +3,9 @@ import { API_BASE_URL } from '../constants';
 import { getGlobalSettings } from '@/lib/api';
 import { HomeClient } from './HomeClient';
 
-// Enable Force Dynamic for truly real-time updates and bypass Next.js server-side caching
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+// Enable Incremental Static Regeneration (ISR) with a 60-second window
+// This allows the page to be cached and served instantly, eliminating loading screens
+export const revalidate = 60;
 
 /**
  * Timeout wrapper for server-side fetches

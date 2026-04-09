@@ -304,7 +304,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
 
       <QuoteFormPopup isOpen={isQuotePopupOpen} onClose={() => setIsQuotePopupOpen(false)} />
 
-      <main className="flex-grow">
+      <main className="flex-grow min-h-[65vh] md:min-h-[75vh]">
         {children}
       </main>
 

@@ -33,6 +33,11 @@ export const VisaFreeDestinations: React.FC<VisaFreeDestinationsProps> = ({ data
     const router = useRouter();
     const scrollContainerRef = useRef<HTMLDivElement>(null);
     const [destinations, setDestinations] = useState<DestinationItem[]>(data?.destinationItems || []);
+    const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({});
+
+    const handleImageLoad = (id: string) => {
+        setLoadedImages(prev => ({ ...prev, [id]: true }));
+    };
 
     useEffect(() => {
         if (data?.destinationItems && data.destinationItems.length > 0) {
@@ -53,7 +58,7 @@ export const VisaFreeDestinations: React.FC<VisaFreeDestinationsProps> = ({ data
     };
 
     const displayDestinations = destinations.map((d, idx) => ({
-        id: d._id || d.id || idx,
+        id: String(d._id || d.id || idx),
         idx,
         country: d.name || d.country || 'Destination',
         prefix: d.tagline || d.prefix || 'EXPLORE',
@@ -101,8 +106,9 @@ export const VisaFreeDestinations: React.FC<VisaFreeDestinationsProps> = ({ data
                                     fill
                                     quality={90}
                                     priority={item.idx < 2}
+                                    onLoadingComplete={() => handleImageLoad(item.id)}
                                     sizes="(max-width: 640px) 300px, (max-width: 1024px) 280px, 320px"
-                                    className="object-cover object-center"
+                                    className={`object-cover object-center img-blur-reveal ${loadedImages[item.id] ? 'img-reveal-complete' : ''}`}
                                 />
                             </div>
 

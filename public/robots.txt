@@ -1,8 +1,0 @@
-# Crawlers
-User-agent: *
-Disallow: /admin
-Disallow: /admin/
-Disallow: /api/
-
-# Sitemaps
-Sitemap: https://yatravi.com/sitemap.xml

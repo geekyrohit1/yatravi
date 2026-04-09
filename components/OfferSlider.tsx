@@ -23,6 +23,11 @@ interface OfferSliderProps {
 export const OfferSlider: React.FC<OfferSliderProps> = ({ data }) => {
     const router = useRouter();
     const scrollContainerRef = useRef<HTMLDivElement>(null);
+    const [loadedImages, setLoadedImages] = React.useState<Record<string, boolean>>({});
+
+    const handleImageLoad = (key: string) => {
+        setLoadedImages(prev => ({ ...prev, [key]: true }));
+    };
 
     const { title, subtitle, cards } = data;
 
@@ -70,7 +75,8 @@ export const OfferSlider: React.FC<OfferSliderProps> = ({ data }) => {
                                     fill
                                     quality={100}
                                     sizes="(max-width: 768px) 100vw, 800px"
-                                    className="object-cover"
+                                    onLoadingComplete={() => handleImageLoad(`desktop-${index}`)}
+                                    className={`object-cover transition-all duration-700 img-blur-reveal ${loadedImages[`desktop-${index}`] ? 'img-reveal-complete' : ''}`}
                                 />
                             </div>
                             {card.mobileImage && (
@@ -81,7 +87,8 @@ export const OfferSlider: React.FC<OfferSliderProps> = ({ data }) => {
                                         fill
                                         quality={100}
                                         sizes="100vw"
-                                        className="object-cover"
+                                        onLoadingComplete={() => handleImageLoad(`mobile-${index}`)}
+                                        className={`object-cover transition-all duration-700 img-blur-reveal ${loadedImages[`mobile-${index}`] ? 'img-reveal-complete' : ''}`}
                                     />
                                 </div>
                             )}

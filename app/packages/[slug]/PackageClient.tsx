@@ -35,6 +35,11 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
     const heroScrollRef = useRef<HTMLDivElement>(null);
     const [touchStartX, setTouchStartX] = useState<number | null>(null);
     const [touchEndX, setTouchEndX] = useState<number | null>(null);
+    const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({});
+
+    const handleImageLoad = (key: string) => {
+        setLoadedImages(prev => ({ ...prev, [key]: true }));
+    };
 
     // Manual Sticky Trigger (Robust against overflow issues)
     useEffect(() => {
@@ -230,10 +235,26 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
                     {/* Desktop Side Stack */}
                     <div className="hidden lg:flex lg:col-span-3 flex-col gap-0.5 h-full">
                         <div className="relative flex-1 overflow-hidden">
-                            <Image src={packageData.gallery[1] || packageData.image} alt="Detail" fill quality={80} sizes="33vw" className="object-cover" />
+                            <Image 
+                                src={packageData.gallery[1] || packageData.image} 
+                                alt="Detail" 
+                                fill 
+                                quality={80} 
+                                sizes="33vw" 
+                                onLoadingComplete={() => handleImageLoad('side-1')}
+                                className={`object-cover transition-all duration-500 img-blur-reveal ${loadedImages['side-1'] ? 'img-reveal-complete' : ''}`} 
+                            />
                         </div>
                         <div className="relative flex-1 overflow-hidden">
-                            <Image src={packageData.gallery[2] || packageData.image} alt="Detail" fill quality={80} sizes="33vw" className="object-cover" />
+                            <Image 
+                                src={packageData.gallery[2] || packageData.image} 
+                                alt="Detail" 
+                                fill 
+                                quality={80} 
+                                sizes="33vw" 
+                                onLoadingComplete={() => handleImageLoad('side-2')}
+                                className={`object-cover transition-all duration-500 img-blur-reveal ${loadedImages['side-2'] ? 'img-reveal-complete' : ''}`} 
+                            />
                         </div>
                     </div>
                 </div>

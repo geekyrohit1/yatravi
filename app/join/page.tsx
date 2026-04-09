@@ -3,6 +3,9 @@ import { API_BASE_URL } from '@/constants';
 import JoinClient from './JoinClient';
 import { Metadata } from 'next';
 
+// Enable ISR with 60-second revalidation
+export const revalidate = 60;
+
 async function getJoinData() {
     try {
         const res = await fetch(`${API_BASE_URL}/api/pages/join`, { next: { revalidate: 60 } });

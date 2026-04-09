@@ -26,6 +26,7 @@ const PackageCardComponent: React.FC<PackageCardProps> = ({ pkg, variant = 'vert
   const [mounted, setMounted] = useState(false);
   const [callbackData, setCallbackData] = useState({ name: '', phone: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -175,7 +176,8 @@ const PackageCardComponent: React.FC<PackageCardProps> = ({ pkg, variant = 'vert
               src={safeImages[0]}
               alt={pkg.title}
               fill
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
+              onLoadingComplete={() => setIsImageLoaded(true)}
+              className={`object-cover transition-all duration-500 group-hover:scale-105 img-blur-reveal ${isImageLoaded ? 'img-reveal-complete' : ''}`}
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 33vw, 400px"
               quality={85}
               priority={false}
@@ -319,7 +321,8 @@ const PackageCardComponent: React.FC<PackageCardProps> = ({ pkg, variant = 'vert
               src={safeImages[currentImage]}
               alt={pkg.title}
               fill
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
+              onLoadingComplete={() => setIsImageLoaded(true)}
+              className={`object-cover transition-all duration-500 group-hover:scale-105 img-blur-reveal ${isImageLoaded ? 'img-reveal-complete' : ''}`}
               sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 400px"
               quality={75}
               priority={false}

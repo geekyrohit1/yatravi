@@ -10,7 +10,7 @@ interface FooterProps {
 
 export const Footer: React.FC<FooterProps> = ({ onOpenQuote }) => {
   return (
-    <footer id="footer" className="bg-brand-dark text-white pt-10 md:pt-16 pb-6 border-t-0 relative overflow-hidden z-10 selection:bg-brand-light selection:text-white">
+    <footer id="footer" className="bg-brand-dark text-white pt-10 md:pt-16 pb-6 border-t-0 relative overflow-hidden z-10 selection:bg-brand-light selection:text-white [contain:layout]">
       {/* Top Wave Shape */}
       <div className="absolute top-0 left-0 right-0 overflow-hidden leading-none -translate-y-[99%] pointer-events-none z-20">
         <svg viewBox="0 0 2880 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-[50px] md:h-[70px] block">

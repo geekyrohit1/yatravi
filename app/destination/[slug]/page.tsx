@@ -5,7 +5,8 @@ import DestinationClient from './DestinationClient';
 import SEOQuickLinks from '@/components/SEOQuickLinks';
 import { redirect } from 'next/navigation';
 
-export const dynamic = 'force-dynamic';
+// Enable ISR with 60-second revalidation for instant page delivery
+export const revalidate = 60;
 
 async function getDestination(slug: string) {
     try {

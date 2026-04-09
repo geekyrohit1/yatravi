@@ -11,9 +11,8 @@ export const FadeIn: React.FC<FadeInProps> = ({ children, delay = 0, className =
     const domRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        // Fallback: If for any reason the observer doesn't fire, show the content after a short timeout
-        // This prevents content from staying "Ghosted" and killing the performance score.
-        const failsafe = setTimeout(() => setIsVisible(true), 100);
+        // More generous failsafe to allow for stable hydration
+        const failsafe = setTimeout(() => setIsVisible(true), 800);
 
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
@@ -22,7 +21,7 @@ export const FadeIn: React.FC<FadeInProps> = ({ children, delay = 0, className =
                     clearTimeout(failsafe);
                 }
             });
-        }, { threshold: 0.01, rootMargin: '20px' });
+        }, { threshold: 0.05, rootMargin: '0px' });
 
         const currentRef = domRef.current;
         if (currentRef) {
@@ -40,7 +39,7 @@ export const FadeIn: React.FC<FadeInProps> = ({ children, delay = 0, className =
     return (
         <div
             ref={domRef}
-            className={`${className} transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+            className={`${className} transition-all duration-[200ms] cubic-bezier(0.16, 1, 0.3, 1) ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}
             style={{ 
                 transitionDelay: `${delay}ms`,
                 willChange: 'opacity, transform'

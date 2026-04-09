@@ -3,6 +3,9 @@ import { API_BASE_URL } from '@/constants';
 import AboutClient from './AboutClient';
 import { Metadata } from 'next';
 
+// Enable ISR with 60-second revalidation
+export const revalidate = 60;
+
 async function getAboutData() {
     try {
         const res = await fetch(`${API_BASE_URL}/api/pages/about`, { next: { revalidate: 60 } });

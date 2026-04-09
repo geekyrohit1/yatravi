@@ -19,7 +19,12 @@ interface PromoSliderProps {
 
 export const PromoSlider: React.FC<PromoSliderProps> = ({ data }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({});
     const cards = data.cards || [];
+
+    const handleImageLoad = (key: string) => {
+        setLoadedImages(prev => ({ ...prev, [key]: true }));
+    };
 
     useEffect(() => {
         if (cards.length <= 1) return;
@@ -86,7 +91,8 @@ export const PromoSlider: React.FC<PromoSliderProps> = ({ data }) => {
                                     fill
                                     quality={100}
                                     sizes="100vw"
-                                    className={`object-cover ${card.mobileImage ? 'hidden md:block' : 'block'}`}
+                                    onLoadingComplete={() => handleImageLoad(`desktop-${idx}`)}
+                                    className={`object-cover transition-all duration-700 img-blur-reveal ${loadedImages[`desktop-${idx}`] ? 'img-reveal-complete' : ''} ${card.mobileImage ? 'hidden md:block' : 'block'}`}
                                 />
                                 {/* Mobile Image */}
                                 {card.mobileImage && (
@@ -96,7 +102,8 @@ export const PromoSlider: React.FC<PromoSliderProps> = ({ data }) => {
                                         fill
                                         quality={100}
                                         sizes="100vw"
-                                        className="object-cover md:hidden block"
+                                        onLoadingComplete={() => handleImageLoad(`mobile-${idx}`)}
+                                        className={`object-cover md:hidden block transition-all duration-700 img-blur-reveal ${loadedImages[`mobile-${idx}`] ? 'img-reveal-complete' : ''}`}
                                     />
                                 )}
                                 {/* Click Overlay */}

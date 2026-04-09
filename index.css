@@ -252,4 +252,15 @@ p {
     white-space: nowrap;
     border-width: 0;
 }
+
+/* Premium Image Blur Reveal System */
+.img-blur-reveal {
+  filter: blur(15px) scale(1.05);
+  transition: filter 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: filter, transform;
+}
+
+.img-reveal-complete {
+  filter: blur(0) scale(1) !important;
+}
 

@@ -126,17 +126,15 @@ export default async function RootLayout({
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
                 
-                {/* Google Translate can modify the DOM during hydration, these suppressions prevent crashes */}
-                <Script id="google-translate-fix" strategy="afterInteractive">
+                {/* Google Translate & Scroll Restoration Fixes */}
+                <Script id="browser-fixes" strategy="beforeInteractive">
                   {`
+                    if ('scrollRestoration' in history) {
+                      history.scrollRestoration = 'manual';
+                    }
                     document.addEventListener('DOMContentLoaded', function() {
-                      var observer = new MutationObserver(function(mutations) {
-                        mutations.forEach(function(mutation) {
-                          if (mutation.type === 'childList') {
-                            // Check for Google Translate injected elements or attribute changes
-                          }
-                        });
-                      });
+                      // Prevent Translate from messing up hydration
+                      var observer = new MutationObserver(function(mutations) {});
                     });
                   `}
                 </Script>

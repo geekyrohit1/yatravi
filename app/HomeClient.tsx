@@ -6,6 +6,16 @@ import dynamic from 'next/dynamic';
 import { HeroSection } from '../components/HeroSection';
 import { cleanSlug } from '../lib/utils';
 import ImagePreloader from '../components/ImagePreloader';
+import { FadeIn } from '../components/FadeIn';
+
+// Static Imports for instant reveal
+import { PackageSlider } from '../components/PackageSlider';
+import { VisaFreeDestinations } from '../components/VisaFreeDestinations';
+import { WeekendTrips } from '../components/WeekendTrips';
+import { SuperSaverDeals } from '../components/SuperSaverDeals';
+import { HoneymoonSpecials } from '../components/HoneymoonSpecials';
+import { OfferSlider } from '../components/OfferSlider';
+import { WhyChooseUs } from '../components/WhyChooseUs';
 
 // Reusable Skeleton Components
 const SectionHeaderSkeleton = () => (
@@ -97,22 +107,14 @@ const MarqueeSkeleton = () => (
     </div>
 );
 
-// Dynamic imports
-const PackageSlider = dynamic(() => import('../components/PackageSlider').then(m => m.PackageSlider), { loading: () => <PackageSliderSkeleton /> });
-const PartnersMarquee = dynamic(() => import('../components/PartnersMarquee').then(m => m.PartnersMarquee), { loading: () => <MarqueeSkeleton /> });
-// const TrendingCollections = dynamic(() => import('../components/TrendingCollections').then(m => m.TrendingCollections), { loading: () => <CollectionGridSkeleton /> });
-const WhyChooseUs = dynamic(() => import('../components/WhyChooseUs').then(m => m.WhyChooseUs), { loading: () => <GridSkeleton /> });
-const ConsultationBanner = dynamic(() => import('../components/ConsultationBanner').then(m => m.ConsultationBanner), { loading: () => <BannerSkeleton aspectRatio="aspect-[2/1] md:aspect-[5/1]" /> });
-const FAQSection = dynamic(() => import('../components/FAQSection').then(m => m.FAQSection), { loading: () => <div className="py-10 max-w-7xl mx-auto px-4"><SectionHeaderSkeleton /><div className="space-y-4">{[1, 2, 3].map(i => <div key={i} className="h-12 bg-gray-50 rounded-xl animate-pulse" />)}</div></div> });
-const Newsletter = dynamic(() => import('../components/Newsletter').then(m => m.Newsletter), { loading: () => <BannerSkeleton aspectRatio="aspect-[3/1] md:aspect-[6/1]" /> });
-const WeekendTrips = dynamic(() => import('../components/WeekendTrips').then(m => m.WeekendTrips), { loading: () => <PackageSliderSkeleton /> });
-const VisaFreeDestinations = dynamic(() => import('../components/VisaFreeDestinations').then(m => m.VisaFreeDestinations), { loading: () => <DestinationSliderSkeleton /> });
-const SuperSaverDeals = dynamic(() => import('../components/SuperSaverDeals').then(m => m.SuperSaverDeals), { loading: () => <PackageSliderSkeleton /> });
-const HoneymoonSpecials = dynamic(() => import('../components/HoneymoonSpecials').then(m => m.HoneymoonSpecials), { loading: () => <PackageSliderSkeleton /> });
-const OfferSlider = dynamic(() => import('../components/OfferSlider').then(m => m.OfferSlider), { loading: () => <PackageSliderSkeleton /> });
-const MediaBanner = dynamic(() => import('../components/MediaBanner').then(m => m.MediaBanner), { loading: () => <BannerSkeleton aspectRatio="aspect-[3/1] md:aspect-[6/1]" /> });
-const PromoSlider = dynamic(() => import('../components/PromoSlider').then(m => m.PromoSlider), { loading: () => <PackageSliderSkeleton /> });
-const FooterQuickLinks = dynamic(() => import('../components/FooterQuickLinks').then(m => m.FooterQuickLinks), { loading: () => <div className="py-10 bg-gray-50"><div className="max-w-7xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-8">{[1,2,3,4].map(i => <div key={i} className="space-y-4"><div className="h-4 w-24 bg-gray-200 rounded animate-pulse" /><div className="space-y-2">{[1,2,3].map(j => <div key={j} className="h-3 w-32 bg-gray-100 rounded animate-pulse" />)}</div></div>)}</div></div> });
+// Remaining Dynamic imports for below-the-fold or heavy components
+const PartnersMarquee = dynamic(() => import('../components/PartnersMarquee').then(m => m.PartnersMarquee), { loading: () => <MarqueeSkeleton />, ssr: false });
+const ConsultationBanner = dynamic(() => import('../components/ConsultationBanner').then(m => m.ConsultationBanner), { loading: () => <BannerSkeleton aspectRatio="aspect-[2/1] md:aspect-[5/1]" />, ssr: false });
+const FAQSection = dynamic(() => import('../components/FAQSection').then(m => m.FAQSection), { loading: () => <div className="py-10 max-w-7xl mx-auto px-4"><SectionHeaderSkeleton /><div className="space-y-4">{[1, 2, 3].map(i => <div key={i} className="h-12 bg-gray-50 rounded-xl animate-pulse" />)}</div></div>, ssr: false });
+const Newsletter = dynamic(() => import('../components/Newsletter').then(m => m.Newsletter), { loading: () => <BannerSkeleton aspectRatio="aspect-[3/1] md:aspect-[6/1]" />, ssr: false });
+const MediaBanner = dynamic(() => import('../components/MediaBanner').then(m => m.MediaBanner), { loading: () => <BannerSkeleton aspectRatio="aspect-[3/1] md:aspect-[6/1]" />, ssr: false });
+const PromoSlider = dynamic(() => import('../components/PromoSlider').then(m => m.PromoSlider), { loading: () => <PackageSliderSkeleton />, ssr: false });
+const FooterQuickLinks = dynamic(() => import('../components/FooterQuickLinks').then(m => m.FooterQuickLinks), { loading: () => <div className="py-10 bg-gray-50"><div className="max-w-7xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-8">{[1,2,3,4].map(i => <div key={i} className="space-y-4"><div className="h-4 w-24 bg-gray-200 rounded animate-pulse" /><div className="space-y-2">{[1,2,3].map(j => <div key={j} className="h-3 w-32 bg-gray-100 rounded animate-pulse" />)}</div></div>)}</div></div>, ssr: false });
 
 interface HomeClientProps {
     initialPackages: Package[];
@@ -258,12 +260,13 @@ export const HomeClient: React.FC<HomeClientProps> = ({ initialPackages, initial
         }
 
         return (
-            <div 
+            <section 
                 key={section.key || `section-${index}`} 
+                id={section.key}
                 className={`relative ${index === 0 ? "pt-0" : ""} performance-section w-full overflow-hidden`}
             >
                 {content}
-            </div>
+            </section>
         );
     };
 
@@ -292,7 +295,7 @@ export const HomeClient: React.FC<HomeClientProps> = ({ initialPackages, initial
     }, [initialPackages, initialDestinations]);
 
     return (
-        <div className="flex flex-col gap-0 text-gray-800 bg-white">
+        <div className="flex flex-col gap-0 text-gray-800 bg-white min-h-screen">
             <ImagePreloader urls={preloadUrls} />
             <HeroSection 
                 heroData={initialConfig?.heroSlider} 

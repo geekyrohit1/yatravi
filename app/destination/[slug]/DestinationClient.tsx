@@ -38,6 +38,11 @@ export default function DestinationClient({ initialDestination, initialPackages 
     const [isMobile, setIsMobile] = useState(false);
     const [mounted, setMounted] = useState(false);
     const isNavigating = useRef(false);
+    const [loadedAttractions, setLoadedAttractions] = useState<Record<string, boolean>>({});
+
+    const handleAttractionImageLoad = (idx: number) => {
+        setLoadedAttractions(prev => ({ ...prev, [idx]: true }));
+    };
 
     useEffect(() => {
         setMounted(true);
@@ -282,7 +287,8 @@ export default function DestinationClient({ initialDestination, initialPackages 
                                             src={place.image}
                                             alt={place.name}
                                             fill
-                                            className="object-cover group-hover:scale-105 transition-transform duration-700"
+                                            onLoadingComplete={() => handleAttractionImageLoad(i)}
+                                            className={`object-cover group-hover:scale-105 transition-all duration-700 img-blur-reveal ${loadedAttractions[i] ? 'img-reveal-complete' : ''}`}
                                         />
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent opacity-90 group-hover:opacity-100 transition-opacity" />
                                         <div className="absolute bottom-0 left-0 p-5 md:p-8 w-full translate-y-2 group-hover:translate-y-0 transition-all duration-500">

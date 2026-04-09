@@ -11,6 +11,7 @@ type SaverDeal = Package;
 
 const SuperSaverCard = ({ pkg }: { pkg: Package }) => {
     const router = useRouter();
+    const [isLoaded, setIsLoaded] = useState(false);
     const displayImages = [pkg.verticalImage, pkg.image, ...(pkg.gallery || [])].filter(img => img && typeof img === 'string' && img.trim() !== '');
     const safeImage = displayImages[0] || '/images/placeholder.svg';
 
@@ -24,7 +25,8 @@ const SuperSaverCard = ({ pkg }: { pkg: Package }) => {
                 src={safeImage}
                 alt={pkg.title}
                 fill
-                className="object-cover"
+                onLoadingComplete={() => setIsLoaded(true)}
+                className={`object-cover transition-all duration-700 img-blur-reveal ${isLoaded ? 'img-reveal-complete' : ''}`}
             />
 
 

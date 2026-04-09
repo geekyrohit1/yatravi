@@ -16,6 +16,11 @@ interface MediaBannerProps {
 
 export const MediaBanner: React.FC<MediaBannerProps> = ({ data }) => {
     const [currentSlide, setCurrentSlide] = useState(0);
+    const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({});
+
+    const handleImageLoad = (key: string) => {
+        setLoadedImages(prev => ({ ...prev, [key]: true }));
+    };
     const slides = data.mediaSlides && data.mediaSlides.length > 0
         ? data.mediaSlides
         : data.mediaUrl
@@ -80,7 +85,8 @@ export const MediaBanner: React.FC<MediaBannerProps> = ({ data }) => {
                                             fill
                                             quality={100}
                                             sizes="100vw"
-                                            className={`object-cover ${slide.mobile ? 'hidden md:block' : 'block'}`}
+                                            onLoadingComplete={() => handleImageLoad(`desktop-${idx}`)}
+                                            className={`object-cover transition-all duration-700 img-blur-reveal ${loadedImages[`desktop-${idx}`] ? 'img-reveal-complete' : ''} ${slide.mobile ? 'hidden md:block' : 'block'}`}
                                             priority={idx === 0}
                                         />
                                         {/* Mobile Image */}
@@ -91,7 +97,8 @@ export const MediaBanner: React.FC<MediaBannerProps> = ({ data }) => {
                                                 fill
                                                 quality={100}
                                                 sizes="100vw"
-                                                className="object-cover md:hidden block"
+                                                onLoadingComplete={() => handleImageLoad(`mobile-${idx}`)}
+                                                className={`object-cover md:hidden block transition-all duration-700 img-blur-reveal ${loadedImages[`mobile-${idx}`] ? 'img-reveal-complete' : ''}`}
                                                 priority={idx === 0}
                                             />
                                         )}

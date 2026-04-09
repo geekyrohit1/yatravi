@@ -3,6 +3,9 @@ import { API_BASE_URL } from '@/constants';
 import TermsClient from './TermsClient';
 import { Metadata } from 'next';
 
+// Enable ISR with 60-second revalidation
+export const revalidate = 60;
+
 async function getTermsData() {
     try {
         const res = await fetch(`${API_BASE_URL}/api/pages/terms`, { next: { revalidate: 60 } });

@@ -4,7 +4,7 @@ import { API_BASE_URL } from "@/constants";
  * Enhanced fetch with a strict timeout to prevent SSR hanging
  * Critical for fixing 10s+ TBT and LCP delays
  */
-async function fetchWithTimeout(url: string, options: any = {}, timeout = 10000) {
+async function fetchWithTimeout(url: string, options: any = {}, timeout = 15000) {
     const controller = new AbortController();
     const id = setTimeout(() => controller.abort(), timeout);
 

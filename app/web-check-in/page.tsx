@@ -3,6 +3,9 @@ import { API_BASE_URL } from '@/constants';
 import WebCheckInClient from './WebCheckInClient';
 import { Metadata } from 'next';
 
+// Enable ISR with 60-second revalidation
+export const revalidate = 60;
+
 async function getCheckInData() {
     try {
         const res = await fetch(`${API_BASE_URL}/api/pages/web-check-in`, { next: { revalidate: 60 } });
