@@ -99,7 +99,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                     heroImage: s.customImage || s.heroImage || '/images/placeholder.svg',
                     mobileImage: s.customMobileImage || s.mobileMediaUrl || s.mobileImage,
                     tagline: s.customTagline || s.tagline || 'Explore Now',
-                    startingPrice: s.startingPrice || 99000
+                    startingPrice: s.startingPrice || 12997
                 }));
 
             if (slides.length > 0) {
@@ -236,7 +236,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
     }
 
     return (
-        <section className={`${containerClasses} animate-in fade-in duration-1000`}>
+        <section className={containerClasses}>
             {/* Cinematic Blurred Background Glow (Desktop Only) */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none hidden lg:block z-0">
                 {heroDestinations.map((dest, index) => (
@@ -323,9 +323,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                                             src={dest.heroImage || '/images/placeholder.svg'}
                                             alt={dest.name}
                                             fill
-                                            quality={90}
-                                            priority={index < 2}
-                                            loading={index < 2 ? "eager" : "lazy"}
+                                            quality={75}
+                                            priority={index === 0}
+                                            loading={index === 0 ? "eager" : "lazy"}
                                             decoding="async"
                                             sizes="(max-width: 1024px) 100vw, 1200px"
                                             className="object-cover transform-gpu"
@@ -375,11 +375,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                                     src={dest.mobileImage || dest.heroImage}
                                     alt={dest.name}
                                     fill
-                                    quality={100}
-                                    sizes="(max-width: 1024px) 100vw, 50vw"
+                                    quality={75}
+                                    sizes="(max-width: 1024px) 100vw, 100vw"
                                     className="object-cover"
-                                    priority={index < 3}
-                                    loading={index < 3 ? "eager" : "lazy"}
+                                    priority={index === 0}
+                                    loading={index === 0 ? "eager" : "lazy"}
                                     decoding="async"
                                 />
                                 {/* Refined Overlay: Clear on top, dark at bottom for text legibility */}

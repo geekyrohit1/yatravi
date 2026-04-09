@@ -34,7 +34,7 @@ export default function ImagePreloader({ urls }: ImagePreloaderProps) {
             } else {
                 urls.slice(0, 20).forEach(preloadImage);
             }
-        }, 3000); // 3-second delay after mount
+        }, 5000); // 5-second delay after mount to give LCP absolute priority
 
         return () => clearTimeout(timer);
     }, [urls]);

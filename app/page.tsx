@@ -7,22 +7,39 @@ import { HomeClient } from './HomeClient';
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
+/**
+ * Timeout wrapper for server-side fetches
+ */
+async function fetchWithTimeout(url: string, options: any = {}, timeout = 10000) {
+    const controller = new AbortController();
+    const id = setTimeout(() => controller.abort(), timeout);
+    try {
+        const response = await fetch(url, { ...options, signal: controller.signal });
+        clearTimeout(id);
+        return response;
+    } catch (e) {
+        clearTimeout(id);
+        throw e;
+    }
+}
+
 async function getHomepageData() {
     try {
         const timestamp = new Date().getTime();
 
-        // Server-side fetch with 'no-store' to bypass cache completely
-        const fetchPackages = fetch(`${API_BASE_URL}/api/packages?t=${timestamp}`, { cache: 'no-store' }).then(res => res.json()).catch(err => {
-            console.error('Packages fetch failed', err);
+        // Server-side fetch with strict timeout and 'no-store'
+        const fetchPackages = fetchWithTimeout(`${API_BASE_URL}/api/packages?t=${timestamp}`, { cache: 'no-store' }).then(res => res.json()).catch(err => {
+            console.error('Packages fetch failed or timed out', err);
             return [];
         });
-        const fetchConfig = fetch(`${API_BASE_URL}/api/homepage?t=${timestamp}`, { cache: 'no-store' }).then(res => res.json()).catch(err => {
-            console.error('Config fetch failed', err);
+        
+        const fetchConfig = fetchWithTimeout(`${API_BASE_URL}/api/homepage?t=${timestamp}`, { cache: 'no-store' }).then(res => res.json()).catch(err => {
+            console.error('Config fetch failed or timed out', err);
             return null;
         });
 
-        const fetchDestinations = fetch(`${API_BASE_URL}/api/destinations?t=${timestamp}`, { cache: 'no-store' }).then(res => res.json()).catch(err => {
-            console.error('Destinations fetch failed', err);
+        const fetchDestinations = fetchWithTimeout(`${API_BASE_URL}/api/destinations?t=${timestamp}`, { cache: 'no-store' }).then(res => res.json()).catch(err => {
+            console.error('Destinations fetch failed or timed out', err);
             return [];
         });
 
@@ -45,13 +62,13 @@ async function getHomepageData() {
 
 export async function generateMetadata() {
     try {
-        // Parallel fetch for page-specific data and global settings
+        // Parallel fetch for page-specific data and global settings with strict timeouts
         const [pageRes, settings] = await Promise.all([
-            fetch(`${API_BASE_URL}/api/pages/home`, { next: { revalidate: 60 } }).catch(() => null),
+            fetchWithTimeout(`${API_BASE_URL}/api/pages/home`, { next: { revalidate: 60 } }).catch(() => null),
             getGlobalSettings()
         ]);
         
-        const pageData = pageRes ? await pageRes.json() : null;
+        const pageData = pageRes && pageRes.ok ? await pageRes.json() : null;
         const globalSeo = settings?.globalSeo || {};
 
         const siteName = globalSeo.siteName || 'Yatravi';

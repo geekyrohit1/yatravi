@@ -32,15 +32,17 @@ export default function SmoothScroll() {
     lenisRef.current = lenis;
 
     // 3. Animation Loop
+    let rafId: number;
     function raf(time: number) {
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      rafId = requestAnimationFrame(raf);
     }
 
-    requestAnimationFrame(raf);
+    rafId = requestAnimationFrame(raf);
 
     // 4. Cleanup on unmount
     return () => {
+      cancelAnimationFrame(rafId);
       lenis.destroy();
       lenisRef.current = null;
     };
