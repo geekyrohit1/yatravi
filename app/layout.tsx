@@ -9,7 +9,9 @@ import { ThemeProvider } from '../context/ThemeContext';
 import { ConsentProvider } from '../context/ConsentContext';
 import { CookieBanner } from '../components/CookieBanner';
 import { API_BASE_URL } from '@/constants';
+import { getGlobalSettings } from '@/lib/api';
 import Script from 'next/script';
+import SmoothScroll from '../components/SmoothScroll';
 
 const satisfy = Satisfy({
     subsets: ['latin'],
@@ -57,8 +59,7 @@ const orangeAvenue = localFont({
 });
 
 export async function generateMetadata(): Promise<Metadata> {
-    const res = await fetch(`${API_BASE_URL}/api/settings`, { next: { revalidate: 3600 } }).catch(() => null);
-    const settings = res ? await res.json() : null;
+    const settings = await getGlobalSettings();
     const globalSeo = settings?.globalSeo || {};
 
     const siteName = globalSeo.siteName || 'Yatravi';
@@ -69,10 +70,7 @@ export async function generateMetadata(): Promise<Metadata> {
     const ogImage = globalSeo.defaultOgImage || '/og-image.png';
 
     return {
-        title: {
-            default: defaultTitle,
-            template: `%s ${titleSeparator} ${siteName} - We Care Your Trip`
-        },
+        title: defaultTitle,
         description: defaultDescription,
         keywords: defaultKeywords.split(',').map((k: string) => k.trim()),
         authors: [{ name: 'Yatravi Travel Solutions' }],
@@ -117,8 +115,7 @@ export default async function RootLayout({
 }: {
     children: React.ReactNode;
 }) {
-    const res = await fetch(`${API_BASE_URL}/api/settings`, { next: { revalidate: 3600 } }).catch(() => null);
-    const settings = res ? await res.json() : null;
+    const settings = await getGlobalSettings();
 
     return (
         <html lang="en" suppressHydrationWarning className={`${montserrat.variable} ${montserratAlternates.variable} ${orangeAvenue.variable} ${satisfy.variable} ${engagement.variable} antialiased`}>
@@ -175,6 +172,7 @@ export default async function RootLayout({
                 <ConsentProvider>
                     <SettingsProvider initialSettings={settings}>
                         <ThemeProvider defaultTheme="light" storageKey="yatravi-theme">
+                            <SmoothScroll />
                             <GlobalInquiryPopup />
                             <CookieBanner />
                             <Layout>

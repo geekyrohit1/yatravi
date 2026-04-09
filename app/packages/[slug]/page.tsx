@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { API_BASE_URL } from '../../../constants';
+import { getGlobalSettings } from '@/lib/api';
 import PackageClient from './PackageClient';
 import SEOQuickLinks from '@/components/SEOQuickLinks';
 import { redirect } from 'next/navigation';
@@ -10,7 +11,7 @@ async function getPackage(slug: string) {
     try {
         const timestamp = new Date().getTime();
         const res = await fetch(`${API_BASE_URL}/api/packages/${slug}?t=${timestamp}`, {
-            cache: 'no-store'
+            next: { revalidate: 60 }
         });
         if (!res.ok) return null;
         return res.json();
@@ -22,7 +23,7 @@ async function getPackage(slug: string) {
 
 async function getHomepageConfig() {
     try {
-        const res = await fetch(`${API_BASE_URL}/api/homepage`, { cache: 'no-store' });
+        const res = await fetch(`${API_BASE_URL}/api/homepage`, { next: { revalidate: 60 } });
         return await res.json();
     } catch (error) {
         console.error('Failed to fetch homepage config:', error);
@@ -32,7 +33,14 @@ async function getHomepageConfig() {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
     const { slug } = await params;
-    const pkg = await getPackage(slug);
+    
+    // Parallel fetch for package and global settings
+    const [pkg, settings] = await Promise.all([
+        getPackage(slug),
+        getGlobalSettings()
+    ]);
+    
+    const globalSeo = settings?.globalSeo || {};
 
     if (!pkg) {
         return {
@@ -40,24 +48,31 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
         };
     }
 
+    const defaultOgImage = globalSeo.defaultOgImage || '/og-image.png';
+    const siteKeywords = globalSeo.defaultKeywords || '';
+
     return {
-        title: pkg.seo?.title || `${pkg.title} | Yatravi`,
+        title: pkg.seo?.title || pkg.title,
         description: pkg.seo?.description || pkg.overview?.substring(0, 160) || `Explore ${pkg.title} with Yatravi.`,
-        keywords: pkg.seo?.keywords?.split(',').map((k: string) => k.trim()),
+        keywords: pkg.seo?.keywords 
+            ? pkg.seo.keywords.split(',').map((k: string) => k.trim())
+            : siteKeywords.split(',').map((k: string) => k.trim()),
         alternates: {
             canonical: pkg.seo?.canonicalUrl || `${process.env.NEXT_PUBLIC_SITE_URL || ''}/packages/${pkg.slug}`,
         },
         openGraph: {
             title: pkg.seo?.ogTitle || pkg.seo?.title || pkg.title,
             description: pkg.seo?.ogDescription || pkg.seo?.description || pkg.overview?.substring(0, 160),
-            images: [pkg.seo?.ogImage || pkg.image || '/og-image.png'],
+            images: [pkg.seo?.ogImage || pkg.image || defaultOgImage],
             type: 'website',
+            siteName: globalSeo.siteName || 'Yatravi'
         },
         twitter: {
             card: 'summary_large_image',
             title: pkg.seo?.twitterTitle || pkg.seo?.title || pkg.title,
             description: pkg.seo?.twitterDescription || pkg.seo?.description || pkg.overview?.substring(0, 160),
-            images: [pkg.seo?.twitterImage || pkg.seo?.ogImage || pkg.image || '/og-image.png'],
+            images: [pkg.seo?.twitterImage || pkg.seo?.ogImage || pkg.image || defaultOgImage],
+            creator: globalSeo.twitterHandle || '@yatravi'
         },
         robots: {
             index: pkg.seo?.robots?.includes('index'),

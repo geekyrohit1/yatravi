@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { API_BASE_URL } from '../../../constants';
+import { getGlobalSettings } from '@/lib/api';
 import DestinationClient from './DestinationClient';
 import SEOQuickLinks from '@/components/SEOQuickLinks';
 import { redirect } from 'next/navigation';
@@ -9,7 +10,7 @@ export const dynamic = 'force-dynamic';
 async function getDestination(slug: string) {
     try {
         const res = await fetch(`${API_BASE_URL}/api/destinations`, {
-            cache: 'no-store'
+            next: { revalidate: 60 }
         });
         const allDestinations = await res.json();
 
@@ -38,8 +39,7 @@ async function getDestination(slug: string) {
 
 async function getPackages() {
     try {
-        const timestamp = new Date().getTime();
-        const res = await fetch(`${API_BASE_URL}/api/packages?t=${timestamp}`, { cache: 'no-store' });
+        const res = await fetch(`${API_BASE_URL}/api/packages`, { next: { revalidate: 60 } });
         return await res.json();
     } catch (error) {
         return [];
@@ -48,7 +48,7 @@ async function getPackages() {
 
 async function getHomepageConfig() {
     try {
-        const res = await fetch(`${API_BASE_URL}/api/homepage`, { cache: 'no-store' });
+        const res = await fetch(`${API_BASE_URL}/api/homepage`, { next: { revalidate: 60 } });
         return await res.json();
     } catch (error) {
         console.error('Failed to fetch homepage config:', error);
@@ -58,7 +58,14 @@ async function getHomepageConfig() {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
     const { slug } = await params;
-    const dest = await getDestination(slug);
+    
+    // Parallel fetch for destination and global settings
+    const [dest, settings] = await Promise.all([
+        getDestination(slug),
+        getGlobalSettings()
+    ]);
+    
+    const globalSeo = settings?.globalSeo || {};
 
     if (!dest) {
         return {
@@ -66,24 +73,31 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
         };
     }
 
+    const defaultOgImage = globalSeo.defaultOgImage || '/og-image.png';
+    const siteKeywords = globalSeo.defaultKeywords || '';
+
     return {
-        title: dest.seo?.title || `${dest.name} Tour Packages | Yatravi`,
+        title: dest.seo?.title || `${dest.name} Tour Packages`,
         description: dest.seo?.description || dest.description || `Explore top tour packages for ${dest.name}.`,
-        keywords: dest.seo?.keywords?.split(',').map((k: string) => k.trim()),
+        keywords: dest.seo?.keywords 
+            ? dest.seo.keywords.split(',').map((k: string) => k.trim())
+            : siteKeywords.split(',').map((k: string) => k.trim()),
         alternates: {
             canonical: dest.seo?.canonicalUrl || `${process.env.NEXT_PUBLIC_SITE_URL || ''}/destination/${dest.slug}`,
         },
         openGraph: {
             title: dest.seo?.ogTitle || dest.seo?.title || `${dest.name} Tour Packages`,
             description: dest.seo?.ogDescription || dest.seo?.description || dest.description,
-            images: [dest.seo?.ogImage || dest.heroImage || '/og-image.png'],
+            images: [dest.seo?.ogImage || dest.heroImage || defaultOgImage],
             type: 'website',
+            siteName: globalSeo.siteName || 'Yatravi'
         },
         twitter: {
             card: 'summary_large_image',
             title: dest.seo?.twitterTitle || dest.seo?.title || `${dest.name} Tour Packages`,
             description: dest.seo?.twitterDescription || dest.seo?.description || dest.description,
-            images: [dest.seo?.twitterImage || dest.seo?.ogImage || dest.heroImage || '/og-image.png'],
+            images: [dest.seo?.twitterImage || dest.seo?.ogImage || dest.heroImage || defaultOgImage],
+            creator: globalSeo.twitterHandle || '@yatravi'
         },
         robots: {
             index: dest.seo?.robots?.includes('index'),
@@ -131,7 +145,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
                     dangerouslySetInnerHTML={{ __html: dest.seo.jsonLd }}
                 />
             )}
-            <h1 className="sr-only">{dest?.name} Tour Packages | Yatravi</h1>
+            <h1 className="sr-only">{dest?.name} Tour Packages</h1>
             <DestinationClient initialDestination={dest} initialPackages={filteredPackages} />
             <SEOQuickLinks links={dest.seo?.quickLinks || []} title="Important Travel Links" />
         </div>

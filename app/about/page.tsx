@@ -5,7 +5,7 @@ import { Metadata } from 'next';
 
 async function getAboutData() {
     try {
-        const res = await fetch(`${API_BASE_URL}/api/pages/about`, { next: { revalidate: 3600 } });
+        const res = await fetch(`${API_BASE_URL}/api/pages/about`, { next: { revalidate: 60 } });
         if (!res.ok) return null;
         return res.json();
     } catch (error) {

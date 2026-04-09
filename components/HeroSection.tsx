@@ -141,6 +141,35 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
     const heroDestinations: HeroDestination[] = heroDestinationsState;
     const activeDestination = heroDestinations[activeIndex] || { name: 'Loading...', slug: '', heroImage: '', tagline: '', startingPrice: 0 };
 
+    // Mobile Swipe Handling
+    const [touchStart, setTouchStart] = useState<number | null>(null);
+    const [touchEnd, setTouchEnd] = useState<number | null>(null);
+
+    // Balanced swipe threshold for premium control
+    const minSwipeDistance = 100;
+
+    const onTouchStart = (e: React.TouchEvent) => {
+        setTouchEnd(null);
+        setTouchStart(e.targetTouches[0].clientX);
+    };
+
+    const onTouchMove = (e: React.TouchEvent) => {
+        setTouchEnd(e.targetTouches[0].clientX);
+    };
+
+    const onTouchEnd = () => {
+        if (!touchStart || !touchEnd) return;
+        const distance = touchStart - touchEnd;
+        const isLeftSwipe = distance > minSwipeDistance;
+        const isRightSwipe = distance < -minSwipeDistance;
+
+        if (isLeftSwipe) {
+            handleNext();
+        } else if (isRightSwipe) {
+            handlePrev();
+        }
+    };
+
     // Auto-slide effect
     useEffect(() => {
         if (heroDestinations.length <= 1) return;
@@ -293,9 +322,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                                             src={dest.heroImage || '/images/placeholder.svg'}
                                             alt={dest.name}
                                             fill
-                                            quality={85}
-                                            priority={index === 0}
-                                            loading={index === 0 ? "eager" : "lazy"}
+                                            quality={90}
+                                            priority={index < 2}
+                                            loading={index < 2 ? "eager" : "lazy"}
+                                            decoding="async"
                                             sizes="(max-width: 1024px) 100vw, 1200px"
                                             className="object-cover transform-gpu"
                                         />
@@ -326,7 +356,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 </div>
 
                 {/* REDESIGNED MOBILE/TABLET LAYOUT - Dynamic Image Background with Minimalist UI overlay */}
-                <div className="lg:hidden relative w-full h-full overflow-hidden shadow-sm">
+                <div 
+                    className="lg:hidden relative w-full h-full overflow-hidden shadow-sm"
+                    onTouchStart={onTouchStart}
+                    onTouchMove={onTouchMove}
+                    onTouchEnd={onTouchEnd}
+                >
                     {/* Background Image Slider Layer */}
                     <div className="absolute inset-0 z-0">
                         {heroDestinationsState.map((dest, index) => (
@@ -339,10 +374,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                                     src={dest.mobileImage || dest.heroImage}
                                     alt={dest.name}
                                     fill
-                                    quality={80}
+                                    quality={100}
                                     sizes="(max-width: 1024px) 100vw, 50vw"
                                     className="object-cover"
-                                    priority={index === 0}
+                                    priority={index < 3}
+                                    loading={index < 3 ? "eager" : "lazy"}
+                                    decoding="async"
                                 />
                                 {/* Refined Overlay: Clear on top, dark at bottom for text legibility */}
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/100 via-black/40 to-transparent" />

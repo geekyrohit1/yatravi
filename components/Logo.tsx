@@ -1,10 +1,10 @@
 import React from 'react';
 
-export const Logo = ({ 
-  className = "flex flex-col items-stretch px-1 lg:px-2", 
+export const Logo = ({
+  className = "flex flex-col items-stretch px-1 lg:px-2",
   forceDesktop = false
-}: { 
-  className?: string, 
+}: {
+  className?: string,
   forceDesktop?: boolean
 }) => (
   <div className={`relative flex items-center ${className} select-none flex-shrink-0 group`}>
@@ -20,7 +20,7 @@ export const Logo = ({
       </div>
     )}
 
-    <div className={`${forceDesktop ? 'flex' : 'hidden md:flex'} flex-col items-stretch leading-none px-1 lg:px-2`}>
+    <div className={`${forceDesktop ? 'flex' : 'hidden md:flex'} flex-col items-stretch leading-none px-1 lg:px-2 lg:translate-y-[1px]`}>
       <div className="flex items-center justify-center">
         <span className="font-alt text-[19px] font-bold text-gray-900 lg:text-white transition-colors duration-500 uppercase tracking-[0.14em] whitespace-nowrap">
           Yatravi

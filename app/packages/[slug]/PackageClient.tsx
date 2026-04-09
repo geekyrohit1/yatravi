@@ -33,6 +33,8 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
     const [showGallery, setShowGallery] = useState(false);
     const [currentHeroIndex, setCurrentHeroIndex] = useState(1);
     const heroScrollRef = useRef<HTMLDivElement>(null);
+    const [touchStartX, setTouchStartX] = useState<number | null>(null);
+    const [touchEndX, setTouchEndX] = useState<number | null>(null);
 
     // Manual Sticky Trigger (Robust against overflow issues)
     useEffect(() => {
@@ -209,7 +211,7 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
                         className="w-full lg:col-span-9 flex overflow-x-auto snap-x snap-mandatory no-scrollbar lg:overflow-hidden lg:block h-full relative"
                     >
                         {packageData.gallery.map((img: string, idx: number) => (
-                            <div key={idx} className="min-w-full h-full relative snap-start shrink-0 lg:absolute lg:inset-0 lg:hidden first:lg:block">
+                            <div key={idx} className="min-w-full h-full relative snap-start snap-stop-always shrink-0 lg:absolute lg:inset-0 lg:hidden first:lg:block">
                                 <Image
                                     src={img || packageData.image}
                                     alt={`Gallery View ${idx + 1}`}
@@ -479,9 +481,9 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
             {/* Tab Bar Placeholder (Prevents Layout Jumps) */}
             <div ref={stickyRef} className="h-14">
                 <div className={`${isSticky
-                    ? 'fixed top-0 left-0 right-0 z-[60] shadow-md border-b border-gray-100 lg:border-white/10'
+                    ? 'fixed top-0 left-0 right-0 z-40 shadow-md border-b border-gray-100 lg:border-white/10'
                     : 'relative border-b border-gray-100 lg:border-white/10'} 
-                    bg-white/95 lg:bg-brand-dark backdrop-blur-md transition-all duration-300`}>
+                    bg-white/95 lg:bg-brand-dark backdrop-blur-md`}>
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div className="flex items-center gap-8 md:gap-10 overflow-x-auto no-scrollbar">
                             {[
@@ -969,7 +971,25 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
                     </div>
 
                     {/* Main Image View */}
-                    <div className="relative w-full h-[60vh] md:h-[70vh] flex items-center justify-center px-4 md:px-20 group">
+                    <div 
+                        className="relative w-full h-[60vh] md:h-[70vh] flex items-center justify-center px-4 md:px-20 group touch-pan-y"
+                        onTouchStart={(e) => setTouchStartX(e.targetTouches[0].clientX)}
+                        onTouchMove={(e) => setTouchEndX(e.targetTouches[0].clientX)}
+                        onTouchEnd={() => {
+                            if (!touchStartX || !touchEndX) return;
+                            const distance = touchStartX - touchEndX;
+                            const minSwipeDistance = 100;
+                            if (Math.abs(distance) > minSwipeDistance) {
+                                if (distance > 0) {
+                                    setCurrentHeroIndex(prev => prev < packageData.gallery.length ? prev + 1 : 1);
+                                } else {
+                                    setCurrentHeroIndex(prev => prev > 1 ? prev - 1 : packageData.gallery.length);
+                                }
+                            }
+                            setTouchStartX(null);
+                            setTouchEndX(null);
+                        }}
+                    >
                         {/* Navigation Buttons */}
                         <button
                             onClick={() => setCurrentHeroIndex(prev => prev > 1 ? prev - 1 : packageData.gallery.length)}

@@ -5,7 +5,7 @@ import { Metadata } from 'next';
 
 async function getJoinData() {
     try {
-        const res = await fetch(`${API_BASE_URL}/api/pages/join`, { next: { revalidate: 3600 } });
+        const res = await fetch(`${API_BASE_URL}/api/pages/join`, { next: { revalidate: 60 } });
         if (!res.ok) return null;
         return res.json();
     } catch (error) {

@@ -49,7 +49,7 @@ export const PromoSlider: React.FC<PromoSliderProps> = ({ data }) => {
         if (touchStartX === null || touchEndX === null) return;
         
         const distance = touchStartX - touchEndX;
-        const minSwipeDistance = 50;
+        const minSwipeDistance = 100; // Stabilized threshold for balanced control
 
         if (Math.abs(distance) > minSwipeDistance) {
             if (distance > 0) {
