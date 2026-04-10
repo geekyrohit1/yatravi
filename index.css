@@ -84,12 +84,30 @@ body {
     max-width: 100vw;
 }
 
-html {
-    -webkit-overflow-scrolling: touch;
+/* Lenis Recommended Styles */
+html.lenis {
+  height: auto;
+  scroll-behavior: initial !important; /* Grant Lenis full control */
 }
 
-.snap-stop-always {
-    scroll-snap-stop: always !important;
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
 }
 
 body {
@@ -262,5 +280,35 @@ p {
 
 .img-reveal-complete {
   filter: blur(0) scale(1) !important;
+}
+
+/* WhatsApp Message Fade-in Animation */
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-fade-in-right {
+  animation: fadeInRight 0.5s ease-out forwards;
+}
+
+/* Global Page Entrance Animation */
+main {
+  animation: pageFadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes pageFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 

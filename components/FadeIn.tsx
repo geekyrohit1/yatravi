@@ -11,8 +11,14 @@ export const FadeIn: React.FC<FadeInProps> = ({ children, delay = 0, className =
     const domRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
+        // If we're already scrolled down (back navigation), show immediately
+        if (typeof window !== 'undefined' && window.scrollY > 0) {
+            setIsVisible(true);
+            return;
+        }
+
         // More generous failsafe to allow for stable hydration
-        const failsafe = setTimeout(() => setIsVisible(true), 800);
+        const failsafe = setTimeout(() => setIsVisible(true), 400); // Faster failsafe
 
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
@@ -40,7 +46,7 @@ export const FadeIn: React.FC<FadeInProps> = ({ children, delay = 0, className =
         <div
             ref={domRef}
             className={`${className} transition-all duration-[200ms] cubic-bezier(0.16, 1, 0.3, 1) ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}
-            style={{ 
+            style={{
                 transitionDelay: `${delay}ms`,
                 willChange: 'opacity, transform'
             }}

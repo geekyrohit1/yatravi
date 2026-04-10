@@ -22,6 +22,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({ isOpen, onClose, onO
       
       return () => {
         window.removeEventListener('popstate', handlePopState);
+        // Only go back if we are NOT navigating forward to a new page
         if (!isNavigating.current && window.history.state && window.history.state.popup === 'MobileDrawer') {
           window.history.back();
         }
@@ -41,7 +42,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({ isOpen, onClose, onO
       />
 
       <div 
-        className={`lg:hidden fixed top-0 right-0 bottom-0 w-[80%] z-[99999] bg-white flex flex-col overflow-hidden shadow-[-10px_0_30px_rgba(0,0,0,0.1)] transform transition-transform duration-500 ease-out ${
+        className={`lg:hidden fixed top-0 right-0 bottom-0 w-[80%] z-[99999] bg-white flex flex-col overflow-hidden shadow-[-10px_0_30px_rgba(0,0,0,0.1)] transform transition-transform duration-[250ms] ease-out pointer-events-auto ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
@@ -70,7 +71,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({ isOpen, onClose, onO
           </button>
         </div>
 
-        <div className="flex-1 overflow-y-auto px-4 pt-4 pb-8 custom-scrollbar flex flex-col relative z-10">
+        <div data-lenis-prevent className="flex-1 overflow-y-auto px-4 pt-4 pb-8 custom-scrollbar flex flex-col relative z-10">
           <div className="flex flex-col space-y-2 w-full">
             {[
               { name: 'Home', href: '/' },

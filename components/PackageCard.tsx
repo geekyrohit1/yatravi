@@ -32,6 +32,32 @@ const PackageCardComponent: React.FC<PackageCardProps> = ({ pkg, variant = 'vert
     setMounted(true);
   }, []);
 
+  useEffect(() => {
+    if (isCallbackOpen) {
+      const handlePopState = () => {
+        setIsCallbackOpen(false);
+        // Remove focus from the button when backing out
+        if (typeof document !== 'undefined') {
+          (document.activeElement as HTMLElement)?.blur();
+        }
+      };
+      
+      window.history.pushState({ popup: 'PackageCardCallback' }, '');
+      window.addEventListener('popstate', handlePopState);
+      
+      return () => {
+        window.removeEventListener('popstate', handlePopState);
+        if (window.history.state && window.history.state.popup === 'PackageCardCallback') {
+          window.history.back();
+        }
+        // Ensure button loses focus when modal closes manually too
+        if (typeof document !== 'undefined') {
+          (document.activeElement as HTMLElement)?.blur();
+        }
+      };
+    }
+  }, [isCallbackOpen]);
+
   const displayImages = [pkg.image, ...(pkg.gallery || [])].filter(img => img && typeof img === 'string' && img.trim() !== '');
   const safeImages = displayImages.length > 0 ? displayImages : ['/images/placeholder.svg'];
 
@@ -287,7 +313,7 @@ const PackageCardComponent: React.FC<PackageCardProps> = ({ pkg, variant = 'vert
             <div className="flex gap-2 items-center">
               <button
                 onClick={(e) => { e.stopPropagation(); setIsCallbackOpen(true); }}
-                className="w-10 h-10 md:w-12 md:h-12 rounded-lg border border-gray-100 flex items-center justify-center text-gray-400 hover:border-brand hover:text-brand hover:bg-brand-light/10 transition-all duration-300 bg-gray-50/20 shrink-0"
+                className="w-10 h-10 md:w-12 md:h-12 rounded-lg border border-gray-100 flex items-center justify-center text-gray-400 lg:hover:border-brand lg:hover:text-brand lg:hover:bg-brand-light/10 active:bg-brand/5 transition-all duration-300 bg-gray-50/20 shrink-0"
                 aria-label="Call for details"
               >
                 <Phone className="w-4 h-4 md:w-5 md:h-5" />
@@ -439,7 +465,7 @@ const PackageCardComponent: React.FC<PackageCardProps> = ({ pkg, variant = 'vert
             <div className="flex gap-2.5">
               <button
                 onClick={(e) => { e.stopPropagation(); setIsCallbackOpen(true); }}
-                className="w-11 h-11 md:w-12 md:h-12 rounded-lg border-2 border-brand text-brand flex items-center justify-center hover:bg-brand hover:text-white transition-all shadow-sm shrink-0"
+                className="w-11 h-11 md:w-12 md:h-12 rounded-lg border-2 border-brand text-brand flex items-center justify-center lg:hover:bg-brand lg:hover:text-white active:bg-brand active:text-white transition-all shadow-sm shrink-0"
                 aria-label="Call for details"
               >
                 <Phone className="w-4 h-4 md:w-5 md:h-5" />

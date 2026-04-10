@@ -100,7 +100,7 @@ export default {
                 'fade-in-down': 'fade-in-down 0.5s ease-out forwards',
                 'shimmer': 'shimmer 2s infinite linear',
                 'gradient-xy': 'gradient-xy 8s ease infinite',
-                'search-pill-expand': 'search-pill-expand 0.15s ease-out forwards',
+                'search-pill-expand': 'search-pill-expand 0.1s ease-out forwards',
                 'fade-in': 'fade-in 0.3s ease-out forwards',
             },
         },

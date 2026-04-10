@@ -53,11 +53,12 @@ export const MobileSearchModal: React.FC<MobileSearchModalProps> = ({
 
       return () => {
         window.removeEventListener('popstate', handlePopState);
-        // Only call back() if we are NOT intentionally navigating to a new page
-        // and if our fake state is still at the top of the history stack.
+        // Clean up history state ONLY if we are not navigating forward
         if (!isNavigating.current && window.history.state && window.history.state.popup === 'MobileSearchModal') {
           window.history.back();
         }
+        // Reset focus
+        if (typeof document !== 'undefined') (document.activeElement as HTMLElement)?.blur();
       };
     }
   }, [showSearchModal, setShowSearchModal]);
@@ -67,10 +68,13 @@ export const MobileSearchModal: React.FC<MobileSearchModalProps> = ({
   return (
     <div className="fixed inset-0 z-[10000] lg:hidden">
       {/* Backdrop with custom snappy fade-in animation */}
-      <div className="absolute inset-0 bg-black/40 backdrop-blur-md animate-fade-in" onClick={() => setShowSearchModal(false)} />
+      <div 
+        className="absolute inset-0 bg-black/40 backdrop-blur-md animate-fade-in z-10" 
+        onClick={() => setShowSearchModal(false)} 
+      />
 
       {/* Modal Content - Cinematic Modal Expand Animation from Search Bar Position */}
-      <div className="absolute inset-0 md:inset-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:w-[90vw] md:max-w-3xl md:h-[85vh] md:rounded-3xl bg-white flex flex-col animate-search-pill-expand overflow-hidden font-sans md:shadow-2xl">
+      <div className="absolute inset-0 md:inset-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:w-[90vw] md:max-w-3xl md:h-[85vh] md:rounded-3xl bg-white flex flex-col animate-search-pill-expand overflow-hidden font-sans md:shadow-2xl z-20 pointer-events-auto">
         {/* Header with Depth */}
         <div className="px-4 pt-6 pb-6 border-b border-gray-100 flex flex-col gap-6 bg-white sticky top-0 z-20 shadow-sm">
           <div className="flex items-center gap-2">
@@ -159,7 +163,7 @@ export const MobileSearchModal: React.FC<MobileSearchModalProps> = ({
         </div>
 
         {/* Results Area */}
-        <div className="flex-1 overflow-y-auto custom-scrollbar px-4 py-4">
+        <div data-lenis-prevent className="flex-1 overflow-y-auto custom-scrollbar px-4 py-4">
           {!searchQuery ? (
             <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-100">
               {/* Recent Searches */}

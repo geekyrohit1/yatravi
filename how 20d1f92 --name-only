@@ -1,0 +1,127 @@
+warning: in the working copy of 'app/HomeClient.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'app/layout.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'app/packages/[slug]/PackageClient.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'components/Header.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'components/MobileDrawer.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'components/MobileSearchModal.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'components/PackageCard.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'components/SmoothScroll.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'package-lock.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'package.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'types.ts', LF will be replaced by CRLF the next time Git touches it
+[1mdiff --git a/app/destination/[slug]/DestinationClient.tsx b/app/destination/[slug]/DestinationClient.tsx[m
+[1mindex 29a05bb..0a37ce0 100644[m
+[1m--- a/app/destination/[slug]/DestinationClient.tsx[m
+[1m+++ b/app/destination/[slug]/DestinationClient.tsx[m
+[36m@@ -44,12 +44,26 @@[m [mexport default function DestinationClient({ initialDestination, initialPackages[m
+         setLoadedAttractions(prev => ({ ...prev, [idx]: true }));[m
+     };[m
+ [m
+[32m+[m[32m    const [showStickyBar, setShowStickyBar] = useState(true);[m
+     useEffect(() => {[m
+         setMounted(true);[m
+         const checkMobile = () => setIsMobile(window.innerWidth < 768);[m
+         checkMobile();[m
+[32m+[m
+[32m+[m[32m        const handleScroll = () => {[m
+[32m+[m[32m            const scrollPos = window.scrollY;[m
+[32m+[m[32m            const windowHeight = window.innerHeight;[m
+[32m+[m[32m            const totalHeight = document.documentElement.scrollHeight;[m
+[32m+[m[32m            const isNearFooter = (scrollPos + windowHeight) > (totalHeight - 600);[m
+[32m+[m[32m            setShowStickyBar(!isNearFooter);[m
+[32m+[m[32m        };[m
+[32m+[m
+         window.addEventListener('resize', checkMobile);[m
+[31m-        return () => window.removeEventListener('resize', checkMobile);[m
+[32m+[m[32m        window.addEventListener('scroll', handleScroll);[m
+[32m+[m[32m        return () => {[m
+[32m+[m[32m            window.removeEventListener('resize', checkMobile);[m
+[32m+[m[32m            window.removeEventListener('scroll', handleScroll);[m
+[32m+[m[32m        };[m
+     }, []);[m
+ [m
+     useEffect(() => {[m
+[36m@@ -65,21 +79,43 @@[m [mexport default function DestinationClient({ initialDestination, initialPackages[m
+         window.dispatchEvent(new CustomEvent('hideFloatingIcons', { detail: showMobileForm }));[m
+     }, [showMobileForm]);[m
+ [m
+[31m-    // Back button trap for mobile form[m
+[32m+[m[32m    // Back button trackers[m
+     useEffect(() => {[m
+         if (showMobileForm) {[m
+[31m-            const handlePopState = () => setShowMobileForm(false);[m
+[32m+[m[32m            const handlePopState = () => {[m
+[32m+[m[32m                setShowMobileForm(false);[m
+[32m+[m[32m                if (typeof document !== 'undefined') (document.activeElement as HTMLElement)?.blur();[m
+[32m+[m[32m            };[m
+             window.history.pushState({ popup: 'MobileFormDest' }, '');[m
+             window.addEventListener('popstate', handlePopState);[m
+             return () => {[m
+                 window.removeEventListener('popstate', handlePopState);[m
+[31m-                if (!isNavigating.current && window.history.state && window.history.state.popup === 'MobileFormDest') {[m
+[32m+[m[32m                if (window.history.state && window.history.state.popup === 'MobileFormDest') {[m
+                     window.history.back();[m
+                 }[m
+[32m+[m[32m                if (typeof document !== 'undefined') (document.activeElement as HTMLElement)?.blur();[m
+             };[m
+         }[m
+     }, [showMobileForm]);[m
+ [m
+[32m+[m[32m    useEffect(() => {[m
+[32m+[m[32m        if (selectedAttraction) {[m
+[32m+[m[32m            const handlePopState = () => {[m
+[32m+[m[32m                setSelectedAttraction(null);[m
+[32m+[m[32m                if (typeof document !== 'undefined') (document.activeElement as HTMLElement)?.blur();[m
+[32m+[m[32m            };[m
+[32m+[m[32m            window.history.pushState({ popup: 'AttractionDetailsDest' }, '');[m
+[32m+[m[32m            window.addEventListener('popstate', handlePopState);[m
+[32m+[m[32m            return () => {[m
+[32m+[m[32m                window.removeEventListener('popstate', handlePopState);[m
+[32m+[m[32m                if (window.history.state && window.history.state.popup === 'AttractionDetailsDest') {[m
+[32m+[m[32m                    window.history.back();[m
+[32m+[m[32m                }[m
+[32m+[m[32m                if (typeof document !== 'undefined') (document.activeElement as HTMLElement)?.blur();[m
+[32m+[m[32m            };[m
+[32m+[m[32m        }[m
+[32m+[m[32m    }, [selectedAttraction]);[m
+[32m+[m
+     // Filter packages based on the slug/name[m
+     const filterPackages = (allPackages: Package[], destName: string, searchSlug: string) => {[m
+         const normalize = (str: string) => str?.toLowerCase().replace(/[^a-z0-9]/g, '') || '';[m
+[36m@@ -564,8 +600,10 @@[m [mexport default function DestinationClient({ initialDestination, initialPackages[m
+                 </div>[m
+             </div>[m
+ [m
+[31m-            {/* Mobile Sticky Bottom Bar */}[m
+[31m-            <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] z-40 flex items-center justify-between">[m
+[32m+[m[32m            {/* Mobile Sticky Bottom Bar (Footer Aware) */}[m
+[32m+[m[32m            <div className={`lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] z-40 flex items-center justify-between transition-all duration-500 ${[m
+[32m+[m[32m                showStickyBar ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0 pointer-events-none'[m
+[32m+[m[32m            }`}>[m
+                 <div>[m
+                     <p className="text-xs text-gray-600 font-semibold tracking-widest leading-none mb-1">Plan your trip</p>[m
+                     <div className="flex items-baseline gap-2">[m
+[1mdiff --git a/app/layout.tsx b/app/layout.tsx[m
+[1mindex 2218bff..def1049 100644[m
+[1m--- a/app/layout.tsx[m
+[1m+++ b/app/layout.tsx[m
+[36m@@ -12,6 +12,7 @@[m [mimport { API_BASE_URL } from '@/constants';[m
+ import { getGlobalSettings } from '@/lib/api';[m
+ import Script from 'next/script';[m
+ import SmoothScroll from '../components/SmoothScroll';[m
+[32m+[m[32mimport NextTopLoader from 'nextjs-toploader';[m
+ [m
+ const satisfy = Satisfy({[m
+     subsets: ['latin'],[m
+[36m@@ -126,12 +127,9 @@[m [mexport default async function RootLayout({[m
+                 <link rel="preconnect" href="https://fonts.googleapis.com" />[m
+                 <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />[m
+                 [m
+[31m-                {/* Google Translate & Scroll Restoration Fixes */}[m
+[32m+[m[32m                {/* Google Translate & Hydration Fixes */}[m
+                 <Script id="browser-fixes" strategy="beforeInteractive">[m
+                   {`[m
+[31m-                    if ('scrollRestoration' in history) {[m
+[31m-                      history.scrollRestoration = 'manual';[m
+[31m-                    }[m
+                     document.addEventListener('DOMContentLoaded',

@@ -44,12 +44,26 @@ export default function DestinationClient({ initialDestination, initialPackages 
         setLoadedAttractions(prev => ({ ...prev, [idx]: true }));
     };
 
+    const [showStickyBar, setShowStickyBar] = useState(true);
     useEffect(() => {
         setMounted(true);
         const checkMobile = () => setIsMobile(window.innerWidth < 768);
         checkMobile();
+
+        const handleScroll = () => {
+            const scrollPos = window.scrollY;
+            const windowHeight = window.innerHeight;
+            const totalHeight = document.documentElement.scrollHeight;
+            const isNearFooter = (scrollPos + windowHeight) > (totalHeight - 600);
+            setShowStickyBar(!isNearFooter);
+        };
+
         window.addEventListener('resize', checkMobile);
-        return () => window.removeEventListener('resize', checkMobile);
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('resize', checkMobile);
+            window.removeEventListener('scroll', handleScroll);
+        };
     }, []);
 
     useEffect(() => {
@@ -65,20 +79,42 @@ export default function DestinationClient({ initialDestination, initialPackages 
         window.dispatchEvent(new CustomEvent('hideFloatingIcons', { detail: showMobileForm }));
     }, [showMobileForm]);
 
-    // Back button trap for mobile form
+    // Back button trackers
     useEffect(() => {
         if (showMobileForm) {
-            const handlePopState = () => setShowMobileForm(false);
+            const handlePopState = () => {
+                setShowMobileForm(false);
+                if (typeof document !== 'undefined') (document.activeElement as HTMLElement)?.blur();
+            };
             window.history.pushState({ popup: 'MobileFormDest' }, '');
             window.addEventListener('popstate', handlePopState);
             return () => {
                 window.removeEventListener('popstate', handlePopState);
-                if (!isNavigating.current && window.history.state && window.history.state.popup === 'MobileFormDest') {
+                if (window.history.state && window.history.state.popup === 'MobileFormDest') {
                     window.history.back();
                 }
+                if (typeof document !== 'undefined') (document.activeElement as HTMLElement)?.blur();
             };
         }
     }, [showMobileForm]);
+
+    useEffect(() => {
+        if (selectedAttraction) {
+            const handlePopState = () => {
+                setSelectedAttraction(null);
+                if (typeof document !== 'undefined') (document.activeElement as HTMLElement)?.blur();
+            };
+            window.history.pushState({ popup: 'AttractionDetailsDest' }, '');
+            window.addEventListener('popstate', handlePopState);
+            return () => {
+                window.removeEventListener('popstate', handlePopState);
+                if (window.history.state && window.history.state.popup === 'AttractionDetailsDest') {
+                    window.history.back();
+                }
+                if (typeof document !== 'undefined') (document.activeElement as HTMLElement)?.blur();
+            };
+        }
+    }, [selectedAttraction]);
 
     // Filter packages based on the slug/name
     const filterPackages = (allPackages: Package[], destName: string, searchSlug: string) => {
@@ -564,8 +600,10 @@ export default function DestinationClient({ initialDestination, initialPackages 
                 </div>
             </div>
 
-            {/* Mobile Sticky Bottom Bar */}
-            <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] z-40 flex items-center justify-between">
+            {/* Mobile Sticky Bottom Bar (Footer Aware) */}
+            <div className={`lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] z-40 flex items-center justify-between transition-all duration-500 ${
+                showStickyBar ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0 pointer-events-none'
+            }`}>
                 <div>
                     <p className="text-xs text-gray-600 font-semibold tracking-widest leading-none mb-1">Plan your trip</p>
                     <div className="flex items-baseline gap-2">

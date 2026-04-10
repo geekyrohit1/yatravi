@@ -41,7 +41,8 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
         setLoadedImages(prev => ({ ...prev, [key]: true }));
     };
 
-    // Manual Sticky Trigger (Robust against overflow issues)
+    // Manual Sticky Trigger & Sticky Bar Visibility
+    const [showStickyBar, setShowStickyBar] = useState(true);
     useEffect(() => {
         const handleScroll = () => {
             if (stickyRef.current) {
@@ -49,6 +50,13 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
                 const threshold = stickyRef.current.offsetTop - 70;
                 setIsSticky(window.scrollY > threshold);
             }
+
+            // Footer-awareness for bottom sticky bar
+            const scrollPos = window.scrollY;
+            const windowHeight = window.innerHeight;
+            const totalHeight = document.documentElement.scrollHeight;
+            const isNearFooter = (scrollPos + windowHeight) > (totalHeight - 600);
+            setShowStickyBar(!isNearFooter);
         };
         window.addEventListener('scroll', handleScroll);
         // Initial check
@@ -84,20 +92,60 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
         window.dispatchEvent(new CustomEvent('hideFloatingIcons', { detail: showMobileForm }));
     }, [showMobileForm]);
 
-    // Back button trap for mobile form
+    // Back button trackers
     useEffect(() => {
         if (showMobileForm) {
-            const handlePopState = () => setShowMobileForm(false);
+            const handlePopState = () => {
+                setShowMobileForm(false);
+                if (typeof document !== 'undefined') (document.activeElement as HTMLElement)?.blur();
+            };
             window.history.pushState({ popup: 'MobileFormPkg' }, '');
             window.addEventListener('popstate', handlePopState);
             return () => {
                 window.removeEventListener('popstate', handlePopState);
-                if (!isNavigating.current && window.history.state && window.history.state.popup === 'MobileFormPkg') {
+                if (window.history.state && window.history.state.popup === 'MobileFormPkg') {
                     window.history.back();
                 }
+                if (typeof document !== 'undefined') (document.activeElement as HTMLElement)?.blur();
             };
         }
     }, [showMobileForm]);
+
+    useEffect(() => {
+        if (showGallery) {
+            const handlePopState = () => {
+                setShowGallery(false);
+                if (typeof document !== 'undefined') (document.activeElement as HTMLElement)?.blur();
+            };
+            window.history.pushState({ popup: 'GalleryPkg' }, '');
+            window.addEventListener('popstate', handlePopState);
+            return () => {
+                window.removeEventListener('popstate', handlePopState);
+                if (window.history.state && window.history.state.popup === 'GalleryPkg') {
+                    window.history.back();
+                }
+                if (typeof document !== 'undefined') (document.activeElement as HTMLElement)?.blur();
+            };
+        }
+    }, [showGallery]);
+
+    useEffect(() => {
+        if (selectedTour) {
+            const handlePopState = () => {
+                setSelectedTour(null);
+                if (typeof document !== 'undefined') (document.activeElement as HTMLElement)?.blur();
+            };
+            window.history.pushState({ popup: 'TourDetailsPkg' }, '');
+            window.addEventListener('popstate', handlePopState);
+            return () => {
+                window.removeEventListener('popstate', handlePopState);
+                if (window.history.state && window.history.state.popup === 'TourDetailsPkg') {
+                    window.history.back();
+                }
+                if (typeof document !== 'undefined') (document.activeElement as HTMLElement)?.blur();
+            };
+        }
+    }, [selectedTour]);
 
     // Countdown timer logic (unchanged)
     const [timeLeft, setTimeLeft] = useState({ hours: 23, minutes: 59, seconds: 59 });
@@ -521,12 +569,20 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
                                     onClick={() => {
                                         const element = document.getElementById(tab.id);
                                         if (element) {
-                                            const offset = 100; // Adjusted for top-0 sticky
-                                            const bodyRect = document.body.getBoundingClientRect().top;
-                                            const elementRect = element.getBoundingClientRect().top;
-                                            const elementPosition = elementRect - bodyRect;
-                                            const offsetPosition = elementPosition - offset;
-                                            window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+                                            const finalOffset = -140; // 70 header + 50 tabs + 20 buffer
+                                            if (window.ytvLenis) {
+                                                window.ytvLenis.scrollTo(element, { 
+                                                    offset: finalOffset, 
+                                                    duration: 1.2,
+                                                    easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+                                                });
+                                            } else {
+                                                const bodyRect = document.body.getBoundingClientRect().top;
+                                                const elementRect = element.getBoundingClientRect().top;
+                                                const elementPosition = elementRect - bodyRect;
+                                                const offsetPosition = elementPosition + finalOffset;
+                                                window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+                                            }
                                         }
                                         setActiveSection(tab.id);
                                     }}
@@ -940,8 +996,10 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
                 </div>
             </div>
 
-            {/* 5. Mobile Sticky Bottom Bar */}
-            <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] z-40 flex items-center justify-between">
+            {/* 5. Mobile Sticky Bottom Bar (Footer Aware) */}
+            <div className={`lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] z-40 flex items-center justify-between transition-all duration-500 ${
+                showStickyBar ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0 pointer-events-none'
+            }`}>
                 <div>
                     <p className="text-xs text-gray-600 font-semibold tracking-widest leading-none mb-1">Starting from</p>
                     <div className="flex items-baseline gap-2">

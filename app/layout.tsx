@@ -12,6 +12,7 @@ import { API_BASE_URL } from '@/constants';
 import { getGlobalSettings } from '@/lib/api';
 import Script from 'next/script';
 import SmoothScroll from '../components/SmoothScroll';
+import NextTopLoader from 'nextjs-toploader';
 
 const satisfy = Satisfy({
     subsets: ['latin'],
@@ -126,12 +127,9 @@ export default async function RootLayout({
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
                 
-                {/* Google Translate & Scroll Restoration Fixes */}
+                {/* Google Translate & Hydration Fixes */}
                 <Script id="browser-fixes" strategy="beforeInteractive">
                   {`
-                    if ('scrollRestoration' in history) {
-                      history.scrollRestoration = 'manual';
-                    }
                     document.addEventListener('DOMContentLoaded', function() {
                       // Prevent Translate from messing up hydration
                       var observer = new MutationObserver(function(mutations) {});
@@ -167,6 +165,17 @@ export default async function RootLayout({
                 />
             </head>
             <body className="bg-gray-50" suppressHydrationWarning>
+                <NextTopLoader
+                    color="#FF5A5F"
+                    initialPosition={0.08}
+                    crawlSpeed={200}
+                    height={3}
+                    crawl={true}
+                    showSpinner={false}
+                    easing="ease"
+                    speed={200}
+                    shadow="0 0 10px #FF5A5F,0 0 5px #FF5A5F"
+                />
                 <ConsentProvider>
                     <SettingsProvider initialSettings={settings}>
                         <ThemeProvider defaultTheme="light" storageKey="yatravi-theme">

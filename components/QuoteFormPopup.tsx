@@ -168,9 +168,11 @@ export const QuoteFormPopup: React.FC<QuoteFormPopupProps> = ({ isOpen, onClose 
             
             return () => {
                 window.removeEventListener('popstate', handlePopState);
-                if (!isNavigating.current && window.history.state && window.history.state.popup === 'QuoteFormPopup') {
+                if (window.history.state && window.history.state.popup === 'QuoteFormPopup') {
                     window.history.back();
                 }
+                // Reset focus to remove stuck mobile states
+                if (typeof document !== 'undefined') (document.activeElement as HTMLElement)?.blur();
             };
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -52,17 +52,26 @@ export const DestinationTabs = () => {
         setActiveTab(id);
         const element = document.getElementById(id);
         if (element) {
-            // Adjust offset for the sticky header height (matches PackageClient.tsx smooth scroll)
-            const offset = 100; // Adjusted for top-0 sticky
-            const bodyRect = document.body.getBoundingClientRect().top;
-            const elementRect = element.getBoundingClientRect().top;
-            const elementPosition = elementRect - bodyRect;
-            const offsetPosition = elementPosition - offset;
+            const finalOffset = -140; // 70 header + 50 tabs + 20 buffer
+            if (window.ytvLenis) {
+                // Use the premium kinetic engine for scrolling
+                window.ytvLenis.scrollTo(element, { 
+                    offset: finalOffset, 
+                    duration: 1.2,
+                    easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+                });
+            } else {
+                // Fallback for cases where Lenis might not be initialized
+                const bodyRect = document.body.getBoundingClientRect().top;
+                const elementRect = element.getBoundingClientRect().top;
+                const elementPosition = elementRect - bodyRect;
+                const offsetPosition = elementPosition + finalOffset;
 
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: 'smooth'
-            });
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
         }
     };
 
