@@ -45,6 +45,10 @@ const destinationSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    altText: {
+        type: String,
+        default: ''
+    },
     verticalImage: {
         type: String, // Mobile-optimized vertical portrait
         required: false
@@ -139,7 +143,7 @@ destinationSchema.pre('save', async function () {
         this.slug = slug;
     }
 
-    // Smart Auto-Schema Generation
+    // Smart Auto-Schema Generation (Always syncs with content)
     if (!this.seo) this.seo = {};
     
     if (this.seo.autoGenerateSchema) {

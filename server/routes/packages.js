@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const Package = require('../models/Package');
 const Destination = require('../models/Destination');
 const authMiddleware = require('../middleware/auth');
-const { generateSEOQuickLinks } = require('../utils/seoHelper');
+const { generateSEOQuickLinks, generateJSONLD } = require('../utils/seoHelper');
 
 // Search Packages & Destinations (Fallback)
 router.get('/search/all', async (req, res) => {
@@ -88,15 +88,28 @@ router.put('/:id', authMiddleware, async (req, res) => {
       return res.status(404).json({ message: 'Package not found' });
     }
     
+    const oldSeo = pkg.seo || {};
     Object.assign(pkg, req.body);
     
-    // Smart SEO: Auto-generate quick links if empty during update
-    if (pkg.seo && (!pkg.seo.quickLinks || pkg.seo.quickLinks.length === 0)) {
-        if (pkg.title && pkg.slug) {
-            pkg.seo.quickLinks = generateSEOQuickLinks(pkg.title, 'package', pkg.slug);
-        }
+    // Smart SEO: Handle Schema Auto-generation
+    if (pkg.seo && pkg.seo.autoGenerateSchema) {
+        pkg.seo.jsonLd = generateJSONLD(pkg, 'package', req.headers.host || 'yatravi.com');
     }
 
+    // Safety Lock: Restore manual SEO if incoming is empty/missing
+    if (req.body.seo) {
+        pkg.seo = {
+            ...oldSeo,
+            ...pkg.seo, // Use the updated SEO (including generated schema)
+            // Only overwrite if new value is actually provided (not just an empty string from an unset form field)
+            title: req.body.seo.title || oldSeo.title,
+            description: req.body.seo.description || oldSeo.description,
+            keywords: req.body.seo.keywords || oldSeo.keywords,
+            focusKeyword: req.body.seo.focusKeyword || oldSeo.focusKeyword,
+            jsonLd: (pkg.seo && pkg.seo.autoGenerateSchema) ? pkg.seo.jsonLd : (req.body.seo.jsonLd || oldSeo.jsonLd)
+        };
+    }
+    
     pkg.markModified('seo'); // Force Mongoose to detect nested seo object changes
     const saved = await pkg.save();
     res.json(saved);

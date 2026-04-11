@@ -449,18 +449,34 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
 
             <div className="md:hidden bg-white border-b border-gray-100 py-5 font-sans">
                 <div className="px-5">
-                    <nav className="text-[10px] text-slate-500 flex items-center gap-2 font-medium tracking-wide mb-3">
-                        <span onClick={() => router.push('/')}>Home</span>
-                        <span className="opacity-30">/</span>
-                        <span>Packages</span>
-                    </nav>
+                    <div className="flex justify-between items-center mb-3">
+                        <nav className="text-[10px] text-slate-500 flex items-center gap-2 font-medium tracking-wide">
+                            <span onClick={() => router.push('/')} className="cursor-pointer">Home</span>
+                            <span className="opacity-30">/</span>
+                            <span>Packages</span>
+                        </nav>
+                        <div className="flex items-center gap-2">
+                            {/* Mobile Rating Badge - Professional Theme */}
+                            <div className="flex items-center gap-1 bg-gray-50 text-slate-900 px-2.5 py-1.5 rounded-xl border border-gray-100 text-[10px] font-bold shadow-sm">
+                                <Star className="w-3 h-3 fill-yellow-500 text-yellow-500" />
+                                <span>{packageData.rating}</span>
+                            </div>
+                            {/* Share Button (Reduced Radius) */}
+                            <ShareButton 
+                                url={typeof window !== 'undefined' ? window.location.href : ''} 
+                                title={packageData.title}
+                                className="!px-3 !py-1.5 border-gray-100 bg-gray-50/50 hover:bg-gray-100"
+                                rounded="rounded-xl"
+                            />
+                        </div>
+                    </div>
                     <div className="flex flex-col gap-2 mb-3">
                         {/* Status Badges - Mobile (Refinement) */}
                         <div className="flex flex-wrap gap-2 w-full mb-1">
                             {packageData.groupSize && packageData.groupSize.toLowerCase().includes('fixed') && (
-                                <div className="bg-orange-50 text-[#fb5012] text-[9px] font-bold px-2 py-1 rounded-md shadow-sm border border-orange-100/50 flex items-center gap-1 tracking-[0.08em] font-sans">
-                                    <Calendar className="w-2.5 h-2.5" />
-                                    <span>Fixed Departure {packageData.validityDate && <span className="opacity-60 ml-1 font-medium lowercase tracking-tight">· {packageData.validityDate}</span>}</span>
+                                <div className="bg-white text-slate-900 text-[9px] font-bold px-2.5 py-1.5 rounded-lg shadow-sm border border-gray-100 flex items-center gap-1.5 tracking-tight font-sans">
+                                    <Calendar className="w-3 h-3 text-brand" />
+                                    <span>Fixed Departure {packageData.validityDate && <span className="text-slate-400 ml-1 font-medium lowercase tracking-tight">· {packageData.validityDate}</span>}</span>
                                 </div>
                             )}
                             {packageData.isBestSeller && (
@@ -487,15 +503,7 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
                                 </div>
                             ))}
                         </div>
-                        <div className="flex justify-between items-start gap-4">
-                            <div className="text-[22px] md:text-2xl font-semibold text-gray-900 leading-tight tracking-tight pr-4">{packageData.title}</div>
-
-                            {/* Rating (Compact - Top Right for Mobile) */}
-                            <div className="flex items-center gap-1.5 bg-yellow-50/50 text-yellow-700 px-3 py-1.5 rounded-full border border-yellow-100 text-[10px] font-bold shrink-0 mt-1 shadow-sm">
-                                <Star className="w-3 h-3 fill-current" />
-                                <span>{packageData.rating}</span>
-                            </div>
-                        </div>
+                        <div className="text-[22px] md:text-2xl font-semibold text-gray-900 leading-tight tracking-tight pr-4">{packageData.title}</div>
                     </div>
 
                     {/* Region Breakdown Highlight Bar (Mobile) */}
@@ -1000,10 +1008,20 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
             <div className={`lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] z-40 flex items-center justify-between transition-all duration-500 ${
                 showStickyBar ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0 pointer-events-none'
             }`}>
-                <div>
-                    <p className="text-xs text-gray-600 font-semibold tracking-widest leading-none mb-1">Starting from</p>
+                <div className="flex flex-col">
+                    <div className="flex items-center gap-2 mb-1">
+                        <p className="text-[10px] text-gray-500 font-bold uppercase tracking-wider leading-none">Starting from</p>
+                        {packageData.originalPrice > packageData.price && (
+                            <span className="bg-emerald-50 text-emerald-600 text-[8px] font-extrabold px-1.5 py-0.5 rounded uppercase tracking-tighter border border-emerald-100">
+                                Save {Math.round(((packageData.originalPrice - packageData.price) / packageData.originalPrice) * 100)}%
+                            </span>
+                        )}
+                    </div>
                     <div className="flex items-baseline gap-2">
-                        <span className="text-xl font-semibold tracking-tight text-brand">₹{packageData.price.toLocaleString()}</span>
+                        <span className="text-xl font-bold tracking-tight text-slate-900">₹{packageData.price.toLocaleString()}</span>
+                        {packageData.originalPrice > packageData.price && (
+                            <span className="text-[11px] text-gray-400 line-through font-medium">₹{packageData.originalPrice.toLocaleString()}</span>
+                        )}
                     </div>
                 </div>
                 <button

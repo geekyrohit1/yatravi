@@ -8,9 +8,10 @@ interface ShareButtonProps {
     text?: string;
     url: string;
     className?: string; // Allow custom styling
+    rounded?: string;   // Allow custom border radius
 }
 
-const ShareButton: React.FC<ShareButtonProps> = ({ title, text, url, className = "" }) => {
+const ShareButton: React.FC<ShareButtonProps> = ({ title, text, url, className = "", rounded = "rounded-full" }) => {
     const [copied, setCopied] = useState(false);
 
     const handleShare = async () => {
@@ -25,11 +26,32 @@ const ShareButton: React.FC<ShareButtonProps> = ({ title, text, url, className =
                 console.error('Error sharing:', error);
             }
         } else {
-            // Fallback to clipboard copy
+            // Fallback to clipboard copy with robust check
             try {
-                await navigator.clipboard.writeText(url);
-                setCopied(true);
-                setTimeout(() => setCopied(false), 2000);
+                if (navigator.clipboard && window.isSecureContext) {
+                    await navigator.clipboard.writeText(url);
+                    setCopied(true);
+                    setTimeout(() => setCopied(false), 2000);
+                } else {
+                    // Legacy fallback for non-secure contexts or unsupported browsers
+                    const textArea = document.createElement("textarea");
+                    textArea.value = url;
+                    // Ensure it's not visible but still part of the DOM
+                    textArea.style.position = "fixed";
+                    textArea.style.left = "-9999px";
+                    textArea.style.top = "0";
+                    document.body.appendChild(textArea);
+                    textArea.focus();
+                    textArea.select();
+                    try {
+                        document.execCommand('copy');
+                        setCopied(true);
+                        setTimeout(() => setCopied(false), 2000);
+                    } catch (err) {
+                        console.error('Fallback copy failed', err);
+                    }
+                    document.body.removeChild(textArea);
+                }
             } catch (err) {
                 console.error('Failed to copy text: ', err);
             }
@@ -39,10 +61,7 @@ const ShareButton: React.FC<ShareButtonProps> = ({ title, text, url, className =
     return (
         <button
             onClick={handleShare}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-300 ${copied
-                ? 'bg-green-100 text-green-700 hover:bg-green-200'
-                : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50 hover:text-brand hover:border-brand-light/20'
-                } ${className}`}
+            className={`flex items-center gap-2 px-3 py-1.5 ${rounded} text-xs font-semibold tracking-tight transition-all duration-200 active:scale-95 bg-white text-slate-600 border border-gray-200 hover:border-gray-300 shadow-sm ${className}`}
             title="Share this package"
         >
             {copied ? (

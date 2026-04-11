@@ -19,6 +19,7 @@ const destinationSchema = z.object({
     name: z.string().min(2, "Name is required"),
     slug: z.string().optional(),
     heroImage: z.string().min(1, "Hero Image is required"),
+    altText: z.string().optional(),
     verticalImage: z.string().optional(),
     bannerImage: z.string().optional(),
     tagline: z.string().optional(),
@@ -47,7 +48,12 @@ const destinationSchema = z.object({
     faqs: z.array(z.object({
         question: z.string(),
         answer: z.string()
-    })).optional()
+    })).optional(),
+    seo: z.object({
+        title: z.string().optional(),
+        description: z.string().optional(),
+        keywords: z.string().optional()
+    }).optional()
 });
 
 type DestinationFormValues = z.infer<typeof destinationSchema>;
@@ -66,6 +72,7 @@ export default function DestinationForm({ initialData, isEditMode = false }: Des
         name: initialData?.name || '',
         slug: initialData?.slug || '',
         heroImage: initialData?.heroImage || '',
+        altText: initialData?.altText || '',
         verticalImage: initialData?.verticalImage || '',
         bannerImage: initialData?.bannerImage || '',
         tagline: initialData?.tagline || '',
@@ -86,7 +93,12 @@ export default function DestinationForm({ initialData, isEditMode = false }: Des
             localDish: initialData?.facts?.localDish || ''
         },
         attractions: initialData?.attractions || [],
-        faqs: initialData?.faqs || []
+        faqs: initialData?.faqs || [],
+        seo: {
+            title: initialData?.seo?.title || '',
+            description: initialData?.seo?.description || '',
+            keywords: initialData?.seo?.keywords || ''
+        }
     };
 
     const form = useForm<DestinationFormValues>({
@@ -105,22 +117,32 @@ export default function DestinationForm({ initialData, isEditMode = false }: Des
 
     const name = watch('name');
     const slug = watch('slug');
+    const altText = watch('altText');
 
-    // Auto-generate slug from name while typing
+    // Auto-generate slug and Alt Text from name while typing
     useEffect(() => {
-        if (name && !slug) {
-            const generatedSlug = name
-                .toLowerCase()
-                .replace(/[^a-z0-9\s-]/g, '')
-                .replace(/\s+/g, '-')
-                .replace(/-+/g, '-')
-                .trim();
+        if (name) {
+            // 1. Slug Generation
+            if (!slug) {
+                const generatedSlug = name
+                    .toLowerCase()
+                    .replace(/[^a-z0-9\s-]/g, '')
+                    .replace(/\s+/g, '-')
+                    .replace(/-+/g, '-')
+                    .trim();
 
-            if (generatedSlug !== slug) {
-                setValue('slug', generatedSlug, { shouldValidate: true });
+                if (generatedSlug !== slug) {
+                    setValue('slug', generatedSlug, { shouldValidate: true });
+                }
+            }
+
+            // 2. Alt Text Generation
+            if (!altText) {
+                const generatedAlt = `${name} Destination Image`;
+                setValue('altText', generatedAlt);
             }
         }
-    }, [name, setValue]);
+    }, [name, slug, altText, setValue]);
 
     const { fields: attractionFields, append: appendAttraction, remove: removeAttraction } = useFieldArray({ control, name: "attractions" });
     const { fields: faqFields, append: appendFaq, remove: removeFaq } = useFieldArray({ control, name: "faqs" });
@@ -281,9 +303,24 @@ export default function DestinationForm({ initialData, isEditMode = false }: Des
                                         </div>
                                     </div>
 
-                                    <div className="space-y-2">
-                                        <Label className="text-gray-700 font-medium">Slug (Auto-generated)</Label>
-                                        <Input {...register('slug')} disabled className="h-11 rounded-xl border-gray-200 bg-gray-100 text-gray-500" />
+                                    <div className="grid grid-cols-1 gap-6">
+                                        <div className="space-y-2">
+                                            <Label className="text-gray-700 font-medium">Meta Title (SEO)</Label>
+                                            <Input {...register('seo.title')} placeholder="Enter custom meta title" className="h-11 rounded-xl border-gray-200 focus:border-[#CD1C18] focus:ring-[#CD1C18]/20 bg-gray-50/50" />
+                                            <p className="text-xs text-gray-500">Visible on Google. Recommended: 50-60 chars.</p>
+                                        </div>
+
+                                        <div className="space-y-2">
+                                            <Label className="text-gray-700 font-medium">Meta Description (SEO)</Label>
+                                            <Textarea {...register('seo.description')} placeholder="Enter compelling meta description..." className="min-h-[80px] rounded-xl border-gray-200 focus:border-[#CD1C18] focus:ring-[#CD1C18]/20 bg-gray-50/50" />
+                                            <p className="text-xs text-gray-500">Summary for search. Recommended: 120-160 chars.</p>
+                                        </div>
+
+                                        <div className="space-y-2">
+                                            <Label className="text-gray-700 font-medium">URL Slug (SEO)</Label>
+                                            <Input {...register('slug')} placeholder="auto-generated-slug" className="h-11 rounded-xl border-gray-200 focus:border-[#CD1C18] focus:ring-[#CD1C18]/20 bg-gray-50/50" />
+                                            <p className="text-xs text-gray-500">Lowercase, numbers and hyphens only.</p>
+                                        </div>
                                     </div>
 
                                     <div className="space-y-4 pt-4 border-t border-gray-100 mt-6">
@@ -349,7 +386,11 @@ export default function DestinationForm({ initialData, isEditMode = false }: Des
                                                 <div className="flex-1 space-y-4 w-full">
                                                     <div className="space-y-2">
                                                         <Input {...register('heroImage')} placeholder="Paste image URL..." className="h-11 rounded-xl border-gray-200 focus:border-[#CD1C18] focus:ring-[#CD1C18]/20 bg-white" />
-                                                        <p className="text-xs text-gray-400">Used for homepage "Top Destinations". **Required: 16:9 Aspect Ratio** (e.g. 1200x675px). Max: 50MB.</p>
+                                                        <div className="space-y-1 mt-2">
+                                                            <Label className="text-[10px] font-bold uppercase tracking-widest text-brand">SEO: Image Alt Text</Label>
+                                                            <Input {...register('altText')} placeholder="Describe image (e.g. Beautiful Maldives Resort)" className="h-9 rounded-lg text-sm border-brand/20 bg-brand/[0.02]" />
+                                                        </div>
+                                                        <p className="text-xs text-gray-400">Used for homepage "Top Destinations". **Required: 16:9 Aspect Ratio**.</p>
                                                     </div>
                                                     <div className="relative">
                                                         <Button type="button" variant="outline" className="w-full rounded-xl border-gray-200 hover:bg-white hover:border-[#CD1C18] hover:text-[#CD1C18] transition-all h-11" disabled={uploading}>

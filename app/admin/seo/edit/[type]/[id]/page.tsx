@@ -10,6 +10,52 @@ import Link from 'next/link';
 import { API_BASE_URL } from '@/constants';
 import { Button } from '@/components/Button';
 
+const truncateText = (text: string, limit: number) => {
+    if (!text) return '';
+    if (text.length <= limit) return text;
+    return text.substring(0, limit) + "...";
+};
+
+const LimitIndicator = ({ current, min, max }: { current: number, min: number, max: number }) => {
+    const isGood = current >= min && current <= max;
+    const isTooLong = current > max;
+    const color = isGood ? 'text-green-500' : isTooLong ? 'text-red-500' : 'text-yellow-500';
+
+    return (
+        <div className="flex justify-between mt-1.5">
+            <span className="text-[10px] text-gray-400">Recommended: {min}-{max} characters</span>
+            <span className={`text-[10px] font-bold ${color}`}>{current} chars</span>
+        </div>
+    );
+};
+
+const ChecklistItem = ({ item }: { item: any }) => (
+    <div className={`flex items-start gap-4 p-4 rounded-2xl transition-all border ${
+        item.passed 
+            ? 'bg-white border-green-100 opacity-80' 
+            : item.priority === 'critical' 
+                ? 'bg-white border-red-100 shadow-sm' 
+                : 'bg-white border-yellow-100'
+    }`}>
+        <div className={`shrink-0 w-6 h-6 rounded-full flex items-center justify-center mt-0.5 ${
+            item.passed ? 'bg-green-500 text-white' : item.priority === 'critical' ? 'bg-red-100 text-red-600' : 'bg-yellow-100 text-yellow-600'
+        }`}>
+            {item.passed ? <CheckCircle className="w-4 h-4" /> : item.priority === 'critical' ? <AlertTriangle className="w-3.5 h-3.5" /> : <Info className="w-3.5 h-3.5" />}
+        </div>
+        <div className="flex-1">
+            <div className="flex items-center justify-between">
+                <h4 className={`text-sm font-bold ${item.passed ? 'text-gray-500' : 'text-gray-900'}`}>{item.label}</h4>
+                <span className={`text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider ${
+                    item.passed ? 'bg-gray-100 text-gray-400' : item.priority === 'critical' ? 'bg-red-100 text-red-700' : 'bg-yellow-100 text-yellow-700'
+                }`}>
+                    {item.passed ? 'Done' : item.priority}
+                </span>
+            </div>
+            <p className="text-xs text-gray-500 mt-1">{item.desc}</p>
+        </div>
+    </div>
+);
+
 export default function EditSEOPage() {
     const router = useRouter();
     const params = useParams();
@@ -40,6 +86,7 @@ export default function EditSEOPage() {
         description: '',
         keywords: '',
         focusKeyword: '',
+        altText: '',
         canonicalUrl: '',
         robots: 'index, follow',
         ogTitle: '',
@@ -106,6 +153,7 @@ export default function EditSEOPage() {
                 focusKeyword: type === 'global' 
                     ? (seoSource?.defaultKeywords ? (dbKeywords === oldKeywords ? 'holiday packages' : seoSource.defaultKeywords.split(',')[0].trim()) : 'holiday packages') 
                     : (seoSource?.focusKeyword || (seoSource?.keywords ? seoSource.keywords.split(',')[0].trim() : '') || data.title || data.name || ''),
+                altText: data.altText || (type === 'package' ? `${data.title} Hero Image` : type === 'destination' ? `${data.name} Destination Image` : ''),
                 canonicalUrl: seoSource?.canonicalUrl || '',
                 robots: seoSource?.robots || 'index, follow',
                 ogTitle: seoSource?.ogTitle || '',
@@ -267,6 +315,18 @@ export default function EditSEOPage() {
             desc: seoData.autoGenerateSchema ? 'Auto-schema is active.' : 'Enable auto-generate schema for better Google visibility.'
         });
         if (seoData.autoGenerateSchema) score += 5;
+        
+        // --- 6. IMAGE ALT TEXT ---
+        const hasAltText = !!seoData.altText;
+        checks.push({
+            id: 'image-alt',
+            label: 'Hero Image Alt Text',
+            passed: hasAltText,
+            priority: 'recommended',
+            score: 10,
+            desc: hasAltText ? 'Hero image has descriptive alt text.' : 'Add alt text to your hero image for better image SEO results.'
+        });
+        if (hasAltText) score += 10;
 
         setChecklist(checks);
         setAnalysisScore(Math.min(score, 100));
@@ -310,7 +370,8 @@ export default function EditSEOPage() {
             } else {
                 payload = {
                     ...itemWithoutVersion,
-                    seo: seoData
+                    altText: seoData.altText, // Sync back to top level
+                    seo: { ...seoData, altText: seoData.altText }
                 };
             }
     
@@ -644,27 +705,38 @@ export default function EditSEOPage() {
                                             placeholder="Comma separated..."
                                             className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-100 focus:border-gray-900 focus:ring-1 focus:ring-gray-900 outline-none transition-all"
                                         />
-                                        
-                                        {/* LSI Keywords Cloud - Now in General Tab */}
-                                        {lsiKeywords.length > 0 && (
-                                            <div className="mt-4 p-4 bg-gray-50/50 rounded-2xl border border-gray-100 animate-fade-in">
-                                                <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-3">AI Suggested Related Keywords</p>
-                                                <div className="flex flex-wrap gap-2">
-                                                    {lsiKeywords.map((tag, idx) => (
-                                                        <button
-                                                            key={idx}
-                                                            onClick={() => addLsiToKeywords(tag)}
-                                                            className="px-3 py-1.5 bg-white border border-gray-100 rounded-lg text-[11px] font-medium text-gray-700 hover:border-brand hover:text-brand transition-all flex items-center gap-1.5 group"
-                                                        >
-                                                            <Plus className="w-3 h-3 text-gray-300 group-hover:text-brand" />
-                                                            {tag}
-                                                        </button>
-                                                    ))}
-                                                </div>
-                                                <p className="text-[9px] text-gray-400 mt-3 italic">Click any keyword to add it to your main Keywords list above.</p>
-                                            </div>
-                                        )}
                                     </div>
+                                    <div>
+                                        <label className="block text-xs font-bold uppercase tracking-wider text-brand mb-2">Hero Image Alt Text (SEO)</label>
+                                        <input
+                                            type="text"
+                                            value={seoData.altText}
+                                            onChange={(e) => setSeoData({ ...seoData, altText: e.target.value })}
+                                            placeholder="e.g. Honeymoon couple at sunrise"
+                                            className="w-full px-4 py-3 rounded-xl bg-brand/5 border border-brand/10 focus:border-brand focus:ring-1 focus:ring-brand outline-none transition-all font-medium"
+                                        />
+                                        <p className="text-[10px] text-gray-400 mt-1 italic pl-1">Helps this item rank in Google Image Search.</p>
+                                    </div>
+                                        
+                                    {/* LSI Keywords Cloud - Now in General Tab */}
+                                    {lsiKeywords.length > 0 && (
+                                        <div className="mt-4 p-4 bg-gray-50/50 rounded-2xl border border-gray-100 animate-fade-in">
+                                            <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-3">AI Suggested Related Keywords</p>
+                                            <div className="flex flex-wrap gap-2">
+                                                {lsiKeywords.map((tag, idx) => (
+                                                    <button
+                                                        key={idx}
+                                                        onClick={() => addLsiToKeywords(tag)}
+                                                        className="px-3 py-1.5 bg-white border border-gray-100 rounded-lg text-[11px] font-medium text-gray-700 hover:border-brand hover:text-brand transition-all flex items-center gap-1.5 group"
+                                                    >
+                                                        <Plus className="w-3 h-3 text-gray-300 group-hover:text-brand" />
+                                                        {tag}
+                                                    </button>
+                                                ))}
+                                            </div>
+                                            <p className="text-[9px] text-gray-400 mt-3 italic">Click any keyword to add it to your main Keywords list above.</p>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
 
@@ -1077,55 +1149,10 @@ export default function EditSEOPage() {
                                             </div>
                                         )}
                                     </div>
-                        </div>
-                    )}
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
-        </div>
-    );
+        );
 }
-
-const truncateText = (text: string, limit: number) => {
-    if (text.length <= limit) return text;
-    return text.substring(0, limit) + "...";
-};
-
-const LimitIndicator = ({ current, min, max }: { current: number, min: number, max: number }) => {
-    const isGood = current >= min && current <= max;
-    const isTooLong = current > max;
-    const color = isGood ? 'text-green-500' : isTooLong ? 'text-red-500' : 'text-yellow-500';
-
-    return (
-        <div className="flex justify-between mt-1.5">
-            <span className="text-[10px] text-gray-400">Recommended: {min}-{max} characters</span>
-            <span className={`text-[10px] font-bold ${color}`}>{current} chars</span>
-        </div>
-    );
-};
-
-const ChecklistItem = ({ item }: { item: any }) => (
-    <div className={`flex items-start gap-4 p-4 rounded-2xl transition-all border ${
-        item.passed 
-            ? 'bg-white border-green-100 opacity-80' 
-            : item.priority === 'critical' 
-                ? 'bg-white border-red-100 shadow-sm' 
-                : 'bg-white border-yellow-100'
-    }`}>
-        <div className={`shrink-0 w-6 h-6 rounded-full flex items-center justify-center mt-0.5 ${
-            item.passed ? 'bg-green-500 text-white' : item.priority === 'critical' ? 'bg-red-100 text-red-600' : 'bg-yellow-100 text-yellow-600'
-        }`}>
-            {item.passed ? <CheckCircle className="w-4 h-4" /> : item.priority === 'critical' ? <AlertTriangle className="w-3.5 h-3.5" /> : <Info className="w-3.5 h-3.5" />}
-        </div>
-        <div className="flex-1">
-            <div className="flex items-center justify-between">
-                <h4 className={`text-sm font-bold ${item.passed ? 'text-gray-500' : 'text-gray-900'}`}>{item.label}</h4>
-                <span className={`text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider ${
-                    item.passed ? 'bg-gray-100 text-gray-400' : item.priority === 'critical' ? 'bg-red-100 text-red-700' : 'bg-yellow-100 text-yellow-700'
-                }`}>
-                    {item.passed ? 'Done' : item.priority}
-                </span>
-            </div>
-            <p className="text-xs text-gray-500 mt-1">{item.desc}</p>
-        </div>
-    </div>
-);

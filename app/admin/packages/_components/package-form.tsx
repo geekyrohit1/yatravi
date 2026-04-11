@@ -31,6 +31,7 @@ const packageSchema = z.object({
     groupSize: z.string(),
     overview: z.string(),
     image: z.string().min(1, "Main image is required"),
+    altText: z.string().optional(),
     verticalImage: z.string().optional().nullable(),
     gallery: z.array(z.string()),
     highlights: z.array(z.string()),
@@ -134,6 +135,7 @@ export default function PackageForm({ initialData, isEditMode = false }: Package
         groupSize: initialData?.groupSize || 'Fixed Departure',
         overview: initialData?.overview || '',
         image: initialData?.image || '',
+        altText: initialData?.altText || '',
         verticalImage: initialData?.verticalImage || '',
         gallery: initialData?.gallery || [],
         highlights: initialData?.highlights || [],
@@ -269,6 +271,7 @@ export default function PackageForm({ initialData, isEditMode = false }: Package
                 validityDate: initialData.validityDate || '',
                 pickupPoint: initialData.pickupPoint || '',
                 dropPoint: initialData.dropPoint || '',
+                altText: initialData.altText || '',
                 seo: {
                     title: initialData.seo?.title || '',
                     description: initialData.seo?.description || '',
@@ -283,24 +286,32 @@ export default function PackageForm({ initialData, isEditMode = false }: Package
 
     const title = watch('title');
     const slug = watch('slug');
+    const altText = watch('altText');
 
-    // Auto-generate slug from title while typing
+    // Auto-generate slug and Alt Text from title while typing
     useEffect(() => {
-        // Only auto-generate if we are NOT in edit mode OR if the current slug is empty/ID-based
-        if (title && (!slug || slug.startsWith('pkg_'))) {
-            const generatedSlug = title
-                .toLowerCase()
-                .replace(/[^a-z0-9\s-]/g, '')
-                .replace(/\s+/g, '-')
-                .replace(/-+/g, '-')
-                .trim();
+        if (title) {
+            // 1. Slug Generation (Only if empty or temp ID)
+            if (!slug || slug.startsWith('pkg_')) {
+                const generatedSlug = title
+                    .toLowerCase()
+                    .replace(/[^a-z0-9\s-]/g, '')
+                    .replace(/\s+/g, '-')
+                    .replace(/-+/g, '-')
+                    .trim();
 
-            // Only update if it actually changed to avoid infinite loops or unnecessary re-renders
-            if (generatedSlug !== slug) {
-                setValue('slug', generatedSlug, { shouldValidate: true });
+                if (generatedSlug !== slug) {
+                    setValue('slug', generatedSlug, { shouldValidate: true });
+                }
+            }
+
+            // 2. Alt Text Generation (Only if empty)
+            if (!altText) {
+                const generatedAlt = `${title} Hero Image`;
+                setValue('altText', generatedAlt);
             }
         }
-    }, [title, setValue]);
+    }, [title, slug, altText, setValue]);
 
     // Field Arrays
     const { fields: highlightFields, append: appendHighlight, remove: removeHighlight } = useFieldArray({ control, name: "highlights" as any });
@@ -1111,6 +1122,11 @@ export default function PackageForm({ initialData, isEditMode = false }: Package
                                             <Label className="text-sm text-gray-500">Image URL</Label>
                                             <Input {...register('image')} placeholder="https://..." className="h-11 rounded-xl" />
                                         </div>
+                                        <div className="space-y-1">
+                                            <Label className="text-[10px] font-bold uppercase tracking-widest text-brand/70">SEO: Hero Image Alt Text</Label>
+                                            <Input {...register('altText')} placeholder="Describe the image for SEO (e.g. Couple enjoying Bali sunset)" className="h-9 rounded-lg text-sm border-brand/20 focus:border-brand focus:ring-brand/10 bg-brand/[0.02]" />
+                                            <p className="text-[9px] text-gray-400 italic">Helps Google understand this image and improves rankings.</p>
+                                        </div>
                                         <div className="relative">
                                             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                                                 <span className="text-sm text-gray-500 font-medium">OR</span>
@@ -1312,10 +1328,24 @@ export default function PackageForm({ initialData, isEditMode = false }: Package
                                 <strong>Note:</strong> Slugs are automatically generated from the title upon saving to ensure SEO-friendly URLs. You can override it here if needed.
                             </div>
 
-                            <div className="space-y-2">
-                                <Label className="font-medium">URL Slug (SEO)</Label>
-                                <Input {...register('slug')} placeholder="auto-generated-slug" className="h-11 rounded-xl font-mono text-sm" />
-                                <p className="text-xs text-gray-500">Leave empty to auto-generate from title. Use lowercase, numbers, and hyphens only.</p>
+                            <div className="grid grid-cols-1 gap-6">
+                                <div className="space-y-2">
+                                    <Label className="font-medium">Meta Title (SEO)</Label>
+                                    <Input {...register('seo.title')} placeholder="Enter custom meta title" className="h-11 rounded-xl" />
+                                    <p className="text-xs text-gray-500">Visible on Google search results. Recommended: 50-60 characters.</p>
+                                </div>
+
+                                <div className="space-y-2">
+                                    <Label className="font-medium">Meta Description (SEO)</Label>
+                                    <Textarea {...register('seo.description')} placeholder="Enter compelling description" className="min-h-[80px] rounded-xl" />
+                                    <p className="text-xs text-gray-500">Summary for search results. Recommended: 120-160 characters.</p>
+                                </div>
+
+                                <div className="space-y-2">
+                                    <Label className="font-medium">URL Slug (SEO)</Label>
+                                    <Input {...register('slug')} placeholder="auto-generated-slug" className="h-11 rounded-xl font-mono text-sm" />
+                                    <p className="text-xs text-gray-500">Leave empty to auto-generate from title. Use lowercase, numbers, and hyphens only.</p>
+                                </div>
                             </div>
 
                             <div className="space-y-4 pt-4 border-t border-gray-100 mb-8">

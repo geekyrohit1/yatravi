@@ -152,7 +152,7 @@ packageSchema.pre('save', async function () {
     this.id = `pkg_${this.slug || generateSlug(this.title)}`;
   }
 
-  // Smart Auto-Schema Generation
+  // Smart Auto-Schema Generation (Always syncs with content)
   if (!this.seo) this.seo = {};
   
   if (this.seo.autoGenerateSchema) {

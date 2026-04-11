@@ -6,6 +6,7 @@ export interface Destination {
   verticalImage?: string;
   packageCount: number;
   startPrice: number;
+  altText?: string;
 }
 
 export interface Review {
@@ -119,6 +120,7 @@ export interface Package {
   regionBreakdown?: string;
   pickupPoint?: string;
   dropPoint?: string;
+  altText?: string;
   seo?: {
     title?: string;
     description?: string;

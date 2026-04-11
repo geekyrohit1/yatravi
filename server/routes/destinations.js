@@ -52,7 +52,14 @@ router.post('/', authMiddleware, async (req, res) => {
             req.body.seo.quickLinks = generateSEOQuickLinks(req.body.name, 'destination', req.body.slug);
         }
     }
+    
     const destination = new Destination(req.body);
+
+    // Smart SEO: Handle Schema Auto-generation
+    if (destination.seo && destination.seo.autoGenerateSchema) {
+        destination.seo.jsonLd = generateJSONLD(destination, 'destination', req.headers.host || 'yatravi.com');
+    }
+
     const saved = await destination.save();
     res.status(201).json(saved);
   } catch (error) {
@@ -76,15 +83,28 @@ router.put('/:id', authMiddleware, async (req, res) => {
 
     if (!destination) return res.status(404).json({ message: 'Destination not found for update' });
 
+    const oldSeo = destination.seo || {};
     Object.assign(destination, req.body);
     
-    // Smart SEO: Auto-generate quick links if empty during update
-    if (destination.seo && (!destination.seo.quickLinks || destination.seo.quickLinks.length === 0)) {
-        if (destination.name && destination.slug) {
-            destination.seo.quickLinks = generateSEOQuickLinks(destination.name, 'destination', destination.slug);
-        }
+    // Smart SEO: Handle Schema Auto-generation
+    if (destination.seo && destination.seo.autoGenerateSchema) {
+        destination.seo.jsonLd = generateJSONLD(destination, 'destination', req.headers.host || 'yatravi.com');
     }
 
+    // Safety Lock: Restore manual SEO if incoming is empty/missing
+    if (req.body.seo) {
+        destination.seo = {
+            ...oldSeo,
+            ...destination.seo,
+            // Only overwrite if new value is actually provided
+            title: req.body.seo.title || oldSeo.title,
+            description: req.body.seo.description || oldSeo.description,
+            keywords: req.body.seo.keywords || oldSeo.keywords,
+            focusKeyword: req.body.seo.focusKeyword || oldSeo.focusKeyword,
+            jsonLd: (destination.seo && destination.seo.autoGenerateSchema) ? destination.seo.jsonLd : (req.body.seo.jsonLd || oldSeo.jsonLd)
+        };
+    }
+    
     destination.markModified('seo'); // Force Mongoose to detect nested seo object changes
     const saved = await destination.save();
     res.json(saved);

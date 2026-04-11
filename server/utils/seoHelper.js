@@ -40,4 +40,85 @@ const generateSEOQuickLinks = (title, type, slug) => {
     return generated.slice(0, 35);
 };
 
-module.exports = { generateSEOQuickLinks };
+const generateJSONLD = (data, type, hostname = 'yatravi.com') => {
+    if (!data) return '';
+
+    const schemas = [];
+    const baseUrl = `https://${hostname}${type === 'package' ? '/packages/' : '/destination/'}${data.slug}`;
+
+    // 1. Breadcrumb List
+    schemas.push({
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": `https://${hostname}`
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": type === 'package' ? 'Packages' : 'Destinations',
+                "item": `https://${hostname}/${type === 'package' ? 'packages' : 'destination'}`
+            },
+            {
+                "@type": "ListItem",
+                "position": 3,
+                "name": data.title || data.name,
+                "item": baseUrl
+            }
+        ]
+    });
+
+    // 2. Main Entity Schema
+    if (type === 'package') {
+        schemas.push({
+            "@context": "https://schema.org",
+            "@type": "Product",
+            "name": data.title,
+            "description": data.overview || data.seo?.description,
+            "image": data.image,
+            "offers": {
+                "@type": "Offer",
+                "price": data.price,
+                "priceCurrency": "INR",
+                "availability": "https://schema.org/InStock",
+                "url": baseUrl
+            }
+        });
+    } else if (type === 'destination') {
+        schemas.push({
+            "@context": "https://schema.org",
+            "@type": "TouristDestination",
+            "name": data.name,
+            "description": data.description || data.seo?.description,
+            "image": data.heroImage,
+            "location": {
+                "@type": "Place",
+                "name": data.name
+            }
+        });
+    }
+
+    // 3. FAQ Schema
+    if (data.faqs && data.faqs.length > 0) {
+        schemas.push({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": data.faqs.filter(f => f.question && f.answer).map(f => ({
+                "@type": "Question",
+                "name": f.question,
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": f.answer
+                }
+            }))
+        });
+    }
+
+    return JSON.stringify(schemas, null, 2);
+};
+
+module.exports = { generateSEOQuickLinks, generateJSONLD };

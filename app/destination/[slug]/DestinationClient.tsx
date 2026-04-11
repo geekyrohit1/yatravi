@@ -605,9 +605,9 @@ export default function DestinationClient({ initialDestination, initialPackages 
                 showStickyBar ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0 pointer-events-none'
             }`}>
                 <div>
-                    <p className="text-xs text-gray-600 font-semibold tracking-widest leading-none mb-1">Plan your trip</p>
+                    <p className="text-[10px] text-gray-500 font-bold uppercase tracking-wider leading-none mb-1">Starting from</p>
                     <div className="flex items-baseline gap-2">
-                        <span className="text-xl font-semibold tracking-tight text-brand">To {destination.name}</span>
+                        <span className="text-xl font-bold tracking-tight text-slate-900">₹{(destination.startingPrice || destination.startPrice || 25000).toLocaleString()}</span>
                     </div>
                 </div>
                 <button
