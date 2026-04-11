@@ -3,9 +3,8 @@ import { API_BASE_URL } from '../constants';
 import { getGlobalSettings } from '@/lib/api';
 import { HomeClient } from './HomeClient';
 
-// Enable Incremental Static Regeneration (ISR) with a 60-second window
-// This allows the page to be cached and served instantly, eliminating loading screens
-export const revalidate = 60;
+// Force dynamic rendering to ensure fresh data and resolve build-time conflicts with cache: 'no-store'
+export const dynamic = 'force-dynamic';
 
 /**
  * Timeout wrapper for server-side fetches
