@@ -37,8 +37,42 @@ interface HeroDestination {
     startingPrice: number;
 }
 
-// Fallback destinations in case API is empty
-// Fallback destinations with local placeholders
+// 1. Separate component for typewriter to prevent full HeroSection re-renders
+const SearchPlaceholder = ({ destinations }: { destinations: HeroDestination[] }) => {
+    const [dynamicPlaceholder, setDynamicPlaceholder] = useState('');
+    const [placeholderIndex, setPlaceholderIndex] = useState(0);
+    const [isDeletingPlaceholder, setIsDeletingPlaceholder] = useState(false);
+
+    useEffect(() => {
+        if (!destinations || destinations.length === 0) return;
+
+        const currentFullText = destinations[placeholderIndex].name;
+        const typingSpeed = isDeletingPlaceholder ? 40 : 100;
+
+        const timeout = setTimeout(() => {
+            if (!isDeletingPlaceholder) {
+                setDynamicPlaceholder(currentFullText.substring(0, dynamicPlaceholder.length + 1));
+                if (dynamicPlaceholder === currentFullText) {
+                    setTimeout(() => setIsDeletingPlaceholder(true), 2000);
+                }
+            } else {
+                setDynamicPlaceholder(currentFullText.substring(0, dynamicPlaceholder.length - 1));
+                if (dynamicPlaceholder === '') {
+                    setIsDeletingPlaceholder(false);
+                    setPlaceholderIndex((prev) => (prev + 1) % destinations.length);
+                }
+            }
+        }, typingSpeed);
+
+        return () => clearTimeout(timeout);
+    }, [dynamicPlaceholder, isDeletingPlaceholder, placeholderIndex, destinations]);
+
+    return (
+        <span className="text-brand text-[13px] font-semibold truncate text-left">
+            <span translate="no">"{dynamicPlaceholder}"</span>
+        </span>
+    );
+};
 
 interface HeroSectionProps {
     heroData?: any[];
@@ -69,74 +103,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         }
         return [];
     });
-    const [dynamicPlaceholder, setDynamicPlaceholder] = useState('');
-    const [placeholderIndex, setPlaceholderIndex] = useState(0);
-    const [isDeletingPlaceholder, setIsDeletingPlaceholder] = useState(false);
     const [mounted, setMounted] = useState(false);
     const [imageReady, setImageReady] = useState(false);
-
-    useEffect(() => {
-        setMounted(true);
-        // If data is already present, reveal immediately
-        if (heroData && heroData.length > 0) {
-            setImageReady(true);
-        } else {
-            // Still show skeleton if data is missing, but with a shorter failsafe
-            const failsafe = setTimeout(() => setImageReady(true), 800);
-            return () => clearTimeout(failsafe);
-        }
-    }, [heroData]);
-
-    // Update state if props change after initial load
-    useEffect(() => {
-        if (heroData && heroData.length > 0) {
-            const slides = heroData
-                .filter((s: any) => s.enabled !== false)
-                .sort((a: any, b: any) => (a.order || 0) - (b.order || 0))
-                .map((s: any) => ({
-                    name: (s.customTitle || s.name || 'Destination'),
-                    slug: s.slug || 'explore',
-                    heroImage: s.customImage || s.heroImage || '/images/placeholder.svg',
-                    mobileImage: s.customMobileImage || s.mobileMediaUrl || s.mobileImage,
-                    tagline: s.customTagline || s.tagline || 'Explore Now',
-                    startingPrice: s.startingPrice || 12997
-                }));
-
-            if (slides.length > 0) {
-                setHeroDestinationsState(slides);
-            }
-        }
-    }, [heroData]);
-
-    // Typewriter effect for mobile search placeholder
-    useEffect(() => {
-        if (heroDestinationsState.length === 0) return;
-
-        const currentFullText = heroDestinationsState[placeholderIndex].name;
-        const typingSpeed = isDeletingPlaceholder ? 40 : 100;
-
-        const timeout = setTimeout(() => {
-            if (!isDeletingPlaceholder) {
-                // Typing
-                setDynamicPlaceholder(currentFullText.substring(0, dynamicPlaceholder.length + 1));
-
-                if (dynamicPlaceholder === currentFullText) {
-                    // Start deleting after a pause
-                    setTimeout(() => setIsDeletingPlaceholder(true), 2000);
-                }
-            } else {
-                // Deleting
-                setDynamicPlaceholder(currentFullText.substring(0, dynamicPlaceholder.length - 1));
-
-                if (dynamicPlaceholder === '') {
-                    setIsDeletingPlaceholder(false);
-                    setPlaceholderIndex((prev) => (prev + 1) % heroDestinationsState.length);
-                }
-            }
-        }, typingSpeed);
-
-        return () => clearTimeout(timeout);
-    }, [dynamicPlaceholder, isDeletingPlaceholder, placeholderIndex, heroDestinationsState]);
 
     const heroDestinations: HeroDestination[] = heroDestinationsState;
     const activeDestination = heroDestinations[activeIndex] || { name: 'Loading...', slug: '', heroImage: '', tagline: '', startingPrice: 0 };
@@ -237,24 +205,29 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
     return (
         <section className={containerClasses}>
-            {/* Cinematic Blurred Background Glow (Desktop Only) */}
+            {/* Cinematic Blurred Background Glow (Desktop Only) - Optimized to render only the active layer */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none hidden lg:block z-0">
-                {heroDestinations.map((dest, index) => (
-                    <div
-                        key={`bg-glow-${index}-${dest.slug}`}
-                        className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === activeIndex ? 'opacity-20' : 'opacity-0'}`}
-                    >
-                        <Image
-                            src={dest.heroImage || '/images/placeholder.svg'}
-                            alt=""
-                            fill
-                            quality={50}
-                            priority={false}
-                            sizes="100vw"
-                            className="object-cover blur-[80px] saturate-[2.5] brightness-[1.05] transform-gpu scale-110"
-                        />
-                    </div>
-                ))}
+                {heroDestinations.map((dest, index) => {
+                    // Only render the active and potentially the next/prev slide during transitions
+                    if (Math.abs(index - activeIndex) > 1 && !(activeIndex === 0 && index === heroDestinations.length - 1) && !(activeIndex === heroDestinations.length - 1 && index === 0)) return null;
+                    
+                    return (
+                        <div
+                            key={`bg-glow-${index}-${dest.slug}`}
+                            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === activeIndex ? 'opacity-20' : 'opacity-0'}`}
+                        >
+                            <Image
+                                src={dest.heroImage || '/images/placeholder.svg'}
+                                alt=""
+                                fill
+                                quality={30} // Lower quality for blur layers
+                                priority={false}
+                                sizes="10vw" // Very small sizes for blurred background
+                                className="object-cover blur-[60px] saturate-[2] brightness-[1.05] transform-gpu scale-110"
+                            />
+                        </div>
+                    );
+                })}
             </div>
             <div className="relative w-full h-full rounded-none overflow-hidden">
                 {/* NEW DESKTOP SPLIT LAYOUT (replaces lines 319-404 on large screens) */}
@@ -302,7 +275,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                                     const message = `Hi, I am interested in ${activeDestination.name} package. Please share details.`;
                                     window.open(`https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`, '_blank');
                                 }}
-                                className="px-8 py-4 bg-white/40 hover:bg-brand/10 text-gray-700 hover:text-brand font-medium lowercase capitalize-first tracking-widest text-[11px] rounded-xl backdrop-blur-md transition-all flex items-center gap-2 border border-white/20 whitespace-nowrap"
+                                className="px-8 py-4 bg-white/40 hover:bg-brand/10 text-gray-700 hover:text-brand font-medium lowercase capitalize-first tracking-widest text-[11px] rounded-xl transition-all flex items-center gap-2 border border-white/20 whitespace-nowrap"
                             >
                                 <Phone className="w-4 h-4" />
                                 <span className="capitalize-first">chat expert</span>
@@ -440,9 +413,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                             >
                                 <div className="flex items-center gap-1.5 overflow-hidden">
                                     <span className="text-gray-900 text-[13px] font-medium tracking-tight">Search your destination</span>
-                                    <span className="text-brand text-[13px] font-semibold truncate text-left">
-                                        <span translate="no">"{dynamicPlaceholder}"</span>
-                                    </span>
+                                    <SearchPlaceholder destinations={heroDestinationsState} />
                                 </div>
                                 <Search className="w-4 h-4 text-gray-400 group-hover:text-brand transition-colors" />
                             </button>

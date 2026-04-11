@@ -62,6 +62,7 @@ export default {
                 alt: ['var(--font-montserrat-alt)', 'sans-serif'],
                 fancy: ['var(--font-orange-avenue)', 'serif'],
                 engagement: ['var(--font-engagement)', 'cursive'],
+                'dm-serif': ['var(--font-dm-serif)', 'serif'],
                 mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace'],
             },
             keyframes: {

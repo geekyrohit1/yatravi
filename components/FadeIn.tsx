@@ -48,7 +48,7 @@ export const FadeIn: React.FC<FadeInProps> = ({ children, delay = 0, className =
             className={`${className} transition-all duration-[200ms] cubic-bezier(0.16, 1, 0.3, 1) ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}
             style={{
                 transitionDelay: `${delay}ms`,
-                willChange: 'opacity, transform'
+                willChange: isVisible ? 'auto' : 'opacity, transform'
             }}
         >
             {children}

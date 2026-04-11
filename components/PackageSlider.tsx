@@ -14,11 +14,19 @@ export const PackageSlider: React.FC<PackageSliderProps> = ({ title, subtitle, p
   const [isAtStart, setIsAtStart] = useState(true);
   const [isAtEnd, setIsAtEnd] = useState(false);
 
+  const ticking = useRef(false);
+
   const checkScrollPosition = () => {
-    if (scrollRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-      setIsAtStart(scrollLeft === 0);
-      setIsAtEnd(scrollLeft + clientWidth >= scrollWidth - 1); 
+    if (!ticking.current) {
+      requestAnimationFrame(() => {
+        if (scrollRef.current) {
+          const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+          setIsAtStart(scrollLeft <= 5); // Added small buffer
+          setIsAtEnd(scrollLeft + clientWidth >= scrollWidth - 5); 
+        }
+        ticking.current = false;
+      });
+      ticking.current = true;
     }
   };
 

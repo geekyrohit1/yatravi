@@ -503,7 +503,22 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
                                 </div>
                             ))}
                         </div>
-                        <div className="text-[22px] md:text-2xl font-semibold text-gray-900 leading-tight tracking-tight pr-4">{packageData.title}</div>
+                        <div className="flex justify-between items-start gap-1.5">
+                            <div className="text-[22px] md:text-2xl font-semibold text-gray-900 leading-tight tracking-tight flex-1">
+                                {packageData.title}
+                            </div>
+                            
+                            {/* Minimalism Calendar Style Days Indicator (Mobile Only) */}
+                            <div className="shrink-0 flex flex-col items-center border border-gray-100 rounded-xl overflow-hidden bg-white min-w-[50px] animate-fade-up">
+                                <div className="bg-brand w-full py-1 px-1 flex justify-center">
+                                    <Calendar className="w-2 h-2 text-white" />
+                                </div>
+                                <div className="py-1 px-1 flex flex-col items-center justify-center leading-none">
+                                    <span className="text-[24px] font-dm-serif font-black text-[#0f172a] tracking-tight">{packageData.duration}</span>
+                                    <span className="text-[7.5px] font-fancy font-bold text-slate-500 tracking-[0.05em] uppercase mt-0.5">Days</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     {/* Region Breakdown Highlight Bar (Mobile) */}
@@ -1025,30 +1040,37 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
                     </div>
                 </div>
                 <button
-                    onClick={() => setShowMobileForm(true)}
-                    className="bg-brand text-white px-6 py-3 rounded-xl font-semibold text-sm shadow-md hover:bg-brand-dark transition-colors"
+                    onPointerDown={() => setShowMobileForm(true)}
+                    className="bg-brand text-white px-6 py-3 rounded-xl font-semibold text-sm shadow-md hover:bg-brand-dark transition-colors touch-action-manipulation"
                 >
                     Inquire Now
                 </button>
             </div>
 
-            {/* Standardized Mobile Inquiry Drawer */}
-            {showMobileForm && (
-                <div className="lg:hidden fixed inset-0 z-[100] flex items-end justify-center bg-black/60 backdrop-blur-sm animate-in fade-in duration-300 pointer-events-auto">
-                    <div className="relative w-full max-h-[92vh] animate-in slide-in-from-bottom-full duration-500">
-                        <div className="rounded-t-xl overflow-hidden shadow-2xl-up">
-                            <InquiryWidget
-                                title={`Inquiry for ${packageData.title}`}
-                                onClose={() => setShowMobileForm(false)}
-                                showPaxCount={true}
-                                packageId={pkg._id}
-                                packageTitle={pkg.title}
-                                source="Package Detail Page"
-                            />
-                        </div>
+            {/* Standardized Mobile Inquiry Drawer - Pre-mounted for Zero Latency */}
+            <div 
+                className={`lg:hidden fixed inset-0 z-[100] flex items-end justify-center bg-black/60 transition-opacity duration-300 ${
+                    showMobileForm ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+                }`}
+                onPointerDown={(e) => {
+                    if (e.target === e.currentTarget) setShowMobileForm(false);
+                }}
+            >
+                <div className={`relative w-full max-h-[92vh] transition-transform duration-500 ease-out ${
+                    showMobileForm ? 'translate-y-0' : 'translate-y-full'
+                }`}>
+                    <div className="rounded-t-xl overflow-hidden shadow-2xl-up">
+                        <InquiryWidget
+                            title={`Inquiry for ${packageData.title}`}
+                            onClose={() => setShowMobileForm(false)}
+                            showPaxCount={true}
+                            packageId={pkg._id}
+                            packageTitle={pkg.title}
+                            source="Package Detail Page"
+                        />
                     </div>
                 </div>
-            )}
+            </div>
 
             {/* Gallery Lightbox Modal */}
             {showGallery && (

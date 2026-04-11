@@ -82,7 +82,7 @@ interface InquiryWidgetProps {
     source?: string;
 }
 
-export const InquiryWidget = ({ 
+export const InquiryWidget = React.memo(({ 
     title, 
     onClose, 
     showPaxCount = false, 
@@ -344,4 +344,4 @@ export const InquiryWidget = ({
             </LocalizationProvider>
         </ThemeProvider>
     );
-};
+});

@@ -611,28 +611,35 @@ export default function DestinationClient({ initialDestination, initialPackages 
                     </div>
                 </div>
                 <button
-                    onClick={() => setShowMobileForm(true)}
-                    className="bg-brand text-white px-6 py-3 rounded-xl font-semibold text-sm shadow-md hover:bg-brand-dark transition-colors"
+                    onPointerDown={() => setShowMobileForm(true)}
+                    className="bg-brand text-white px-6 py-3 rounded-xl font-semibold text-sm shadow-md hover:bg-brand-dark transition-colors touch-action-manipulation"
                 >
                     Inquire Now
                 </button>
             </div>
 
-            {/* Refined Mobile Form - Bottom Drawer (Integrated Design) */}
-            {showMobileForm && (
-                <div className="lg:hidden fixed inset-0 z-[100] flex items-end justify-center bg-black/60 backdrop-blur-sm animate-in fade-in duration-300 pointer-events-auto">
-                    <div className="relative w-full max-h-[85vh] animate-in slide-in-from-bottom-full duration-500">
-                        <div className="rounded-t-xl overflow-hidden shadow-2xl-up">
-                            <InquiryWidget
-                                title={`Planning a ${destination.name} Trip?`}
-                                onClose={() => setShowMobileForm(false)}
-                                packageTitle={destination.name}
-                                source="Destination Page"
-                            />
-                        </div>
+            {/* Pre-mounted Mobile Form - Bottom Drawer (Zero Latency) */}
+            <div 
+                className={`lg:hidden fixed inset-0 z-[100] flex items-end justify-center bg-black/60 transition-opacity duration-300 ${
+                    showMobileForm ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+                }`}
+                onPointerDown={(e) => {
+                    if (e.target === e.currentTarget) setShowMobileForm(false);
+                }}
+            >
+                <div className={`relative w-full max-h-[85vh] transition-transform duration-500 ease-out ${
+                    showMobileForm ? 'translate-y-0' : 'translate-y-full'
+                }`}>
+                    <div className="rounded-t-xl overflow-hidden shadow-2xl-up">
+                        <InquiryWidget
+                            title={`Planning a ${destination.name} Trip?`}
+                            onClose={() => setShowMobileForm(false)}
+                            packageTitle={destination.name}
+                            source="Destination Page"
+                        />
                     </div>
                 </div>
-            )}
+            </div>
         </div >
     );
 }

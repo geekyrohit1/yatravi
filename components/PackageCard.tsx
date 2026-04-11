@@ -357,7 +357,7 @@ const PackageCardComponent: React.FC<PackageCardProps> = ({ pkg, variant = 'vert
             {/* Top-Left Badges */}
             <div className="absolute top-2 left-2 flex flex-col gap-1 items-start z-10">
               {pkg.groupSize && pkg.groupSize.toLowerCase().includes('fixed') && (
-                <div className="bg-white/95 backdrop-blur-md border border-white/40 text-[#fb5012] text-[7px] font-bold px-1.5 py-0.5 rounded-md shadow-[0_4px_12px_rgba(0,0,0,0.06)] flex items-center gap-1 tracking-[0.08em]">
+                <div className="bg-white/95 border border-white/40 text-[#fb5012] text-[7px] font-bold px-1.5 py-0.5 rounded-md shadow-[0_4px_12px_rgba(0,0,0,0.06)] flex items-center gap-1 tracking-[0.08em]">
                   <Calendar className="w-2 h-2" />
                   <span>Fixed Departure</span>
                 </div>
@@ -378,7 +378,7 @@ const PackageCardComponent: React.FC<PackageCardProps> = ({ pkg, variant = 'vert
 
             {/* Bottom Overlay Badges */}
             <div className="absolute bottom-1.5 left-1.5 right-1.5 flex justify-between items-end z-20">
-              <div className="bg-white/95 backdrop-blur-md px-1.5 py-1 rounded-md shadow-sm flex items-center gap-1 border border-white/40 leading-none">
+              <div className="bg-white/95 px-1.5 py-1 rounded-md shadow-sm flex items-center gap-1 border border-white/40 leading-none">
                 <Clock className="w-3 h-3 text-gray-900" />
                 <span className="text-[11.5px] md:text-[11px] text-gray-900 font-bold tracking-tight">
                   <span translate="no">{pkg.duration}D</span>
@@ -386,7 +386,7 @@ const PackageCardComponent: React.FC<PackageCardProps> = ({ pkg, variant = 'vert
                   <span translate="no">{pkg.duration - 1}N</span>
                 </span>
               </div>
-              <div className="flex items-center gap-1 bg-white/95 backdrop-blur-md px-1.5 py-1 rounded-md shadow-sm font-bold text-[11.5px] md:text-[11px] border border-white/40 leading-none">
+              <div className="flex items-center gap-1 bg-white/95 px-1.5 py-1 rounded-md shadow-sm font-bold text-[11.5px] md:text-[11px] border border-white/40 leading-none">
                 <Star className="w-3 h-3 fill-brand text-brand" />
                 <span className="text-brand" translate="no">{pkg.rating}</span>
               </div>

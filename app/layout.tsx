@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
-import { Satisfy, Engagement } from 'next/font/google';
+import { Satisfy, Engagement, DM_Serif_Display } from 'next/font/google';
 import '../index.css';
 import { Layout } from '../components/Layout';
 import { GlobalInquiryPopup } from '../components/GlobalInquiryPopup';
@@ -25,6 +25,13 @@ const engagement = Engagement({
     subsets: ['latin'],
     weight: '400',
     variable: '--font-engagement',
+    display: 'swap',
+});
+
+const dmSerif = DM_Serif_Display({
+    subsets: ['latin'],
+    weight: '400',
+    variable: '--font-dm-serif',
     display: 'swap',
 });
 
@@ -119,7 +126,7 @@ export default async function RootLayout({
     const settings = await getGlobalSettings();
 
     return (
-        <html lang="en" suppressHydrationWarning className={`${montserrat.variable} ${montserratAlternates.variable} ${orangeAvenue.variable} ${satisfy.variable} ${engagement.variable} antialiased`}>
+        <html lang="en" suppressHydrationWarning className={`${montserrat.variable} ${montserratAlternates.variable} ${orangeAvenue.variable} ${satisfy.variable} ${engagement.variable} ${dmSerif.variable} antialiased`}>
             <head>
                 {/* Preconnect to improve TTFB for images and API */}
                 <link rel="preconnect" href="https://yatravi.com" />

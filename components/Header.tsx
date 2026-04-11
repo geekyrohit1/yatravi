@@ -55,8 +55,8 @@ export const Header: React.FC<HeaderProps> = ({
 
   return (
     <nav className={`${pathname === '/'
-      ? 'hidden lg:flex md:absolute md:top-10 md:bg-transparent md:border-0 md:shadow-none md:lg:bg-brand-dark lg:border-white/10 md:bg-white/80 md:backdrop-blur-md'
-      : 'sticky top-0 lg:bg-brand-dark lg:border-white/10 bg-white/80 backdrop-blur-md border-b border-white/50 flex'
+      ? 'hidden lg:flex md:absolute md:top-10 md:bg-transparent md:border-0 md:shadow-none md:lg:bg-brand-dark lg:border-white/10 md:bg-white/95'
+      : 'sticky top-0 lg:bg-brand-dark lg:border-white/10 bg-white/95 border-b border-white/50 flex'
       } w-full ${isMobileMenuOpen ? 'z-[9999]' : 'z-[100]'} px-4 sm:px-6 lg:px-8 py-1.5 md:py-3 lg:py-6 transition-all duration-300 [backface-visibility:hidden] [transform:translateZ(0)]`}>
       <div className="max-w-7xl mx-auto w-full">
         <div className="flex items-center justify-between gap-2 lg:gap-0">
@@ -243,7 +243,7 @@ export const Header: React.FC<HeaderProps> = ({
               className={`${isMobileMenuOpen
                 ? 'text-gray-900'
                 : 'text-gray-900'
-                } h-[38px] w-10 md:h-[44px] md:w-11 flex items-center justify-center relative z-[210] transition-all duration-300 active:scale-95`}
+                } h-[38px] w-10 md:h-[44px] md:w-11 flex items-center justify-center relative z-[210] transition-all duration-300 touch-action-manipulation`}
             >
               {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>

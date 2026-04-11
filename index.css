@@ -116,7 +116,7 @@ body {
     font-family: var(--font-montserrat), system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
+    text-rendering: auto;
 }
 
 h1,
@@ -178,17 +178,11 @@ p {
 
 .animate-fade-up {
     animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    will-change: opacity, transform;
 }
 
 .performance-section, .gpu-accelerated {
-    /* High-performance rendering layer without over-taxing GPU */
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-    will-change: transform, opacity;
-    contain: content;
+    /* High-performance rendering layer - Optimized for scroll sync */
+    contain: layout;
 }
 
 .no-flicker {

@@ -43,7 +43,7 @@ const SuperSaverCard = ({ pkg }: { pkg: Package }) => {
 
                 {/* Region Breakdown Highlight Bar (Saver Variant) - Micro-Scaled for Mobile */}
                 {(pkg.regionBreakdown || pkg.itinerarySummary) && (
-                    <div className="flex items-center gap-1.5 py-0.5 px-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg mb-2 w-fit">
+                    <div className="flex items-center gap-1.5 py-0.5 px-2 bg-white/20 border border-white/20 rounded-lg mb-2 w-fit">
                         <p className="text-[8.5px] md:text-[10px] text-white font-medium leading-[1.4] md:leading-snug">
                             {(pkg.regionBreakdown || pkg.itinerarySummary || '').split(/[•|·]| - /).map((part, i) => (
                                 <React.Fragment key={`saver-r-${i}`}>

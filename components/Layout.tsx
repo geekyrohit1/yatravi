@@ -48,6 +48,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
 
   const [showWhatsApp, setShowWhatsApp] = useState(false);
   const [hasStickyMobileBar, setHasStickyMobileBar] = useState(false);
+  const prevVisibleRef = React.useRef(false);
   
   useEffect(() => {
     const handleScrollVisibility = () => {
@@ -55,12 +56,18 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
       const windowHeight = window.innerHeight;
       const totalHeight = document.documentElement.scrollHeight;
       
-      // Show WhatsApp after 300px, but hide it near the footer (600px threshold)
+      // Calculate desired state
       const isNearFooter = (scrollPos + windowHeight) > (totalHeight - 600);
-      setShowWhatsApp(scrollPos > 300 && !isNearFooter);
+      const shouldBeVisible = scrollPos > 300 && !isNearFooter;
+
+      // Only update state if visibility actually changed to prevent 60fps re-renders
+      if (shouldBeVisible !== prevVisibleRef.current) {
+        prevVisibleRef.current = shouldBeVisible;
+        setShowWhatsApp(shouldBeVisible);
+      }
     };
 
-    window.addEventListener('scroll', handleScrollVisibility);
+    window.addEventListener('scroll', handleScrollVisibility, { passive: true });
     return () => window.removeEventListener('scroll', handleScrollVisibility);
   }, []);
 
@@ -365,7 +372,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
           </a>
 
           {/* Minimalistic Text Message Above Icon */}
-          <div className="bg-white/95 backdrop-blur-md border border-gray-100 px-3 py-1.5 md:px-2.5 md:py-1 rounded-xl shadow-lg animate-fade-up">
+          <div className="bg-white/95 border border-gray-100 px-3 py-1.5 md:px-2.5 md:py-1 rounded-xl shadow-lg animate-fade-up">
             <p className="text-[9px] md:text-[9.5px] font-bold text-gray-800 tracking-tight whitespace-nowrap">Chat with us?</p>
           </div>
         </div>
