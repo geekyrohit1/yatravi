@@ -162,7 +162,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         }, 5000); // Change slide every 5 seconds
 
         return () => clearInterval(interval);
-    }, [handleNext, heroDestinations.length]); 
+    }, [handleNext, heroDestinations.length]);
 
     const handleExplore = () => {
         router.push(`/destination/${activeDestination.slug}`);
@@ -210,7 +210,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 {heroDestinations.map((dest, index) => {
                     // Only render the active and potentially the next/prev slide during transitions
                     if (Math.abs(index - activeIndex) > 1 && !(activeIndex === 0 && index === heroDestinations.length - 1) && !(activeIndex === heroDestinations.length - 1 && index === 0)) return null;
-                    
+
                     return (
                         <div
                             key={`bg-glow-${index}-${dest.slug}`}
@@ -220,10 +220,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                                 src={dest.heroImage || '/images/placeholder.svg'}
                                 alt=""
                                 fill
-                                quality={30} // Lower quality for blur layers
+                                quality={20} // Low quality for blurred glow layers
                                 priority={false}
-                                sizes="10vw" // Very small sizes for blurred background
-                                className="object-cover blur-[60px] saturate-[2] brightness-[1.05] transform-gpu scale-110"
+                                sizes="10vw" 
+                                className="object-cover blur-[60px] saturate-[2] brightness-[1.1] transform-gpu scale-110"
                             />
                         </div>
                     );
@@ -241,9 +241,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                             </span>
                         </div>
 
-                        <h1 className="text-5xl lg:text-[56px] font-semibold text-gray-900 leading-[1.1] mb-8 lowercase capitalize-first tracking-wide max-w-xl">
+                        <h2 className="text-5xl lg:text-[56px] font-semibold text-gray-900 leading-[1.1] mb-8 lowercase capitalize-first tracking-wide max-w-xl">
                             {activeDestination.name}
-                        </h1>
+                        </h2>
 
                         <div className="flex flex-col mb-10 border-l-2 border-brand/30 pl-5">
                             <span className="text-[10px] font-bold text-brand lowercase tracking-[0.25em] mb-1.5 capitalize-first">
@@ -296,11 +296,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                                             src={dest.heroImage || '/images/placeholder.svg'}
                                             alt={dest.name}
                                             fill
-                                            quality={75}
+                                            quality={60} // Balanced for high speed
                                             priority={index === 0}
+                                            {...(index === 0 ? { fetchPriority: "high" } : {})}
                                             loading={index === 0 ? "eager" : "lazy"}
                                             decoding="async"
-                                            sizes="(max-width: 1024px) 100vw, 1200px"
+                                            sizes="(max-width: 1024px) 100vw, (max-width: 1280px) 50vw, 800px"
                                             className="object-cover transform-gpu"
                                         />
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60" />
@@ -330,7 +331,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 </div>
 
                 {/* REDESIGNED MOBILE/TABLET LAYOUT - Dynamic Image Background with Minimalist UI overlay */}
-                <div 
+                <div
                     className="lg:hidden relative w-full h-full overflow-hidden shadow-sm"
                     onTouchStart={onTouchStart}
                     onTouchMove={onTouchMove}
@@ -348,10 +349,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                                     src={dest.mobileImage || dest.heroImage}
                                     alt={dest.name}
                                     fill
-                                    quality={75}
-                                    sizes="(max-width: 1024px) 100vw, 100vw"
+                                    quality={60} // Balanced for mobile speed
+                                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 70vw, 100vw"
                                     className="object-cover"
                                     priority={index === 0}
+                                    {...(index === 0 ? { fetchPriority: "high" } : {})}
                                     loading={index === 0 ? "eager" : "lazy"}
                                     decoding="async"
                                 />
@@ -397,9 +399,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                             {/* Personalized Greeting matches user mockup */}
                             <div className="mb-3 transform transition-all duration-700 delay-100 translate-y-0 opacity-100">
                                 <div className="flex items-center gap-2 mb-1.5">
-                                    <h2 className="text-white text-3xl font-bold tracking-tight leading-tight drop-shadow-md max-w-[90%]">
+                                    <h3 className="text-white text-3xl font-bold tracking-tight leading-tight drop-shadow-md max-w-[90%] font-sans">
                                         <span>Where Do You Want to Go?</span>
-                                    </h2>
+                                    </h3>
                                 </div>
                                 <p className="text-white/90 text-[13px] font-medium tracking-tight drop-shadow-sm">
                                     <span>Thoughtfully planned trips from<span className="text-[#ffea00] font-semibold">" ₹7,999/- Per Person"</span></span>

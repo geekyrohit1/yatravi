@@ -58,9 +58,9 @@ export const HoneymoonSpecials: React.FC<HoneymoonSpecialsProps> = ({ packages, 
                     <div>
                         <div className="flex items-center gap-3 mb-1">
                             <div className="w-1 h-5 md:h-6 bg-brand rounded-full"></div>
-                            <h2 className="text-xl md:text-2xl font-bold tracking-tight text-gray-900 py-1">
+                            <h3 className="text-xl md:text-2xl font-bold tracking-tight text-gray-900 py-1">
                                 <span>{title}</span>
-                            </h2>
+                            </h3>
                         </div>
                         {subtitle && <p className="text-gray-500 text-[10px] md:text-xs ml-4 pl-3 border-l-2 border-gray-200 tracking-wide font-medium">
                             <span>{subtitle}</span>
@@ -78,7 +78,7 @@ export const HoneymoonSpecials: React.FC<HoneymoonSpecialsProps> = ({ packages, 
 
                 <div 
                     ref={scrollRef}
-                    className="flex gap-3 md:gap-6 overflow-x-auto pb-4 pt-2 no-scrollbar snap-x"
+                    className="flex gap-3 md:gap-6 overflow-x-auto pb-4 pt-2 no-scrollbar snap-x snap-mandatory"
                 >
                     {displayPackages.map((pkg) => (
                         <div 

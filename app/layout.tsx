@@ -72,9 +72,9 @@ export async function generateMetadata(): Promise<Metadata> {
 
     const siteName = globalSeo.siteName || 'Yatravi';
     const titleSeparator = globalSeo.titleSeparator || '|';
-    const defaultTitle = globalSeo.defaultTitle || 'Yatravi | We Care Your Trip - Lowest Price Holiday Packages';
-    const defaultDescription = globalSeo.defaultDescription || 'Explore the world with Yatravi. Lowest price holiday packages and premium travel experiences.';
-    const defaultKeywords = globalSeo.defaultKeywords || 'travel agency, holiday packages, tour packages, cheapest tours';
+    const defaultTitle = globalSeo.defaultTitle || 'Yatravi | Best Holiday Packages & Luxury Tour Packages - Lowest Price Guaranteed';
+    const defaultDescription = globalSeo.defaultDescription || 'Yatravi is your leading Travel Agency for the best Holiday Packages and Tour Packages. View premium destinations, book your stay, and save on your next trip.';
+    const defaultKeywords = globalSeo.defaultKeywords || 'Travel Agency, Holiday Packages, Tour Packages, Best Tours, Low Price Packages, View Destinations';
     const ogImage = globalSeo.defaultOgImage || '/og-image.png';
 
     return {
@@ -108,7 +108,11 @@ export async function generateMetadata(): Promise<Metadata> {
             creator: globalSeo.twitterHandle || '@yatravi'
         },
         icons: {
-            icon: '/favicon.svg',
+            icon: [
+                { url: '/favicon.svg', type: 'image/svg+xml' },
+                { url: '/yatraviicon.png', type: 'image/png' },
+            ],
+            shortcut: '/favicon.svg',
             apple: '/yatraviicon.png',
         },
         metadataBase: new URL('https://yatravi.com'),
@@ -133,6 +137,7 @@ export default async function RootLayout({
                 <link rel="dns-prefetch" href="https://yatravi.com" />
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+                <link rel="preconnect" href="https://www.google-analytics.com" />
                 
                 {/* Google Translate & Hydration Fixes */}
                 <Script id="browser-fixes" strategy="beforeInteractive">

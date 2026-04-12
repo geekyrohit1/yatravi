@@ -191,8 +191,12 @@ const PackageCardComponent: React.FC<PackageCardProps> = ({ pkg, variant = 'vert
   if (variant === 'horizontal') {
     return (
       <div
-        className="group flex flex-col md:flex-row bg-white rounded-lg overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer h-full max-w-full"
-        onClick={() => router.push(`/packages/${pkg.slug || pkg.id}`)}
+        className="group flex flex-col md:flex-row bg-white rounded-lg overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer h-full max-w-full snap-start snap-always"
+        onClick={() => {
+          if (typeof window !== 'undefined' && window.innerWidth >= 768) {
+            router.push(`/packages/${pkg.slug || pkg.id}`);
+          }
+        }}
       >
 
         {/* Image Section - Framed Look */}
@@ -283,30 +287,30 @@ const PackageCardComponent: React.FC<PackageCardProps> = ({ pkg, variant = 'vert
 
           {/* Footer Area - Compact Footer */}
           <div className="mt-auto pt-4 border-t border-gray-100 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1fr,auto] items-end gap-3">
-            <div className="space-y-0.5">
-              <p className="text-[9px] text-gray-400 font-semibold tracking-wider leading-none mb-1.5 uppercase">
-                <span>Starting from</span>
+            <div className="space-y-1">
+              <p className="text-[10px] text-gray-400 font-bold tracking-widest leading-none mb-2 uppercase opacity-70">
+                Starting from
               </p>
-              <div className="flex items-baseline gap-1.5 flex-wrap">
-                <span className="text-xl md:text-2xl font-bold text-gray-900 tracking-tighter" translate="no">
-                  <span className="mr-1">INR</span>
-                  <span>{price.toLocaleString()}</span>
-                </span>
+              <div className="flex items-baseline gap-2 flex-wrap min-h-[32px]">
+                <div className="flex items-baseline gap-1.5">
+                  <span className="text-[20px] md:text-[25px] font-medium text-gray-900 tracking-tighter">INR</span>
+                  <span className="text-[20px] md:text-[25px] font-medium text-gray-900 tracking-tighter" translate="no">
+                    {price.toLocaleString()}
+                  </span>
+                </div>
                 {originalPrice > price && (
-                  <div className="flex items-center gap-2">
-                    <span className="text-[11px] text-gray-400 line-through font-medium opacity-60" translate="no">
-                      <span className="mr-1">INR</span>
-                      <span>{originalPrice.toLocaleString()}</span>
+                  <div className="flex items-center gap-2 mb-0.5">
+                    <span className="text-[12px] text-gray-400 line-through font-medium opacity-50" translate="no">
+                      ₹{originalPrice.toLocaleString()}
                     </span>
-                    <span className="bg-[#f0fdf4] text-[#0f766e] text-[9px] font-extrabold px-2 py-0.5 rounded-md border border-[#dcfce7] tracking-wide inline-block" translate="no">
-                      <span className="mr-1">SAVE INR</span>
-                      <span>{savedAmount.toLocaleString()}</span>
+                    <span className="bg-emerald-50 text-emerald-700 text-[10px] font-bold px-2 py-0.5 rounded-md border border-emerald-100/50 tracking-tight" translate="no">
+                      Save ₹{savedAmount.toLocaleString()}
                     </span>
                   </div>
                 )}
               </div>
-              <div className="pt-0.5">
-                <p className="text-[8px] md:text-[9px] text-green-600 font-semibold bg-green-50/50 w-fit px-1.5 py-0.5 rounded-md border border-green-100/30 tracking-wide inline-block">Includes Taxes & Fees</p>
+              <div className="pt-1">
+                <p className="text-[9px] text-emerald-600 font-bold bg-emerald-50/30 w-fit px-2 py-0.5 rounded-md border border-emerald-100/20 tracking-wide">Includes Taxes & Fees</p>
               </div>
             </div>
 
@@ -336,8 +340,12 @@ const PackageCardComponent: React.FC<PackageCardProps> = ({ pkg, variant = 'vert
   return (
     <>
       <div
-        className="bg-white rounded-lg shadow-[0_4px_20px_rgba(0,0,0,0.05)] border border-gray-200/60 overflow-hidden group flex flex-col h-full cursor-pointer transition-all duration-300 hover:shadow-[0_12px_30px_rgba(0,0,0,0.08)] transform-gpu"
-        onClick={() => router.push(`/packages/${pkg.slug || pkg.id}`)}
+        className="bg-white rounded-lg shadow-[0_4px_20px_rgba(0,0,0,0.05)] border border-gray-200/60 overflow-hidden group flex flex-col h-full cursor-pointer transition-all duration-300 hover:shadow-[0_12px_30px_rgba(0,0,0,0.08)] transform-gpu snap-start snap-always"
+        onClick={() => {
+          if (typeof window !== 'undefined' && window.innerWidth >= 768) {
+            router.push(`/packages/${pkg.slug || pkg.id}`);
+          }
+        }}
       >
 
         {/* Image Section - Framed Look */}
@@ -442,23 +450,23 @@ const PackageCardComponent: React.FC<PackageCardProps> = ({ pkg, variant = 'vert
 
 
           <div className="mt-auto">
-            <div className="flex items-center gap-1.5 mb-1.5">
-              <span className="text-[10px] md:text-[9px] text-gray-500 line-through font-medium tracking-tight" translate="no">
-                <span className="mr-1">INR</span>
-                <span>{originalPrice.toLocaleString()}</span>
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-[11px] text-gray-400 line-through font-medium opacity-50" translate="no">
+                ₹{originalPrice.toLocaleString()}
               </span>
-              <span className="bg-[#f0fdf4] text-[#0f766e] text-[9px] md:text-[7.5px] font-extrabold px-1.5 py-0.5 rounded-md border border-[#dcfce7]" translate="no">
-                <span className="mr-0.5">SAVE INR</span>
-                <span>{savedAmount.toLocaleString()}</span>
+              <span className="bg-emerald-50 text-emerald-700 text-[9px] font-bold px-1.5 py-0.5 rounded-md border border-emerald-100/30 tracking-tight" translate="no">
+                Save ₹{savedAmount.toLocaleString()}
               </span>
             </div>
-            <div className="flex items-baseline gap-1 mb-2.5 md:mb-3">
-              <h3 className="text-[21px] sm:text-[18.5px] md:text-[14.5px] lg:text-xl font-bold text-gray-900 tracking-tight" translate="no">
-                <span className="mr-1">INR</span>
-                <span>{price.toLocaleString()}</span>
-              </h3>
-              <span className="text-[11px] sm:text-[10.5px] md:text-[8.5px] lg:text-[10px] text-gray-400 font-medium whitespace-nowrap">
-                <span>/ person</span>
+            <div className="flex items-baseline gap-1.5 mb-5 md:mb-6">
+              <div className="flex items-baseline gap-1.5">
+                <span className="text-[21.5px] sm:text-[19px] md:text-[15.5px] lg:text-[22px] font-medium text-gray-900 tracking-tighter">INR</span>
+                <div className="text-[21.5px] sm:text-[19px] md:text-[15.5px] lg:text-[22px] font-medium text-gray-900 tracking-tighter leading-none" translate="no">
+                  {price.toLocaleString()}
+                </div>
+              </div>
+              <span className="text-[11px] md:text-[10px] text-gray-400 font-medium tracking-tight">
+                / person
               </span>
             </div>
 

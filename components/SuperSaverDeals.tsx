@@ -17,7 +17,11 @@ const SuperSaverCard = ({ pkg }: { pkg: Package }) => {
 
     return (
         <div
-            onClick={() => router.push(`/packages/${pkg.slug || pkg.id}`)}
+            onClick={() => {
+                if (typeof window !== 'undefined' && window.innerWidth >= 768) {
+                    router.push(`/packages/${pkg.slug || pkg.id}`);
+                }
+            }}
             className="relative h-[280px] md:h-[420px] w-full rounded-lg overflow-hidden group cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-500"
         >
             {/* Background Image */}
@@ -60,9 +64,9 @@ const SuperSaverCard = ({ pkg }: { pkg: Package }) => {
                     <span className="text-white/60 text-[8px] md:text-[10px] font-medium tracking-wider mb-0.5">
                         <span>Starts at</span>
                     </span>
-                    <div className="flex items-baseline gap-1" translate="no">
-                        <span className="text-white text-[14.5px] md:text-2xl font-bold tracking-tight">
-                            <span className="mr-0.5">₹</span>
+                    <div className="flex items-baseline gap-1.5 mb-1" translate="no">
+                        <span className="text-white text-[13.5px] md:text-[20.5px] font-medium tracking-tight">
+                            <span className="mr-1 font-medium">₹</span>
                             <span>{(pkg.price || 0).toLocaleString()}</span>
                         </span>
                         {pkg.originalPrice && pkg.originalPrice > pkg.price && (
@@ -127,9 +131,9 @@ export const SuperSaverDeals: React.FC<SuperSaverDealsProps> = ({ packages, data
                     <div>
                         <div className="flex items-center gap-3 mb-1">
                             <div className="w-1 h-5 md:h-6 bg-brand rounded-full"></div>
-                            <h2 className="text-xl md:text-2xl font-bold tracking-tight text-gray-900 py-1">
+                            <h3 className="text-xl md:text-2xl font-bold tracking-tight text-gray-900 py-1">
                                 <span>{title}</span>
-                            </h2>
+                            </h3>
                         </div>
                         {subtitle && <p className="text-gray-500 text-[10px] md:text-xs ml-4 pl-3 border-l-2 border-gray-200 tracking-wide font-medium">
                             <span>{subtitle}</span>
@@ -145,7 +149,7 @@ export const SuperSaverDeals: React.FC<SuperSaverDealsProps> = ({ packages, data
                     </div>
                 </div>
 
-                <div ref={scrollRef} className="flex gap-3 md:gap-6 overflow-x-auto pb-4 pt-2 no-scrollbar snap-x">
+                <div ref={scrollRef} className="flex gap-3 md:gap-6 overflow-x-auto pb-4 pt-2 no-scrollbar snap-x snap-mandatory">
                     {deals.map((pkg) => (
                         <div
                             key={pkg._id || pkg.id}

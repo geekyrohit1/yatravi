@@ -264,7 +264,7 @@ export default function PackageClient({ initialPkg }: PackageClientProps) {
                         className="w-full lg:col-span-9 flex overflow-x-auto snap-x snap-mandatory no-scrollbar lg:overflow-hidden lg:block h-full relative"
                     >
                         {packageData.gallery.map((img: string, idx: number) => (
-                            <div key={idx} className="min-w-full h-full relative snap-start snap-stop-always shrink-0 lg:absolute lg:inset-0 lg:hidden first:lg:block">
+                            <div key={idx} className="min-w-full h-full relative snap-start snap-always shrink-0 lg:absolute lg:inset-0 lg:hidden first:lg:block">
                                 <Image
                                     src={img || packageData.image}
                                     alt={`Gallery View ${idx + 1}`}

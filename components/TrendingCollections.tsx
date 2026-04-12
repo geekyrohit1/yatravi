@@ -56,9 +56,9 @@ export const TrendingCollections: React.FC<TrendingCollectionsProps> = ({ data }
                     <div>
                         <div className="flex items-center gap-3">
                             <div className="w-1 h-5 md:h-6 bg-brand rounded-full" />
-                            <h2 className="text-xl md:text-2xl font-bold tracking-tight text-gray-900 py-1">
+                            <h3 className="text-xl md:text-2xl font-bold tracking-tight text-gray-900 py-1">
                                 {title}
-                            </h2>
+                            </h3>
                         </div>
                         {subtitle && <p className="text-gray-500 text-[10px] md:text-xs ml-4 pl-3 border-l-2 border-gray-200 tracking-wide font-medium">{subtitle}</p>}
                     </div>
@@ -71,7 +71,7 @@ export const TrendingCollections: React.FC<TrendingCollectionsProps> = ({ data }
                         // Index 1, 2: Small Right (col-span-1)
                         // Index 3: Wide Bottom Right (col-span-2)
 
-                        let className = "relative rounded-xl overflow-hidden cursor-pointer group flex-shrink-0 snap-center min-w-[85vw] md:min-w-0 isolate [transform:translateZ(0)]";
+                        let className = "relative rounded-xl overflow-hidden cursor-pointer group flex-shrink-0 snap-start min-w-[85vw] md:min-w-0 isolate [transform:translateZ(0)]";
 
                         if (index === 0) className += " md:col-span-2 md:row-span-2";
                         else if (index === 1 || index === 2) className += " md:col-span-1 md:row-span-1";
@@ -80,7 +80,11 @@ export const TrendingCollections: React.FC<TrendingCollectionsProps> = ({ data }
                         return (
                             <div
                                 key={index}
-                                onClick={() => handleCardClick(card)}
+                                onClick={() => {
+                                    if (typeof window !== 'undefined' && window.innerWidth >= 768) {
+                                        handleCardClick(card);
+                                    }
+                                }}
                                 className={className}
                             >
                                 <div className="absolute inset-0">

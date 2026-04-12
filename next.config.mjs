@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    poweredByHeader: false,
+    compress: true,
     images: {
         formats: ['image/webp'],
         remotePatterns: [
@@ -58,6 +60,10 @@ const nextConfig = {
                     {
                         key: 'X-XSS-Protection',
                         value: '1; mode=block',
+                    },
+                    {
+                        key: 'Cache-Control',
+                        value: 'public, max-age=31536000, immutable',
                     },
                 ],
             },

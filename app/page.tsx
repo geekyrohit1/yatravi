@@ -119,7 +119,7 @@ export default async function HomePage() {
 
     return (
         <main>
-            <h1 className="sr-only">Yatravi | We Care Your Trip - Lowest Price Holiday Packages</h1>
+            <h1 className="sr-only">Yatravi Travel Agency | Best Holiday Packages, Luxury Tour Packages, and Budget Stays. View detailed itineraries and save big!</h1>
             <HomeClient
                 initialPackages={packages}
                 initialConfig={config}
