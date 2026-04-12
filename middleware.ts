@@ -63,10 +63,7 @@ export const config = {
         '/admin',
         '/admin/:path*',
         '/api/:path*',
-        '/sitemap.xml',
-        '/robots.txt',
         '/package.json',
-        '/llms.txt',
         '/:path*.(json|conf|md|mjs|env)' // Catch-all for common technical extensions
     ],
 };
