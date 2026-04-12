@@ -72,7 +72,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
     const siteName = globalSeo.siteName || 'Yatravi';
     const titleSeparator = globalSeo.titleSeparator || '|';
-    const defaultTitle = globalSeo.defaultTitle || 'Yatravi | Best Holiday Packages & Luxury Tour Packages - Lowest Price Guaranteed';
+    const defaultTitle = globalSeo.defaultTitle || 'Yatravi - We Care Your Trip | Best Holiday & Luxury Tour Packages';
     const defaultDescription = globalSeo.defaultDescription || 'Yatravi is your leading Travel Agency for the best Holiday Packages and Tour Packages. View premium destinations, book your stay, and save on your next trip.';
     const defaultKeywords = globalSeo.defaultKeywords || 'Travel Agency, Holiday Packages, Tour Packages, Best Tours, Low Price Packages, View Destinations';
     const ogImage = globalSeo.defaultOgImage || '/og-image.png';

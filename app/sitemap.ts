@@ -21,12 +21,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://yatravi.com'
 
   const staticRoutes = [
-    '', '/about', '/destinations', '/packages', '/contact', 
-    '/privacy', '/terms', '/join', '/support-center', '/web-check-in',
-  ].map((route) => ({
-    url: `${baseUrl}${route}`,
+    { route: '', priority: 1.0, changeFrequency: 'daily' },
+    { route: '/about', priority: 0.7, changeFrequency: 'monthly' },
+    { route: '/destinations', priority: 0.8, changeFrequency: 'daily' },
+    { route: '/packages', priority: 0.8, changeFrequency: 'daily' },
+    { route: '/contact', priority: 0.7, changeFrequency: 'monthly' },
+    { route: '/privacy', priority: 0.3, changeFrequency: 'monthly' },
+    { route: '/terms', priority: 0.3, changeFrequency: 'monthly' },
+    { route: '/join', priority: 0.6, changeFrequency: 'weekly' },
+    { route: '/support-center', priority: 0.6, changeFrequency: 'weekly' },
+    { route: '/web-check-in', priority: 0.5, changeFrequency: 'monthly' },
+  ].map((item) => ({
+    url: `${baseUrl}${item.route}`,
     lastModified: new Date(),
-    priority: route === '' ? 1.0 : 0.8,
+    changeFrequency: item.changeFrequency as any,
+    priority: item.priority,
   }))
 
   try {
@@ -38,6 +47,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const packageRoutes = packagesArray.map((pkg: any) => ({
       url: `${baseUrl}/packages/${pkg.slug || pkg.id}`,
       lastModified: new Date(pkg.updatedAt || new Date()),
+      changeFrequency: 'daily' as const,
       priority: 0.9,
     }))
 
@@ -49,6 +59,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const destinationRoutes = destinationsArray.map((dest: any) => ({
       url: `${baseUrl}/destination/${dest.slug || dest.id}`,
       lastModified: new Date(dest.updatedAt || new Date()),
+      changeFrequency: 'weekly' as const,
       priority: 0.9,
     }))
 

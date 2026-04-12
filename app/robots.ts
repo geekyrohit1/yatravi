@@ -6,11 +6,19 @@ import { MetadataRoute } from 'next'
  */
 export default function robots(): MetadataRoute.Robots {
   return {
-    rules: {
-      userAgent: '*',
-      allow: '/',
-      disallow: ['/admin', '/admin/', '/api/'],
-    },
+    rules: [
+      {
+        userAgent: [
+          'HTTrack', 'Zeus', 'Mata Hari', 'LexiBot', 'EmailCollector'
+        ],
+        disallow: '/',
+      },
+      {
+        userAgent: '*',
+        allow: '/',
+        disallow: ['/admin', '/admin/', '/api/'],
+      },
+    ],
     sitemap: 'https://yatravi.com/sitemap.xml',
   }
 }

@@ -20,7 +20,6 @@ export function middleware(request: NextRequest) {
         '/tsconfig.json',
         '/next.config.mjs',
         '/README.md',
-        '/llms.txt',
         '/yatravi.conf',
         '/yatravi_nginx.conf',
         '/yatravi_ssl.conf',
@@ -35,20 +34,9 @@ export function middleware(request: NextRequest) {
         return NextResponse.redirect(new URL('/', request.url));
     }
 
-    // Add X-Robots-Tag to technical paths
-    if (path.startsWith('/admin') || path.startsWith('/api') || path === '/robots.txt' || path === '/sitemap.xml') {
+    // Add X-Robots-Tag to technical paths (Admin and API only)
+    if (path.startsWith('/admin') || path.startsWith('/api')) {
         response.headers.set('X-Robots-Tag', 'noindex, nofollow, noarchive');
-    }
-
-    // 2. Sitemap Protection (Restrict to Search Engine Bots only)
-    if (path === '/sitemap.xml') {
-        const userAgent = request.headers.get('user-agent')?.toLowerCase() || '';
-        const IS_BOT = /googlebot|bingbot|slurp|duckduckbot|baiduspider|yandexbot|sogou|exabot|facebot|ia_archiver/i.test(userAgent);
-        
-        if (!IS_BOT) {
-            // If it's a human/unknown bot, hide the sitemap
-            return NextResponse.redirect(new URL('/', request.url));
-        }
     }
 
     // 3. Admin Access Control
