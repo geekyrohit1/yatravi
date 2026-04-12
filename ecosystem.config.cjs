@@ -2,8 +2,8 @@ module.exports = {
     apps: [
         {
             name: 'yatravi-frontend',
-            script: 'node_modules/next/dist/bin/next',
-            args: 'start -p 3000',
+            script: 'node',
+            args: 'node_modules/next/dist/bin/next start -p 3000',
             instances: 1,
             autorestart: true,
             watch: false,
