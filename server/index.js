@@ -24,6 +24,9 @@ const seoToolsRoutes = require('./routes/seo-tools');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// Trust Proxy for Cloudflare/Nginx
+app.set('trust proxy', 1);
+
 // CRITICAL SECURITY CHECK
 if (!process.env.JWT_SECRET) {
   console.error('FATAL ERROR: JWT_SECRET is not defined in .env');

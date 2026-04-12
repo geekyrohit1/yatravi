@@ -159,7 +159,7 @@ export const InquiryWidget = React.memo(({
     return (
         <ThemeProvider theme={inquiryCalendarTheme}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <div className={`bg-white rounded-t-xl md:rounded-xl shadow-[0_8px_40px_rgba(0,0,0,0.08)] border-x border-t border-gray-100 overflow-hidden pointer-events-auto flex flex-col max-h-[85vh] ${roundedBottom ? 'rounded-b-xl border-b' : 'rounded-b-none'}`}>
+                <div className={`bg-white rounded-t-xl md:rounded-xl shadow-[0_8px_40px_rgba(0,0,0,0.08)] border-x border-t border-gray-100 overflow-hidden pointer-events-auto flex flex-col max-h-[90vh] md:max-h-[85vh] ${roundedBottom ? 'rounded-b-xl border-b' : 'rounded-b-none'}`}>
             {/* Minimalist Header - Fixed at Top */}
             <div className="bg-brand px-5 py-3 md:py-8 text-white text-center relative overflow-hidden shrink-0">
                 {onClose && (
@@ -180,19 +180,20 @@ export const InquiryWidget = React.memo(({
             </div>
 
             {/* Scrollable Form Body */}
-            <div className="flex-1 overflow-y-auto no-scrollbar px-5 py-3 md:px-8 md:py-6">
-                {submitted ? (
-                    <div className="text-center py-6 md:py-12 animate-in zoom-in duration-500">
-                        <div className="w-10 h-10 md:w-16 md:h-16 bg-green-50 text-green-600 rounded-xl md:rounded-2xl flex items-center justify-center mx-auto mb-3 md:mb-6 shadow-sm border border-green-100">
-                            <CheckCircle className="w-5 h-5 md:w-8 md:h-8" />
+            <form onSubmit={handleSubmit} className="flex flex-col overflow-hidden">
+                <div className="overflow-y-auto no-scrollbar px-5 pt-3 pb-4 md:px-8 md:pt-5 md:pb-6">
+                    {submitted ? (
+                        <div className="text-center py-6 md:py-12 animate-in zoom-in duration-500">
+                            <div className="w-10 h-10 md:w-16 md:h-16 bg-green-50 text-green-600 rounded-xl md:rounded-2xl flex items-center justify-center mx-auto mb-3 md:mb-6 shadow-sm border border-green-100">
+                                <CheckCircle className="w-5 h-5 md:w-8 md:h-8" />
+                            </div>
+                            <h4 className="font-bold text-base md:text-xl text-gray-900 mb-1 md:mb-2 tracking-tight">Request Sent! 🎉</h4>
+                            <p className="text-[11px] md:text-[13px] text-gray-500 leading-relaxed font-medium">
+                                Our travel expert will reach out to you within <span className="text-brand font-bold">30 minutes</span>.
+                            </p>
                         </div>
-                        <h4 className="font-bold text-base md:text-xl text-gray-900 mb-1 md:mb-2 tracking-tight">Request Sent! 🎉</h4>
-                        <p className="text-[11px] md:text-[13px] text-gray-500 leading-relaxed font-medium">
-                            Our travel expert will reach out to you within <span className="text-brand font-bold">30 minutes</span>.
-                        </p>
-                    </div>
-                ) : (
-                    <form onSubmit={handleSubmit} className="space-y-2 md:space-y-4">
+                    ) : (
+                        <div className="space-y-2 md:space-y-3">
                         <div className="space-y-1">
                             <label className="text-[10px] font-semibold md:font-bold text-gray-500 md:text-gray-400 uppercase tracking-wider md:tracking-widest ml-1">Full Name</label>
                             <div className="relative group">
@@ -203,7 +204,7 @@ export const InquiryWidget = React.memo(({
                                     value={formData.name}
                                     onChange={handleChange}
                                     placeholder="Your Full Name"
-                                    className="w-full pl-11 pr-4 py-2 md:py-3 border border-gray-100 rounded-xl text-[13px] font-medium focus:outline-none focus:border-brand focus:ring-4 focus:ring-brand/5 transition-all bg-gray-50/50 placeholder:text-gray-300"
+                                    className="w-full pl-11 pr-4 py-2 md:py-2.5 border border-gray-100 rounded-xl text-[13px] font-medium focus:outline-none focus:border-brand focus:ring-4 focus:ring-brand/5 transition-all bg-gray-50/50 placeholder:text-gray-300"
                                     required
                                 />
                             </div>
@@ -219,7 +220,7 @@ export const InquiryWidget = React.memo(({
                                     value={formData.email}
                                     onChange={handleChange}
                                     placeholder="your@email.com"
-                                    className="w-full pl-11 pr-4 py-2 md:py-3 border border-gray-100 rounded-xl text-[13px] font-medium focus:outline-none focus:border-brand focus:ring-4 focus:ring-brand/5 transition-all bg-gray-50/50 placeholder:text-gray-300"
+                                    className="w-full pl-11 pr-4 py-2 md:py-2.5 border border-gray-100 rounded-xl text-[13px] font-medium focus:outline-none focus:border-brand focus:ring-4 focus:ring-brand/5 transition-all bg-gray-50/50 placeholder:text-gray-300"
                                     required
                                 />
                             </div>
@@ -237,7 +238,7 @@ export const InquiryWidget = React.memo(({
                                     value={formData.phone}
                                     onChange={handleChange}
                                     placeholder="+91 98765 43210"
-                                    className="w-full pl-11 md:pl-12 pr-4 py-2 md:py-3 border border-gray-100 rounded-xl text-[13px] font-medium focus:outline-none focus:border-brand focus:ring-4 focus:ring-brand/5 transition-all bg-gray-50/50 placeholder:text-gray-300"
+                                    className="w-full pl-11 md:pl-12 pr-4 py-2 md:py-2.5 border border-gray-100 rounded-xl text-[13px] font-medium focus:outline-none focus:border-brand focus:ring-4 focus:ring-brand/5 transition-all bg-gray-50/50 placeholder:text-gray-300"
                                     required
                                 />
                             </div>
@@ -303,10 +304,22 @@ export const InquiryWidget = React.memo(({
                             </div>
                         )}
 
+                            <div className="flex justify-center mt-4">
+                                <span className="text-[9px] md:text-[10px] font-bold text-gray-400 uppercase tracking-widest bg-gray-50/50 px-3 py-1 rounded-full border border-gray-100 flex items-center gap-1.5">
+                                    <CheckCircle className="w-2.5 h-2.5" />
+                                    100% Privacy Guaranteed
+                                </span>
+                            </div>
+                        </div>
+                    )}
+                </div>
+
+                {!submitted && (
+                    <div className="shrink-0 bg-white border-t border-gray-100 p-4 md:p-5 space-y-3">
                         <button
                             type="submit"
                             disabled={loading}
-                            className="w-full py-3 md:py-4 bg-brand hover:bg-brand-dark text-white font-bold tracking-wider text-[11px] md:text-[12px] uppercase rounded-xl shadow-lg shadow-brand/20 transition-all active:scale-[0.98] mt-4 md:mt-6 disabled:opacity-70 flex items-center justify-center gap-2 group mb-3 md:mb-0"
+                            className="w-full py-3 md:py-4 bg-brand hover:bg-brand-dark text-white font-bold tracking-wider text-[11px] md:text-[12px] uppercase rounded-xl shadow-lg shadow-brand/20 transition-all active:scale-[0.98] disabled:opacity-70 flex items-center justify-center gap-2 group"
                         >
                             {loading ? (
                                 <>
@@ -321,25 +334,20 @@ export const InquiryWidget = React.memo(({
                             )}
                         </button>
 
-                        <div className="flex justify-center py-1 md:pt-2">
-                             <span className="text-[9px] md:text-[10px] font-bold text-gray-400 uppercase tracking-widest bg-gray-50 px-3 py-1 rounded-full border border-gray-100">
-                                100% Privacy Guaranteed
-                            </span>
+                        {/* Hotline Integration within Footer */}
+                        <div className="flex items-center justify-center gap-3 text-gray-600 pt-1">
+                            <div className="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center shadow-sm border border-gray-100">
+                                <Phone className="w-3 text-brand" />
+                            </div>
+                            <div className="flex flex-col">
+                                <span className="text-[8px] md:text-[9px] text-gray-400 font-bold uppercase tracking-widest leading-none mb-0.5">Hotline</span>
+                                <a href="tel:+919587505726" className="text-[13px] md:text-[14px] font-bold text-gray-900 hover:text-brand transition-colors tracking-tight leading-none">+91 95875 05726</a>
+                            </div>
                         </div>
-                    </form>
+                    </div>
                 )}
-            </div>
+            </form>
 
-            {/* Hotline - Fixed at Bottom */}
-            <div className="bg-gray-50/50 p-3.5 md:p-6 border-t border-gray-100 flex items-center justify-center gap-3 text-gray-600 shrink-0 pb-safe-offset-4">
-                <div className="w-8 h-8 md:w-9 md:h-9 rounded-full bg-white flex items-center justify-center shadow-sm border border-gray-100">
-                    <Phone className="w-3 md:w-4 text-brand" />
-                </div>
-                <div className="flex flex-col">
-                    <span className="text-[8px] md:text-[10px] text-gray-400 font-bold uppercase tracking-widest leading-none mb-0.5 md:mb-1">Hotline</span>
-                    <a href="tel:+919587505726" className="text-[14px] md:text-[15px] font-bold text-gray-900 hover:text-brand transition-colors tracking-tight leading-none">+91 95875 05726</a>
-                </div>
-            </div>
                 </div>
             </LocalizationProvider>
         </ThemeProvider>

@@ -138,10 +138,10 @@ export default async function RootLayout({
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
                 <link rel="preconnect" href="https://www.google-analytics.com" />
-                
+
                 {/* Google Translate & Hydration Fixes */}
                 <Script id="browser-fixes" strategy="beforeInteractive">
-                  {`
+                    {`
                     document.addEventListener('DOMContentLoaded', function() {
                       // Prevent Translate from messing up hydration
                       var observer = new MutationObserver(function(mutations) {});
